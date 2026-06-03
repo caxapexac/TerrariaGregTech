@@ -1,0 +1,58 @@
+air_scrubber: Purificador de Ar
+alloy_blast_smelter: Fundição de Ligas de Alto-forno
+alloy_smelter: Fundição de Ligas
+arc_furnace: Forno a Arco
+assembler: Montador
+assembly_line: Linha de Montagem
+autoclave: Autoclave
+bender: Dobrador
+brewery: Cervejaria
+canner: Enlatador
+centrifuge: Centrífuga
+chemical_bath: Banho Químico
+chemical_reactor: Reator Químico
+circuit_assembler: Montador de Circuitos
+coke_oven: Forno de Coque
+combustion_generator: Gerador a Combustão
+compressor: Compressor
+cracker: Craqueador
+cutter: Cortador
+distillation_tower: Torre de Destilação
+distillery: Destilaria
+dummy: Manequim
+electric_blast_furnace: Alto-forno Elétrico
+electric_furnace: Forno Elétrico
+electrolyzer: Eletrolisador
+electromagnetic_separator: Separador Eletromagnético
+extractor: Extrator
+extruder: Extrusora
+fermenter: Fermentador
+fluid_heater: Aquecedor de Fluidos
+fluid_solidifier: Solidificador de Fluidos
+forge_hammer: Martelo de Forja
+forming_press: Prensa de Moldagem
+fusion_reactor: Reator de Fusão
+gas_collector: Coletor de Gás
+gas_turbine: Turbina a Gás
+implosion_compressor: Compressor de Implosão
+large_boiler: Caldeira Grande
+large_chemical_reactor: Reator Químico Grande
+laser_engraver: Gravador a Laser
+lathe: Torno
+macerator: Macerador
+mixer: Misturador
+ore_washer: Lavador de Minérios
+packer: Empacotador
+plasma_generator: Gerador de Plasma
+polarizer: Polarizador
+primitive_blast_furnace: Alto-forno Primitivo
+pyrolyse_oven: Forno de Pirólise
+research_station: Estação de Pesquisa
+rock_breaker: Quebrador de Rochas
+scanner: Escâner
+sifter: Peneira
+steam_boiler: Caldeira a Vapor
+steam_turbine: Turbina a Vapor
+thermal_centrifuge: Centrífuga Térmica
+vacuum_freezer: Congelador a Vácuo
+wiremill: Trefiladeira

@@ -130,11 +130,26 @@ public abstract class MetaMachine : ModTileEntity, ITickSubscription, ICoverable
 	public override string Name => GetType().Name;
 
 	public virtual Common.Energy.VoltageTier Tier => ResolveTier(_tier);
-	public virtual string DisplayName => Definition == null
-		? Label
-		: Definition.Tiered
-			? $"{Common.Energy.VoltageTiers.ShortName(Tier)} {Definition.Label}"
-			: Definition.Label;
+
+	public virtual string DisplayName
+	{
+		get
+		{
+			if (Definition == null) return Label;
+			string key = $"Mods.GregTechCEuTerraria.Items.{MachineKey}.DisplayName";
+			var text = Terraria.Localization.Language.GetText(key);
+			if (text.Value != key)
+				return StripColorTags(text.Value);
+			return Definition.Tiered
+				? $"{Common.Energy.VoltageTiers.ShortName(Tier)} {Definition.Label}"
+				: Definition.Label;
+		}
+	}
+
+	private static readonly System.Text.RegularExpressions.Regex _colorTagRe =
+		new(@"\[c/[0-9A-Fa-f]+:(.*?)\]", System.Text.RegularExpressions.RegexOptions.Compiled);
+
+	internal static string StripColorTags(string s) => _colorTagRe.Replace(s, "$1");
 
 	// Tile resolved via MachineKey ("lv_macerator"); the entity's tML Name
 	// is the family class name post-entity-collapse, not a per-tier id.

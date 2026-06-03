@@ -1,4 +1,5 @@
 #nullable enable
+using GregTechCEuTerraria.Config;
 using GregTechCEuTerraria.TerrariaCompat.UI.Widgets;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -26,6 +27,7 @@ public sealed class DiscordInviteState : UIState
 	private UITerrariaPanel? _panel;
 	private UIText? _text1;
 	private UIText? _text2;
+	private UIText? _close;
 
 	public override void OnInitialize()
 	{
@@ -39,7 +41,14 @@ public sealed class DiscordInviteState : UIState
 		_panel.Top.Set(0f, -0.12f);
 		_panel.Width.Set(System.Math.Max(w1, w2) + 24f, 0f);
 		_panel.Height.Set(lineH * 2f + 16f, 0f);
-		_panel.OnLeftClick += (_, _) => Terraria.Utils.OpenToURL(Url);
+
+		_panel.OnLeftClick += (_, _) =>
+		{
+			if (_close != null && _close.IsMouseHovering)
+				return;
+			Terraria.Utils.OpenToURL(Url);
+			GTClientConfig.Instance?.DismissDiscordInvite();
+		};
 
 		_text1 = new UIText(Line1, Scale) { HAlign = 0.5f, VAlign = 0.5f, TextColor = Idle };
 		_text1.Top.Set(-lineH * 0.5f, 0f);
@@ -47,6 +56,13 @@ public sealed class DiscordInviteState : UIState
 		_text2.Top.Set(lineH * 0.5f, 0f);
 		_panel.Append(_text1);
 		_panel.Append(_text2);
+
+		_close = new UIText("X", Scale) { HAlign = 1f, VAlign = 0f, TextColor = Idle };
+		_close.Left.Set(-4f, 0f);
+		_close.Top.Set(2f, 0f);
+		_close.OnLeftClick += (_, _) => GTClientConfig.Instance?.DismissDiscordInvite();
+		_panel.Append(_close);
+
 		Append(_panel);
 	}
 
@@ -59,5 +75,7 @@ public sealed class DiscordInviteState : UIState
 			_text1.TextColor = c;
 			_text2.TextColor = c;
 		}
+		if (_close != null)
+			_close.TextColor = _close.IsMouseHovering ? Hover : Idle;
 	}
 }

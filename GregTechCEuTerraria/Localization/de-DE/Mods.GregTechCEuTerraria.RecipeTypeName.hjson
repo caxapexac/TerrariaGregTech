@@ -1,0 +1,58 @@
+air_scrubber: Luftreiniger
+alloy_blast_smelter: Legierungs-Hochschmelzofen
+alloy_smelter: Legierungsschmelzofen
+arc_furnace: Lichtbogenofen
+assembler: Monteur
+assembly_line: Fließband
+autoclave: Autoklav
+bender: Biegemaschine
+brewery: Brauerei
+canner: Einkocher
+centrifuge: Zentrifuge
+chemical_bath: Chemikalienbad
+chemical_reactor: Chemischer Reaktor
+circuit_assembler: Schaltungsmonteur
+coke_oven: Koksofen
+combustion_generator: Verbrennungsgenerator
+compressor: Kompressor
+cracker: Cracker
+cutter: Schneider
+distillation_tower: Destillationsturm
+distillery: Destillationsanlage
+dummy: Dummy
+electric_blast_furnace: Elektrischer Hochofen
+electric_furnace: Elektroofen
+electrolyzer: Elektrolyseanlage
+electromagnetic_separator: Elektromagnetischer Separator
+extractor: Extraktor
+extruder: Extruder
+fermenter: Fermentierer
+fluid_heater: Flüssigkeitserhitzer
+fluid_solidifier: Flüssigkeitsverfestiger
+forge_hammer: Schmiedehammer
+forming_press: Formpresse
+fusion_reactor: Fusionsreaktor
+gas_collector: Gassammler
+gas_turbine: Gasturbine
+implosion_compressor: Implosionskompressor
+large_boiler: Großer Kessel
+large_chemical_reactor: Großer Chemiereaktor
+laser_engraver: Lasergravierer
+lathe: Drehbank
+macerator: Mazerator
+mixer: Mischer
+ore_washer: Erzwäscher
+packer: Packstation
+plasma_generator: Plasmagenerator
+polarizer: Polarisator
+primitive_blast_furnace: Primitiver Hochofen
+pyrolyse_oven: Pyrolyseofen
+research_station: Forschungsstation
+rock_breaker: Steinbrecher
+scanner: Scanner
+sifter: Sieb
+steam_boiler: Dampfkessel
+steam_turbine: Dampfturbine
+thermal_centrifuge: Thermische Zentrifuge
+vacuum_freezer: Vakuum-Gefrierschrank
+wiremill: Drahtmühle

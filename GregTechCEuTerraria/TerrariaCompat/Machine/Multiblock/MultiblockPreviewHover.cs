@@ -206,23 +206,34 @@ public static class MultiblockPreviewHover
 				{
 					if (item is null || item.IsAir) continue;
 					if (!seenType.Add(item.type)) continue;
-					string full = Lang.GetItemName(item.type).Value;
-					string key  = StripTierPrefix(full);
+					string key = StripTierId(item.ModItem?.Name ?? item.type.ToString());
 					if (!seenKey.Add(key)) continue;
-					names.Add(key);
+					names.Add(StripTier(MetaMachine.StripColorTags(Lang.GetItemName(item.type).Value)));
 				}
 			}
 		}
 	}
 
-	// Strip leading short-tier token + space; pass-through if no tier prefix.
-	private static string StripTierPrefix(string name)
+	private static string StripTier(string name)
 	{
 		int sp = name.IndexOf(' ');
-		if (sp <= 0) return name;
-		string first = name.Substring(0, sp);
-		if (System.Array.IndexOf(_tierShortNames, first) < 0) return name;
-		return name.Substring(sp + 1);
+		if (sp > 0 && System.Array.IndexOf(_tierShortNames, name.Substring(0, sp)) >= 0)
+			return name.Substring(sp + 1);
+		int lsp = name.LastIndexOf(' ');
+		if (lsp > 0 && System.Array.IndexOf(_tierShortNames, name.Substring(lsp + 1)) >= 0)
+			return name.Substring(0, lsp);
+		return name;
+	}
+
+	private static string StripTierId(string id)
+	{
+		int us = id.IndexOf('_');
+		if (us <= 0) return id;
+		string first = id.Substring(0, us);
+		foreach (var t in _tierShortNames)
+			if (string.Equals(first, t, System.StringComparison.OrdinalIgnoreCase))
+				return id.Substring(us + 1);
+		return id;
 	}
 
 	private static readonly string[] _tierShortNames =

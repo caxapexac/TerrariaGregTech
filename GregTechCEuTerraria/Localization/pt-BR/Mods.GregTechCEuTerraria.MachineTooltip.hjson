@@ -1,0 +1,479 @@
+active_transformer_0: "[c/AAAAAA:Transformadores: Lasers Disfarçados]"
+active_transformer_1: "[c/AAAAAA:Pode combinar qualquer número de][c/FFFFFF:Entradas][c/AAAAAA: de Energia em qualquer número de][c/FFFFFF:Saídas][c/AAAAAA: de Energia.]"
+active_transformer_2: "[c/AAAAAA:Pode transmitir energia a distâncias incríveis com]"
+active_transformer_3: Lasers[c/AAAAAA:.]
+advanced_processing_array: Paralelize o Mundo
+assembly_line: Não é uma Máquina de Montagem multibloco!
+available_recipe_map_1: Tipos de Receita Disponíveis: %s
+available_recipe_map_2: Tipos de Receita Disponíveis: %s, %s
+available_recipe_map_3: Tipos de Receita Disponíveis: %s, %s, %s
+available_recipe_map_4: Tipos de Receita Disponíveis: %s, %s, %s, %s
+block_breaker: "[c/AAAAAA:Minera o bloco na face frontal e coleta seus drops]"
+buffer: Um Pequeno Buffer para armazenar Itens e Fluidos
+central_monitor: Mas roda Doom?
+charcoal_pile: Padaria de combustível subterrânea
+charcoal_pile_0: Transforma Toras em [c/55FF55:Carvão][c/AAAAAA: quando][c/FF5555:igniciado][c/AAAAAA:.]
+charcoal_pile_1: Clique com o botão direito com itens que iniciam fogo para começar.
+charcoal_pile_2: A pirólise ocorre em um espaço de até [c/55FFFF:9x4x9][c/AAAAAA: abaixo.]
+charcoal_pile_3: As toras não devem ser expostas ao [c/FFFF55:Ar][c/AAAAAA:!]
+cleanroom: Mantendo aquelas partículas irritantes do lado de fora
+cleanroom_0: Coloque máquinas dentro para executar receitas de sala limpa.
+cleanroom_1: Usa [c/FFFFFF:30 EU/t][c/AAAAAA: quando suja,][c/FFFFFF:4 EU/t][c/AAAAAA: quando limpa.]
+cleanroom_2: O overclock aumenta a limpeza por ciclo.
+cleanroom_3: "[c/55FFFF:Tamanho:][c/FFFFFF:5x5x5 a 15x15x15]"
+cleanroom_4: Requer [c/FFFFFF:Revestimentos de Filtro][c/AAAAAA:no teto, excluindo as bordas.]
+cleanroom_5: Aceita até [c/FFFFFF:4 Portas][c/AAAAAA:! Permanece limpa quando a porta está aberta.]
+cleanroom_6: Geradores, Silenciadores, Brocas e Máquinas Primitivas são muito sujos para a sala limpa!
+cleanroom_7: Envie energia através de [c/FFFFFF:Mecanismos][c/AAAAAA:ou][c/FFFFFF:Diodos][c/AAAAAA:nas paredes.]
+coke_oven: Fazendo combustíveis melhores para Aço e Energia
+coke_oven_hatch: "[c/AAAAAA:Permite acesso de automação para o Forno de Coque.]"
+combustion: "[c/AAAAAA:Requer Líquidos inflamáveis]"
+computation_receiver_hatch: Entrada de Dados de Computação para Multiblocos
+computation_transmitter_hatch: Saída de Dados de Computação para Multiblocos
+cracker: Torna o Óleo útil
+cracker_1: Cada bobina após [c/FFAA00:Cuproníquel][c/AAAAAA: reduz o uso de energia em][c/FFFFFF:10%%][c/AAAAAA:.]
+data_access_hatch_0: Acesso a Dados para Multiblocos
+data_access_hatch_1: Adiciona [c/55FF55:%s][c/AAAAAA: slots para Itens de Dados]
+data_bank_0: Seu NAS Pessoal
+data_bank_1: Armazenamento de Dados em Massa. Transfira com Cabos Ópticos.
+data_bank_2: Bancos de Dados podem ser encadeados.
+data_bank_3: Usa [c/FFFFFF:%s EU/t][c/AAAAAA: por Escotilha de Dados/Óptica normalmente.]
+data_bank_4: Usa [c/FFFFFF:%s EU/t][c/AAAAAA: por Escotilha de Dados/Óptica quando encadeado.]
+data_receiver_hatch: Entrada de Dados de Pesquisa para Multiblocos
+data_transmitter_hatch: Saída de Dados de Pesquisa para Multiblocos
+distillation_tower: Refinaria de Fluidos
+electric_blast_furnace: Onde está o defumador elétrico?
+electric_blast_furnace_0: Para cada [c/FFFFFF:900K][c/AAAAAA: acima da temperatura da receita, um multiplicador de energia multiplicativo de][c/FFFFFF:95%%][c/AAAAAA: é aplicado antes do overclock.]
+electric_blast_furnace_1: Para cada [c/FFFFFF:1800K][c/AAAAAA: acima da temperatura da receita, um overclock se torna][c/FFFFFF:100%% eficiente][c/AAAAAA: (overclock perfeito).]
+electric_blast_furnace_2: Para cada nível de voltagem acima de [c/55FFFF:MV][c/AAAAAA:, a temperatura é aumentada em][c/FFFFFF:100K][c/AAAAAA:.]
+endpoint_0: Conecte com blocos de [c/FFFFFF:Tubo de Longa Distância][c/AAAAAA: para criar um gasoduto.]
+endpoint_1: Gasodutos devem ter exatamente [c/FFFFFF:1 Entrada][c/AAAAAA: e][c/FFFFFF:1 Saída][c/AAAAAA: de ponta.]
+endpoint_2: Apenas as pontas do gasoduto precisam estar em [c/FFFFFF:chunks carregados][c/AAAAAA:.]
+ev_alloy_smelter: "[c/AAAAAA:Fundição de combinação HighTech]"
+ev_arc_furnace: "[c/AAAAAA:Quem precisa de um Alto-forno?]"
+ev_assembler: "[c/AAAAAA:Vingadores, Montar!]"
+ev_autoclave: "[c/AAAAAA:Cristalizando seus Pós]"
+ev_bender: "[c/AAAAAA:Buu, ele é mau! Nós queremos o BENDER!!!]"
+ev_brewery: "[c/AAAAAA:Fabricação de poções compacta e eficiente]"
+ev_canner: "[c/AAAAAA:Coloca coisas dentro e fora de Recipientes]"
+ev_centrifuge: "[c/AAAAAA:Separador Molecular]"
+ev_chemical_bath: "[c/AAAAAA:Banhando Minérios em Produtos Químicos para separá-los]"
+ev_chemical_reactor: "[c/AAAAAA:Deixando Produtos Químicos reagirem entre si]"
+ev_circuit_assembler: "[c/AAAAAA:Pegar e Colocar por todo lado]"
+ev_compressor: "[c/AAAAAA:Compress-O-Matic C77]"
+ev_cutter: "[c/AAAAAA:Fatiar e Picar]"
+ev_distillery: "[c/AAAAAA:Extraindo as Partes mais relevantes de Fluidos]"
+ev_electric_furnace: "[c/AAAAAA:Não é como usar um Commodore 64]"
+ev_electrolyzer: "[c/AAAAAA:Eletrolisando Moléculas]"
+ev_electromagnetic_separator: "[c/AAAAAA:Separando os Minérios magnéticos do resto]"
+ev_extractor: "[c/AAAAAA:Dispositivo Desucador da Perdição - D123]"
+ev_extruder: "[c/AAAAAA:Máquina Universal para Trabalho em Metal]"
+ev_fermenter: "[c/AAAAAA:Fermentando Fluidos]"
+ev_fluid_drilling_rig: Drenador de Poços
+ev_fluid_heater: "[c/AAAAAA:Aquecendo seus Fluidos]"
+ev_fluid_solidifier: "[c/AAAAAA:Esfria Fluidos para formar Sólidos]"
+ev_forge_hammer: "[c/AAAAAA:Pare, Hora do Martelo!]"
+ev_forming_press: "[c/AAAAAA:Imprimindo Imagens em coisas]"
+ev_gas_collector: "[c/AAAAAA:Coleta Gás do ar dependendo da dimensão]"
+ev_laser_engraver: "[c/AAAAAA:Não olhe diretamente para o Laser]"
+ev_lathe: "[c/AAAAAA:Produz Hastes de forma mais eficiente]"
+ev_macerator: "[c/AAAAAA:Triturando seus Minérios com Subprodutos]"
+ev_mass_fabricator: "[c/AAAAAA:Matéria UUM * Fabricação ao Quadrado]"
+ev_mixer: "[c/AAAAAA:Isso vai Misturar?]"
+ev_ore_washer: "[c/AAAAAA:Obtendo mais Subprodutos de seus Minérios]"
+ev_packer: "[c/AAAAAA:Coloca coisas dentro e Tira coisas de Caixas]"
+ev_polarizer: "[c/AAAAAA:Bipolarizando seus Ímãs]"
+ev_replicator: "[c/AAAAAA:Produzindo o Mais Puro dos Elementos]"
+ev_rock_crusher: "[c/AAAAAA:Coloque Água e Lava adjacentes horizontalmente]"
+ev_scanner: "[c/AAAAAA:Escaneia Materiais e outras coisas]"
+ev_sifter: "[c/AAAAAA:Mantenha a calma e continue peneirando]"
+ev_thermal_centrifuge: "[c/AAAAAA:Separando Minérios com mais precisão]"
+ev_wiremill: "[c/AAAAAA:Produz Fios de forma mais eficiente]"
+extreme_combustion_engine: Liberador Extremo de Energia Química
+fisher: Custa linha para pescar. Consome uma linha a cada vez.
+gas_turbine: "[c/AAAAAA:Requer Gases inflamáveis]"
+high_performance_computation_array_0: Apenas o seu Supercomputador comum
+high_performance_computation_array_1: Usado para gerar [c/FFFFFF:Computação][c/AAAAAA: (e calor).]
+high_performance_computation_array_2: Requer componentes HPCA para gerar [c/FFFFFF:CWU/t][c/AAAAAA: (Unidades de Trabalho de Computação).]
+hp_steam_alloy_smelter: "[c/AAAAAA:Fundição de combinação]"
+hp_steam_compressor: "[c/AAAAAA:Comprimindo Itens]"
+hp_steam_extractor: "[c/AAAAAA:Extraindo sua primeira Borracha]"
+hp_steam_forge_hammer: "[c/AAAAAA:Martelo de Forja]"
+hp_steam_furnace: "[c/AAAAAA:Fundindo coisas com Vapor comprimido]"
+hp_steam_liquid_boiler: "[c/AAAAAA:Mais rápida que a Caldeira de Líquido a Vapor Pequena]"
+hp_steam_macerator: "[c/AAAAAA:Macerando seus Minérios sem Subprodutos]"
+hp_steam_rock_crusher: "[c/AAAAAA:Coloque Água e Lava adjacentes horizontalmente]"
+hp_steam_solar_boiler: "[c/AAAAAA:Energia a Vapor pelo Sol]"
+hp_steam_solid_boiler: "[c/AAAAAA:Mais rápida que a Caldeira de Combustível Sólido a Vapor Pequena]"
+hull: "[c/AAAAAA:Você só precisa de][c/AA00AA:I][c/FF55FF:m][c/AA0000:a][c/FF5555:g][c/FFFF55:i][c/55FF55:n][c/55FFFF:a][c/00AAAA:ç][c/AAAAAA:ã][c/0000AA:o][c/AAAAAA:para usar isso]"
+hv_alloy_smelter: "[c/AAAAAA:Fundição de combinação HighTech]"
+hv_arc_furnace: "[c/AAAAAA:Quem precisa de um Alto-forno?]"
+hv_assembler: "[c/AAAAAA:Vingadores, Montar!]"
+hv_autoclave: "[c/AAAAAA:Cristalizando seus Pós]"
+hv_bender: "[c/AAAAAA:Buu, ele é mau! Nós queremos o BENDER!!!]"
+hv_brewery: "[c/AAAAAA:Fabricação de poções compacta e eficiente]"
+hv_canner: "[c/AAAAAA:Coloca coisas dentro e fora de Recipientes]"
+hv_centrifuge: "[c/AAAAAA:Separando Moléculas]"
+hv_chemical_bath: "[c/AAAAAA:Banhando Minérios em Produtos Químicos para separá-los]"
+hv_chemical_reactor: "[c/AAAAAA:Deixando Produtos Químicos reagirem entre si]"
+hv_circuit_assembler: "[c/AAAAAA:Pegar e Colocar por todo lado]"
+hv_compressor: "[c/AAAAAA:Compress-O-Matic C77]"
+hv_cutter: "[c/AAAAAA:Fatiar e Picar]"
+hv_distillery: "[c/AAAAAA:Extraindo as Partes mais relevantes de Fluidos]"
+hv_electric_furnace: "[c/AAAAAA:Não é como usar um Commodore 64]"
+hv_electrolyzer: "[c/AAAAAA:Eletrolisando Moléculas]"
+hv_electromagnetic_separator: "[c/AAAAAA:Separando os Minérios magnéticos do resto]"
+hv_extractor: "[c/AAAAAA:Dispositivo Desucador da Perdição - D123]"
+hv_extruder: "[c/AAAAAA:Máquina Universal para Trabalho em Metal]"
+hv_fermenter: "[c/AAAAAA:Fermentando Fluidos]"
+hv_fluid_drilling_rig: Não realiza Fraturamento
+hv_fluid_heater: "[c/AAAAAA:Aquecendo seus Fluidos]"
+hv_fluid_solidifier: "[c/AAAAAA:Esfria Fluidos para formar Sólidos]"
+hv_forge_hammer: "[c/AAAAAA:Pare, Hora do Martelo!]"
+hv_forming_press: "[c/AAAAAA:Imprimindo Imagens em coisas]"
+hv_gas_collector: "[c/AAAAAA:Coleta Gás do ar dependendo da dimensão]"
+hv_laser_engraver: "[c/AAAAAA:Não olhe diretamente para o Laser]"
+hv_lathe: "[c/AAAAAA:Produz Hastes de forma mais eficiente]"
+hv_macerator: "[c/AAAAAA:Triturando seus Minérios com Subprodutos]"
+hv_mass_fabricator: "[c/AAAAAA:Matéria UUM * Fabricação ao Quadrado]"
+hv_mixer: "[c/AAAAAA:Isso vai Misturar?]"
+hv_ore_washer: "[c/AAAAAA:Obtendo mais Subprodutos de seus Minérios]"
+hv_packer: "[c/AAAAAA:Coloca coisas dentro e Tira coisas de Caixas]"
+hv_polarizer: "[c/AAAAAA:Bipolarizando seus Ímãs]"
+hv_replicator: "[c/AAAAAA:Produzindo o Mais Puro dos Elementos]"
+hv_rock_crusher: "[c/AAAAAA:Coloque Água e Lava adjacentes horizontalmente]"
+hv_scanner: "[c/AAAAAA:Escaneia Materiais e outras coisas]"
+hv_sifter: "[c/AAAAAA:Mantenha a calma e continue peneirando]"
+hv_thermal_centrifuge: "[c/AAAAAA:Separando Minérios com mais precisão]"
+hv_wiremill: "[c/AAAAAA:Produz Fios de forma mais eficiente]"
+implosion_compressor: A única Máquina que você quer que faça Boom
+item_collector: Coleta Itens ao seu redor
+iv_alloy_smelter: "[c/AAAAAA:Integrador de Ligas]"
+iv_arc_furnace: "[c/AAAAAA:Aquecedor de Descarga]"
+iv_assembler: "[c/AAAAAA:NÃO é uma Bancada de Trabalho]"
+iv_autoclave: "[c/AAAAAA:Panela de Pressão]"
+iv_bender: "[c/AAAAAA:Distorcedor de Formas]"
+iv_brewery: "[c/AAAAAA:Fabricando suas Bebidas]"
+iv_canner: "[c/AAAAAA:Operador de Latas]"
+iv_centrifuge: "[c/AAAAAA:Ciclone Molecular]"
+iv_chemical_bath: "[c/AAAAAA:Embebedor Químico]"
+iv_chemical_reactor: "[c/AAAAAA:Executor Químico]"
+iv_circuit_assembler: "[c/AAAAAA:Fabricante de Eletrônicos]"
+iv_compressor: "[c/AAAAAA:Condensador de Singularidade]"
+iv_cutter: "[c/AAAAAA:Cutelo de Matéria]"
+iv_distillery: "[c/AAAAAA:Separador de Condensação]"
+iv_electric_furnace: "[c/AAAAAA:Processador de Excitação de Elétrons]"
+iv_electrolyzer: "[c/AAAAAA:Desintegrador Molecular E-4906]"
+iv_electromagnetic_separator: "[c/AAAAAA:Categorizador EM]"
+iv_extractor: "[c/AAAAAA:Extrator a Vácuo]"
+iv_extruder: "[c/AAAAAA:Deslocador de Material]"
+iv_fermenter: "[c/AAAAAA:Acelerador de Fermentação]"
+iv_fluid_heater: "[c/AAAAAA:Infusor de Calor]"
+iv_fluid_solidifier: "[c/AAAAAA:Não é uma Máquina de Gelo]"
+iv_forge_hammer: "[c/AAAAAA:Forjador de Chapas]"
+iv_forming_press: "[c/AAAAAA:Camadeador de Objetos]"
+iv_gas_collector: "[c/AAAAAA:Coleta Gás da atmosfera dependendo da dimensão]"
+iv_laser_engraver: "[c/AAAAAA:Com o Poder de 2.04 MW]"
+iv_lathe: "[c/AAAAAA:Turn-O-Matic L-5906]"
+iv_macerator: "[c/AAAAAA:Blend-O-Matic 9001]"
+iv_mass_fabricator: "[c/AAAAAA:Fábrica Gênesis]"
+iv_mixer: "[c/AAAAAA:Organizador de Matéria]"
+iv_ore_washer: "[c/AAAAAA:Lavadora de Roupas Reaproveitada I-360]"
+iv_packer: "[c/AAAAAA:Encaixotador]"
+iv_polarizer: "[c/AAAAAA:Indutor de Magnetismo]"
+iv_replicator: "[c/AAAAAA:Colador de Matéria]"
+iv_rock_crusher: "[c/AAAAAA:Solidificador de Magma Criogênico R-8200]"
+iv_scanner: "[c/AAAAAA:Detector de Anomalias]"
+iv_sifter: "[c/AAAAAA:Patrocinado por TFC]"
+iv_thermal_centrifuge: "[c/AAAAAA:Fábrica de Suor de Blaze T-6350]"
+iv_wiremill: "[c/AAAAAA:Alongador de Lingotes]"
+large_chemical_reactor: Reator de Caixa Preta
+large_combustion_engine: Câmara de Ignição de Combustível
+laser_source_hatch_0: Transmitindo energia a distância
+laser_source_hatch_1: "[c/FF5555:Cabos de laser devem estar em linha reta!]"
+laser_target_hatch_0: Recebendo energia a distância
+laser_target_hatch_1: "[c/FF5555:Cabos de laser devem estar em linha reta!]"
+lp_steam_alloy_smelter: "[c/AAAAAA:Fundição de combinação]"
+lp_steam_compressor: "[c/AAAAAA:Comprimindo Itens]"
+lp_steam_extractor: "[c/AAAAAA:Extraindo sua primeira Borracha]"
+lp_steam_forge_hammer: "[c/AAAAAA:Martelo de Forja]"
+lp_steam_furnace: "[c/AAAAAA:Fundindo coisas com Vapor comprimido]"
+lp_steam_liquid_boiler: "[c/AAAAAA:Uma Caldeira funcionando com Líquidos]"
+lp_steam_macerator: "[c/AAAAAA:Macerando seus Minérios sem Subprodutos]"
+lp_steam_rock_crusher: "[c/AAAAAA:Coloque Água e Lava adjacentes horizontalmente]"
+lp_steam_solar_boiler: "[c/AAAAAA:Energia a Vapor pelo Sol]"
+lp_steam_solid_boiler: "[c/AAAAAA:Uma maneira inicial de obter Energia a Vapor]"
+luv_alloy_smelter: "[c/AAAAAA:Integrador de Ligas]"
+luv_arc_furnace: "[c/AAAAAA:Aquecedor de Descarga]"
+luv_assembler: "[c/AAAAAA:NÃO é uma Bancada de Trabalho]"
+luv_autoclave: "[c/AAAAAA:Panela de Pressão]"
+luv_bender: "[c/AAAAAA:Distorcedor de Formas]"
+luv_brewery: "[c/AAAAAA:Fabricando suas Bebidas]"
+luv_canner: "[c/AAAAAA:Operador de Latas]"
+luv_centrifuge: "[c/AAAAAA:Ciclone Molecular]"
+luv_chemical_bath: "[c/AAAAAA:Embebedor Químico]"
+luv_chemical_reactor: "[c/AAAAAA:Executor Químico]"
+luv_circuit_assembler: "[c/AAAAAA:Fabricante de Eletrônicos]"
+luv_compressor: "[c/AAAAAA:Condensador de Singularidade]"
+luv_cutter: "[c/AAAAAA:Cutelo de Matéria]"
+luv_distillery: "[c/AAAAAA:Separador de Condensação]"
+luv_electric_furnace: "[c/AAAAAA:Processador de Excitação de Elétrons]"
+luv_electrolyzer: "[c/AAAAAA:Desintegrador Molecular E-4907]"
+luv_electromagnetic_separator: "[c/AAAAAA:Categorizador EM]"
+luv_extractor: "[c/AAAAAA:Extrator a Vácuo]"
+luv_extruder: "[c/AAAAAA:Deslocador de Material]"
+luv_fermenter: "[c/AAAAAA:Acelerador de Fermentação]"
+luv_fluid_heater: "[c/AAAAAA:Infusor de Calor]"
+luv_fluid_solidifier: "[c/AAAAAA:Não é uma Máquina de Gelo]"
+luv_forge_hammer: "[c/AAAAAA:Forjador de Chapas]"
+luv_forming_press: "[c/AAAAAA:Camadeador de Objetos]"
+luv_gas_collector: "[c/AAAAAA:Coleta Gás da atmosfera dependendo da dimensão]"
+luv_laser_engraver: "[c/AAAAAA:Com o Poder de 8.16 MW]"
+luv_lathe: "[c/AAAAAA:Turn-O-Matic L-5907]"
+luv_macerator: "[c/AAAAAA:Blend-O-Matic 9002]"
+luv_mass_fabricator: "[c/AAAAAA:Fábrica Gênesis]"
+luv_mixer: "[c/AAAAAA:Organizador de Matéria]"
+luv_ore_washer: "[c/AAAAAA:Lavadora de Roupas Reaproveitada I-361]"
+luv_packer: "[c/AAAAAA:Encaixotador]"
+luv_polarizer: "[c/AAAAAA:Indutor de Magnetismo]"
+luv_replicator: "[c/AAAAAA:Colador de Matéria]"
+luv_rock_crusher: "[c/AAAAAA:Solidificador de Magma Criogênico R-9200]"
+luv_scanner: "[c/AAAAAA:Detector de Anomalias]"
+luv_sifter: "[c/AAAAAA:Patrocinado por TFC]"
+luv_thermal_centrifuge: "[c/AAAAAA:Fábrica de Suor de Blaze T-6351]"
+luv_wiremill: "[c/AAAAAA:Alongador de Lingotes]"
+lv_alloy_smelter: "[c/AAAAAA:Fundição de combinação HighTech]"
+lv_arc_furnace: "[c/AAAAAA:Quem precisa de um Alto-forno?]"
+lv_assembler: "[c/AAAAAA:Vingadores, Montar!]"
+lv_autoclave: "[c/AAAAAA:Cristalizando seus Pós]"
+lv_bender: "[c/AAAAAA:Buu, ele é mau! Nós queremos o BENDER!!!]"
+lv_brewery: "[c/AAAAAA:Fabricação de poções compacta e eficiente]"
+lv_canner: "[c/AAAAAA:Coloca coisas dentro e fora de Recipientes]"
+lv_centrifuge: "[c/AAAAAA:Separando Moléculas]"
+lv_chemical_bath: "[c/AAAAAA:Banhando Minérios em Produtos Químicos para separá-los]"
+lv_chemical_reactor: "[c/AAAAAA:Deixando Produtos Químicos reagirem entre si]"
+lv_circuit_assembler: "[c/AAAAAA:Pegar e Colocar por todo lado]"
+lv_compressor: "[c/AAAAAA:Compress-O-Matic C77]"
+lv_cutter: "[c/AAAAAA:Fatiar e Picar]"
+lv_distillery: "[c/AAAAAA:Extraindo as Partes mais relevantes de Fluidos]"
+lv_electric_furnace: "[c/AAAAAA:Não é como usar um Commodore 64]"
+lv_electrolyzer: "[c/AAAAAA:Eletrolisando Moléculas]"
+lv_electromagnetic_separator: "[c/AAAAAA:Separando os Minérios magnéticos do resto]"
+lv_extractor: "[c/AAAAAA:Dispositivo Desucador da Perdição - D123]"
+lv_extruder: "[c/AAAAAA:Máquina Universal para Trabalho em Metal]"
+lv_fermenter: "[c/AAAAAA:Fermentando Fluidos]"
+lv_fluid_heater: "[c/AAAAAA:Aquecendo seus Fluidos]"
+lv_fluid_solidifier: "[c/AAAAAA:Esfria Fluidos para formar Sólidos]"
+lv_forge_hammer: "[c/AAAAAA:Pare, Hora do Martelo!]"
+lv_forming_press: "[c/AAAAAA:Imprimindo Imagens em coisas]"
+lv_gas_collector: "[c/AAAAAA:Coleta Gás do ar dependendo da dimensão]"
+lv_laser_engraver: "[c/AAAAAA:Não olhe diretamente para o Laser]"
+lv_lathe: "[c/AAAAAA:Produz Hastes de forma mais eficiente]"
+lv_macerator: "[c/AAAAAA:Triturando seus Minérios sem Subprodutos]"
+lv_mass_fabricator: "[c/AAAAAA:Matéria UUM * Fabricação ao Quadrado]"
+lv_mixer: "[c/AAAAAA:Isso vai Misturar?]"
+lv_ore_washer: "[c/AAAAAA:Obtendo mais Subprodutos de seus Minérios]"
+lv_packer: "[c/AAAAAA:Coloca coisas dentro e Tira coisas de Caixas]"
+lv_polarizer: "[c/AAAAAA:Bipolarizando seus Ímãs]"
+lv_replicator: "[c/AAAAAA:Produzindo o Mais Puro dos Elementos]"
+lv_rock_crusher: "[c/AAAAAA:Coloque Água e Lava adjacentes horizontalmente]"
+lv_scanner: "[c/AAAAAA:Escaneia Materiais e outras coisas]"
+lv_sifter: "[c/AAAAAA:Mantenha a calma e continue peneirando]"
+lv_thermal_centrifuge: "[c/AAAAAA:Separando Minérios com mais precisão]"
+lv_wiremill: "[c/AAAAAA:Produz Fios de forma mais eficiente]"
+machine_hatch: Barramento de Acesso Especializado que apenas segura itens válidos
+maintenance_hatch: Para manter Multiblocos
+maintenance_hatch_cleanroom_auto_0: Para manter automaticamente Multiblocos com Limpeza!
+maintenance_hatch_cleanroom_auto_1: Limpa como:
+maintenance_hatch_configurable_0: Para controle mais fino sobre Multiblocos
+maintenance_hatch_configurable_1: Começa sem problemas de Manutenção!
+maintenance_hatch_full_auto: Para manter automaticamente Multiblocos
+maintenance_hatch_tape_slot: Insira Fita para evitar problemas
+maintenance_hatch_tool_slot: Clique no slot com a mão vazia quando as ferramentas necessárias estiverem no inventário para resolver problemas
+miner: "[c/AAAAAA:Minera minérios abaixo do Minerador! Começa como área de][c/FFFFFF:%sx%s]"
+muffler_hatch_0: Recupera resíduos de máquinas
+muffler_hatch_1: NÃO OBSTRUA A SAÍDA!
+multi_furnace: Assim como o Forno em Casa
+mv_alloy_smelter: "[c/AAAAAA:Fundição de combinação HighTech]"
+mv_arc_furnace: "[c/AAAAAA:Quem precisa de um Alto-forno?]"
+mv_assembler: "[c/AAAAAA:Vingadores, Montar!]"
+mv_autoclave: "[c/AAAAAA:Cristalizando seus Pós]"
+mv_bender: "[c/AAAAAA:Buu, ele é mau! Nós queremos o BENDER!!!]"
+mv_brewery: "[c/AAAAAA:Fabricação de poções compacta e eficiente]"
+mv_canner: "[c/AAAAAA:Coloca coisas dentro e fora de Recipientes]"
+mv_centrifuge: "[c/AAAAAA:Separando Moléculas]"
+mv_chemical_bath: "[c/AAAAAA:Banhando Minérios em Produtos Químicos para separá-los]"
+mv_chemical_reactor: "[c/AAAAAA:Deixando Produtos Químicos reagirem entre si]"
+mv_circuit_assembler: "[c/AAAAAA:Pegar e Colocar por todo lado]"
+mv_compressor: "[c/AAAAAA:Compress-O-Matic C77]"
+mv_cutter: "[c/AAAAAA:Fatiar e Picar]"
+mv_distillery: "[c/AAAAAA:Extraindo as Partes mais relevantes de Fluidos]"
+mv_electric_furnace: "[c/AAAAAA:Não é como usar um Commodore 64]"
+mv_electrolyzer: "[c/AAAAAA:Eletrolisando Moléculas]"
+mv_electromagnetic_separator: "[c/AAAAAA:Separando os Minérios magnéticos do resto]"
+mv_extractor: "[c/AAAAAA:Dispositivo Desucador da Perdição - D123]"
+mv_extruder: "[c/AAAAAA:Máquina Universal para Trabalho em Metal]"
+mv_fermenter: "[c/AAAAAA:Fermentando Fluidos]"
+mv_fluid_drilling_rig: Bomba de Extração de Óleo
+mv_fluid_heater: "[c/AAAAAA:Aquecendo seus Fluidos]"
+mv_fluid_solidifier: "[c/AAAAAA:Esfria Fluidos para formar Sólidos]"
+mv_forge_hammer: "[c/AAAAAA:Pare, Hora do Martelo!]"
+mv_forming_press: "[c/AAAAAA:Imprimindo Imagens em coisas]"
+mv_gas_collector: "[c/AAAAAA:Coleta Gás do ar dependendo da dimensão]"
+mv_laser_engraver: "[c/AAAAAA:Não olhe diretamente para o Laser]"
+mv_lathe: "[c/AAAAAA:Produz Hastes de forma mais eficiente]"
+mv_macerator: "[c/AAAAAA:Triturando seus Minérios sem Subprodutos]"
+mv_mass_fabricator: "[c/AAAAAA:Matéria UUM * Fabricação ao Quadrado]"
+mv_mixer: "[c/AAAAAA:Isso vai Misturar?]"
+mv_ore_washer: "[c/AAAAAA:Obtendo mais Subprodutos de seus Minérios]"
+mv_packer: "[c/AAAAAA:Coloca coisas dentro e Tira coisas de Caixas]"
+mv_polarizer: "[c/AAAAAA:Bipolarizando seus Ímãs]"
+mv_replicator: "[c/AAAAAA:Produzindo o Mais Puro dos Elementos]"
+mv_rock_crusher: "[c/AAAAAA:Coloque Água e Lava adjacentes horizontalmente]"
+mv_scanner: "[c/AAAAAA:Escaneia Materiais e outras coisas]"
+mv_sifter: "[c/AAAAAA:Mantenha a calma e continue peneirando]"
+mv_thermal_centrifuge: "[c/AAAAAA:Separando Minérios com mais precisão]"
+mv_wiremill: "[c/AAAAAA:Produz Fios de forma mais eficiente]"
+network_switch_0: Hub Ethernet
+network_switch_1: Usado para rotear e distribuir [c/FFFFFF:Computação][c/AAAAAA:.]
+network_switch_2: Pode combinar qualquer número de [c/FFFFFF:Receptores][c/AAAAAA: de Computação em qualquer número de][c/FFFFFF:Transmissores][c/AAAAAA: de Computação.]
+network_switch_3: Usa [c/FFFFFF:%s EU/t][c/AAAAAA: por Escotilha de Dados de Computação.]
+object_holder: Mecanismo de Retenção Avançado para Estação de Pesquisa
+opv_gas_collector: "[c/AAAAAA:Coleta Gás do universo dependendo da dimensão]"
+opv_rock_crusher: "[c/AAAAAA:Câmara de Formação Vulcânica]"
+parallel_hatch_mk5: Permite executar até 4 receitas em paralelo.
+parallel_hatch_mk6: Permite executar até 16 receitas em paralelo.
+parallel_hatch_mk7: Permite executar até 64 receitas em paralelo.
+parallel_hatch_mk8: Permite executar até 256 receitas em paralelo.
+passthrough_hatch_fluid: Envia Fluidos de um Lado para o outro
+passthrough_hatch_item: Envia Itens de um Lado para o outro
+power_substation_0: O coração de uma rede de energia centralizada
+power_substation_1: "[c/FFFFFF:Capacitores][c/AAAAAA: não precisam ser todos do mesmo nível.]"
+power_substation_2: Permite até [c/FFFFFF:%d Camadas de Capacitores][c/AAAAAA:.]
+power_substation_3: Perde energia igual a [c/FFFFFF:1%%][c/AAAAAA: da capacidade total a cada][c/FFFFFF:24 horas][c/AAAAAA:.]
+power_substation_4: Limitado a [c/FFFFFF:%d kEU/t][c/AAAAAA: de perda passiva por Bloco de Capacitor.]
+power_substation_5: Pode usar
+power_substation_6: Escotilhas de Laser[c/AAAAAA:.]
+primitive_water_pump: Endervoir em Casa
+processing_array: Quando algumas Máquinas simplesmente não dão conta
+pump: "[c/AAAAAA:A melhor maneira de esvaziar Oceanos!]"
+pump_hatch: Saída de Fluido Primitiva para Bomba de Água
+pyrolyse_oven: Forno de Coque Elétrico
+pyrolyse_oven_1: Bobinas de [c/FFAA00:Cuproníquel][c/AAAAAA:são][c/FFFFFF:25%%][c/AAAAAA: mais lentas. Cada bobina após][c/55FFFF:Kanthal][c/AAAAAA: aumenta a velocidade em][c/FFFFFF:50%%][c/AAAAAA:.]
+quantum_chest: "[c/AAAAAA:Melhor que Gavetas de Armazenamento]"
+quantum_tank: "[c/AAAAAA:Lugar compacto para armazenar todos os seus fluidos]"
+research_station_0: Mais do que apenas um Escâner Multibloco
+research_station_1: Usado para escanear em [c/FFFFFF:Orbes de Dados][c/AAAAAA: e][c/FFFFFF:Módulos de Dados][c/AAAAAA:.]
+research_station_2: Requer [c/FFFFFF:Computação][c/AAAAAA: para funcionar.]
+research_station_3: Fornecer mais Computação permite que a receita seja executada mais rápido.
+rotor_holder_0: Suporte de Rotor para Multiblocos
+rotor_holder_1: Mantém o Rotor no lugar para que ele não voe para longe
+steam_bus: Não funciona com multiblocos não a vapor
+steam_grinder: Um Macerador multibloco sem os Subprodutos
+steam_miner: "[c/AAAAAA:Minera minérios abaixo do Minerador!]"
+steam_oven: Não deve ser confundido com Multi-Fundição
+steam_turbine: "[c/AAAAAA:Converte Vapor em EU]"
+tank_valve: Use para encher e drenar tanques multibloco. Saída automática quando voltado para baixo.
+uev_gas_collector: "[c/AAAAAA:Coleta Gás do sistema solar dependendo da dimensão]"
+uev_rock_crusher: "[c/AAAAAA:Câmara de Formação Vulcânica]"
+uhv_gas_collector: "[c/AAAAAA:Coleta Gás do sistema solar dependendo da dimensão]"
+uhv_rock_crusher: "[c/AAAAAA:Câmara de Formação Vulcânica]"
+uiv_gas_collector: "[c/AAAAAA:Coleta Gás do sistema solar dependendo da dimensão]"
+uiv_rock_crusher: "[c/AAAAAA:Câmara de Formação Vulcânica]"
+uv_alloy_smelter: "[c/AAAAAA:Amalgamador de Metais]"
+uv_arc_furnace: "[c/AAAAAA:Aquecedor de Curto-Circuito]"
+uv_assembler: "[c/AAAAAA:Construtor de Montagem]"
+uv_autoclave: "[c/AAAAAA:Unidade de Sobrecarga]"
+uv_bender: "[c/AAAAAA:Deformador de Matéria]"
+uv_brewery: "[c/AAAAAA:Apressador de Fabricação]"
+uv_canner: "[c/AAAAAA:Atuador de Latas]"
+uv_centrifuge: "[c/AAAAAA:Tornado Molecular]"
+uv_chemical_bath: "[c/AAAAAA:Mergulhador Químico]"
+uv_chemical_reactor: "[c/AAAAAA:Catalisador de Reação]"
+uv_circuit_assembler: "[c/AAAAAA:Fábrica de Computação]"
+uv_compressor: "[c/AAAAAA:Constritor de Matéria]"
+uv_cutter: "[c/AAAAAA:Divisor de Objetos]"
+uv_distillery: "[c/AAAAAA:Separador de Frações]"
+uv_electric_furnace: "[c/AAAAAA:Estimulador de Átomos]"
+uv_electrolyzer: "[c/AAAAAA:Ionizador Atômico]"
+uv_electromagnetic_separator: "[c/AAAAAA:Dissipador EMF]"
+uv_extractor: "[c/AAAAAA:Sugador Liquefator]"
+uv_extruder: "[c/AAAAAA:Condutor de Formas]"
+uv_fermenter: "[c/AAAAAA:Controlador de Respiração]"
+uv_fluid_heater: "[c/AAAAAA:Imbuidor Térmico]"
+uv_fluid_solidifier: "[c/AAAAAA:Petrificador de Fluidos]"
+uv_forge_hammer: "[c/AAAAAA:Modulador de Impacto]"
+uv_forming_press: "[c/AAAAAA:Deslocador de Superfície]"
+uv_gas_collector: "[c/AAAAAA:Coleta Gás do sistema solar dependendo da dimensão]"
+uv_laser_engraver: "[c/AAAAAA:Canhão de Fótons Exato]"
+uv_lathe: "[c/AAAAAA:Moedor de Rotação]"
+uv_macerator: "[c/AAAAAA:Eliminador de Formas]"
+uv_mass_fabricator: "[c/AAAAAA:Iniciador de Existência]"
+uv_mixer: "[c/AAAAAA:Homogeneizador de Material]"
+uv_ore_washer: "[c/AAAAAA:Lava-Jato em Miniatura]"
+uv_packer: "[c/AAAAAA:Armazém da Amazon]"
+uv_polarizer: "[c/AAAAAA:Reorganizador de Campo Magnético]"
+uv_replicator: "[c/AAAAAA:Compositor Elemental]"
+uv_rock_crusher: "[c/AAAAAA:Câmara de Formação Vulcânica]"
+uv_scanner: "[c/AAAAAA:Microscópio Eletrônico]"
+uv_sifter: "[c/AAAAAA:Filtro de Pulsação]"
+uv_thermal_centrifuge: "[c/AAAAAA:Ciclone de Fogo]"
+uv_wiremill: "[c/AAAAAA:Transfigurador de Fios]"
+uxv_gas_collector: "[c/AAAAAA:Coleta Gás do sistema solar dependendo da dimensão]"
+uxv_rock_crusher: "[c/AAAAAA:Câmara de Formação Vulcânica]"
+vacuum_freezer: Caixa de Gelo de Alumínio
+workbench_0: Melhor que Forestry
+workbench_1: Possui Armazenamento de Itens, Armazenamento de Ferramentas, puxa de Inventários adjacentes e salva Receitas.
+zpm_alloy_smelter: "[c/AAAAAA:Integrador de Ligas]"
+zpm_arc_furnace: "[c/AAAAAA:Aquecedor de Descarga]"
+zpm_assembler: "[c/AAAAAA:NÃO é uma Bancada de Trabalho]"
+zpm_autoclave: "[c/AAAAAA:Panela de Pressão]"
+zpm_bender: "[c/AAAAAA:Distorcedor de Formas]"
+zpm_brewery: "[c/AAAAAA:Fabricando suas Bebidas]"
+zpm_canner: "[c/AAAAAA:Operador de Latas]"
+zpm_centrifuge: "[c/AAAAAA:Ciclone Molecular]"
+zpm_chemical_bath: "[c/AAAAAA:Embebedor Químico]"
+zpm_chemical_reactor: "[c/AAAAAA:Executor Químico]"
+zpm_circuit_assembler: "[c/AAAAAA:Fabricante de Eletrônicos]"
+zpm_compressor: "[c/AAAAAA:Condensador de Singularidade]"
+zpm_cutter: "[c/AAAAAA:Cutelo de Matéria]"
+zpm_distillery: "[c/AAAAAA:Separador de Condensação]"
+zpm_electric_furnace: "[c/AAAAAA:Processador de Excitação de Elétrons]"
+zpm_electrolyzer: "[c/AAAAAA:Desintegrador Molecular E-4908]"
+zpm_electromagnetic_separator: "[c/AAAAAA:Categorizador EM]"
+zpm_extractor: "[c/AAAAAA:Extrator a Vácuo]"
+zpm_extruder: "[c/AAAAAA:Deslocador de Material]"
+zpm_fermenter: "[c/AAAAAA:Acelerador de Fermentação]"
+zpm_fluid_heater: "[c/AAAAAA:Infusor de Calor]"
+zpm_fluid_solidifier: "[c/AAAAAA:Não é uma Máquina de Gelo]"
+zpm_forge_hammer: "[c/AAAAAA:Forjador de Chapas]"
+zpm_forming_press: "[c/AAAAAA:Camadeador de Objetos]"
+zpm_gas_collector: "[c/AAAAAA:Coleta Gás da atmosfera dependendo da dimensão]"
+zpm_laser_engraver: "[c/AAAAAA:Com o Poder de 32.64 MW]"
+zpm_lathe: "[c/AAAAAA:Turn-O-Matic L-5908]"
+zpm_macerator: "[c/AAAAAA:Blend-O-Matic 9003]"
+zpm_mass_fabricator: "[c/AAAAAA:Fábrica Gênesis]"
+zpm_mixer: "[c/AAAAAA:Organizador de Matéria]"
+zpm_ore_washer: "[c/AAAAAA:Lavadora de Roupas Reaproveitada I-362]"
+zpm_packer: "[c/AAAAAA:Encaixotador]"
+zpm_polarizer: "[c/AAAAAA:Indutor de Magnetismo]"
+zpm_replicator: "[c/AAAAAA:Colador de Matéria]"
+zpm_rock_crusher: "[c/AAAAAA:Solidificador de Magma Criogênico R-10200]"
+zpm_scanner: "[c/AAAAAA:Detector de Anomalias]"
+zpm_sifter: "[c/AAAAAA:Patrocinado por TFC]"
+zpm_thermal_centrifuge: "[c/AAAAAA:Fábrica de Suor de Blaze T-6352]"
+zpm_wiremill: "[c/AAAAAA:Alongador de Lingotes]"
+// long_distance_item_pipeline_endpoint_0: "[c/AAFFAA:Endpoint for a Long Distance Item Pipeline.]"
+// long_distance_item_pipeline_endpoint_1: "[c/AAFFAA:Teleports items to a far-away partner endpoint.]"
+// long_distance_item_pipeline_endpoint_2: "[c/AAAAAA:1. Connect to the end of a long-distance pipe run.]"
+// long_distance_item_pipeline_endpoint_3: "[c/AAAAAA:2. Place a matching endpoint at the far end.]"
+// long_distance_item_pipeline_endpoint_4: "[c/AAAAAA:3. Screwdriver one to Input, the other to Output.]"
+// long_distance_item_pipeline_endpoint_5: "[c/888888:Feed the Input from any side; it exits into a chest next to the Output.]"
+// long_distance_item_pipeline_endpoint_6: "[c/888888:Endpoints must be at least 50 blocks apart.]"
+// long_distance_fluid_pipeline_endpoint_0: "[c/AAFFAA:Endpoint for a Long Distance Fluid Pipeline.]"
+// long_distance_fluid_pipeline_endpoint_1: "[c/AAFFAA:Teleports fluids to a far-away partner endpoint.]"
+// long_distance_fluid_pipeline_endpoint_2: "[c/AAAAAA:1. Connect to the end of a long-distance pipe run.]"
+// long_distance_fluid_pipeline_endpoint_3: "[c/AAAAAA:2. Place a matching endpoint at the far end.]"
+// long_distance_fluid_pipeline_endpoint_4: "[c/AAAAAA:3. Screwdriver one to Input, the other to Output.]"
+// long_distance_fluid_pipeline_endpoint_5: "[c/888888:Feed the Input from any side; it exits into a chest next to the Output.]"
+// long_distance_fluid_pipeline_endpoint_6: "[c/888888:Endpoints must be at least 50 blocks apart.]"

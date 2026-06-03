@@ -1,8 +1,8 @@
 #nullable enable
 using System;
 using System.Collections.Generic;
+using GregTechCEuTerraria.Api.Machine.Multiblock;
 using GregTechCEuTerraria.Common.Energy;
-using Terraria.Localization;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Machine.Multiblock;
 
@@ -18,7 +18,7 @@ public static class CoilAdditionalDisplay
 		if (controller is not CoilWorkableElectricMultiblockMachine c || !c.IsFormed) return;
 		long heat = c.CoilType.Temperature
 			+ 100L * Math.Max(0, c.MultiTier - (int)VoltageTier.MV);
-		lines.Add(Language.GetTextValue(
+		lines.Add(MultiblockDisplayText.Tr(
 			"gtceu.multiblock.blast_furnace.max_temperature",
 			$"[c/FF5555:{heat:N0}K]"));
 	}
@@ -28,7 +28,7 @@ public static class CoilAdditionalDisplay
 	{
 		if (controller is not CoilWorkableElectricMultiblockMachine c || !c.IsFormed) return;
 		int speed = c.CoilType.Tier == 0 ? 75 : 50 * (c.CoilType.Tier + 1);
-		lines.Add(Language.GetTextValue(
+		lines.Add(MultiblockDisplayText.Tr(
 			"gtceu.multiblock.pyrolyse_oven.speed", speed));
 	}
 
@@ -36,10 +36,10 @@ public static class CoilAdditionalDisplay
 	public static void MultiSmelterCoilStats(MetaMachine controller, List<string> lines)
 	{
 		if (controller is not CoilWorkableElectricMultiblockMachine c || !c.IsFormed) return;
-		lines.Add(Language.GetTextValue(
+		lines.Add(MultiblockDisplayText.Tr(
 			"gtceu.multiblock.multi_furnace.heating_coil_level",
 			c.CoilType.Level));
-		lines.Add(Language.GetTextValue(
+		lines.Add(MultiblockDisplayText.Tr(
 			"gtceu.multiblock.multi_furnace.heating_coil_discount",
 			c.CoilType.EnergyDiscount));
 	}
@@ -49,7 +49,7 @@ public static class CoilAdditionalDisplay
 	{
 		if (controller is not CoilWorkableElectricMultiblockMachine c || !c.IsFormed) return;
 		int energy = 100 - 10 * c.CoilType.Tier;
-		lines.Add(Language.GetTextValue(
+		lines.Add(MultiblockDisplayText.Tr(
 			"gtceu.multiblock.cracking_unit.energy", energy));
 	}
 }

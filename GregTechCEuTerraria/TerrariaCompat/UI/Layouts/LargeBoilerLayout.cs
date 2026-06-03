@@ -1,9 +1,9 @@
 #nullable enable
 using System.Collections.Generic;
+using GregTechCEuTerraria.Api.Machine.Multiblock;
 using GregTechCEuTerraria.TerrariaCompat.Machine;
 using GregTechCEuTerraria.TerrariaCompat.Machine.Multiblock.Steam;
 using GregTechCEuTerraria.TerrariaCompat.Net.Actions;
-using Terraria.Localization;
 
 namespace GregTechCEuTerraria.TerrariaCompat.UI.Layouts;
 
@@ -68,20 +68,20 @@ public static class LargeBoilerLayout
 		if (machine.IsFormed)
 		{
 			// Storage is degC offset, display is kelvins (+274 verbatim upstream).
-			lines.Add(Language.GetTextValue("gtceu.multiblock.large_boiler.temperature",
+			lines.Add(MultiblockDisplayText.Tr("gtceu.multiblock.large_boiler.temperature",
 				(machine.CurrentTemperature + 274).ToString("N0"),
 				(machine.MaxTemperature     + 274).ToString("N0")));
 
 			const int TICKS_PER_STEAM_GENERATION = 5;
-			lines.Add(Language.GetTextValue("gtceu.multiblock.large_boiler.steam_output",
+			lines.Add(MultiblockDisplayText.Tr("gtceu.multiblock.large_boiler.steam_output",
 				(machine.SteamGenerated / TICKS_PER_STEAM_GENERATION).ToString("N0")));
 
 			// Color inlined in the value so the locale template stays single-arg.
-			lines.Add(Language.GetTextValue("gtceu.multiblock.large_boiler.throttle",
+			lines.Add(MultiblockDisplayText.Tr("gtceu.multiblock.large_boiler.throttle",
 				$"[c/55FFFF:{machine.Throttle}%]"));
 
 			// Label only - buttons are separate widgets (see header).
-			lines.Add(Language.GetTextValue("gtceu.multiblock.large_boiler.throttle_modify"));
+			lines.Add(MultiblockDisplayText.Tr("gtceu.multiblock.large_boiler.throttle_modify"));
 		}
 
 		return lines;

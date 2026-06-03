@@ -1,0 +1,99 @@
+invalid_structure: {
+	$parentVal: Ungültige Struktur.
+	tooltip: Dieser Block ist ein Controller der Multiblock-Struktur. Hilfe zum Aufbau finde in der Strukturvorlage in JEI.
+}
+
+max_energy_per_tick: Max. EU/t: [c/55FF55:{0} ({1}])
+max_recipe_tier: Maximale Rezeptstufe: {0}
+energy_consumption: Energieverbrauch: {0} EU/t ({1})
+max_energy_per_tick_amps: Max. EU/t: {0} ({1}A {2})
+
+computation: {
+	max: Max. CWU/t: {0}
+	usage: Verwendung: {0}
+	not_enough_computation: Maschine braucht mehr Rechenleistung!
+}
+
+idling: "[c/FFAA00:Leerlauf.]"
+work_paused: Arbeit pausiert.
+running: Läuft perfekt.
+data_bank.providing: Bereitstellung von Daten.
+research_station.researching: "[c/FFAA00:Forschung.]"
+progress: Fortschritt: {0}s / {1}s ({2}%%)
+progress_percent: Fortschritt: {0}%%
+batch_enabled: - {0}x aus der Stapelverarbeitung
+subtick_parallels: - {0}x durch Übertakten
+total_runs: "{0} Rezepte gleichzeitig ausführen"
+
+parallel: {
+	$parentVal: Bis zu {0} Rezepte parallel ausführen
+	exact: - {0}x von Parallels
+}
+
+not_enough_energy: ACHTUNG: Die Maschine benötigt mehr Energie.
+not_enough_energy_output: ACHTUNG: Energie-Dynamo-Stufe zu niedrig!
+
+universal: {
+	has_problems: Hat Wartungsprobleme!
+
+	problem: {
+		wrench: "[c/AAAAAA:Rohr ist locker. (][c/55FF55:Schraubenschlüssel][c/AAAAAA:)]"
+		screwdriver: "[c/AAAAAA:Schrauben sind locker. (][c/55FF55:Schraubendreher][c/AAAAAA:)]"
+		soft_mallet: "[c/AAAAAA:Etwas steckt fest. (][c/55FF55:Soft Mallet][c/AAAAAA:)]"
+		hard_hammer: "[c/AAAAAA:Die Beschichtung ist verbeult. (][c/55FF55:Harter Hammer][c/AAAAAA:)]"
+		wire_cutter: "[c/AAAAAA:Kabel durchgebrannt. (][c/55FF55:Drahtschneider][c/AAAAAA:)]"
+		crowbar: "[c/AAAAAA:Das gehört nicht dorthin. (][c/55FF55:Brecheisen][c/AAAAAA:)]"
+	}
+
+	muffler_obstructed: {
+		$parentVal: Schalldämpferklappe ist verstopft!
+		tooltip: Vor der Schalldämpferklappe muss ein Luftraumblock vorhanden sein.
+	}
+}
+
+turbine: {
+	fuel_needed: Verbraucht {0} pro {1} Ticks
+	energy_per_tick_maxed: Energieausstoß: {0} EU/t
+}
+
+output_line: {
+	0: "{0} x [c/FFFF55:{1}] ({2}s/ea)"
+	1: "{0} x [c/FFFF55:{1}] ({2}/s)"
+	2: "{0} ≈ [c/FFFF55:{1}] ({2}s/ea)"
+	3: "{0} ≈ [c/FFFF55:{1}] ({2}/s)"
+}
+
+blast_furnace.max_temperature: Wärmekapazität: {0}
+pyrolyse_oven.speed: Verarbeitungsgeschwindigkeit: {0}%%
+
+multi_furnace: {
+	heating_coil_level: Heizschlangenstufe: {0}
+	heating_coil_discount: Heizspirale EU Boost: {0}x
+}
+
+cracking_unit.energy: Energieverbrauch: {0}%%
+
+steam: {
+	steam_stored: Steam: {0} / {1} mb
+	low_steam: Nicht genug Steam zum Laufen!
+}
+
+large_boiler: {
+	temperature: Temperatur: {0}K / {1}K
+	steam_output: Dampfleistung: {0} mB/t
+	throttle: Gas: {0}
+	throttle_modify: Drossel ändern:
+}
+
+waiting: WARNUNG: Maschine wartet.
+
+cleanroom: {
+	clean_state: Status: [c/55FF55:REINIGEN]
+	dirty_state: Status: [c/AA0000:KONTAMINIERT]
+	clean_amount: Sauberkeit: [c/55FF55:{0}%%]
+}
+
+dimensions: {
+	0: Abmessungen:
+	// 1.2d: "[c/55FF55:{0}]x[c/55FF55:{1}]"
+}

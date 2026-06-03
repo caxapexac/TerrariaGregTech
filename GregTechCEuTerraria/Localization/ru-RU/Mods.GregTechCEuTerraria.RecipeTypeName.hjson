@@ -1,0 +1,58 @@
+air_scrubber: Очиститель воздуха
+alloy_blast_smelter: Доменная печь для сплавов
+alloy_smelter: Печь для сплавов
+arc_furnace: Дуговая печь
+assembler: Сборщик
+assembly_line: Сборочный конвейер
+autoclave: Автоклав
+bender: Гибочный станок
+brewery: Варочная машина
+canner: Наполнитель
+centrifuge: Центрифуга
+chemical_bath: Химическая ванна
+chemical_reactor: Химический реактор
+circuit_assembler: Сборщик микросхем
+coke_oven: Коксовая печь
+combustion_generator: Дизельный генератор
+compressor: Компрессор
+cracker: Крекинговый завод
+cutter: Резочная машина
+distillation_tower: Ректификационная колонна
+distillery: Дистиллятор
+dummy: Заглушка
+electric_blast_furnace: Электрическая доменная печь
+electric_furnace: Электрическая печь
+electrolyzer: Электролизер
+electromagnetic_separator: Электромагнитный сепаратор
+extractor: Экстрактор
+extruder: Экструдер
+fermenter: Ферментатор
+fluid_heater: Жидкостный нагреватель
+fluid_solidifier: Жидкостный отвердитель
+forge_hammer: Кузнечный молот
+forming_press: Формовочный пресс
+fusion_reactor: Термоядерный реактор
+gas_collector: Воздухозаборник
+gas_turbine: Газовая турбина
+implosion_compressor: Имплозионный компрессор
+large_boiler: Большой котел
+large_chemical_reactor: Большой химический реактор
+laser_engraver: Лазерный гравировщик
+lathe: Токарный станок
+macerator: Измельчитель
+mixer: Миксер
+ore_washer: Рудопромывочная машина
+packer: Упаковщик
+plasma_generator: Плазменный генератор
+polarizer: Поляризатор
+primitive_blast_furnace: Примитивная доменная печь
+pyrolyse_oven: Пиролизная печь
+research_station: Станция исследований
+rock_breaker: Камнелом
+scanner: Сканер
+sifter: Просеиватель
+steam_boiler: Паровой котел
+steam_turbine: Паровая турбина
+thermal_centrifuge: Термальная центрифуга
+vacuum_freezer: Вакуумный холодильник
+wiremill: Волочильный станок

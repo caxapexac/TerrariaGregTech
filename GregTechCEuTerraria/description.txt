@@ -1,6 +1,8 @@
 A full port of GregTech Modern (GTCEu).
 We want to greg everywhere
 
+> Note: This is an unofficial port. Do not request support in original mod
+
 Adds:
 - ~8700 new items
 - ~32000 recipes

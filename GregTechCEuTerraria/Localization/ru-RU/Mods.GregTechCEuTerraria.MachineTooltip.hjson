@@ -1,0 +1,479 @@
+active_transformer_0: Трансформеры: Замаскированные лазеры
+active_transformer_1: Может комбинировать любое кол-во Энергетических [c/FFFFFF:Входных][c/AAAAAA: разъемов в любое кол-во Энергетических][c/FFFFFF:Выходных][c/AAAAAA: разъемов.]
+active_transformer_2: Может передавать энергию на невероятное расстояние с помощью
+active_transformer_3: Лазеров[c/AAAAAA:.]
+advanced_processing_array: Распараллель этот мир
+assembly_line: Не многоблочная Сборочная машина!
+available_recipe_map_1: Доступные рецепты: %s
+available_recipe_map_2: Доступные рецепты: %s, %s
+available_recipe_map_3: Доступные рецепты: %s, %s, %s
+available_recipe_map_4: Доступные рецепты: %s, %s, %s, %s
+block_breaker: "[c/AAAAAA:Разрушает блок перед собой и подбирает то, что выпало]"
+buffer: Небольшой буфер для хранения предметов и жидкостей
+central_monitor: Но сможет ли он запустить Doom?
+charcoal_pile: Подземная топливная пекарня
+charcoal_pile_0: "[c/FF5555:Пережигает][c/AAAAAA: древесину в][c/55FF55:Древесный уголь][c/AAAAAA:.]"
+charcoal_pile_1: Щелкните правой кнопкой мыши предметом, зажигающим огонь, чтобы начать.
+charcoal_pile_2: Прожиг происходит на расстоянии до [c/55FFFF:9x4x9][c/AAAAAA: под ним.]
+charcoal_pile_3: Древесина не должна подвергаться воздействию [c/FFFF55:Воздуха][c/AAAAAA:!]
+cleanroom: Избавьтесь от этих надоедливых частиц
+cleanroom_0: Установите машины внутри для запуска рецептов требующих чистую комнату.
+cleanroom_1: Использует [c/FFFFFF:30 EU/т][c/AAAAAA: когда загрязнена,][c/FFFFFF:4 EU/т][c/AAAAAA: когда очищена.]
+cleanroom_2: Разгон увеличивает очистку за один цикл.
+cleanroom_3: "[c/55FFFF:Размер: от][c/FFFFFF:5x5x5 до 15x15x15]"
+cleanroom_4: Требует установку [c/FFFFFF:Корпуса фильтра][c/AAAAAA:в любом месте потолка кроме его граней.]
+cleanroom_5: Позволяет установить до [c/FFFFFF:4 дверей][c/AAAAAA:! Требует повторную очистку при открытой двери.]
+cleanroom_6: Генераторы, глушители, буры и примитивные машины слишком грязные для чистой комнаты!
+cleanroom_7: Подавайте питание через [c/FFFFFF:Оболочку][c/AAAAAA:или][c/FFFFFF:Диоды][c/AAAAAA:в стенах.]
+coke_oven: Создание лучшего топлива для Стали и Энергии
+coke_oven_hatch: "[c/AAAAAA:Позволяет автоматизировать доступ для Коксовой печи.]"
+combustion: "[c/AAAAAA:Требуются легковоспламеняющиеся жидкости]"
+computation_receiver_hatch: Вход данных вычислений для многоблочной структуры
+computation_transmitter_hatch: Выход данных вычислений для многоблочной структуры
+cracker: Делает Нефть полезной
+cracker_1: Каждая катушка после [c/FFAA00:Купроникелевой][c/AAAAAA: снижает потребление энергии на][c/FFFFFF:10%%][c/AAAAAA:.]
+data_access_hatch_0: Люк для данных для Многоблочной структуры
+data_access_hatch_1: Добавляет [c/55FF55:%s][c/AAAAAA: слотов для Данных]
+data_bank_0: Твой личный NAS
+data_bank_1: Массовое хранение данных. Передача только по оптическим кабелям.
+data_bank_2: Хранилища данных могут быть объединены между собой.
+data_bank_3: Использует [c/FFFFFF:%s EU/т][c/AAAAAA: для каждого Люка Данных/Оптик. Данных.]
+data_bank_4: Использует [c/FFFFFF:%s EU/т][c/AAAAAA: для каждого Люка Данных/Опт. Данных когда они в цепочке.]
+data_receiver_hatch: Вход для Данных исследований для многоблочной структуры
+data_transmitter_hatch: Выход для Данных исследований для многоблочной структуры
+distillation_tower: Жидкостная ректификация
+electric_blast_furnace: Где электрокоптильня?
+electric_blast_furnace_0: На каждые [c/FFFFFF:900K][c/AAAAAA:, превышающих температуру рецепта, перед разгоном используется][c/FFFFFF:95%%][c/AAAAAA: энергии.]
+electric_blast_furnace_1: На каждые [c/FFFFFF:1800K][c/AAAAAA:, превышающих температуру рецепта, ускорение становится эффективным на][c/FFFFFF:100%%][c/AAAAAA: (Идеальный Разгон).]
+electric_blast_furnace_2: На каждые уровень напряжения выше [c/55FFFF:MV][c/AAAAAA:, разгон становится эффективным на][c/FFFFFF:100K][c/AAAAAA:.]
+endpoint_0: Соединяется с блоком [c/FFFFFF:Трубопровода][c/AAAAAA: для создания трубопровода.]
+endpoint_1: Трубопровод обязан иметь [c/FFFFFF:1 Входную][c/AAAAAA: и][c/FFFFFF:1 Выходную][c/AAAAAA: конечную точку.]
+endpoint_2: Только Конечная точка трубопровода может находится в [c/FFFFFF:Загруженном чанке][c/AAAAAA:.]
+ev_alloy_smelter: "[c/AAAAAA:Высокотехнологичная комбинирующая плавильня]"
+ev_arc_furnace: "[c/AAAAAA:Кому нужна доменная печь?]"
+ev_assembler: "[c/AAAAAA:Мстители, общий сбор!]"
+ev_autoclave: "[c/AAAAAA:Кристаллизация вашей пыли]"
+ev_bender: "[c/AAAAAA:Бу, он плохой! Мы хотим БЕНДЕРА!!!]"
+ev_brewery: "[c/AAAAAA:Компактное и эффективное приготовление жидкостей]"
+ev_canner: "[c/AAAAAA:Укладывает вещи в контейнеры и вынимает из них]"
+ev_centrifuge: "[c/AAAAAA:Молекулярный сепаратор]"
+ev_chemical_bath: "[c/AAAAAA:Искупай руды в химикатах для их разделения]"
+ev_chemical_reactor: "[c/AAAAAA:Позволяет химическим веществам реагировать друг с другом]"
+ev_circuit_assembler: "[c/AAAAAA:Там-Сям хвать по маленьку]"
+ev_compressor: "[c/AAAAAA:Сжиматрон С77]"
+ev_cutter: "[c/AAAAAA:Нарезка кубиками]"
+ev_distillery: "[c/AAAAAA:Извлечение наиболее важных частей жидкостей]"
+ev_electric_furnace: "[c/AAAAAA:Не похоже на использование Commodore 64]"
+ev_electrolyzer: "[c/AAAAAA:Электролиз молекул]"
+ev_electromagnetic_separator: "[c/AAAAAA:Отделяет магнитные руды от остальных]"
+ev_extractor: "[c/AAAAAA:Соковыжиматель судьбы - D123]"
+ev_extruder: "[c/AAAAAA:Универсальная машина для работы по металлу]"
+ev_fermenter: "[c/AAAAAA:Ферментирование жидкостей]"
+ev_fluid_drilling_rig: Осушитель колодцев
+ev_fluid_heater: "[c/AAAAAA:Нагреем ваши жидкости]"
+ev_fluid_solidifier: "[c/AAAAAA:Охлаждает жидкости до твёрдого состояния]"
+ev_forge_hammer: "[c/AAAAAA:Стоп... Время Хаммера!]"
+ev_forming_press: "[c/AAAAAA:Впечатывает образы в вещи]"
+ev_gas_collector: "[c/AAAAAA:Собирает газ из воздуха в зависимости от измерения]"
+ev_laser_engraver: "[c/AAAAAA:Не смотрите прямо на лазер]"
+ev_lathe: "[c/AAAAAA:Более эффективно производит стержни]"
+ev_macerator: "[c/AAAAAA:Дробит ваши руды с побочным продуктом]"
+ev_mass_fabricator: "[c/AAAAAA:UUM = Материя * Изготовление в квадрате]"
+ev_mixer: "[c/AAAAAA:Измельчиться ли?]"
+ev_ore_washer: "[c/AAAAAA:Получение большего количества побочных продуктов из ваших руд]"
+ev_packer: "[c/AAAAAA:Кладет вещи в коробки и достает их из коробок]"
+ev_polarizer: "[c/AAAAAA:Биполяризация ваших магнитов]"
+ev_replicator: "[c/AAAAAA:Производство чистейших элементов]"
+ev_rock_crusher: "[c/AAAAAA:Поместите Воду и Лаву горизонтально рядом]"
+ev_scanner: "[c/AAAAAA:Сканирует материалов и не только]"
+ev_sifter: "[c/AAAAAA:Сохраняйте спокойствие и продолжайте просеивать]"
+ev_thermal_centrifuge: "[c/AAAAAA:Более точное разделение руд]"
+ev_wiremill: "[c/AAAAAA:Более эффективно производит провода]"
+extreme_combustion_engine: Высвободитель энергии хим. реакции
+fisher: Тратит нитки при ловле. Использует по одной каждый раз.
+gas_turbine: "[c/AAAAAA:Требуются легковоспламеняющиеся газы]"
+high_performance_computation_array_0: Просто самый обычный Суперкомпьютер
+high_performance_computation_array_1: Используется для генерации [c/FFFFFF:Вычислений][c/AAAAAA: (и тепла).]
+high_performance_computation_array_2: Требуются компоненты HPCA для создания [c/FFFFFF:CWU/т][c/AAAAAA: (Вычислительные Рабочие Единицы).]
+hp_steam_alloy_smelter: "[c/AAAAAA:Комбинирующая плавильня]"
+hp_steam_compressor: "[c/AAAAAA:Сжимает предметы]"
+hp_steam_extractor: "[c/AAAAAA:Извлечение вашей первой резины]"
+hp_steam_forge_hammer: "[c/AAAAAA:Кузнечный молот]"
+hp_steam_furnace: "[c/AAAAAA:Плавка с паром под давлением]"
+hp_steam_liquid_boiler: "[c/AAAAAA:Быстрее, чем маленький жидкостный паровой котел]"
+hp_steam_macerator: "[c/AAAAAA:Дробит ваши руды без побочных продуктов]"
+hp_steam_rock_crusher: "[c/AAAAAA:Поместите Воду и Лаву горизонтально рядом]"
+hp_steam_solar_boiler: "[c/AAAAAA:Пар от энергии солнца]"
+hp_steam_solid_boiler: "[c/AAAAAA:Быстрее, чем маленький угольный паровой котел]"
+hull: "[c/AAAAAA:Вам просто нужно][c/AA00AA:В][c/FF55FF:о][c/AA0000:о][c/FF5555:б][c/FFFF55:р][c/55FF55:а][c/55FFFF:ж][c/00AAAA:е][c/AAAAAA:н][c/0000AA:и][c/AA00AA:е][c/AAAAAA: чтобы использовать это]"
+hv_alloy_smelter: "[c/AAAAAA:Высокотехнологичная комбинирующая плавильня]"
+hv_arc_furnace: "[c/AAAAAA:Кому нужна доменная печь?]"
+hv_assembler: "[c/AAAAAA:Мстители, общий сбор!]"
+hv_autoclave: "[c/AAAAAA:Кристаллизация вашей пыли]"
+hv_bender: "[c/AAAAAA:Бу, он плохой! Мы хотим БЕНДЕРА!!!]"
+hv_brewery: "[c/AAAAAA:Компактное и эффективное приготовление жидкостей]"
+hv_canner: "[c/AAAAAA:Укладывает вещи в контейнеры и вынимает из них]"
+hv_centrifuge: "[c/AAAAAA:Разделяет молекулы]"
+hv_chemical_bath: "[c/AAAAAA:Искупай руды в химикатах для их разделения]"
+hv_chemical_reactor: "[c/AAAAAA:Позволяет химическим веществам реагировать друг с другом]"
+hv_circuit_assembler: "[c/AAAAAA:Там-Сям хвать по маленьку]"
+hv_compressor: "[c/AAAAAA:Сжиматрон С77]"
+hv_cutter: "[c/AAAAAA:Нарезка кубиками]"
+hv_distillery: "[c/AAAAAA:Извлечение наиболее важных частей жидкостей]"
+hv_electric_furnace: "[c/AAAAAA:Не похоже на использование Commodore 64]"
+hv_electrolyzer: "[c/AAAAAA:Электролиз молекул]"
+hv_electromagnetic_separator: "[c/AAAAAA:Отделяет магнитные руды от остальных]"
+hv_extractor: "[c/AAAAAA:Соковыжиматель судьбы - D123]"
+hv_extruder: "[c/AAAAAA:Универсальная машина для работы по металлу]"
+hv_fermenter: "[c/AAAAAA:Ферментирование жидкостей]"
+hv_fluid_drilling_rig: Не делает Фрекинг
+hv_fluid_heater: "[c/AAAAAA:Нагреем ваши жидкости]"
+hv_fluid_solidifier: "[c/AAAAAA:Охлаждает жидкости до твёрдого состояния]"
+hv_forge_hammer: "[c/AAAAAA:Стоп... Время Хаммера!]"
+hv_forming_press: "[c/AAAAAA:Впечатывает образы в вещи]"
+hv_gas_collector: "[c/AAAAAA:Собирает газ из воздуха в зависимости от измерения]"
+hv_laser_engraver: "[c/AAAAAA:Не смотрите прямо на лазер]"
+hv_lathe: "[c/AAAAAA:Более эффективно производит стержни]"
+hv_macerator: "[c/AAAAAA:Дробит ваши руды с побочным продуктом]"
+hv_mass_fabricator: "[c/AAAAAA:UUM = Материя * Изготовление в квадрате]"
+hv_mixer: "[c/AAAAAA:Измельчиться ли?]"
+hv_ore_washer: "[c/AAAAAA:Получение большего количества побочных продуктов из ваших руд]"
+hv_packer: "[c/AAAAAA:Кладет вещи в коробки и достает их из коробок]"
+hv_polarizer: "[c/AAAAAA:Биполяризация ваших магнитов]"
+hv_replicator: "[c/AAAAAA:Производство чистейших элементов]"
+hv_rock_crusher: "[c/AAAAAA:Поместите Воду и Лаву горизонтально рядом]"
+hv_scanner: "[c/AAAAAA:Сканирует материалов и не только]"
+hv_sifter: "[c/AAAAAA:Сохраняйте спокойствие и продолжайте просеивать]"
+hv_thermal_centrifuge: "[c/AAAAAA:Более точное разделение руд]"
+hv_wiremill: "[c/AAAAAA:Более эффективно производит провода]"
+implosion_compressor: Единственная машина, которая должна делать БУМ
+item_collector: Собирает предметы вокруг себя
+iv_alloy_smelter: "[c/AAAAAA:Сплавный интегратор]"
+iv_arc_furnace: "[c/AAAAAA:Нагнетательный нагреватель]"
+iv_assembler: "[c/AAAAAA:НЕ Верстак]"
+iv_autoclave: "[c/AAAAAA:Скороварка]"
+iv_bender: "[c/AAAAAA:Искажатель формы]"
+iv_brewery: "[c/AAAAAA:Приготовь своё варево]"
+iv_canner: "[c/AAAAAA:Закатыватель]"
+iv_centrifuge: "[c/AAAAAA:Молекулярный циклотрон]"
+iv_chemical_bath: "[c/AAAAAA:Химическое замачивание]"
+iv_chemical_reactor: "[c/AAAAAA:Химический исполнитель]"
+iv_circuit_assembler: "[c/AAAAAA:Производитель электроники]"
+iv_compressor: "[c/AAAAAA:Конденсатор сингулярности]"
+iv_cutter: "[c/AAAAAA:Рассекатель материи]"
+iv_distillery: "[c/AAAAAA:Сепаратор конденсата]"
+iv_electric_furnace: "[c/AAAAAA:Пробудитель возбуждения электронов]"
+iv_electrolyzer: "[c/AAAAAA:Молекулярный дизентигратор E-4906]"
+iv_electromagnetic_separator: "[c/AAAAAA:Электромагнитный каталогизатор]"
+iv_extractor: "[c/AAAAAA:Вакуумный извлекатель]"
+iv_extruder: "[c/AAAAAA:Рассеиватель материалов]"
+iv_fermenter: "[c/AAAAAA:Ускоритель ферментации]"
+iv_fluid_heater: "[c/AAAAAA:Тепловой инфузор]"
+iv_fluid_solidifier: "[c/AAAAAA:Не ледогенератор]"
+iv_forge_hammer: "[c/AAAAAA:Формовщик пластин]"
+iv_forming_press: "[c/AAAAAA:Объектный компоновщик]"
+iv_gas_collector: "[c/AAAAAA:Собирает газ из атмосферы в зависимости от измерения]"
+iv_laser_engraver: "[c/AAAAAA:C мощностью 2,04 МВт]"
+iv_lathe: "[c/AAAAAA:ФрезоТрон L-5906]"
+iv_macerator: "[c/AAAAAA:Руд-о-Дроб 9001]"
+iv_mass_fabricator: "[c/AAAAAA:Фабрика генезиса]"
+iv_mixer: "[c/AAAAAA:Упорядочиватель материи]"
+iv_ore_washer: "[c/AAAAAA:Перепрофилированная стиральная машина Л-360]"
+iv_packer: "[c/AAAAAA:Коробинатор]"
+iv_polarizer: "[c/AAAAAA:Индуктор магнетизма]"
+iv_replicator: "[c/AAAAAA:Шкатулка для материи]"
+iv_rock_crusher: "[c/AAAAAA:Криогенный отвердитель магмы R-8200]"
+iv_scanner: "[c/AAAAAA:Детектор аномалий]"
+iv_sifter: "[c/AAAAAA:При поддержке TFC]"
+iv_thermal_centrifuge: "[c/AAAAAA:Пылающая потогонная система T-6350]"
+iv_wiremill: "[c/AAAAAA:Удлинитель слитка]"
+large_chemical_reactor: Реакторный чёрный ящик
+large_combustion_engine: Камера воспламенения топлива
+laser_source_hatch_0: Передача энергии на расстоянии
+laser_source_hatch_1: "[c/FF5555:Лазерные кабели должны располагаться на прямой линии!]"
+laser_target_hatch_0: Получение энергии на расстоянии
+laser_target_hatch_1: "[c/FF5555:Лазерные кабели должны располагаться на прямой линии!]"
+lp_steam_alloy_smelter: "[c/AAAAAA:Комбинирующая плавильня]"
+lp_steam_compressor: "[c/AAAAAA:Сжимает предметы]"
+lp_steam_extractor: "[c/AAAAAA:Извлечение вашей первой резины]"
+lp_steam_forge_hammer: "[c/AAAAAA:Кузнечный молот]"
+lp_steam_furnace: "[c/AAAAAA:Плавка с паром под давлением]"
+lp_steam_liquid_boiler: "[c/AAAAAA:Котел работает на жидкостях]"
+lp_steam_macerator: "[c/AAAAAA:Дробит ваши руды без побочных продуктов]"
+lp_steam_rock_crusher: "[c/AAAAAA:Поместите Воду и Лаву горизонтально рядом]"
+lp_steam_solar_boiler: "[c/AAAAAA:Пар от энергии солнца]"
+lp_steam_solid_boiler: "[c/AAAAAA:Ранний способ получить паровую энергию]"
+luv_alloy_smelter: "[c/AAAAAA:Сплавный интегратор]"
+luv_arc_furnace: "[c/AAAAAA:Нагнетательный нагреватель]"
+luv_assembler: "[c/AAAAAA:НЕ Верстак]"
+luv_autoclave: "[c/AAAAAA:Скороварка]"
+luv_bender: "[c/AAAAAA:Искажатель формы]"
+luv_brewery: "[c/AAAAAA:Приготовь своё варево]"
+luv_canner: "[c/AAAAAA:Закатыватель]"
+luv_centrifuge: "[c/AAAAAA:Молекулярный циклотрон]"
+luv_chemical_bath: "[c/AAAAAA:Химическое замачивание]"
+luv_chemical_reactor: "[c/AAAAAA:Химический исполнитель]"
+luv_circuit_assembler: "[c/AAAAAA:Производитель электроники]"
+luv_compressor: "[c/AAAAAA:Конденсатор сингулярности]"
+luv_cutter: "[c/AAAAAA:Рассекатель материи]"
+luv_distillery: "[c/AAAAAA:Сепаратор конденсата]"
+luv_electric_furnace: "[c/AAAAAA:Пробудитель возбуждения электронов]"
+luv_electrolyzer: "[c/AAAAAA:Молекулярный дизентигратор E-4907]"
+luv_electromagnetic_separator: "[c/AAAAAA:Электромагнитный каталогизатор]"
+luv_extractor: "[c/AAAAAA:Вакуумный извлекатель]"
+luv_extruder: "[c/AAAAAA:Рассеиватель материалов]"
+luv_fermenter: "[c/AAAAAA:Ускоритель ферментации]"
+luv_fluid_heater: "[c/AAAAAA:Тепловой инфузор]"
+luv_fluid_solidifier: "[c/AAAAAA:Не ледогенератор]"
+luv_forge_hammer: "[c/AAAAAA:Формовщик пластин]"
+luv_forming_press: "[c/AAAAAA:Объектный компоновщик]"
+luv_gas_collector: "[c/AAAAAA:Собирает газ из атмосферы в зависимости от измерения]"
+luv_laser_engraver: "[c/AAAAAA:C мощностью 8,16 МВт]"
+luv_lathe: "[c/AAAAAA:ФрезоТрон L-5907]"
+luv_macerator: "[c/AAAAAA:Руд-О-Дроб 9002]"
+luv_mass_fabricator: "[c/AAAAAA:Фабрика генезиса]"
+luv_mixer: "[c/AAAAAA:Упорядочиватель материи]"
+luv_ore_washer: "[c/AAAAAA:Перепрофилированная стиральная машина Л-361]"
+luv_packer: "[c/AAAAAA:Коробинатор]"
+luv_polarizer: "[c/AAAAAA:Индуктор магнетизма]"
+luv_replicator: "[c/AAAAAA:Шкатулка для материи]"
+luv_rock_crusher: "[c/AAAAAA:Криогенный отвердитель магмы R-9200]"
+luv_scanner: "[c/AAAAAA:Детектор аномалий]"
+luv_sifter: "[c/AAAAAA:При поддержке TFC]"
+luv_thermal_centrifuge: "[c/AAAAAA:Пылающая потогонная система T-6351]"
+luv_wiremill: "[c/AAAAAA:Удлинитель слитка]"
+lv_alloy_smelter: "[c/AAAAAA:Высокотехнологичная комбинирующая плавильня]"
+lv_arc_furnace: "[c/AAAAAA:Кому нужна доменная печь?]"
+lv_assembler: "[c/AAAAAA:Мстители, общий сбор!]"
+lv_autoclave: "[c/AAAAAA:Кристаллизация вашей пыли]"
+lv_bender: "[c/AAAAAA:Бу, он плохой! Мы хотим БЕНДЕРА!!!]"
+lv_brewery: "[c/AAAAAA:Компактное и эффективное приготовление жидкостей]"
+lv_canner: "[c/AAAAAA:Укладывает вещи в контейнеры и вынимает из них]"
+lv_centrifuge: "[c/AAAAAA:Разделяет молекулы]"
+lv_chemical_bath: "[c/AAAAAA:Искупай руды в химикатах для их разделения]"
+lv_chemical_reactor: "[c/AAAAAA:Позволяет химическим веществам реагировать друг с другом]"
+lv_circuit_assembler: "[c/AAAAAA:Там-Сям хвать по маленьку]"
+lv_compressor: "[c/AAAAAA:Сжиматрон С77]"
+lv_cutter: "[c/AAAAAA:Нарезка кубиками]"
+lv_distillery: "[c/AAAAAA:Извлечение наиболее важных частей жидкостей]"
+lv_electric_furnace: "[c/AAAAAA:Не похоже на использование Commodore 64]"
+lv_electrolyzer: "[c/AAAAAA:Электролиз молекул]"
+lv_electromagnetic_separator: "[c/AAAAAA:Отделяет магнитные руды от остальных]"
+lv_extractor: "[c/AAAAAA:Соковыжиматель судьбы - D123]"
+lv_extruder: "[c/AAAAAA:Универсальная машина для работы по металлу]"
+lv_fermenter: "[c/AAAAAA:Ферментирование жидкостей]"
+lv_fluid_heater: "[c/AAAAAA:Нагреем ваши жидкости]"
+lv_fluid_solidifier: "[c/AAAAAA:Охлаждает жидкости до твёрдого состояния]"
+lv_forge_hammer: "[c/AAAAAA:Стоп... Время Хаммера!]"
+lv_forming_press: "[c/AAAAAA:Впечатывает образы в вещи]"
+lv_gas_collector: "[c/AAAAAA:Собирает газ из воздуха в зависимости от измерения]"
+lv_laser_engraver: "[c/AAAAAA:Не смотрите прямо на лазер]"
+lv_lathe: "[c/AAAAAA:Более эффективно производит стержни]"
+lv_macerator: "[c/AAAAAA:Дробит ваши руды без побочных продуктов]"
+lv_mass_fabricator: "[c/AAAAAA:UUM = Материя * Изготовление в квадрате]"
+lv_mixer: "[c/AAAAAA:Измельчиться ли?]"
+lv_ore_washer: "[c/AAAAAA:Получение большего количества побочных продуктов из ваших руд]"
+lv_packer: "[c/AAAAAA:Кладет вещи в коробки и достает их из коробок]"
+lv_polarizer: "[c/AAAAAA:Биполяризация ваших магнитов]"
+lv_replicator: "[c/AAAAAA:Производство чистейших элементов]"
+lv_rock_crusher: "[c/AAAAAA:Поместите Воду и Лаву горизонтально рядом]"
+lv_scanner: "[c/AAAAAA:Сканирует материалов и не только]"
+lv_sifter: "[c/AAAAAA:Сохраняйте спокойствие и продолжайте просеивать]"
+lv_thermal_centrifuge: "[c/AAAAAA:Более точное разделение руд]"
+lv_wiremill: "[c/AAAAAA:Более эффективно производит провода]"
+machine_hatch: Специализированный люк, который содержит только допустимые предметы
+maintenance_hatch: Для обслуживания многоблочных структур
+maintenance_hatch_cleanroom_auto_0: Для автоматической очистки многоблочных машин!
+maintenance_hatch_cleanroom_auto_1: Очищена на:
+maintenance_hatch_configurable_0: Для более тонкого контроля над многоблочными структурами
+maintenance_hatch_configurable_1: Структура начинает работу без пробел с обслуживанием!
+maintenance_hatch_full_auto: Для автоматического обслуживания многоблочных структур
+maintenance_hatch_tape_slot: Вставьте клейкую ленту для решения проблем
+maintenance_hatch_tool_slot: Нажмите на слот пустой рукой, когда в инвентаре есть необходимые инструменты для решения проблем
+miner: "[c/AAAAAA:Добывает руды ТОЛЬКО ниже шахтера! Начнет работу в][c/FFFFFF:%sx%s][c/AAAAAA:области]"
+muffler_hatch_0: Восстанавливает отходы от машин
+muffler_hatch_1: НЕ ЗАСЛОНЯЙТЕ ВЫХОД!
+multi_furnace: Печка прям как дома
+mv_alloy_smelter: "[c/AAAAAA:Высокотехнологичная комбинирующая плавильня]"
+mv_arc_furnace: "[c/AAAAAA:Кому нужна доменная печь?]"
+mv_assembler: "[c/AAAAAA:Мстители, общий сбор!]"
+mv_autoclave: "[c/AAAAAA:Кристаллизация вашей пыли]"
+mv_bender: "[c/AAAAAA:Бу, он плохой! Мы хотим БЕНДЕРА!!!]"
+mv_brewery: "[c/AAAAAA:Компактное и эффективное приготовление жидкостей]"
+mv_canner: "[c/AAAAAA:Укладывает вещи в контейнеры и вынимает из них]"
+mv_centrifuge: "[c/AAAAAA:Разделяет молекулы]"
+mv_chemical_bath: "[c/AAAAAA:Искупай руды в химикатах для их разделения]"
+mv_chemical_reactor: "[c/AAAAAA:Позволяет химическим веществам реагировать друг с другом]"
+mv_circuit_assembler: "[c/AAAAAA:Там-Сям хвать по маленьку]"
+mv_compressor: "[c/AAAAAA:Сжиматрон С77]"
+mv_cutter: "[c/AAAAAA:Нарезка кубиками]"
+mv_distillery: "[c/AAAAAA:Извлечение наиболее важных частей жидкостей]"
+mv_electric_furnace: "[c/AAAAAA:Не похоже на использование Commodore 64]"
+mv_electrolyzer: "[c/AAAAAA:Электролиз молекул]"
+mv_electromagnetic_separator: "[c/AAAAAA:Отделяет магнитные руды от остальных]"
+mv_extractor: "[c/AAAAAA:Соковыжиматель судьбы - D123]"
+mv_extruder: "[c/AAAAAA:Универсальная машина для работы по металлу]"
+mv_fermenter: "[c/AAAAAA:Ферментирование жидкостей]"
+mv_fluid_drilling_rig: Насос для добычи нефти
+mv_fluid_heater: "[c/AAAAAA:Нагреем ваши жидкости]"
+mv_fluid_solidifier: "[c/AAAAAA:Охлаждает жидкости до твёрдого состояния]"
+mv_forge_hammer: "[c/AAAAAA:Стоп... Время Хаммера!]"
+mv_forming_press: "[c/AAAAAA:Впечатывает образы в вещи]"
+mv_gas_collector: "[c/AAAAAA:Собирает газ из воздуха в зависимости от измерения]"
+mv_laser_engraver: "[c/AAAAAA:Не смотрите прямо на лазер]"
+mv_lathe: "[c/AAAAAA:Более эффективно производит стержни]"
+mv_macerator: "[c/AAAAAA:Дробит ваши руды без побочных продуктов]"
+mv_mass_fabricator: "[c/AAAAAA:UUM = Материя * Изготовление в квадрате]"
+mv_mixer: "[c/AAAAAA:Измельчиться ли?]"
+mv_ore_washer: "[c/AAAAAA:Получение большего количества побочных продуктов из ваших руд]"
+mv_packer: "[c/AAAAAA:Кладет вещи в коробки и достает их из коробок]"
+mv_polarizer: "[c/AAAAAA:Биполяризация ваших магнитов]"
+mv_replicator: "[c/AAAAAA:Производство чистейших элементов]"
+mv_rock_crusher: "[c/AAAAAA:Поместите Воду и Лаву горизонтально рядом]"
+mv_scanner: "[c/AAAAAA:Сканирует материалов и не только]"
+mv_sifter: "[c/AAAAAA:Сохраняйте спокойствие и продолжайте просеивать]"
+mv_thermal_centrifuge: "[c/AAAAAA:Более точное разделение руд]"
+mv_wiremill: "[c/AAAAAA:Более эффективно производит провода]"
+network_switch_0: Ethernet-концентратор
+network_switch_1: Используется для маршрутизации и распределения [c/FFFFFF:Вычислений][c/AAAAAA:.]
+network_switch_2: Можно объединить любое кол-во [c/FFFFFF:Приемников][c/AAAAAA: вычислений в любое кол-во][c/FFFFFF:Передатчиков][c/AAAAAA: вычислений.]
+network_switch_3: Использует [c/FFFFFF:%s ЕУ/т за каждый Люк данных вычислений.]
+object_holder: Улучшенный держатель объекта для Станций исследований
+opv_gas_collector: "[c/AAAAAA:Собирает газ из вселенной в зависимости от измерения]"
+opv_rock_crusher: "[c/AAAAAA:Камера вулканического образования]"
+parallel_hatch_mk5: Позволяет запускать до 4 рецептов параллельно.
+parallel_hatch_mk6: Позволяет запускать до 16 рецептов параллельно.
+parallel_hatch_mk7: Позволяет запускать до 64 рецептов параллельно.
+parallel_hatch_mk8: Позволяет запускать до 256 рецептов параллельно.
+passthrough_hatch_fluid: Отправляет жидкости с одной стороны на другую
+passthrough_hatch_item: Отправляет предметы с одной стороны на другую
+power_substation_0: Сердце вашей централизованной электросети
+power_substation_1: "[c/FFFFFF:Накопителям][c/AAAAAA: не нужно быть одно уровня.]"
+power_substation_2: Позволяет установить до [c/FFFFFF:%d Слоёв накопителей][c/AAAAAA:.]
+power_substation_3: Теряет [c/FFFFFF:1%%][c/AAAAAA: от общей емкости каждые][c/FFFFFF:24 часа][c/AAAAAA:.]
+power_substation_4: Ограниченно [c/FFFFFF:%s EU/т][c/AAAAAA: постоянной потери на Блок накопителя.]
+power_substation_5: Может использовать
+power_substation_6: Люк для лазерного источника[c/AAAAAA:.]
+primitive_water_pump: Эндервуар дома
+processing_array: Когда несколько машин просто не работают
+pump: "[c/AAAAAA:Лучший способ опустошить океаны!]"
+pump_hatch: Примитивный жидкостный выход для водяного насоса
+pyrolyse_oven: Электрическая коксовая печь
+pyrolyse_oven_1: "[c/55FF55:Купроникелевые катушки][c/AAAAAA: работают на][c/55FF55:25%%][c/AAAAAA: медленнее. Каждая катушка после][c/55FF55:канталовой][c/AAAAAA: увеличивает скорость на][c/55FF55:50%%][c/AAAAAA:.]"
+quantum_chest: "[c/AAAAAA:Лучше чем Storage Drawers]"
+quantum_tank: "[c/AAAAAA:Компактное место для хранения всех ваших жидкостей]"
+research_station_0: Больше чем Многоблочный Сканнер
+research_station_1: Используется для сканирования [c/FFFFFF:Сфер данных][c/AAAAAA: или][c/FFFFFF:Модулей данных][c/AAAAAA:.]
+research_station_2: Требует [c/FFFFFF:Вычисления][c/AAAAAA: для работы]
+research_station_3: Предоставление большего количества Вычислений позволяет рецепту работать быстрее.
+rotor_holder_0: Держатель ротора для многоблочной структуры
+rotor_holder_1: Удерживает ротор на месте, чтобы он не улетел
+steam_bus: Не работает с электрическими многоблочными структурами
+steam_grinder: Многоблочный измельчитель без побочных продуктов
+steam_miner: "[c/AAAAAA:Добывает руды ТОЛЬКО ниже шахтера!]"
+steam_oven: Не путать с Мультиплавильней
+steam_turbine: "[c/AAAAAA:Преобразует Пар в EU]"
+tank_valve: Используется для заполнения и опустошения многоблочных резервуаров. Автоматические выходы, когда повернут вниз.
+uev_gas_collector: "[c/AAAAAA:Собирает газ из Солнечной системы в зависимости от измерения]"
+uev_rock_crusher: "[c/AAAAAA:Камера вулканического образования]"
+uhv_gas_collector: "[c/AAAAAA:Собирает газ из Солнечной системы в зависимости от измерения]"
+uhv_rock_crusher: "[c/AAAAAA:Камера вулканического образования]"
+uiv_gas_collector: "[c/AAAAAA:Собирает газ из Солнечной системы в зависимости от измерения]"
+uiv_rock_crusher: "[c/AAAAAA:Камера вулканического образования]"
+uv_alloy_smelter: "[c/AAAAAA:Смеситель металлов]"
+uv_arc_furnace: "[c/AAAAAA:Нагреватель короткого замыкания]"
+uv_assembler: "[c/AAAAAA:Сборочный конструктор]"
+uv_autoclave: "[c/AAAAAA:Блок обременения]"
+uv_bender: "[c/AAAAAA:Деформатор материи]"
+uv_brewery: "[c/AAAAAA:Скоровар]"
+uv_canner: "[c/AAAAAA:Электроконсерватор]"
+uv_centrifuge: "[c/AAAAAA:Молекулярный торнадо]"
+uv_chemical_bath: "[c/AAAAAA:Химический утопитель]"
+uv_chemical_reactor: "[c/AAAAAA:Катализатор реакции]"
+uv_circuit_assembler: "[c/AAAAAA:Фабрика вычислений]"
+uv_compressor: "[c/AAAAAA:Сжиматель материи]"
+uv_cutter: "[c/AAAAAA:Разделитель объектов]"
+uv_distillery: "[c/AAAAAA:Разделитель фракций]"
+uv_electric_furnace: "[c/AAAAAA:Атомный стимулятор]"
+uv_electrolyzer: "[c/AAAAAA:Атомный ионизатор]"
+uv_electromagnetic_separator: "[c/AAAAAA:Рассеиватель ЭМП]"
+uv_extractor: "[c/AAAAAA:Разжижающая присоска]"
+uv_extruder: "[c/AAAAAA:Придаватель формы]"
+uv_fermenter: "[c/AAAAAA:Контроллер выделений]"
+uv_fluid_heater: "[c/AAAAAA:Термальный пропитчик]"
+uv_fluid_solidifier: "[c/AAAAAA:Окаменеватель жидкостей]"
+uv_forge_hammer: "[c/AAAAAA:Модулятор удара]"
+uv_forming_press: "[c/AAAAAA:Поверхностный изменятель]"
+uv_gas_collector: "[c/AAAAAA:Собирает газ из Солнечной системы в зависимости от измерения]"
+uv_laser_engraver: "[c/AAAAAA:Точная фотонная пушка]"
+uv_lathe: "[c/AAAAAA:Ротационный гриндер]"
+uv_macerator: "[c/AAAAAA:Уничтожитель форм]"
+uv_mass_fabricator: "[c/AAAAAA:Инициатор существования]"
+uv_mixer: "[c/AAAAAA:Гомогенизатор материала]"
+uv_ore_washer: "[c/AAAAAA:Миниатюрная автомойка]"
+uv_packer: "[c/AAAAAA:Склад Амазона]"
+uv_polarizer: "[c/AAAAAA:Перестраиватель магнитного поля]"
+uv_replicator: "[c/AAAAAA:Элементный композитор]"
+uv_rock_crusher: "[c/AAAAAA:Камера вулканического образования]"
+uv_scanner: "[c/AAAAAA:Электронный микроскоп]"
+uv_sifter: "[c/AAAAAA:Пульсационный фильтр]"
+uv_thermal_centrifuge: "[c/AAAAAA:Огненный циклон]"
+uv_wiremill: "[c/AAAAAA:Трансфигуратор провода]"
+uxv_gas_collector: "[c/AAAAAA:Собирает газ из Солнечной системы в зависимости от измерения]"
+uxv_rock_crusher: "[c/AAAAAA:Камера вулканического образования]"
+vacuum_freezer: Алюминиевый ящик для льда
+workbench_0: Лучше, чем в Forestry
+workbench_1: Имеет Хранилище Предметов, Хранилище Инструментов, соединяется с соседними инвентарями и сохраняет рецепты.
+zpm_alloy_smelter: "[c/AAAAAA:Сплавный интегратор]"
+zpm_arc_furnace: "[c/AAAAAA:Нагнетательный нагреватель]"
+zpm_assembler: "[c/AAAAAA:НЕ Верстак]"
+zpm_autoclave: "[c/AAAAAA:Скороварка]"
+zpm_bender: "[c/AAAAAA:Искажатель формы]"
+zpm_brewery: "[c/AAAAAA:Приготовь своё варево]"
+zpm_canner: "[c/AAAAAA:Закатыватель]"
+zpm_centrifuge: "[c/AAAAAA:Молекулярный циклотрон]"
+zpm_chemical_bath: "[c/AAAAAA:Химическое замачивание]"
+zpm_chemical_reactor: "[c/AAAAAA:Химический исполнитель]"
+zpm_circuit_assembler: "[c/AAAAAA:Производитель электроники]"
+zpm_compressor: "[c/AAAAAA:Конденсатор сингулярности]"
+zpm_cutter: "[c/AAAAAA:Рассекатель материи]"
+zpm_distillery: "[c/AAAAAA:Сепаратор конденсата]"
+zpm_electric_furnace: "[c/AAAAAA:Пробудитель возбуждения электронов]"
+zpm_electrolyzer: "[c/AAAAAA:Молекулярный дизентигратор E-4908]"
+zpm_electromagnetic_separator: "[c/AAAAAA:Электромагнитный каталогизатор]"
+zpm_extractor: "[c/AAAAAA:Вакуумный извлекатель]"
+zpm_extruder: "[c/AAAAAA:Рассеиватель материалов]"
+zpm_fermenter: "[c/AAAAAA:Ускоритель ферментации]"
+zpm_fluid_heater: "[c/AAAAAA:Тепловой инфузор]"
+zpm_fluid_solidifier: "[c/AAAAAA:Не ледогенератор]"
+zpm_forge_hammer: "[c/AAAAAA:Формовщик пластин]"
+zpm_forming_press: "[c/AAAAAA:Объектный компоновщик]"
+zpm_gas_collector: "[c/AAAAAA:Собирает газ из атмосферы в зависимости от измерения]"
+zpm_laser_engraver: "[c/AAAAAA:C мощностью 32,64 МВт]"
+zpm_lathe: "[c/AAAAAA:ФрезоТрон L-5908]"
+zpm_macerator: "[c/AAAAAA:Руд-О-Дроб 9003]"
+zpm_mass_fabricator: "[c/AAAAAA:Фабрика генезиса]"
+zpm_mixer: "[c/AAAAAA:Упорядочиватель материи]"
+zpm_ore_washer: "[c/AAAAAA:Перепрофилированная стиральная машина Л-362]"
+zpm_packer: "[c/AAAAAA:Коробинатор]"
+zpm_polarizer: "[c/AAAAAA:Индуктор магнетизма]"
+zpm_replicator: "[c/AAAAAA:Шкатулка для материи]"
+zpm_rock_crusher: "[c/AAAAAA:Криогенный отвердитель магмы R-10200]"
+zpm_scanner: "[c/AAAAAA:Детектор аномалий]"
+zpm_sifter: "[c/AAAAAA:При поддержке TFC]"
+zpm_thermal_centrifuge: "[c/AAAAAA:Пылающая потогонная система T-6352]"
+zpm_wiremill: "[c/AAAAAA:Удлинитель слитка]"
+// long_distance_item_pipeline_endpoint_0: "[c/AAFFAA:Endpoint for a Long Distance Item Pipeline.]"
+// long_distance_item_pipeline_endpoint_1: "[c/AAFFAA:Teleports items to a far-away partner endpoint.]"
+// long_distance_item_pipeline_endpoint_2: "[c/AAAAAA:1. Connect to the end of a long-distance pipe run.]"
+// long_distance_item_pipeline_endpoint_3: "[c/AAAAAA:2. Place a matching endpoint at the far end.]"
+// long_distance_item_pipeline_endpoint_4: "[c/AAAAAA:3. Screwdriver one to Input, the other to Output.]"
+// long_distance_item_pipeline_endpoint_5: "[c/888888:Feed the Input from any side; it exits into a chest next to the Output.]"
+// long_distance_item_pipeline_endpoint_6: "[c/888888:Endpoints must be at least 50 blocks apart.]"
+// long_distance_fluid_pipeline_endpoint_0: "[c/AAFFAA:Endpoint for a Long Distance Fluid Pipeline.]"
+// long_distance_fluid_pipeline_endpoint_1: "[c/AAFFAA:Teleports fluids to a far-away partner endpoint.]"
+// long_distance_fluid_pipeline_endpoint_2: "[c/AAAAAA:1. Connect to the end of a long-distance pipe run.]"
+// long_distance_fluid_pipeline_endpoint_3: "[c/AAAAAA:2. Place a matching endpoint at the far end.]"
+// long_distance_fluid_pipeline_endpoint_4: "[c/AAAAAA:3. Screwdriver one to Input, the other to Output.]"
+// long_distance_fluid_pipeline_endpoint_5: "[c/888888:Feed the Input from any side; it exits into a chest next to the Output.]"
+// long_distance_fluid_pipeline_endpoint_6: "[c/888888:Endpoints must be at least 50 blocks apart.]"

@@ -3,14 +3,6 @@ using Terraria.Localization;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Machine.Multiblock;
 
-// Locale-fallback installer for the multiblock display-text keys consulted by
-// MultiblockDisplayText. Keys live in raw gtceu.* (matching upstream
-// en_us.json) so the builder's GetTextValue calls grep 1:1 against upstream
-// Java. port-locale.py mirrors under Mods.GregTechCEuTerraria.* and doesn't
-// own this namespace, so we install English fallbacks via GetOrRegister.
-//
-// Format adaptations: %s -> {0}/{1}/...; MC section-color -> Terraria [c/RRGGBB:...]
-// (sectiona->55FF55, sectionc->FF5555, section6->FFAA00, sectione->FFFF55, sectionb->55FFFF, section7->AAAAAA).
 public static class MultiblockLocale
 {
 	public static void RegisterAll()
@@ -20,6 +12,16 @@ public static class MultiblockLocale
 		// world-hover tooltip uses (single source of truth).
 		Api.Machine.Multiblock.MultiblockDisplayText.FailReasonResolver =
 			RecipeStatusText.Resolve;
+
+		// Map the raw upstream gtceu.* keys
+		Api.Machine.Multiblock.MultiblockDisplayText.KeyResolver = raw =>
+		{
+			if (!raw.StartsWith("gtceu.")) return raw;
+			string k = raw.Substring("gtceu.".Length);
+			return k.Contains('.')
+				? "Mods.GregTechCEuTerraria." + k
+				: "Mods.GregTechCEuTerraria.RecipeTypeName." + k;
+		};
 
 		Register("gtceu.multiblock.invalid_structure",         "[c/FF5555:Invalid Structure!]");
 		Register("gtceu.multiblock.invalid_structure.tooltip", "Make sure the structure is built correctly.");

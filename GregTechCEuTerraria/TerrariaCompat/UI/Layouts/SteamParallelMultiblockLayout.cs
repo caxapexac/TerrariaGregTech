@@ -1,7 +1,7 @@
 #nullable enable
 using System.Collections.Generic;
+using GregTechCEuTerraria.Api.Machine.Multiblock;
 using GregTechCEuTerraria.TerrariaCompat.Machine.Multiblock.Steam;
-using Terraria.Localization;
 
 namespace GregTechCEuTerraria.TerrariaCompat.UI.Layouts;
 
@@ -52,34 +52,34 @@ public static class SteamParallelMultiblockLayout
 			long capacity = machine.SteamCapacity;
 			if (capacity > 0)
 			{
-				lines.Add(Language.GetTextValue("gtceu.multiblock.steam.steam_stored",
+				lines.Add(MultiblockDisplayText.Tr("gtceu.multiblock.steam.steam_stored",
 					machine.SteamStored.ToString("N0"), capacity.ToString("N0")));
 			}
 
 			if (!recipeLogic.IsWorkingEnabled())
 			{
-				lines.Add(Language.GetTextValue("gtceu.multiblock.work_paused"));
+				lines.Add(MultiblockDisplayText.Tr("gtceu.multiblock.work_paused"));
 			}
 			else if (recipeLogic.IsActive())
 			{
-				lines.Add(Language.GetTextValue("gtceu.multiblock.running"));
+				lines.Add(MultiblockDisplayText.Tr("gtceu.multiblock.running"));
 				if (machine.MaxParallels > 1)
-					lines.Add(Language.GetTextValue("gtceu.multiblock.parallel",
+					lines.Add(MultiblockDisplayText.Tr("gtceu.multiblock.parallel",
 						machine.MaxParallels.ToString("N0")));
 				int currentProgress = (int)(recipeLogic.GetProgressPercent() * 100);
 				double maxInSec     = recipeLogic.GetMaxProgress() / 20.0;
 				double currentInSec = recipeLogic.GetProgress()    / 20.0;
-				lines.Add(Language.GetTextValue("gtceu.multiblock.progress",
+				lines.Add(MultiblockDisplayText.Tr("gtceu.multiblock.progress",
 					currentInSec.ToString("0.00"), maxInSec.ToString("0.00"),
 					currentProgress));
 			}
 			else
 			{
-				lines.Add(Language.GetTextValue("gtceu.multiblock.idling"));
+				lines.Add(MultiblockDisplayText.Tr("gtceu.multiblock.idling"));
 			}
 
 			if (recipeLogic.IsWaiting())
-				lines.Add(Language.GetTextValue("gtceu.multiblock.steam.low_steam"));
+				lines.Add(MultiblockDisplayText.Tr("gtceu.multiblock.steam.low_steam"));
 		}
 
 		return lines;

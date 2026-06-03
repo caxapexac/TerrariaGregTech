@@ -14,6 +14,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.GameContent.UI.Elements;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.UI;
 // Disambiguate - vanilla also has Terraria.GameContent.UI.Elements.UISearchBar.
@@ -691,6 +692,7 @@ public sealed class GlobalRecipeBrowserState : UIState
 	// then optionally by the "have ingredients" checkbox.
 	private void Refilter(string text)
 	{
+		SyncLocaleCaches();
 		if (_mode == BrowseMode.Items)      { RefilterItems(text);      return; }
 		if (_mode == BrowseMode.Loot)       { RefilterLoot(text);       return; }
 		if (_mode == BrowseMode.Equippable) { RefilterEquippable(text); return; }
@@ -1073,6 +1075,16 @@ public sealed class GlobalRecipeBrowserState : UIState
 
 	private static readonly Dictionary<int, string> _itemNameLowerCache = new();
 
+	private static string? _cacheCulture;
+	internal static void SyncLocaleCaches()
+	{
+		string culture = LanguageManager.Instance.ActiveCulture?.Name ?? "";
+		if (culture == _cacheCulture) return;
+		_cacheCulture = culture;
+		_itemNameLowerCache.Clear();
+		RecipeSearch.ClearCache();
+	}
+
 	private List<int> EnsureItemUniverse()
 	{
 		if (_allItems is not null) return _allItems;
@@ -1096,6 +1108,7 @@ public sealed class GlobalRecipeBrowserState : UIState
 
 	public void Warm()
 	{
+		SyncLocaleCaches();
 		EnsureItemUniverse();
 		EnsureEquippableUniverse();
 		WarmItemNames();

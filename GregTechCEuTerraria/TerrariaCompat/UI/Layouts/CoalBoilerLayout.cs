@@ -15,7 +15,7 @@ public static class CoalBoilerLayout
 	{
 		Width = 176,
 		Height = 100,
-		Title = boiler.IsHighPressure ? "High Pressure Coal Boiler" : "Coal Boiler",
+		Title = boiler.DisplayName,
 
 		Widgets =
 		{

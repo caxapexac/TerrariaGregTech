@@ -1,6 +1,5 @@
 #nullable enable
 using System;
-using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -13,32 +12,26 @@ namespace GregTechCEuTerraria.TerrariaCompat.UI.Widgets;
 
 // JEI-style text input. LMB=focus, RMB=clear, Esc/Enter=unfocus, key-repeat
 // after InitialRepeatDelay every RepeatInterval.
-//
-// **Direct XNA polling, not Main.GetInputText** - vanilla's text-input pipeline
-// doesn't deliver keystrokes to a mod UIElement (its focus routing is hard-coded
-// to chat/sign/NPC text). Tradeoff: no clipboard paste, no arrows, no IME.
-//
-// **UnfocusAll() is static** - hosting UIStates must call it on close, else
-// focus leaks across UI lifetimes (next typed key lands in an invisible widget).
-//
-// **Never touch Main.blockInput** - vanilla never resets it; setting once
-// soft-locks the player past the UI closing.
 public sealed class UISearchBar : UIElement
 {
 	private static UISearchBar? _focusedInstance;
 
-	public static void UnfocusAll() => _focusedInstance = null;
+	public static void UnfocusAll()
+	{
+		_focusedInstance?.Unsubscribe();
+		_focusedInstance = null;
+	}
 
-	// XNA polling doesn't auto-repeat.
-	private const int InitialRepeatDelay = 25;   // ~0.4 s
-	private const int RepeatInterval     = 3;    // ~12 keys/sec
+	// Backspace key-repeat (KeyboardState has no auto-repeat).
+	private const int BackRepeatDelay    = 25;   // ticks before repeat kicks in
+	private const int BackRepeatInterval = 3;
 
 	private string _text = "";
 	private readonly string _placeholder;
 	private readonly Action<string> _onChanged;
+	private bool _subscribed;
 	private KeyboardState _prevKb;
-	private Keys _heldKey = Keys.None;
-	private int _heldTicks;
+	private int _backHeld;
 
 	public string Text => _text;
 	public bool IsFocused => _focusedInstance == this;
@@ -53,14 +46,40 @@ public sealed class UISearchBar : UIElement
 
 	private void Focus()
 	{
+		// At most one search bar is focused (and thus subscribed) at a time.
+		if (_focusedInstance != null && _focusedInstance != this)
+			_focusedInstance.Unsubscribe();
 		_focusedInstance = this;
-		// Snapshot so already-held click modifiers don't re-fire as new presses.
+		Subscribe();
 		_prevKb = Keyboard.GetState();
-		_heldKey = Keys.None;
-		_heldTicks = 0;
+		_backHeld = 0;
 	}
 
-	public void Unfocus() { if (IsFocused) _focusedInstance = null; }
+	public void Unfocus()
+	{
+		if (IsFocused) _focusedInstance = null;
+		Unsubscribe();
+	}
+
+	private void Subscribe()
+	{
+		if (_subscribed) return;
+		TextInputEXT.TextInput += OnTextInput;
+		_subscribed = true;
+	}
+
+	private void Unsubscribe()
+	{
+		if (!_subscribed) return;
+		TextInputEXT.TextInput -= OnTextInput;
+		_subscribed = false;
+	}
+
+	private void OnTextInput(char c)
+	{
+		if (IsFocused && c >= ' ' && c != (char)127)
+			SetText(_text + c);
+	}
 
 	public void SetText(string text)
 	{
@@ -80,91 +99,31 @@ public sealed class UISearchBar : UIElement
 
 		if (IsFocused)
 		{
-			// WritingText is per-frame self-resetting - safe to leave set.
 			PlayerInput.WritingText = true;
-			ProcessKeystrokes();
+
+			var kb = Keyboard.GetState();
+			if (Edge(kb, Keys.Enter) || Edge(kb, Keys.Escape))
+			{
+				Unfocus();
+			}
+			else if (kb.IsKeyDown(Keys.Back))
+			{
+				_backHeld++;
+				bool fire = _backHeld == 1 ||
+					(_backHeld >= BackRepeatDelay && (_backHeld - BackRepeatDelay) % BackRepeatInterval == 0);
+				if (fire && _text.Length > 0) SetText(_text.Substring(0, _text.Length - 1));
+			}
+			else
+			{
+				_backHeld = 0;
+			}
+			_prevKb = kb;
 		}
 
 		if (over) Main.LocalPlayer.mouseInterface = true;
 	}
 
-	private void ProcessKeystrokes()
-	{
-		var kb = Keyboard.GetState();
-		Keys fired = FindFiringKey(kb);
-
-		if (fired == Keys.Escape || fired == Keys.Enter) { Unfocus(); _prevKb = kb; return; }
-		if (fired == Keys.Back)
-		{
-			if (_text.Length > 0) SetText(_text.Substring(0, _text.Length - 1));
-		}
-		else if (fired != Keys.None)
-		{
-			bool shift = kb.IsKeyDown(Keys.LeftShift) || kb.IsKeyDown(Keys.RightShift);
-			// Console.CapsLock is Windows-only; Shift covers other OS.
-			bool caps  = System.OperatingSystem.IsWindows() && Console.CapsLock;
-			if (CharFor(fired, shift, caps) is { } ch) SetText(_text + ch);
-		}
-
-		_prevKb = kb;
-	}
-
-	// Key firing this frame - newly-pressed, or held key whose repeat is due.
-	private Keys FindFiringKey(KeyboardState kb)
-	{
-		foreach (var key in kb.GetPressedKeys())
-		{
-			if (!_prevKb.IsKeyDown(key))
-			{
-				_heldKey = key;
-				_heldTicks = 0;
-				return key;
-			}
-		}
-
-		if (_heldKey != Keys.None && kb.IsKeyDown(_heldKey))
-		{
-			_heldTicks++;
-			int sinceRepeatStart = _heldTicks - InitialRepeatDelay;
-			if (sinceRepeatStart >= 0 && sinceRepeatStart % RepeatInterval == 0)
-				return _heldKey;
-			return Keys.None;
-		}
-
-		_heldKey = Keys.None;
-		return Keys.None;
-	}
-
-	// Letters / digits handled by range arithmetic; Oem keys explicit.
-	private static readonly Dictionary<Keys, (string Plain, string Shift)> Punct = new()
-	{
-		{ Keys.Space,            (" ",  " ")  },
-		{ Keys.OemMinus,         ("-",  "_")  },
-		{ Keys.OemPlus,          ("=",  "+")  },
-		{ Keys.OemPeriod,        (".",  ">")  },
-		{ Keys.OemComma,         (",",  "<")  },
-		{ Keys.OemQuestion,      ("/",  "?")  },
-		{ Keys.OemSemicolon,     (";",  ":")  },
-		{ Keys.OemQuotes,        ("'",  "\"") },
-		{ Keys.OemTilde,         ("`",  "~")  },
-		{ Keys.OemPipe,          ("\\", "|")  },
-		{ Keys.OemOpenBrackets,  ("[",  "{")  },
-		{ Keys.OemCloseBrackets, ("]",  "}")  },
-	};
-	private static readonly string[] ShiftDigits = { ")", "!", "@", "#", "$", "%", "^", "&", "*", "(" };
-
-	private static string? CharFor(Keys k, bool shift, bool caps)
-	{
-		if (k >= Keys.A && k <= Keys.Z)
-		{
-			char c = (char)('a' + (k - Keys.A));
-			return (shift ^ caps) ? char.ToUpperInvariant(c).ToString() : c.ToString();
-		}
-		if (k >= Keys.D0 && k <= Keys.D9)        return shift ? ShiftDigits[k - Keys.D0] : ((int)(k - Keys.D0)).ToString();
-		if (k >= Keys.NumPad0 && k <= Keys.NumPad9) return ((int)(k - Keys.NumPad0)).ToString();
-		if (Punct.TryGetValue(k, out var p))     return shift ? p.Shift : p.Plain;
-		return null;
-	}
+	private bool Edge(KeyboardState kb, Keys k) => kb.IsKeyDown(k) && !_prevKb.IsKeyDown(k);
 
 	protected override void DrawSelf(SpriteBatch spriteBatch)
 	{

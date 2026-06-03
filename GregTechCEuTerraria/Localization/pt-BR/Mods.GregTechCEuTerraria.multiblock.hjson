@@ -1,0 +1,99 @@
+invalid_structure: {
+	$parentVal: Estrutura inválida.
+	tooltip: Este bloco é um controlador da estrutura multibloco. Para ajuda na construção, veja o modelo da estrutura no JEI.
+}
+
+max_energy_per_tick: EU/t Máx: [c/55FF55:{0} ({1}])
+max_recipe_tier: Nível Máximo da Receita: {0}
+energy_consumption: Uso de Energia: {0} EU/t ({1})
+max_energy_per_tick_amps: EU/t Máx: {0} ({1}A {2})
+
+computation: {
+	max: CWU/t Máx: {0}
+	usage: Usando: {0}
+	not_enough_computation: A máquina precisa de mais computação!
+}
+
+idling: "[c/FFAA00:Ocioso.]"
+work_paused: Trabalho Pausado.
+running: Funcionando perfeitamente.
+data_bank.providing: Fornecendo dados.
+research_station.researching: "[c/FFAA00:Pesquisando.]"
+progress: Progresso: {0}s / {1}s ({2}%%)
+progress_percent: Progresso: {0}%%
+batch_enabled: - {0}x de Agrupamento
+subtick_parallels: - {0}x de Overclock
+total_runs: Realizando {0} Receitas de uma vez
+
+parallel: {
+	$parentVal: Realizando até {0} Receitas em Paralelo
+	exact: - {0}x de Paralelos
+}
+
+not_enough_energy: AVISO: A máquina precisa de mais energia.
+not_enough_energy_output: AVISO: Nível do Dínamo de Energia Muito Baixo!
+
+universal: {
+	has_problems: Tem Problemas de Manutenção!
+
+	problem: {
+		wrench: "[c/AAAAAA:O tubo está solto. (][c/55FF55:Chave Inglesa][c/AAAAAA:)]"
+		screwdriver: "[c/AAAAAA:Os parafusos estão soltos. (][c/55FF55:Chave de Fenda][c/AAAAAA:)]"
+		soft_mallet: "[c/AAAAAA:Algo está preso. (][c/55FF55:Macete][c/AAAAAA:)]"
+		hard_hammer: "[c/AAAAAA:O revestimento está amassado. (][c/55FF55:Martelo Pesado][c/AAAAAA:)]"
+		wire_cutter: "[c/AAAAAA:Os fios queimaram. (][c/55FF55:Alicate de Corte][c/AAAAAA:)]"
+		crowbar: "[c/AAAAAA:Isso não pertence a esse lugar. (][c/55FF55:Pé de cabra][c/AAAAAA:)]"
+	}
+
+	muffler_obstructed: {
+		$parentVal: Escotilha de Silenciador está Obstruída!
+		tooltip: A Escotilha de Silenciador deve ter um bloco de espaço aéreo na frente dela.
+	}
+}
+
+turbine: {
+	fuel_needed: Consome {0} por {1} ticks
+	energy_per_tick_maxed: Saída de Energia: {0} EU/t
+}
+
+output_line: {
+	0: "{0} x [c/FFFF55:{1}] ({2}s/cada)"
+	1: "{0} x [c/FFFF55:{1}] ({2}/s)"
+	2: "{0} ≈ [c/FFFF55:{1}] ({2}s/cada)"
+	3: "{0} ≈ [c/FFFF55:{1}] ({2}/s)"
+}
+
+blast_furnace.max_temperature: Capacidade de Calor: {0}
+pyrolyse_oven.speed: Velocidade de Processamento: {0}%%
+
+multi_furnace: {
+	heating_coil_level: Nível da Bobina de Aquecimento: {0}
+	heating_coil_discount: Impulso de EU da Bobina de Aquecimento: {0}x
+}
+
+cracking_unit.energy: Uso de Energia: {0}%%
+
+steam: {
+	steam_stored: Vapor: {0} / {1} mb
+	low_steam: Vapor insuficiente para funcionar!
+}
+
+large_boiler: {
+	temperature: Temperatura: {0}K / {1}K
+	steam_output: Saída de Vapor: {0} mB/t
+	throttle: Acelerador: {0}
+	throttle_modify: Modificar Acelerador:
+}
+
+waiting: AVISO: A máquina está esperando.
+
+cleanroom: {
+	clean_state: Status: [c/55FF55:LIMPO]
+	dirty_state: Status: [c/AA0000:CONTAMINADO]
+	clean_amount: Limpeza: [c/55FF55:{0}%%]
+}
+
+dimensions: {
+	0: Dimensões:
+	// 1.2d: "[c/55FF55:{0}]x[c/55FF55:{1}]"
+}

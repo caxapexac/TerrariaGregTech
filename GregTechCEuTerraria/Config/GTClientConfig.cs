@@ -1,5 +1,6 @@
 #nullable enable
 using System.ComponentModel;
+using System.Reflection;
 using Terraria.ModLoader;
 using Terraria.ModLoader.Config;
 
@@ -17,4 +18,12 @@ public sealed class GTClientConfig : ModConfig
 	public bool ShowDiscordInvite { get; set; } = true;
 
 	public static GTClientConfig Instance => ModContent.GetInstance<GTClientConfig>();
+
+	public void DismissDiscordInvite()
+	{
+		ShowDiscordInvite = false;
+		typeof(ConfigManager)
+			.GetMethod("Save", BindingFlags.Static | BindingFlags.NonPublic)
+			?.Invoke(null, new object[] { this });
+	}
 }

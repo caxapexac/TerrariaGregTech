@@ -1,0 +1,2126 @@
+almandine_block.MapEntry: Almandin-Block
+aluminium_block.MapEntry: Aluminium-Block
+americium_block.MapEntry: Americium-Block
+amethyst_block.MapEntry: Amethyst-Block
+andradite_block.MapEntry: Andradit-Block
+annealed_copper_block.MapEntry: Geglühtes Kupfer-Block
+antimony_block.MapEntry: Antimon-Block
+apatite_block.MapEntry: Apatit-Block
+battery_alloy_block.MapEntry: Batterielegierung-Block
+beryllium_block.MapEntry: Beryllium-Block
+bismuth_block.MapEntry: Wismut-Block
+bismuth_bronze_block.MapEntry: Wismutbronze-Block
+black_bronze_block.MapEntry: Schwarzbronze-Block
+black_steel_block.MapEntry: Schwarzer Stahl-Block
+blue_alloy_block.MapEntry: Silbertin-Leitlegierung-Block
+blue_steel_block.MapEntry: Blauer Stahl-Block
+blue_topaz_block.MapEntry: Blauer Topas-Block
+borosilicate_glass_block.MapEntry: Borosilikatglas-Block
+brass_block.MapEntry: Messing-Block
+bronze_block.MapEntry: Bronze-Block
+certus_quartz_block.MapEntry: Certus-Quarz-Block
+charcoal_block.MapEntry: Holzkohle-Block
+chromium_block.MapEntry: Chrom-Block
+cinnabar_block.MapEntry: Zinnober-Block
+coal_block.MapEntry: Kohle-Block
+cobalt_block.MapEntry: Kobalt-Block
+cobalt_brass_block.MapEntry: Kobaltmessing-Block
+coke_block.MapEntry: Koks-Block
+copper_block.MapEntry: Kupfer-Block
+cupronickel_block.MapEntry: Kupfernickel-Block
+damascus_steel_block.MapEntry: Damaststahl-Block
+darmstadtium_block.MapEntry: Darmstadtium-Block
+diamond_block.MapEntry: Diamant-Block
+duranium_block.MapEntry: Duranium-Block
+echo_shard_block.MapEntry: Echosplitter-Block
+electrum_block.MapEntry: Elektrum-Block
+emerald_block.MapEntry: Smaragd-Block
+ender_eye_block.MapEntry: Ender-Auge-Block
+ender_pearl_block.MapEntry: Ender Perle-Block
+enriched_naquadah_block.MapEntry: Angereichertes Naquadah-Block
+enriched_naquadah_trinium_europium_duranide_block.MapEntry: Angereichertes Naquadah-Trinium-Europium-Duranid-Block
+epoxy_block.MapEntry: Epoxidharz-Block
+europium_block.MapEntry: Europium-Block
+flint_block.MapEntry: Feuerstein-Block
+gallium_block.MapEntry: Gallium-Block
+gallium_arsenide_block.MapEntry: Galliumarsenid-Block
+glass_block.MapEntry: Glas-Block
+gold_block.MapEntry: Gold-Block
+graphene_block.MapEntry: Graphen-Block
+green_sapphire_block.MapEntry: Grüner Saphir-Block
+grossular_block.MapEntry: Grossular-Block
+hastelloy_c_276_block.MapEntry: Hastelloy C-276-Block
+hastelloy_x_block.MapEntry: Hastelloy X-Block
+hsla_steel_block.MapEntry: HSLA-Stahl-Block
+hsse_block.MapEntry: HSS-E-Block
+hssg_block.MapEntry: HSS-G-Block
+hsss_block.MapEntry: HSS-S-Block
+incoloy_ma_956_block.MapEntry: Incoloy MA-956-Block
+indium_block.MapEntry: Indium-Block
+indium_gallium_phosphide_block.MapEntry: Indiumgalliumphosphid-Block
+indium_tin_barium_titanium_cuprate_block.MapEntry: Indium-Zinn-Barium-Titan-Cuprat-Block
+invar_block.MapEntry: Invar-Block
+iridium_block.MapEntry: Iridium-Block
+iron_block.MapEntry: Eisen-Block
+kanthal_block.MapEntry: Kanthal-Block
+lapis_block.MapEntry: Lapis-Block
+lapotron_block.MapEntry: Lapotron-Block
+lazurite_block.MapEntry: Lazurit-Block
+lead_block.MapEntry: Blei-Block
+magnalium_block.MapEntry: Magnalium-Block
+magnesium_diboride_block.MapEntry: Magnesiumdiborid-Block
+magnetic_iron_block.MapEntry: Magnetisches Eisen-Block
+magnetic_neodymium_block.MapEntry: Magnetisches Neodym-Block
+magnetic_samarium_block.MapEntry: Magnetisches Samarium-Block
+magnetic_steel_block.MapEntry: Magnetischer Stahl-Block
+malachite_block.MapEntry: Malachit-Block
+manganese_block.MapEntry: Mangan-Block
+manganese_phosphide_block.MapEntry: Manganphosphid-Block
+maraging_steel_300_block.MapEntry: Maraging Steel 300-Block
+mercury_barium_calcium_cuprate_block.MapEntry: Quecksilber-Barium-Calcium-Cuprat-Block
+molybdenum_block.MapEntry: Molybdän-Block
+molybdenum_disilicide_block.MapEntry: Molybdändisilizid-Block
+monazite_block.MapEntry: Monazit-Block
+naquadah_block.MapEntry: Naquadah-Block
+naquadah_alloy_block.MapEntry: Naquadah-Legierung-Block
+naquadria_block.MapEntry: Naquadria-Block
+neodymium_block.MapEntry: Neodym-Block
+nether_quartz_block.MapEntry: Netherquarz-Block
+nether_star_block.MapEntry: Netherstern-Block
+netherite_block.MapEntry: Netherit-Block
+neutronium_block.MapEntry: Neutronium-Block
+nichrome_block.MapEntry: Nichrom-Block
+nickel_block.MapEntry: Nickel-Block
+nickel_zinc_ferrite_block.MapEntry: Nickel-Zink-Ferrit-Block
+niobium_block.MapEntry: Niob-Block
+niobium_nitride_block.MapEntry: Niobnitrid-Block
+niobium_titanium_block.MapEntry: Niobium-Titan-Block
+olivine_block.MapEntry: Olivin-Block
+opal_block.MapEntry: Opal-Block
+osmiridium_block.MapEntry: Osmiridium-Block
+osmium_block.MapEntry: Osmium-Block
+palladium_block.MapEntry: Palladium-Block
+platinum_block.MapEntry: Platin-Block
+plutonium_block.MapEntry: Plutonium-Block
+plutonium_241_block.MapEntry: Plutonium 241-Block
+polybenzimidazole_block.MapEntry: Polybenzimidazol-Block
+polycaprolactam_block.MapEntry: Polycaprolactam-Block
+polyethylene_block.MapEntry: Polyethylen-Block
+polyphenylene_sulfide_block.MapEntry: Polyphenylensulfid-Block
+polytetrafluoroethylene_block.MapEntry: Polytetrafluorethylen-Block
+polyvinyl_butyral_block.MapEntry: Polyvinylbutyral-Block
+polyvinyl_chloride_block.MapEntry: Polyvinylchlorid-Block
+potin_block.MapEntry: Potin-Block
+pyrope_block.MapEntry: Pyrop-Block
+quartzite_block.MapEntry: Quarzit-Block
+raw_rubber_block.MapEntry: Rohkautschuk-Block
+realgar_block.MapEntry: Realgar-Block
+red_alloy_block.MapEntry: Rote Legierung-Block
+red_garnet_block.MapEntry: Roter Granat-Block
+red_steel_block.MapEntry: Roter Stahl-Block
+reinforced_epoxy_resin_block.MapEntry: Verstärktes Epoxidharz-Block
+rhodium_block.MapEntry: Rhodium-Block
+rhodium_plated_palladium_block.MapEntry: Rhodiniertes Palladium-Block
+rock_salt_block.MapEntry: Steinsalz-Block
+rose_gold_block.MapEntry: Roségold-Block
+rtm_alloy_block.MapEntry: RTM-Legierung-Block
+rubber_block.MapEntry: Gummi-Block
+ruby_block.MapEntry: Rubin-Block
+ruridit_block.MapEntry: Ruridit-Block
+ruthenium_block.MapEntry: Ruthenium-Block
+ruthenium_trinium_americium_neutronate_block.MapEntry: Ruthenium-Trinium-Americium-Neutronat-Block
+rutile_block.MapEntry: Rutil-Block
+salt_block.MapEntry: Salz-Block
+samarium_block.MapEntry: Samarium-Block
+samarium_iron_arsenic_oxide_block.MapEntry: Samarium-Eisen-Arsenoxid-Block
+sapphire_block.MapEntry: Saphir-Block
+silicon_block.MapEntry: Silizium-Block
+silicone_rubber_block.MapEntry: Silikonkautschuk-Block
+silver_block.MapEntry: Silber-Block
+sodalite_block.MapEntry: Sodalith-Block
+soldering_alloy_block.MapEntry: Lötlegierung-Block
+spessartine_block.MapEntry: Spessartin-Block
+stainless_steel_block.MapEntry: Edelstahl-Block
+steel_block.MapEntry: Stahl-Block
+stellite_100_block.MapEntry: Stellite-100-Block
+sterling_silver_block.MapEntry: Sterlingsilber-Block
+styrene_butadiene_rubber_block.MapEntry: Styrol-Butadien-Kautschuk-Block
+sugar_block.MapEntry: Zucker-Block
+tantalum_block.MapEntry: Tantal-Block
+tantalum_carbide_block.MapEntry: Tantalkarbid-Block
+thorium_block.MapEntry: Thorium-Block
+tin_block.MapEntry: Zinn-Block
+tin_alloy_block.MapEntry: Zinnlegierung-Block
+titanium_block.MapEntry: Titan-Block
+titanium_carbide_block.MapEntry: Titankarbid-Block
+titanium_tungsten_carbide_block.MapEntry: Titan-Wolframkarbid-Block
+topaz_block.MapEntry: Topas-Block
+trinium_block.MapEntry: Trinium-Block
+tritanium_block.MapEntry: Tritanium-Block
+tungsten_block.MapEntry: Wolfram-Block
+tungsten_carbide_block.MapEntry: Wolframkarbid-Block
+tungsten_steel_block.MapEntry: Wolframstahl-Block
+ultimet_block.MapEntry: Ultimet-Block
+uranium_block.MapEntry: Uran-Block
+uranium_235_block.MapEntry: Uran 235-Block
+uranium_rhodium_dinaquadide_block.MapEntry: Uran-Rhodium-Dinaquadid-Block
+uranium_triplatinum_block.MapEntry: Urantriplatin-Block
+uvarovite_block.MapEntry: Uwarowit-Block
+vanadium_block.MapEntry: Vanadium-Block
+vanadium_gallium_block.MapEntry: Vanadium-Gallium-Block
+vanadium_steel_block.MapEntry: Vanadiumstahl-Block
+watertight_steel_block.MapEntry: Wasserdichter Stahl-Block
+wax_block.MapEntry: Wachs-Block
+wrought_iron_block.MapEntry: Schmiedeeisen-Block
+yellow_garnet_block.MapEntry: Gelber Granat-Block
+yttrium_block.MapEntry: Yttrium-Block
+yttrium_barium_cuprate_block.MapEntry: Yttrium-Barium-Cuprat-Block
+zeron_100_block.MapEntry: Zeron-100-Block
+zinc_block.MapEntry: Zink-Block
+// almandine_ore.MapEntry: Almandine Ore
+// aluminium_ore.MapEntry: Aluminium Ore
+// alunite_ore.MapEntry: Alunite Ore
+// amethyst_ore.MapEntry: Amethyst Ore
+// apatite_ore.MapEntry: Apatite Ore
+// asbestos_ore.MapEntry: Asbestos Ore
+// barite_ore.MapEntry: Barite Ore
+// basaltic_mineral_sand_ore.MapEntry: Basaltic Mineral Sand Ore
+// bastnasite_ore.MapEntry: Bastnasite Ore
+// bauxite_ore.MapEntry: Bauxite Ore
+// bentonite_ore.MapEntry: Bentonite Ore
+// beryllium_ore.MapEntry: Beryllium Ore
+// blue_topaz_ore.MapEntry: Blue Topaz Ore
+// bornite_ore.MapEntry: Bornite Ore
+// calcite_ore.MapEntry: Calcite Ore
+// cassiterite_ore.MapEntry: Cassiterite Ore
+// cassiterite_sand_ore.MapEntry: Cassiterite Sand Ore
+// certus_quartz_ore.MapEntry: Certus Quartz Ore
+// chalcocite_ore.MapEntry: Chalcocite Ore
+// chalcopyrite_ore.MapEntry: Chalcopyrite Ore
+// chromite_ore.MapEntry: Chromite Ore
+// cinnabar_ore.MapEntry: Cinnabar Ore
+// coal_ore.MapEntry: Coal Ore
+// cobalt_ore.MapEntry: Cobalt Ore
+// cobaltite_ore.MapEntry: Cobaltite Ore
+// cooperite_ore.MapEntry: Cooperite Ore
+// copper_ore.MapEntry: Copper Ore
+// diamond_ore.MapEntry: Diamond Ore
+// diatomite_ore.MapEntry: Diatomite Ore
+// electrotine_ore.MapEntry: Electrotine Ore
+// emerald_ore.MapEntry: Emerald Ore
+// fullers_earth_ore.MapEntry: Fullers Earth Ore
+// galena_ore.MapEntry: Galena Ore
+// garnet_sand_ore.MapEntry: Garnet Sand Ore
+// garnierite_ore.MapEntry: Garnierite Ore
+// glauconite_sand_ore.MapEntry: Glauconite Sand Ore
+// goethite_ore.MapEntry: Goethite Ore
+// gold_ore.MapEntry: Gold Ore
+// granitic_mineral_sand_ore.MapEntry: Granitic Mineral Sand Ore
+// graphite_ore.MapEntry: Graphite Ore
+// green_sapphire_ore.MapEntry: Green Sapphire Ore
+// grossular_ore.MapEntry: Grossular Ore
+// gypsum_ore.MapEntry: Gypsum Ore
+// hematite_ore.MapEntry: Hematite Ore
+// ilmenite_ore.MapEntry: Ilmenite Ore
+// iron_ore.MapEntry: Iron Ore
+// kyanite_ore.MapEntry: Kyanite Ore
+// lapis_ore.MapEntry: Lapis Ore
+// lazurite_ore.MapEntry: Lazurite Ore
+// lead_ore.MapEntry: Lead Ore
+// lepidolite_ore.MapEntry: Lepidolite Ore
+// lithium_ore.MapEntry: Lithium Ore
+// magnesite_ore.MapEntry: Magnesite Ore
+// magnetite_ore.MapEntry: Magnetite Ore
+// malachite_ore.MapEntry: Malachite Ore
+// mica_ore.MapEntry: Mica Ore
+// molybdenite_ore.MapEntry: Molybdenite Ore
+// molybdenum_ore.MapEntry: Molybdenum Ore
+// monazite_ore.MapEntry: Monazite Ore
+// naquadah_ore.MapEntry: Naquadah Ore
+// neodymium_ore.MapEntry: Neodymium Ore
+// nether_quartz_ore.MapEntry: Nether Quartz Ore
+// nickel_ore.MapEntry: Nickel Ore
+// oilsands_ore.MapEntry: Oilsands Ore
+// olivine_ore.MapEntry: Olivine Ore
+// opal_ore.MapEntry: Opal Ore
+// palladium_ore.MapEntry: Palladium Ore
+// pentlandite_ore.MapEntry: Pentlandite Ore
+// pitchblende_ore.MapEntry: Pitchblende Ore
+// platinum_ore.MapEntry: Platinum Ore
+// plutonium_ore.MapEntry: Plutonium Ore
+// pollucite_ore.MapEntry: Pollucite Ore
+// powellite_ore.MapEntry: Powellite Ore
+// pyrite_ore.MapEntry: Pyrite Ore
+// pyrochlore_ore.MapEntry: Pyrochlore Ore
+// pyrolusite_ore.MapEntry: Pyrolusite Ore
+// pyrope_ore.MapEntry: Pyrope Ore
+// quartzite_ore.MapEntry: Quartzite Ore
+// realgar_ore.MapEntry: Realgar Ore
+// red_garnet_ore.MapEntry: Red Garnet Ore
+// redstone_ore.MapEntry: Redstone Ore
+// rock_salt_ore.MapEntry: Rock Salt Ore
+// ruby_ore.MapEntry: Ruby Ore
+// salt_ore.MapEntry: Salt Ore
+// saltpeter_ore.MapEntry: Saltpeter Ore
+// sapphire_ore.MapEntry: Sapphire Ore
+// scheelite_ore.MapEntry: Scheelite Ore
+// silver_ore.MapEntry: Silver Ore
+// soapstone_ore.MapEntry: Soapstone Ore
+// sodalite_ore.MapEntry: Sodalite Ore
+// spessartine_ore.MapEntry: Spessartine Ore
+// sphalerite_ore.MapEntry: Sphalerite Ore
+// spodumene_ore.MapEntry: Spodumene Ore
+// stibnite_ore.MapEntry: Stibnite Ore
+// sulfur_ore.MapEntry: Sulfur Ore
+// talc_ore.MapEntry: Talc Ore
+// tantalite_ore.MapEntry: Tantalite Ore
+// tetrahedrite_ore.MapEntry: Tetrahedrite Ore
+// thorium_ore.MapEntry: Thorium Ore
+// tin_ore.MapEntry: Tin Ore
+// topaz_ore.MapEntry: Topaz Ore
+// tricalcium_phosphate_ore.MapEntry: Tricalcium Phosphate Ore
+// trona_ore.MapEntry: Trona Ore
+// tungstate_ore.MapEntry: Tungstate Ore
+// uraninite_ore.MapEntry: Uraninite Ore
+// vanadium_magnetite_ore.MapEntry: Vanadium Magnetite Ore
+// wulfenite_ore.MapEntry: Wulfenite Ore
+// yellow_garnet_ore.MapEntry: Yellow Garnet Ore
+// yellow_limonite_ore.MapEntry: Yellow Limonite Ore
+// zeolite_ore.MapEntry: Zeolite Ore
+acid_hazard_sign_block.MapEntry: Säure-Gefahrenschild
+active_transformer.MapEntry: Aktiver Transformator
+advanced_computer_casing.MapEntry: Erweitertes Computergehäuse
+advanced_data_access_hatch.MapEntry: Erweiterte Datenzugriffsklappe
+advanced_monitor.MapEntry: Erweiterter Monitor
+alloy_blast_smelter.MapEntry: Legierungs-Hochofen
+aluminium_crate.MapEntry: Aluminiumkiste
+aluminium_drum.MapEntry: Aluminiumfass
+antimatter_hazard_sign_block.MapEntry: Antimaterie-Gefahrenschild
+assembly_line.MapEntry: Fertigungsstraße
+assembly_line_casing.MapEntry: Fertigungsstraßengehäuse
+assembly_line_grating.MapEntry: Fertigungsstraßengitter
+assembly_line_unit.MapEntry: Fertigungsstraßen-Steuereinheit
+atomic_casing.MapEntry: Atomgehäuse
+auto_maintenance_hatch.MapEntry: Automatische Wartungsklappe
+basic_data_access_hatch.MapEntry: Einfache Datenzugriffsklappe
+bio_hazard_sign_block.MapEntry: Bio-Gefahrenschild
+black_borderless_lamp.MapEntry: Schwarze randlose Lampe
+black_lamp.MapEntry: Schwarze Lampe
+black_large_metal_sheet.MapEntry: Großes schwarzes Metallblech
+black_metal_sheet.MapEntry: Schwarzes Metallblech
+black_studs.MapEntry: Schwarzer Nietenblock
+blue_borderless_lamp.MapEntry: Blaue randlose Lampe
+blue_lamp.MapEntry: Blaue Lampe
+blue_large_metal_sheet.MapEntry: Großes blaues Metallblech
+blue_metal_sheet.MapEntry: Blaues Metallblech
+blue_studs.MapEntry: Blauer Nietenblock
+boss_hazard_sign_block.MapEntry: Boss-Gefahrenschild
+brittle_charcoal.MapEntry: Spröde Holzkohle
+bronze_brick_casing.MapEntry: Bronze-Ziegelgehäuse
+bronze_crate.MapEntry: Bronzekiste
+bronze_drum.MapEntry: Bronzefass
+bronze_firebox_casing.MapEntry: Bronze-Feuerkammergehäuse
+bronze_gearbox.MapEntry: Bronze-Getriebegehäuse
+bronze_large_boiler.MapEntry: Großer Bronze-Dampfkessel
+bronze_machine_casing.MapEntry: Bronze-Maschinengehäuse
+bronze_multiblock_tank.MapEntry: Bronze-Multiblocktank
+bronze_pipe_casing.MapEntry: Bronze-Rohrgehäuse
+bronze_tank_valve.MapEntry: Bronze-Tankventil
+brown_borderless_lamp.MapEntry: Braune randlose Lampe
+brown_lamp.MapEntry: Braune Lampe
+brown_large_metal_sheet.MapEntry: Großes braunes Metallblech
+brown_metal_sheet.MapEntry: Braunes Metallblech
+brown_studs.MapEntry: Brauner Nietenblock
+causality_hazard_sign_block.MapEntry: Kausalitäts-Gefahrenschild
+central_monitor.MapEntry: Zentralmonitor
+charcoal_pile_igniter.MapEntry: Holzkohlemeiler-Zünder
+chiseled_dark_concrete.MapEntry: Gemeißelter dunkler Beton
+chiseled_light_concrete.MapEntry: Gemeißelter heller Beton
+chiseled_marble.MapEntry: Gemeißelter Marmor
+chiseled_red_granite.MapEntry: Gemeißelter roter Granit
+clean_machine_casing.MapEntry: Sauberes Edelstahlgehäuse
+cleaning_maintenance_hatch.MapEntry: Reinigungswartungsklappe
+cleanroom.MapEntry: Reinraum
+cleanroom_glass.MapEntry: Reinraumglas
+coke_oven.MapEntry: Koksofen
+coke_oven_bricks.MapEntry: Koksofen-Ziegel
+coke_oven_hatch.MapEntry: Koksofenklappe
+computation_receiver_hatch.MapEntry: Berechnungsdaten-Empfangsklappe
+computation_transmitter_hatch.MapEntry: Berechnungsdaten-Sendeklappe
+computer_casing.MapEntry: Computergehäuse
+computer_heat_vent.MapEntry: Computer-Wärmeabzug
+configurable_maintenance_hatch.MapEntry: Konfigurierbare Wartungsklappe
+corrosion_proof_casing.MapEntry: Korrosionsbeständiges Gehäuse
+cracked_dark_concrete_bricks.MapEntry: Rissige dunkle Betonziegel
+cracked_light_concrete_bricks.MapEntry: Rissige helle Betonziegel
+cracked_marble_bricks.MapEntry: Rissige Marmorziegel
+cracked_red_granite_bricks.MapEntry: Rissige rote Granitziegel
+cracker.MapEntry: Crackanlage
+creative_chest.MapEntry: Kreativtruhe
+creative_computation_provider.MapEntry: Kreativ-Berechnungseinheit
+creative_data_access_hatch.MapEntry: Kreative Datenzugriffsklappe
+creative_energy.MapEntry: Kreativenergie
+creative_tank.MapEntry: Kreativtank
+crushing_wheels.MapEntry: Mahlräder
+cupronickel_coil_block.MapEntry: Kupfernickel-Heizspulenblock
+cyan_borderless_lamp.MapEntry: Cyanfarbene randlose Lampe
+cyan_lamp.MapEntry: Cyanfarbene Lampe
+cyan_large_metal_sheet.MapEntry: Großes cyanfarbenes Metallblech
+cyan_metal_sheet.MapEntry: Cyanfarbenes Metallblech
+cyan_studs.MapEntry: Cyanfarbener Nietenblock
+dark_concrete.MapEntry: Dunkler Beton
+dark_concrete_bricks.MapEntry: Dunkle Betonziegel
+dark_concrete_cobblestone.MapEntry: Dunkler Betonbruchstein
+dark_concrete_small_tile.MapEntry: Dunkle Beton-Kleinfliese
+dark_concrete_tile.MapEntry: Dunkle Betonfliese
+dark_concrete_windmill_a.MapEntry: Dunkler Beton Mühlenziegel
+dark_concrete_windmill_b.MapEntry: Dunkler Beton Mühlenziegel B
+data_access_hatch.MapEntry: Datenzugriffsklappe
+data_bank.MapEntry: Datenbank
+data_receiver_hatch.MapEntry: Optische Datenempfangsklappe
+data_transmitter_hatch.MapEntry: Optische Datenübertragungsklappe
+distillation_tower.MapEntry: Destillationsturm
+electric_blast_furnace.MapEntry: Elektrischer Hochofen(EBF)
+electrolytic_cell.MapEntry: Elektrolytische Zelle
+empty_tier_i_battery.MapEntry: Leerer Kondensator - Stufe I
+empty_tier_ii_battery.MapEntry: Leerer Kondensator - Stufe II
+empty_tier_iii_battery.MapEntry: Leerer Kondensator - Stufe III
+engine_intake_casing.MapEntry: Motor-Ansauggehäuse
+ev_16a_energy_converter.MapEntry: "[c/AA00AA:EV] 16[c/FFFF55:A] Energieumwandler"
+ev_1a_energy_converter.MapEntry: "[c/AA00AA:EV] 1[c/FFFF55:A] Energieumwandler"
+ev_4a_energy_converter.MapEntry: "[c/AA00AA:EV] 4[c/FFFF55:A] Energieumwandler"
+ev_8a_energy_converter.MapEntry: "[c/AA00AA:EV] 8[c/FFFF55:A] Energieumwandler"
+ev_air_scrubber.MapEntry: "[c/AA00AA:Erweiterter Luftreiniger III]"
+ev_alloy_smelter.MapEntry: "[c/AA00AA:Erweiterter Legierungsschmelzer III]"
+ev_arc_furnace.MapEntry: "[c/AA00AA:Erweiterter Lichtbogenofen III]"
+ev_assembler.MapEntry: "[c/AA00AA:Erweiterter Montierer III]"
+ev_autoclave.MapEntry: "[c/AA00AA:Erweiterter Autoklav III]"
+ev_battery_buffer_16x.MapEntry: "[c/AA00AA:Extreme Spannung] 16x Batteriepuffer"
+ev_battery_buffer_4x.MapEntry: "[c/AA00AA:Extreme Spannung] 4x Batteriepuffer"
+ev_battery_buffer_8x.MapEntry: "[c/AA00AA:Extreme Spannung] 8x Batteriepuffer"
+ev_bedrock_ore_miner.MapEntry: "[c/AA00AA:Erweiterter Bedrock-Erzförderer III]"
+ev_bender.MapEntry: "[c/AA00AA:Erweiterte Biegemaschine III]"
+ev_block_breaker.MapEntry: "[c/AA00AA:Erweiterter Blockbrecher III]"
+ev_brewery.MapEntry: "[c/AA00AA:Erweiterte Brauerei III]"
+ev_canner.MapEntry: "[c/AA00AA:Erweiterte Abfüllanlage III]"
+ev_centrifuge.MapEntry: "[c/AA00AA:Erweiterte Zentrifuge III]"
+ev_charger_4x.MapEntry: "[c/AA00AA:Extreme Spannung] 4x Turbolader"
+ev_chemical_bath.MapEntry: "[c/AA00AA:Erweitertes Chemikalienbad III]"
+ev_chemical_reactor.MapEntry: "[c/AA00AA:Erweiterter Chemiereaktor III]"
+ev_circuit_assembler.MapEntry: "[c/AA00AA:Erweiterter Schaltkreis-Montierer III]"
+ev_compressor.MapEntry: "[c/AA00AA:Erweiterter Kompressor III]"
+ev_cutter.MapEntry: "[c/AA00AA:Erweiterter Schneider III]"
+ev_diode.MapEntry: "[c/AA00AA:EV-Diode]"
+ev_distillery.MapEntry: "[c/AA00AA:Erweiterte Destillationsanlage III]"
+ev_electric_furnace.MapEntry: "[c/AA00AA:Erweiterter Elektroofen III]"
+ev_electrolyzer.MapEntry: "[c/AA00AA:Erweiterter Elektrolyseur III]"
+ev_electromagnetic_separator.MapEntry: "[c/AA00AA:Erweiterter elektromagnetischer Separator III]"
+ev_energy_input_hatch.MapEntry: "[c/AA00AA:EV-Energieeingangsklappe]"
+ev_energy_input_hatch_16a.MapEntry: "[c/AA00AA:EV 16A Energieeingangsklappe]"
+ev_energy_input_hatch_4a.MapEntry: "[c/AA00AA:EV 4A Energieeingangsklappe]"
+ev_energy_output_hatch.MapEntry: "[c/AA00AA:EV-Energieausgangsklappe]"
+ev_energy_output_hatch_16a.MapEntry: "[c/AA00AA:EV 16A Energieausgangsklappe]"
+ev_energy_output_hatch_4a.MapEntry: "[c/AA00AA:EV 4A Energieausgangsklappe]"
+ev_extractor.MapEntry: "[c/AA00AA:Erweiterter Extraktor III]"
+ev_extruder.MapEntry: "[c/AA00AA:Erweiterter Extruder III]"
+ev_fermenter.MapEntry: "[c/AA00AA:Erweiterter Fermentierer III]"
+ev_fisher.MapEntry: "[c/AA00AA:Erweiterter Fischer III]"
+ev_fluid_drilling_rig.MapEntry: "[c/AA00AA:Erweiterte Flüssigkeits-Bohranlage III]"
+ev_fluid_heater.MapEntry: "[c/AA00AA:Erweiterter Flüssigkeitserhitzer III]"
+ev_fluid_passthrough_hatch.MapEntry: "[c/AA00AA:EV-Flüssigkeitsdurchgangsklappe]"
+ev_fluid_solidifier.MapEntry: "[c/AA00AA:Erweiterter Flüssigkeitsverfestiger III]"
+ev_forge_hammer.MapEntry: "[c/AA00AA:Erweiterter Schmiedehammer III]"
+ev_forming_press.MapEntry: "[c/AA00AA:Erweiterte Formpresse III]"
+ev_gas_collector.MapEntry: "[c/AA00AA:Erweiterter Gassammler III]"
+ev_hermetic_casing.MapEntry: Hermetisches Gehäuse IV
+ev_input_bus.MapEntry: "[c/AA00AA:EV-Inputbus]"
+ev_input_hatch.MapEntry: "[c/AA00AA:EV-Inputklappe]"
+ev_input_hatch_4x.MapEntry: "[c/AA00AA:EV-Vierfach-Inputklappe]"
+ev_input_hatch_9x.MapEntry: "[c/AA00AA:EV-Neunfach-Inputklappe]"
+ev_item_collector.MapEntry: "[c/AA00AA:Erweiterter Itemsammler III]"
+ev_item_passthrough_hatch.MapEntry: "[c/AA00AA:EV-Item-Durchgangsklappe]"
+ev_lapotronic_battery.MapEntry: EV-Lapotronischer Kondensator
+ev_large_miner.MapEntry: "[c/AA00AA:Erweiterter Großbergbau-Bohrer III]"
+ev_laser_engraver.MapEntry: "[c/AA00AA:Erweiterter Lasergravierer III]"
+ev_lathe.MapEntry: "[c/AA00AA:Erweiterte Drehmaschine III]"
+ev_macerator.MapEntry: "[c/AA00AA:Erweiterter Zerkleinerer III]"
+ev_machine_casing.MapEntry: EV-Maschinengehäuse
+ev_machine_hull.MapEntry: "[c/AA00AA:EV][c/FFFFFF:Maschinengehäuse]"
+ev_mixer.MapEntry: "[c/AA00AA:Erweiterter Mischer III]"
+ev_muffler_hatch.MapEntry: "[c/AA00AA:EV-Schalldämpferklappe]"
+ev_ore_washer.MapEntry: "[c/AA00AA:Erweiterter Erzwäscher III]"
+ev_output_bus.MapEntry: "[c/AA00AA:EV-Outputbus]"
+ev_output_hatch.MapEntry: "[c/AA00AA:EV-Outputklappe]"
+ev_output_hatch_4x.MapEntry: "[c/AA00AA:EV-Vierfach-Outputklappe]"
+ev_output_hatch_9x.MapEntry: "[c/AA00AA:EV-Neunfach-Outputklappe]"
+ev_packer.MapEntry: "[c/AA00AA:Erweiterte Packstation III]"
+ev_polarizer.MapEntry: "[c/AA00AA:Erweiterter Polarisator III]"
+ev_pump.MapEntry: "[c/AA00AA:Erweiterte Pumpe III]"
+ev_rock_crusher.MapEntry: "[c/AA00AA:Erweiterter Steinbrecher III]"
+ev_rotor_holder.MapEntry: "[c/AA00AA:EV-Rotorhalter]"
+ev_scanner.MapEntry: "[c/AA00AA:Erweiterter Scanner III]"
+ev_sifter.MapEntry: "[c/AA00AA:Erweiterter Sichter III]"
+ev_substation_input_hatch_64a.MapEntry: "[c/AA00AA:EV 64A Umspannwerk-Energieklappe]"
+ev_substation_output_hatch_64a.MapEntry: "[c/AA00AA:EV 64A Umspannwerk-Dynamo-Klappe]"
+ev_super_chest.MapEntry: Supertruhe IV
+ev_super_tank.MapEntry: Supertank IV
+ev_thermal_centrifuge.MapEntry: "[c/AA00AA:Erweiterte Thermozentrifuge III]"
+ev_transformer_16a.MapEntry: "[c/AA00AA:Extreme Spannung] Leistungstransformator"
+ev_transformer_1a.MapEntry: "[c/AA00AA:Transformator (Extreme Spannung)]"
+ev_transformer_2a.MapEntry: "[c/AA00AA:Extreme Spannung] Hi-Amp (2x) Transformator"
+ev_transformer_4a.MapEntry: "[c/AA00AA:Extreme Spannung] Hi-Amp (4x) Transformator"
+ev_wiremill.MapEntry: "[c/AA00AA:Erweitertes Drahtwerk III]"
+ev_world_accelerator.MapEntry: "[c/AA00AA:Erweiterter Weltbeschleuniger III]"
+explosion_hazard_sign_block.MapEntry: Explosions-Gefahrenschild
+extreme_combustion_engine.MapEntry: Extremer Verbrennungsmotor
+extreme_engine_intake_casing.MapEntry: Extremes Ansauggehäuse
+filter_casing.MapEntry: Filtergehäuse
+fire_hazard_sign_block.MapEntry: Brand-Gefahrenschild
+firebricks.MapEntry: Schamottsteine
+foam.MapEntry: Schaum
+frost_hazard_sign_block.MapEntry: Frost-Gefahrenschild
+frostproof_machine_casing.MapEntry: Frostsicheres Maschinengehäuse (Aluminium)
+fusion_casing.MapEntry: Fusionsgehäuse
+fusion_casing_mk2.MapEntry: Fusionsgehäuse MK II
+fusion_casing_mk3.MapEntry: Fusionsgehäuse MK III
+fusion_coil.MapEntry: Fusionsspulenblock
+fusion_glass.MapEntry: Fusionsglas
+gas_large_turbine.MapEntry: Große Gasturbine
+generic_hazard_sign_block.MapEntry: Gefahrenschild
+gold_drum.MapEntry: Goldfass
+gray_borderless_lamp.MapEntry: Graue randlose Lampe
+gray_lamp.MapEntry: Graue Lampe
+gray_large_metal_sheet.MapEntry: Großes graues Metallblech
+gray_metal_sheet.MapEntry: Graues Metallblech
+gray_studs.MapEntry: Grauer Nietenblock
+green_borderless_lamp.MapEntry: Grüne randlose Lampe
+green_lamp.MapEntry: Grüne Lampe
+green_large_metal_sheet.MapEntry: Großes grünes Metallblech
+green_metal_sheet.MapEntry: Grünes Metallblech
+green_studs.MapEntry: Grüner Nietenblock
+gregification_hazard_sign_block.MapEntry: Gregification-Gefahrenschild
+heat_vent.MapEntry: Wärmeentlüftung
+heatproof_machine_casing.MapEntry: Hitzebeständiges Maschinengehäuse (Invar)
+high_performance_computation_array.MapEntry: Hochleistungs-Rechenarray (HPCA)
+high_power_casing.MapEntry: Hochleistungsgehäuse
+high_pressure_hazard_sign_block.MapEntry: Hochdruck-Gefahrenschild
+high_temperature_hazard_sign_block.MapEntry: Hochtemperatur-Gefahrenschild
+high_temperature_smelting_casing.MapEntry: Hochtemperatur-Schmelzgehäuse
+high_voltage_hazard_sign_block.MapEntry: Hochspannungs-Gefahrenschild
+hp_steam_alloy_smelter.MapEntry: Hochdruck-Dampflegierungsschmelzanlage
+hp_steam_compressor.MapEntry: Hochdruck-Dampfkompressor
+hp_steam_extractor.MapEntry: Hochdruck-Dampfextraktor
+hp_steam_forge_hammer.MapEntry: Hochdruck-Dampfschmiedehammer
+hp_steam_furnace.MapEntry: Hochdruckdampfofen
+hp_steam_liquid_boiler.MapEntry: Hochdruck-Dampfflüssigkeitskessel
+hp_steam_macerator.MapEntry: Hochdruck-Dampfzerkleinerer
+hp_steam_miner.MapEntry: Hochdruck-Dampferzförderer
+hp_steam_rock_crusher.MapEntry: Hochdruck-Dampfsteinbrecher
+hp_steam_solar_boiler.MapEntry: Hochdruck-Dampf-Solarkessel
+hp_steam_solid_boiler.MapEntry: Hochdruck-Dampfkessel
+hpca_active_cooler_component.MapEntry: Aktive HPCA-Kühlkomponente
+hpca_advanced_computation_component.MapEntry: Erweiterte HPCA-Berechnungskomponente
+hpca_bridge_component.MapEntry: HPCA-Brückenkomponente
+hpca_computation_component.MapEntry: HPCA-Berechnungskomponente
+hpca_empty_component.MapEntry: Leere HPCA-Komponente
+hpca_heat_sink_component.MapEntry: HPCA-Kühlkörperkomponente
+hssg_coil_block.MapEntry: HSS-G Heizspulenblock
+huge_duct_pipe.MapEntry: Riesiges Kanalrohr
+hv_16a_energy_converter.MapEntry: "[c/FFAA00:HV] 16[c/FFFF55:A] Energieumwandler"
+hv_1a_energy_converter.MapEntry: "[c/FFAA00:HV] 1[c/FFFF55:A] Energieumwandler"
+hv_4a_energy_converter.MapEntry: "[c/FFAA00:HV] 4[c/FFFF55:A] Energieumwandler"
+hv_8a_energy_converter.MapEntry: "[c/FFAA00:HV] 8[c/FFFF55:A] Energieumwandler"
+hv_air_scrubber.MapEntry: "[c/FFAA00:Erweiterter Luftreiniger II]"
+hv_alloy_smelter.MapEntry: "[c/FFAA00:Erweiterter Legierungsschmelzer II]"
+hv_arc_furnace.MapEntry: "[c/FFAA00:Erweiterter Lichtbogenofen II]"
+hv_assembler.MapEntry: "[c/FFAA00:Erweiterter Montierer II]"
+hv_autoclave.MapEntry: "[c/FFAA00:Erweiterter Autoklav II]"
+hv_battery_buffer_16x.MapEntry: "[c/FFAA00:Hochspannung] 16x Batteriepuffer"
+hv_battery_buffer_4x.MapEntry: "[c/FFAA00:Hochspannung] 4x Batteriepuffer"
+hv_battery_buffer_8x.MapEntry: "[c/FFAA00:Hochspannung] 8x Batteriepuffer"
+hv_bedrock_ore_miner.MapEntry: "[c/FFAA00:Erweiterter Bedrock-Erzförderer II]"
+hv_bender.MapEntry: "[c/FFAA00:Erweiterte Biegemaschine II]"
+hv_block_breaker.MapEntry: "[c/FFAA00:Erweiterter Blockbrecher II]"
+hv_brewery.MapEntry: "[c/FFAA00:Erweiterte Brauerei II]"
+hv_buffer.MapEntry: "[c/FFAA00:Erweiterter Batteriespeicher II]"
+hv_canner.MapEntry: "[c/FFAA00:Erweiterte Abfüllanlage II]"
+hv_centrifuge.MapEntry: "[c/FFAA00:Erweiterte Zentrifuge II]"
+hv_charger_4x.MapEntry: "[c/FFAA00:Hochspannung] 4x Turbolader"
+hv_chemical_bath.MapEntry: "[c/FFAA00:Erweitertes Chemikalienbad II]"
+hv_chemical_reactor.MapEntry: "[c/FFAA00:Erweiterter Chemiereaktor II]"
+hv_circuit_assembler.MapEntry: "[c/FFAA00:Erweiterter Schaltkreis-Montierer II]"
+hv_combustion.MapEntry: "[c/FFAA00:Erweiterter Verbrennungsgenerator II]"
+hv_compressor.MapEntry: "[c/FFAA00:Erweiterter Kompressor II]"
+hv_cutter.MapEntry: "[c/FFAA00:Erweiterter Schneider II]"
+hv_diode.MapEntry: "[c/FFAA00:HV-Diode]"
+hv_distillery.MapEntry: "[c/FFAA00:Erweiterte Destillationsanlage II]"
+hv_electric_furnace.MapEntry: "[c/FFAA00:Erweiterter Elektroofen II]"
+hv_electrolyzer.MapEntry: "[c/FFAA00:Erweiterter Elektrolyseur II]"
+hv_electromagnetic_separator.MapEntry: "[c/FFAA00:Erweiterter elektromagnetischer Separator II]"
+hv_energy_input_hatch.MapEntry: "[c/FFAA00:HV-Energieeingangsklappe]"
+hv_energy_output_hatch.MapEntry: "[c/FFAA00:HV-Energieausgangsklappe]"
+hv_extractor.MapEntry: "[c/FFAA00:Erweiterter Extraktor II]"
+hv_extruder.MapEntry: "[c/FFAA00:Erweiterter Extruder II]"
+hv_fermenter.MapEntry: "[c/FFAA00:Erweiterter Fermentierer II]"
+hv_fisher.MapEntry: "[c/FFAA00:Erweiterter Fischer II]"
+hv_fluid_drilling_rig.MapEntry: "[c/FFAA00:Erweiterte Flüssigkeits-Bohranlage II]"
+hv_fluid_heater.MapEntry: "[c/FFAA00:Erweiterter Flüssigkeitserhitzer II]"
+hv_fluid_passthrough_hatch.MapEntry: "[c/FFAA00:HV-Flüssigkeitsdurchgangsklappe]"
+hv_fluid_solidifier.MapEntry: "[c/FFAA00:Erweiterter Flüssigkeitsverfestiger II]"
+hv_forge_hammer.MapEntry: "[c/FFAA00:Erweiterter Schmiedehammer II]"
+hv_forming_press.MapEntry: "[c/FFAA00:Erweiterte Formpresse II]"
+hv_gas_collector.MapEntry: "[c/FFAA00:Erweiterter Gassammler II]"
+hv_gas_turbine.MapEntry: "[c/FFAA00:Erweiterter Gasturbinengenerator II]"
+hv_hermetic_casing.MapEntry: Hermetisches Gehäuse III
+hv_input_bus.MapEntry: "[c/FFAA00:HV-Inputbus]"
+hv_input_hatch.MapEntry: "[c/FFAA00:HV-Inputklappe]"
+hv_item_collector.MapEntry: "[c/FFAA00:Erweiterter Itemsammler II]"
+hv_item_passthrough_hatch.MapEntry: "[c/FFAA00:HV-Item-Durchgangsklappe]"
+hv_laser_engraver.MapEntry: "[c/FFAA00:Erweiterter Lasergravierer II]"
+hv_lathe.MapEntry: "[c/FFAA00:Erweiterte Drehmaschine II]"
+hv_macerator.MapEntry: "[c/FFAA00:Erweiterter Zerkleinerer II]"
+hv_machine_casing.MapEntry: HV-Maschinengehäuse
+hv_machine_hull.MapEntry: "[c/FFAA00:HV][c/FFFFFF:Maschinengehäuse]"
+hv_miner.MapEntry: "[c/FFAA00:Erweiterter Miner II]"
+hv_mixer.MapEntry: "[c/FFAA00:Erweiterter Mischer II]"
+hv_muffler_hatch.MapEntry: "[c/FFAA00:HV-Schalldämpferklappe]"
+hv_ore_washer.MapEntry: "[c/FFAA00:Erweiterter Erzwäscher II]"
+hv_output_bus.MapEntry: "[c/FFAA00:HV-Outputbus]"
+hv_output_hatch.MapEntry: "[c/FFAA00:HV-Outputklappe]"
+hv_packer.MapEntry: "[c/FFAA00:Erweiterte Packstation II]"
+hv_polarizer.MapEntry: "[c/FFAA00:Erweiterter Polarisator II]"
+hv_pump.MapEntry: "[c/FFAA00:Erweiterte Pumpe II]"
+hv_rock_crusher.MapEntry: "[c/FFAA00:Erweiterter Steinbrecher II]"
+hv_rotor_holder.MapEntry: "[c/FFAA00:HV-Rotorhalter]"
+hv_scanner.MapEntry: "[c/FFAA00:Erweiterter Scanner II]"
+hv_sifter.MapEntry: "[c/FFAA00:Erweiterter Sichter II]"
+hv_steam_turbine.MapEntry: "[c/FFAA00:Erweiterter Dampfturbinengenerator II]"
+hv_super_chest.MapEntry: Supertruhe III
+hv_super_tank.MapEntry: Supertank III
+hv_thermal_centrifuge.MapEntry: "[c/FFAA00:Erweiterte Thermozentrifuge II]"
+hv_transformer_16a.MapEntry: "[c/FFAA00:Hochspannung] Leistungstransformator"
+hv_transformer_1a.MapEntry: "[c/FFAA00:Hochspannungs-Transformator]"
+hv_transformer_2a.MapEntry: "[c/FFAA00:Hochspannung] Hi-Amp (2x) Transformator"
+hv_transformer_4a.MapEntry: "[c/FFAA00:Hochspannung] Hi-Amp (4x) Transformator"
+hv_wiremill.MapEntry: "[c/FFAA00:Erweitertes Drahtwerk II]"
+hv_world_accelerator.MapEntry: "[c/FFAA00:Erweiterter Weltbeschleuniger II]"
+implosion_compressor.MapEntry: Implosionskompressor
+industrial_steam_casing.MapEntry: Industrielles Dampfgehäuse
+industrial_tnt.MapEntry: Industrielles TNT
+inert_machine_casing.MapEntry: Chemisch inertes PTFE-Maschinengehäuse
+iv_1024a_laser_source_hatch.MapEntry: "[c/5555FF:IV] 1.024[c/FFFF55:A] Laserquellenklappe"
+iv_1024a_laser_target_hatch.MapEntry: "[c/5555FF:IV] 1.024[c/FFFF55:A] Laserzielklappe"
+iv_16a_energy_converter.MapEntry: "[c/5555FF:IV] 16[c/FFFF55:A] Energieumwandler"
+iv_1a_energy_converter.MapEntry: "[c/5555FF:IV] 1[c/FFFF55:A] Energieumwandler"
+iv_256a_laser_source_hatch.MapEntry: "[c/5555FF:IV] 256[c/FFFF55:A] Laserquellenklappe"
+iv_256a_laser_target_hatch.MapEntry: "[c/5555FF:IV] 256[c/FFFF55:A] Laserzielklappe"
+iv_4096a_laser_source_hatch.MapEntry: "[c/5555FF:IV] 4.096[c/FFFF55:A] Laserquellenklappe"
+iv_4096a_laser_target_hatch.MapEntry: "[c/5555FF:IV] 4.096[c/FFFF55:A] Laserzielklappe"
+iv_4a_energy_converter.MapEntry: "[c/5555FF:IV] 4[c/FFFF55:A] Energieumwandler"
+iv_8a_energy_converter.MapEntry: "[c/5555FF:IV] 8[c/FFFF55:A] Energieumwandler"
+iv_alloy_smelter.MapEntry: "[c/5555FF:Elite-Legierungsschmelzofen]"
+iv_arc_furnace.MapEntry: "[c/5555FF:Elite-Lichtbogenofen]"
+iv_assembler.MapEntry: "[c/5555FF:Elite-Montierer]"
+iv_autoclave.MapEntry: "[c/5555FF:Elite-Autoklav]"
+iv_battery_buffer_16x.MapEntry: "[c/5555FF:Wahnsinnige Spannung] 16x Batteriepuffer"
+iv_battery_buffer_4x.MapEntry: "[c/5555FF:Wahnsinnige Spannung] 4x Batteriepuffer"
+iv_battery_buffer_8x.MapEntry: "[c/5555FF:Wahnsinnige Spannung] 8x Batteriepuffer"
+iv_bender.MapEntry: "[c/5555FF:Elite-Biegemaschine]"
+iv_brewery.MapEntry: "[c/5555FF:Elitebrauerei]"
+iv_canner.MapEntry: "[c/5555FF:Elite Abfüllanlage]"
+iv_centrifuge.MapEntry: "[c/5555FF:Elite-Zentrifuge]"
+iv_charger_4x.MapEntry: "[c/5555FF:Wahnsinnige Spannung] 4x Turbolader"
+iv_chemical_bath.MapEntry: "[c/5555FF:Elite-Chemikalienbad]"
+iv_chemical_reactor.MapEntry: "[c/5555FF:Elite-Chemiereaktor]"
+iv_circuit_assembler.MapEntry: "[c/5555FF:Elite-Schaltkreis-Montierer]"
+iv_compressor.MapEntry: "[c/5555FF:Elite-Kompressor]"
+iv_cutter.MapEntry: "[c/5555FF:Eliteschneider]"
+iv_diode.MapEntry: "[c/5555FF:IV-Diode]"
+iv_distillery.MapEntry: "[c/5555FF:Elite-Destillationsanlage]"
+iv_electric_furnace.MapEntry: "[c/5555FF:Elite-Elektroofen]"
+iv_electrolyzer.MapEntry: "[c/5555FF:Elite-Elektrolyseanlage]"
+iv_electromagnetic_separator.MapEntry: "[c/5555FF:Elite Elektromagnetischer Separator]"
+iv_energy_input_hatch.MapEntry: "[c/5555FF:IV Energieklappe]"
+iv_energy_input_hatch_16a.MapEntry: "[c/5555FF:IV 16A Energieklappe]"
+iv_energy_input_hatch_4a.MapEntry: "[c/5555FF:IV 4A Energieklappe]"
+iv_energy_output_hatch.MapEntry: "[c/5555FF:IV Dynamo-Klappe]"
+iv_energy_output_hatch_16a.MapEntry: "[c/5555FF:IV 16A Dynamo-Klappe]"
+iv_energy_output_hatch_4a.MapEntry: "[c/5555FF:IV 4A Dynamo-Klappe]"
+iv_extractor.MapEntry: "[c/5555FF:Elite-Extraktor]"
+iv_extruder.MapEntry: "[c/5555FF:Elite-Extruder]"
+iv_fermenter.MapEntry: "[c/5555FF:Elite-Fermentierer]"
+iv_fisher.MapEntry: "[c/5555FF:Elite-Fischer]"
+iv_fluid_heater.MapEntry: "[c/5555FF:Elite-Flüssigkeitserhitzer]"
+iv_fluid_passthrough_hatch.MapEntry: "[c/5555FF:IV-Flüssigkeitsdurchgangsklappe]"
+iv_fluid_solidifier.MapEntry: "[c/5555FF:Elite-Flüssigkeitsverfestiger]"
+iv_forge_hammer.MapEntry: "[c/5555FF:Elite-Schmiedehammer]"
+iv_forming_press.MapEntry: "[c/5555FF:Elite-Formpresse]"
+iv_gas_collector.MapEntry: "[c/5555FF:Elite-Gassammler]"
+iv_hermetic_casing.MapEntry: Hermetisches Gehäuse V
+iv_input_bus.MapEntry: "[c/5555FF:IV-Eingangsbus]"
+iv_input_hatch.MapEntry: "[c/5555FF:IV-Eingangsklappe]"
+iv_input_hatch_4x.MapEntry: "[c/5555FF:IV Vierfach-Eingangsklappe]"
+iv_input_hatch_9x.MapEntry: "[c/5555FF:IV Neunfache Eingangsklappe]"
+iv_item_passthrough_hatch.MapEntry: "[c/5555FF:IV-Item-Durchgangsklappe]"
+iv_lapotronic_battery.MapEntry: IV Lapotronischer Kondensator
+iv_large_miner.MapEntry: "[c/5555FF:Elite-Großbergmann]"
+iv_laser_engraver.MapEntry: "[c/5555FF:Elite-Lasergravierer]"
+iv_lathe.MapEntry: "[c/5555FF:Elite-Drehmaschine]"
+iv_macerator.MapEntry: "[c/5555FF:Elite-Zerkleinerer]"
+iv_machine_casing.MapEntry: IV-Maschinengehäuse
+iv_machine_hull.MapEntry: "[c/5555FF:IV][c/FFFFFF:Maschinengehäuse]"
+iv_mixer.MapEntry: "[c/5555FF:Elite-Mixer]"
+iv_muffler_hatch.MapEntry: Schalldämpferklappe [c/5555FF:IV]
+iv_ore_washer.MapEntry: "[c/5555FF:Elite-Erzwäscher]"
+iv_output_bus.MapEntry: "[c/5555FF:IV-Ausgangsbus]"
+iv_output_hatch.MapEntry: "[c/5555FF:IV-Ausgangsklappe]"
+iv_output_hatch_4x.MapEntry: "[c/5555FF:IV Vierfach-Ausgangsklappe]"
+iv_output_hatch_9x.MapEntry: "[c/5555FF:IV Neunfache Output Hatch]"
+iv_packer.MapEntry: "[c/5555FF:Elite-Packstation]"
+iv_parallel_hatch.MapEntry: Elite-Parallelkontrollklappe
+iv_polarizer.MapEntry: "[c/5555FF:Elite-Polarisator]"
+iv_quantum_chest.MapEntry: Quantentruhe V
+iv_quantum_tank.MapEntry: Quantentank V
+iv_rock_crusher.MapEntry: "[c/5555FF:Elite-Steinbrecher]"
+iv_rotor_holder.MapEntry: "[c/5555FF:IV-Rotorhalter]"
+iv_scanner.MapEntry: "[c/5555FF:Elite-Scanner]"
+iv_sifter.MapEntry: "[c/5555FF:Elite-Sieb]"
+iv_substation_input_hatch_64a.MapEntry: "[c/5555FF:IV 64A Umspannwerk-Energieklappe]"
+iv_substation_output_hatch_64a.MapEntry: "[c/5555FF:IV 64A Umspannwerk-Dynamo-Klappe]"
+iv_thermal_centrifuge.MapEntry: "[c/5555FF:Elite-Thermozentrifuge]"
+iv_transformer_16a.MapEntry: "[c/5555FF:Wahnsinnige Spannung] Leistungstransformator"
+iv_transformer_1a.MapEntry: "[c/5555FF:Wahnsinniger Spannungstransformator]."
+iv_transformer_2a.MapEntry: "[c/5555FF:Wahnsinnige Spannung] Hi-Amp (2x) Transformator"
+iv_transformer_4a.MapEntry: "[c/5555FF:Wahnsinnige Spannung] Hi-Amp (4x) Transformator"
+iv_wiremill.MapEntry: "[c/5555FF:Elite-Drahtwerk]"
+iv_world_accelerator.MapEntry: "[c/5555FF:Elite-Weltbeschleuniger]"
+kanthal_coil_block.MapEntry: Kanthal-Heizspulenblock
+laminated_glass.MapEntry: Verbundglas
+large_arc_smelter.MapEntry: Großer Lichtbogenschmelzer
+large_assembler.MapEntry: Große Montagefabrik
+large_autoclave.MapEntry: Große Kristallisationskammer
+large_brewer.MapEntry: Großer Braubottich
+large_centrifuge.MapEntry: Große Zentrifugaleinheit
+large_chemical_bath.MapEntry: Großes Chemikalienbad
+large_chemical_reactor.MapEntry: Großer Chemiereaktor
+large_circuit_assembler.MapEntry: Großer Schaltkreis-Montierer
+large_combustion_engine.MapEntry: Großer Verbrennungsmotor
+large_cutter.MapEntry: Große Trennsäge
+large_distillery.MapEntry: Große Fraktionierungsdistille
+large_duct_pipe.MapEntry: Großes Kanalrohr
+large_electrolyzer.MapEntry: Große Elektrolysekammer
+large_electromagnet.MapEntry: Großer Elektromagnet
+large_engraving_laser.MapEntry: Großer Gravurlaser
+large_extractor.MapEntry: Große Extraktionsmaschine
+large_extruder.MapEntry: Große Extrusionsmaschine
+large_maceration_tower.MapEntry: Großer Mazerationsturm
+large_material_press.MapEntry: Große Materialpresse
+large_mixer.MapEntry: Großes Mischgefäß
+large_packer.MapEntry: Große Verpackungsmaschine
+large_scale_assembler_casing.MapEntry: Großformatiges Montierer-Gehäuse
+large_sifting_funnel.MapEntry: Großer Siebtrichter
+large_solidifier.MapEntry: Großes Erstarrungsarray
+large_wiremill.MapEntry: Große Drahtfabrik
+laser_hazard_sign_block.MapEntry: Laser-Gefahrenzeichenblock
+laser_safe_engraving_casing.MapEntry: Lasersicheres Gravurgehäuse
+light_blue_borderless_lamp.MapEntry: Hellblaue randlose Lampe
+light_blue_lamp.MapEntry: Hellblaue Lampe
+light_blue_large_metal_sheet.MapEntry: Hellblaues großes Metallblech
+light_blue_metal_sheet.MapEntry: Hellblaues Metallblech
+light_blue_studs.MapEntry: Hellblauer Nietenblock
+light_concrete.MapEntry: Leichter Beton
+light_concrete_bricks.MapEntry: Leichtbetonsteine
+light_concrete_cobblestone.MapEntry: Kopfsteinpflaster aus hellem Beton
+light_concrete_small_tile.MapEntry: Kleine Fliese aus hellem Beton
+light_concrete_tile.MapEntry: Helle Betonfliese
+light_concrete_windmill_a.MapEntry: Windmühle aus Leichtbeton A
+light_concrete_windmill_b.MapEntry: Windmühle aus Leichtbeton B
+light_gray_borderless_lamp.MapEntry: Hellgraue randlose Lampe
+light_gray_lamp.MapEntry: Hellgraue Lampe
+light_gray_large_metal_sheet.MapEntry: Hellgraues großes Metallblech
+light_gray_metal_sheet.MapEntry: Hellgraues Metallblech
+light_gray_studs.MapEntry: Hellgrauer Nietenblock
+lime_borderless_lamp.MapEntry: Randlose Lampe in Hellgrün
+lime_lamp.MapEntry: Hellgrünnlampe
+lime_large_metal_sheet.MapEntry: Kalkgroßes Metallblech
+lime_metal_sheet.MapEntry: Kalkblech
+lime_studs.MapEntry: Hellgrünnstollen
+long_distance_fluid_pipeline.MapEntry: Langstrecken-Flüssigkeitspipeline
+long_distance_fluid_pipeline_endpoint.MapEntry: Endpunkt einer Flüssigkeitspipeline über große Entfernungen
+long_distance_item_pipeline.MapEntry: Langstrecken-Itempipeline
+long_distance_item_pipeline_endpoint.MapEntry: Langstrecken-Item-Pipeline-Endpunkt
+lp_steam_alloy_smelter.MapEntry: Niedrigdruck-Dampflegierungsschmelzanlage
+lp_steam_compressor.MapEntry: Niedrigdruck-Dampfkompressor
+lp_steam_extractor.MapEntry: Niedrigdruck-Dampfextraktor
+lp_steam_forge_hammer.MapEntry: Niedrigdruck-Dampfschmiedehammer
+lp_steam_furnace.MapEntry: Niedrigdruck-Dampfofen
+lp_steam_liquid_boiler.MapEntry: Niedrigdruck-Dampfflüssigkeitskessel
+lp_steam_macerator.MapEntry: Niedrigdruck-Dampfzerkleinerer
+lp_steam_miner.MapEntry: Niedrigdruck-Dampferzförderer
+lp_steam_rock_crusher.MapEntry: Niedrigdruck-Dampfsteinbrecher
+lp_steam_solar_boiler.MapEntry: Niedrigdruck-Dampf-Solarkessel
+lp_steam_solid_boiler.MapEntry: Niedrigdruck-Dampfkessel
+luv_1024a_laser_source_hatch.MapEntry: "[c/FF55FF:LuV] 1.024[c/FFFF55:A] Laserquellenklappe"
+luv_1024a_laser_target_hatch.MapEntry: "[c/FF55FF:LuV] 1.024[c/FFFF55:A] Laserzielklappe"
+luv_16a_energy_converter.MapEntry: "[c/FF55FF:LuV] 16[c/FFFF55:A] Energieumwandler"
+luv_1a_energy_converter.MapEntry: "[c/FF55FF:LuV] 1[c/FFFF55:A] Energieumwandler"
+luv_256a_laser_source_hatch.MapEntry: "[c/FF55FF:LuV] 256[c/FFFF55:A] Laserquellenklappe"
+luv_256a_laser_target_hatch.MapEntry: "[c/FF55FF:LuV] 256[c/FFFF55:A] Laserzielklappe"
+luv_4096a_laser_source_hatch.MapEntry: "[c/FF55FF:LuV] 4.096[c/FFFF55:A] Laserquellenklappe"
+luv_4096a_laser_target_hatch.MapEntry: "[c/FF55FF:LuV] 4.096[c/FFFF55:A] Laserzielklappe"
+luv_4a_energy_converter.MapEntry: "[c/FF55FF:LuV] 4[c/FFFF55:A] Energieumwandler"
+luv_8a_energy_converter.MapEntry: "[c/FF55FF:LuV] 8[c/FFFF55:A] Energieumwandler"
+luv_alloy_smelter.MapEntry: "[c/FF55FF:Hochentwickelter Legierungsschmelzer V]"
+luv_arc_furnace.MapEntry: "[c/FF55FF:Hochentwickelter Lichtbogenofen V]"
+luv_assembler.MapEntry: "[c/FF55FF:Hochentwickelter Montierer V]"
+luv_autoclave.MapEntry: "[c/FF55FF:Hochentwickelter Autoklav V]"
+luv_battery_buffer_16x.MapEntry: "[c/FF55FF:Extremspannung] 16x Batteriepuffer"
+luv_battery_buffer_4x.MapEntry: "[c/FF55FF:Extremspannung] 4x Batteriepuffer"
+luv_battery_buffer_8x.MapEntry: "[c/FF55FF:Extremspannung] 8x Batteriepuffer"
+luv_bender.MapEntry: "[c/FF55FF:Hochentwickelte Biegemaschine V]"
+luv_brewery.MapEntry: "[c/FF55FF:Elitebrauerei II]"
+luv_canner.MapEntry: "[c/FF55FF:Hochentwickelte Abfüllanlage V]"
+luv_centrifuge.MapEntry: "[c/FF55FF:Hochentwickelte Zentrifuge V]"
+luv_charger_4x.MapEntry: "[c/FF55FF:Absurde Spannung] 4x Turbolader"
+luv_chemical_bath.MapEntry: "[c/FF55FF:Elite-Chemikalienbad II]"
+luv_chemical_reactor.MapEntry: "[c/FF55FF:Hochentwickelter Chemiereaktor V]"
+luv_circuit_assembler.MapEntry: "[c/FF55FF:Hochentwickelter Schaltkreis-Montierer V]"
+luv_compressor.MapEntry: "[c/FF55FF:Hochentwickelter Kompressor V]"
+luv_cutter.MapEntry: "[c/FF55FF:Hochentwickelter Schneider V]"
+luv_diode.MapEntry: "[c/FF55FF:LuV-Diode]"
+luv_distillery.MapEntry: "[c/FF55FF:Elite Destillationsanlage II]"
+luv_dual_input_hatch.MapEntry: "[c/FF55FF:LuV Dual-Input-Klappe]"
+luv_dual_output_hatch.MapEntry: "[c/FF55FF:LuV-Doppelausgangsklappe]"
+luv_electric_furnace.MapEntry: "[c/FF55FF:Hochentwickelter Elektroofen V]"
+luv_electrolyzer.MapEntry: "[c/FF55FF:Hochentwickelter Elektrolyseur V]"
+luv_electromagnetic_separator.MapEntry: "[c/FF55FF:Elite Elektromagnetischer Separator II]"
+luv_energy_input_hatch.MapEntry: "[c/FF55FF:LuV-Energieklappe]"
+luv_energy_input_hatch_16a.MapEntry: "[c/FF55FF:LuV 16A Energieklappe]"
+luv_energy_input_hatch_4a.MapEntry: "[c/FF55FF:LuV 4A Energieklappe]"
+luv_energy_output_hatch.MapEntry: "[c/FF55FF:LuV Dynamo Klappe]"
+luv_energy_output_hatch_16a.MapEntry: "[c/FF55FF:LuV 16A Dynamo-Klappe]"
+luv_energy_output_hatch_4a.MapEntry: "[c/FF55FF:LuV 4A Dynamo-Klappe]"
+luv_extractor.MapEntry: "[c/FF55FF:Hochentwickelter Extraktor V]"
+luv_extruder.MapEntry: "[c/FF55FF:Hochentwickelter Extruder V]"
+luv_fermenter.MapEntry: "[c/FF55FF:Elite-Fermentierer II]"
+luv_fisher.MapEntry: "[c/FF55FF:Elite Fisher II]"
+luv_fluid_heater.MapEntry: "[c/FF55FF:Hochentwickelter Flüssigkeitserhitzer V]"
+luv_fluid_passthrough_hatch.MapEntry: "[c/FF55FF:LuV-Flüssigkeitsdurchgangsklappe]"
+luv_fluid_solidifier.MapEntry: "[c/FF55FF:Elite Flüssigkeitsverfestiger II]"
+luv_forge_hammer.MapEntry: "[c/FF55FF:Elite-Schmiedehammer II]"
+luv_forming_press.MapEntry: "[c/FF55FF:Elite Formpresse II]"
+luv_fusion_reactor.MapEntry: Fusionsreaktorcomputer MK I
+luv_gas_collector.MapEntry: "[c/FF55FF:Elite-Gassammler II]"
+luv_hermetic_casing.MapEntry: Hermetisches Gehäuse VI
+luv_input_bus.MapEntry: "[c/FF55FF:LuV-Eingangsbus]"
+luv_input_hatch.MapEntry: "[c/FF55FF:LuV-Eingabeklappe]"
+luv_input_hatch_4x.MapEntry: "[c/FF55FF:LuV-Vierfach-Eingabeklappe]"
+luv_input_hatch_9x.MapEntry: "[c/FF55FF:LuV Neunfache Eingangsklappe]"
+luv_item_passthrough_hatch.MapEntry: "[c/FF55FF:Durchreiche Klappe für LuV-Items]"
+luv_lapotronic_battery.MapEntry: LuV Lapotronischer-Kondensator
+luv_large_miner.MapEntry: "[c/FF55FF:Elite Large Miner II]"
+luv_laser_engraver.MapEntry: "[c/FF55FF:Elite-Lasergravierer II]"
+luv_lathe.MapEntry: "[c/FF55FF:Elite-Drehmaschine II]"
+luv_macerator.MapEntry: "[c/FF55FF:Hochentwickelter Zerkleinerer V]"
+luv_machine_casing.MapEntry: LuV-Maschinengehäuse
+luv_machine_hull.MapEntry: "[c/FF55FF:LuV][c/FFFFFF:Maschinengehäuse]"
+luv_mixer.MapEntry: "[c/FF55FF:Hochentwickelter Mischer V]"
+luv_muffler_hatch.MapEntry: Schalldämpferklappe [c/FF55FF:LuV]
+luv_ore_washer.MapEntry: "[c/FF55FF:Elite-Erzwäscher II]"
+luv_output_bus.MapEntry: "[c/FF55FF:LuV-Ausgangsbus]"
+luv_output_hatch.MapEntry: "[c/FF55FF:LuV-Ausgabeklappe]"
+luv_output_hatch_4x.MapEntry: "[c/FF55FF:LuV-Vierfach-Ausgangsklappe]"
+luv_output_hatch_9x.MapEntry: "[c/FF55FF:LuV Neunfache Output Hatch]"
+luv_packer.MapEntry: "[c/FF55FF:Elite Packstation II]"
+luv_parallel_hatch.MapEntry: Master-Parallelkontrollklappe
+luv_polarizer.MapEntry: "[c/FF55FF:Elite Polarisator II]"
+luv_quantum_chest.MapEntry: Quantentruhe VI
+luv_quantum_tank.MapEntry: Quantentank VI
+luv_rock_crusher.MapEntry: "[c/FF55FF:Elite Steinbrecher II]"
+luv_rotor_holder.MapEntry: "[c/FF55FF:LuV Rotorhalter]"
+luv_scanner.MapEntry: "[c/FF55FF:Elite-Scanner II]"
+luv_sifter.MapEntry: "[c/FF55FF:Elite Sieb II]"
+luv_substation_input_hatch_64a.MapEntry: "[c/FF55FF:Energieklappe des Umspannwerks LuV 64A]"
+luv_substation_output_hatch_64a.MapEntry: "[c/FF55FF:LuV 64A Umspannwerk-Dynamo-Klappe]"
+luv_thermal_centrifuge.MapEntry: "[c/FF55FF:Elite Thermozentrifuge II]"
+luv_transformer_16a.MapEntry: "[c/FF55FF:Absurde Spannung] Leistungstransformator"
+luv_transformer_1a.MapEntry: "[c/FF55FF:Absurde Spannung] Transformator"
+luv_transformer_2a.MapEntry: "[c/FF55FF:Ludicrous Voltage] Hi-Amp (2x) Transformator"
+luv_transformer_4a.MapEntry: "[c/FF55FF:Ludicrous Voltage] Hi-Amp (4x) Transformator"
+luv_wiremill.MapEntry: "[c/FF55FF:Hochentwickeltes Drahtwerk V]"
+luv_world_accelerator.MapEntry: "[c/FF55FF:Elite World Accelerator II]"
+lv_16a_energy_converter.MapEntry: "[c/AAAAAA:LV] 16[c/FFFF55:A] Energieumwandler"
+lv_1a_energy_converter.MapEntry: "[c/AAAAAA:LV] 1[c/FFFF55:A] Energieumwandler"
+lv_4a_energy_converter.MapEntry: "[c/AAAAAA:LV] 4[c/FFFF55:A] Energieumwandler"
+lv_8a_energy_converter.MapEntry: "[c/AAAAAA:LV] 8[c/FFFF55:A] Energieumwandler"
+lv_air_scrubber.MapEntry: Einfacher Luftreiniger
+lv_alloy_smelter.MapEntry: Einfacher Legierungsschmelzer
+lv_arc_furnace.MapEntry: Einfacher Lichtbogenofen
+lv_assembler.MapEntry: Einfacher Montierer
+lv_autoclave.MapEntry: Einfacher Autoklav
+lv_battery_buffer_16x.MapEntry: "[c/AAAAAA:Niedrigspannung] 16x Batteriepuffer"
+lv_battery_buffer_4x.MapEntry: "[c/AAAAAA:Niedrigspannung] 4x Batteriepuffer"
+lv_battery_buffer_8x.MapEntry: "[c/AAAAAA:Niedrigspannung] 8x Batteriepuffer"
+lv_bender.MapEntry: Einfache Biegemaschine
+lv_block_breaker.MapEntry: Einfacher Blockbrecher
+lv_brewery.MapEntry: Einfache Brauerei
+lv_buffer.MapEntry: Einfacher Batteriespeicher
+lv_canner.MapEntry: Einfache Abfüllanlage
+lv_centrifuge.MapEntry: Einfache Zentrifuge
+lv_charger_4x.MapEntry: "[c/AAAAAA:Niedrigspannung] 4x Turbolader"
+lv_chemical_bath.MapEntry: Einfaches Chemikalienbad
+lv_chemical_reactor.MapEntry: Einfacher Chemiereaktor
+lv_circuit_assembler.MapEntry: Einfacher Schaltkreis-Montierer
+lv_combustion.MapEntry: Einfacher Verbrennungsgenerator
+lv_compressor.MapEntry: Einfacher Kompressor
+lv_cutter.MapEntry: Einfacher Schneider
+lv_diode.MapEntry: "[c/AAAAAA:LV-Diode]"
+lv_distillery.MapEntry: Einfache Destillationsanlage
+lv_electric_furnace.MapEntry: Einfacher Elektroofen
+lv_electrolyzer.MapEntry: Einfacher Elektrolyseur
+lv_electromagnetic_separator.MapEntry: Einfacher elektromagnetischer Separator
+lv_energy_input_hatch.MapEntry: "[c/AAAAAA:LV-Energieeingangsklappe]"
+lv_energy_output_hatch.MapEntry: "[c/AAAAAA:LV-Energieausgangsklappe]"
+lv_extractor.MapEntry: Einfacher Extraktor
+lv_extruder.MapEntry: Einfacher Extruder
+lv_fermenter.MapEntry: Einfacher Fermentierer
+lv_fisher.MapEntry: Einfacher Fischer
+lv_fluid_heater.MapEntry: Einfacher Flüssigkeitserhitzer
+lv_fluid_passthrough_hatch.MapEntry: "[c/AAAAAA:LV-Flüssigkeitsdurchgangsklappe]"
+lv_fluid_solidifier.MapEntry: Einfacher Flüssigkeitsverfestiger
+lv_forge_hammer.MapEntry: Einfacher Schmiedehammer
+lv_forming_press.MapEntry: Einfache Formpresse
+lv_gas_collector.MapEntry: Einfacher-Gassammler
+lv_gas_turbine.MapEntry: Einfacher Gasturbinengenerator
+lv_hermetic_casing.MapEntry: Hermetisches Gehäuse I
+lv_input_bus.MapEntry: "[c/AAAAAA:LV-Eingangsbus]"
+lv_input_hatch.MapEntry: "[c/AAAAAA:LV-Eingangsklappe]"
+lv_item_collector.MapEntry: Einfacher-Item-Sammler
+lv_item_passthrough_hatch.MapEntry: "[c/AAAAAA:Durchreiche Klappe für LV-Items]"
+lv_laser_engraver.MapEntry: Einfacher Lasergravierer
+lv_lathe.MapEntry: Einfache Drehmaschine
+lv_macerator.MapEntry: Einfacher Zerkleinerer
+lv_machine_casing.MapEntry: LV-Maschinengehäuse
+lv_machine_hull.MapEntry: "[c/AAAAAA:LV][c/FFFFFF:Maschinengehäuse]"
+lv_miner.MapEntry: Einfacher Bergmann
+lv_mixer.MapEntry: Einfacher Mischer
+lv_muffler_hatch.MapEntry: Schalldämpferklappe [c/AAAAAA:LV]
+lv_ore_washer.MapEntry: Einfacher Erzwäscher
+lv_output_bus.MapEntry: "[c/AAAAAA:LV-Ausgangsbus]"
+lv_output_hatch.MapEntry: "[c/AAAAAA:LV-Ausgangsklappe]"
+lv_packer.MapEntry: Einfachere Packstation
+lv_polarizer.MapEntry: Einfacher Polarisator
+lv_pump.MapEntry: Einfache Pumpe
+lv_rock_crusher.MapEntry: Einfacher Steinbrecher
+lv_scanner.MapEntry: Einfacher Scanner
+lv_sifter.MapEntry: Einfacher Sieb
+lv_steam_turbine.MapEntry: Einfacher Dampfturbinengenerator
+lv_super_chest.MapEntry: Supertruhe I
+lv_super_tank.MapEntry: Supertank I
+lv_thermal_centrifuge.MapEntry: Einfache Thermozentrifuge
+lv_transformer_16a.MapEntry: "[c/AAAAAA:Niedrigspannungs]-Leistungstransformator"
+lv_transformer_1a.MapEntry: "[c/AAAAAA:Niedrigspannungs]-Transformator"
+lv_transformer_2a.MapEntry: "[c/AAAAAA:Niedrigspannung] Hi-Amp (2x) Transformator"
+lv_transformer_4a.MapEntry: "[c/AAAAAA:Niedrigspannung] Hi-Amp (4x) Transformator"
+lv_wiremill.MapEntry: Einfaches Drahtwerk
+lv_world_accelerator.MapEntry: Einfacher Weltbeschleuniger
+magenta_borderless_lamp.MapEntry: Randlose Lampe in Magenta
+magenta_lamp.MapEntry: Magenta-Lampe
+magenta_large_metal_sheet.MapEntry: Magenta großes Metallblech
+magenta_metal_sheet.MapEntry: Magentafarbenes Blech
+magenta_studs.MapEntry: Magentafarbener Nietenblock
+magic_hazard_sign_block.MapEntry: Magischer Gefahrenzeichenblock
+magnetic_hazard_sign_block.MapEntry: Magnetischer Gefahrenschildblock
+maintenance_hatch.MapEntry: Wartungsklappe
+marble.MapEntry: Marmor
+marble_bricks.MapEntry: Marmorsteine
+marble_cobblestone.MapEntry: Marmor-Kopfsteinpflaster
+marble_small_tile.MapEntry: Kleine Marmorfliese
+marble_tile.MapEntry: Marmorfliese
+marble_windmill_a.MapEntry: Marmorwindmühle A
+marble_windmill_b.MapEntry: Marmorwindmühle B
+max_16a_energy_converter.MapEntry: MAX 16[c/FFFF55:A] Energieumwandler
+max_1a_energy_converter.MapEntry: MAX 1[c/FFFF55:A] Energieumwandler
+max_4a_energy_converter.MapEntry: MAX 4[c/FFFF55:A] Energieumwandler
+max_8a_energy_converter.MapEntry: MAX 8[c/FFFF55:A] Energieumwandler
+max_battery_buffer_16x.MapEntry: Maximale Spannung 16x Batteriepuffer
+max_battery_buffer_4x.MapEntry: Maximale Spannung 4x Batteriepuffer
+max_battery_buffer_8x.MapEntry: Maximale Spannung 8x Batteriepuffer
+max_charger_4x.MapEntry: Maximale Spannung 4x Turbolader
+max_dual_input_hatch.MapEntry: MAX Dual-Input-Klappe
+max_dual_output_hatch.MapEntry: MAX Dual-Output-Klappe
+max_energy_input_hatch.MapEntry: MAX-Energieklappe
+max_energy_input_hatch_16a.MapEntry: MAX 16A Energieklappe
+max_energy_input_hatch_4a.MapEntry: MAX 4A Energieklappe
+max_energy_output_hatch.MapEntry: MAX Dynamo-Klappe
+max_energy_output_hatch_16a.MapEntry: MAX 16A Dynamo-Klappe
+max_energy_output_hatch_4a.MapEntry: MAX 4A Dynamo-Klappe
+max_input_bus.MapEntry: MAX Eingangsbus
+max_input_hatch.MapEntry: MAX Eingabeklappe
+max_input_hatch_4x.MapEntry: MAX Vierfach-Eingabeklappe
+max_input_hatch_9x.MapEntry: MAX Neunfache Eingangsklappe
+max_machine_casing.MapEntry: MAX-Maschinengehäuse
+max_machine_hull.MapEntry: MAX [c/FFFFFF:Maschinengehäuse]
+max_output_bus.MapEntry: MAX Ausgangsbus
+max_output_hatch.MapEntry: MAX-Ausgabeklappe
+max_output_hatch_4x.MapEntry: MAX Vierfach-Ausgangsklappe
+max_output_hatch_9x.MapEntry: MAX Neunfache Output Hatch
+max_substation_input_hatch_64a.MapEntry: MAX 64A Umspannwerk-Energieklappe
+max_substation_output_hatch_64a.MapEntry: MAX 64A Umspannwerk-Dynamo-Klappe
+me_input_bus.MapEntry: ME-Eingangsbus
+me_input_hatch.MapEntry: ME-Eingangsklappe
+me_output_bus.MapEntry: ME-Ausgangsbus
+me_output_hatch.MapEntry: ME-Ausgabeklappe
+me_pattern_buffer.MapEntry: ME-Musterpuffer
+me_pattern_buffer_proxy.MapEntry: ME Pattern Buffer Proxy
+me_stocking_input_bus.MapEntry: ME-Strumpf-Eingangsbus
+me_stocking_input_hatch.MapEntry: ME-Strumpf-Eingabeklappe
+mega_blast_furnace.MapEntry: Drehherdofen
+mega_vacuum_freezer.MapEntry: Massenschockkühler
+mob_infestation_hazard_sign_block.MapEntry: Mob-Befall-Gefahrenschild-Block
+mob_spawner_hazard_sign_block.MapEntry: Mob Spawner Gefahrenschild-Block
+molybdenum_disilicide_coil_block.MapEntry: Molybdändisilizid-Heizspulenblock
+monitor.MapEntry: Monitor
+mossy_dark_concrete_bricks.MapEntry: Moosige dunkle Betonsteine
+mossy_dark_concrete_cobblestone.MapEntry: Moosiges dunkles Betonpflaster
+mossy_light_concrete_bricks.MapEntry: Moosige helle Betonsteine
+mossy_light_concrete_cobblestone.MapEntry: Bemoostes Kopfsteinpflaster aus hellem Beton
+mossy_marble_bricks.MapEntry: Moosige Marmorsteine
+mossy_marble_cobblestone.MapEntry: Kopfsteinpflaster aus moosigem Marmor
+mossy_red_granite_bricks.MapEntry: Moosbedeckte rote Granitsteine
+mossy_red_granite_cobblestone.MapEntry: Moosbedeckter Kopfsteinpflaster aus rotem Granit
+multi_smelter.MapEntry: Multi-Schmelzerei
+mv_16a_energy_converter.MapEntry: "[c/55FFFF:MV] 16[c/FFFF55:A] Energiewandler"
+mv_1a_energy_converter.MapEntry: "[c/55FFFF:MV] 1[c/FFFF55:A] Energieumwandler"
+mv_4a_energy_converter.MapEntry: "[c/55FFFF:MV] 4[c/FFFF55:A] Energieumwandler"
+mv_8a_energy_converter.MapEntry: "[c/55FFFF:MV] 8[c/FFFF55:A] Energieumwandler"
+mv_air_scrubber.MapEntry: "[c/55FFFF:Erweiterter Luftreiniger]"
+mv_alloy_smelter.MapEntry: "[c/55FFFF:Erweiterte Legierungsschmelzofen]"
+mv_arc_furnace.MapEntry: "[c/55FFFF:Erweiterter Lichtbogenofen]"
+mv_assembler.MapEntry: "[c/55FFFF:Erweiterter Montierer]"
+mv_autoclave.MapEntry: "[c/55FFFF:Erweiterter Autoklav]"
+mv_battery_buffer_16x.MapEntry: "[c/55FFFF:Mittelspannung] 16x Batteriepuffer"
+mv_battery_buffer_4x.MapEntry: "[c/55FFFF:Mittelspannung] 4x Batteriepuffer"
+mv_battery_buffer_8x.MapEntry: "[c/55FFFF:Mittelspannung] 8x Batteriepuffer"
+mv_bedrock_ore_miner.MapEntry: "[c/55FFFF:Erweiterter Grundgesteins-Erzbergmann]"
+mv_bender.MapEntry: "[c/55FFFF:Erweiterter Biegemaschine]"
+mv_block_breaker.MapEntry: "[c/55FFFF:Erweiterter Blockbrecher]"
+mv_brewery.MapEntry: "[c/55FFFF:Erweiterte Brauerei]"
+mv_buffer.MapEntry: "[c/55FFFF:Erweiterter Puffer]"
+mv_canner.MapEntry: "[c/55FFFF:Erweiterte Abfüllanlage]"
+mv_centrifuge.MapEntry: "[c/55FFFF:Erweiterte Zentrifuge]"
+mv_charger_4x.MapEntry: "[c/55FFFF:Mittelspannung] 4x Turbolader"
+mv_chemical_bath.MapEntry: "[c/55FFFF:Erweitertes Chemikalienbad]"
+mv_chemical_reactor.MapEntry: "[c/55FFFF:Erweiterter Chemiereaktor]"
+mv_circuit_assembler.MapEntry: "[c/55FFFF:Erweiterter Schaltkreis-Montierer]"
+mv_combustion.MapEntry: "[c/55FFFF:Erweiterter Verbrennungsgenerator]"
+mv_compressor.MapEntry: "[c/55FFFF:Erweiterter Kompressor]"
+mv_cutter.MapEntry: "[c/55FFFF:Erweiterter Schneider]"
+mv_diode.MapEntry: "[c/55FFFF:MV-Diode]"
+mv_distillery.MapEntry: "[c/55FFFF:Erweiterte Destillationsanlage]"
+mv_electric_furnace.MapEntry: "[c/55FFFF:Erweiterter Elektroofen]"
+mv_electrolyzer.MapEntry: "[c/55FFFF:Erweiterte Elektrolyseanlage]"
+mv_electromagnetic_separator.MapEntry: "[c/55FFFF:Erweiterter elektromagnetischer Separator]"
+mv_energy_input_hatch.MapEntry: "[c/55FFFF:MV-Energieklappe]"
+mv_energy_output_hatch.MapEntry: "[c/55FFFF:MV Dynamo Klappe]"
+mv_extractor.MapEntry: "[c/55FFFF:Erweiterter Extraktor]"
+mv_extruder.MapEntry: "[c/55FFFF:Erweiterter Extruder]"
+mv_fermenter.MapEntry: "[c/55FFFF:Erweiterter Fermentierer]"
+mv_fisher.MapEntry: "[c/55FFFF:Erweiterter Fischer]"
+mv_fluid_drilling_rig.MapEntry: "[c/55FFFF:Erweitert Fluid Drilling Rig]"
+mv_fluid_heater.MapEntry: "[c/55FFFF:Erweiterter Flüssigkeitserhitzer]"
+mv_fluid_passthrough_hatch.MapEntry: "[c/55FFFF:MV-Flüssigkeitsdurchlassklappe]"
+mv_fluid_solidifier.MapEntry: "[c/55FFFF:Erweiterter Flüssigkeitsverfestiger]"
+mv_forge_hammer.MapEntry: "[c/55FFFF:Erweiterter Schmiedehammer]"
+mv_forming_press.MapEntry: "[c/55FFFF:Erweiterte Formpresse]"
+mv_gas_collector.MapEntry: "[c/55FFFF:Erweiterter Gassammler]"
+mv_gas_turbine.MapEntry: "[c/55FFFF:Erweiterter Gasturbinengenerator]"
+mv_hermetic_casing.MapEntry: Hermetisches Gehäuse II
+mv_input_bus.MapEntry: "[c/55FFFF:MV-Eingangsbus]"
+mv_input_hatch.MapEntry: "[c/55FFFF:MV-Eingangsklappe]"
+mv_item_collector.MapEntry: "[c/55FFFF:Erweiterter Itemssammler]"
+mv_item_passthrough_hatch.MapEntry: "[c/55FFFF:Durchgangsklappe für MV-Items]"
+mv_laser_engraver.MapEntry: "[c/55FFFF:Erweiterter Lasergravierer]"
+mv_lathe.MapEntry: "[c/55FFFF:Erweiterte Drehmaschine]"
+mv_macerator.MapEntry: "[c/55FFFF:Erweiterter Zerkleinerer]"
+mv_machine_casing.MapEntry: MV-Maschinengehäuse
+mv_machine_hull.MapEntry: "[c/55FFFF:MV][c/FFFFFF:Maschinengehäuse]"
+mv_miner.MapEntry: "[c/55FFFF:Erweiterter Bergmann]"
+mv_mixer.MapEntry: "[c/55FFFF:Erweiterter Mixer]"
+mv_muffler_hatch.MapEntry: Schalldämpferklappe [c/55FFFF:MV]
+mv_ore_washer.MapEntry: "[c/55FFFF:Erweiterter Erzwäscher]"
+mv_output_bus.MapEntry: "[c/55FFFF:MV-Ausgangsbus]"
+mv_output_hatch.MapEntry: "[c/55FFFF:MV-Ausgangsklappe]"
+mv_packer.MapEntry: "[c/55FFFF:Erweiterte Packstation]"
+mv_polarizer.MapEntry: "[c/55FFFF:Erweiterter Polarisator]"
+mv_pump.MapEntry: "[c/55FFFF:Erweiterte Pumpe]"
+mv_rock_crusher.MapEntry: "[c/55FFFF:Erweiterter Steinbrecher]"
+mv_scanner.MapEntry: "[c/55FFFF:Erweiterter Scanner]"
+mv_sifter.MapEntry: "[c/55FFFF:Erweiterter Sichter]"
+mv_steam_turbine.MapEntry: "[c/55FFFF:Erweiterter Dampfturbinengenerator]"
+mv_super_chest.MapEntry: Supertruhe II
+mv_super_tank.MapEntry: Supertank II
+mv_thermal_centrifuge.MapEntry: "[c/55FFFF:Erweiterte Thermozentrifuge]"
+mv_transformer_16a.MapEntry: "[c/55FFFF:Mittelspannungs] Leistungstransformator"
+mv_transformer_1a.MapEntry: "[c/55FFFF:Mittelspannungs]-Transformator"
+mv_transformer_2a.MapEntry: "[c/55FFFF:Mittelspannung] Hi-Amp (2x) Transformator"
+mv_transformer_4a.MapEntry: "[c/55FFFF:Mittelspannung] Hi-Amp (4x) Transformator"
+mv_wiremill.MapEntry: "[c/55FFFF:Erweitertes Drahtwerk]"
+mv_world_accelerator.MapEntry: "[c/55FFFF:Erweitert World Accelerator]"
+naquadah_coil_block.MapEntry: Naquadah-Heizspulenblock
+network_switch.MapEntry: Netzwerk-Switch
+nichrome_coil_block.MapEntry: Nichrom-Heizspulenblock
+noise_hazard_sign_block.MapEntry: Lärmgefahr-Schilderblock
+nonconducting_casing.MapEntry: Nichtleitendes Gehäuse
+normal_duct_pipe.MapEntry: Normales Kanalrohr
+normal_laser_pipe.MapEntry: Normales Laserrohr
+normal_optical_pipe.MapEntry: Glasfaserkabel
+object_holder.MapEntry: Objekthalter
+opv_1024a_laser_source_hatch.MapEntry: OpV 1.024[c/FFFF55:A] Laserquellenklappe
+opv_1024a_laser_target_hatch.MapEntry: OpV 1.024[c/FFFF55:A] Laserzielklappe
+opv_16a_energy_converter.MapEntry: OpV 16[c/FFFF55:A] Energieumwandler
+opv_1a_energy_converter.MapEntry: OpV 1[c/FFFF55:A] Energieumwandler
+opv_256a_laser_source_hatch.MapEntry: OpV 256[c/FFFF55:A] Laserquellenklappe
+opv_256a_laser_target_hatch.MapEntry: OpV 256[c/FFFF55:A] Laserzielklappe
+opv_4096a_laser_source_hatch.MapEntry: OpV 4.096[c/FFFF55:A] Laserquellenklappe
+opv_4096a_laser_target_hatch.MapEntry: OpV 4.096[c/FFFF55:A] Laserzielklappe
+opv_4a_energy_converter.MapEntry: OpV 4[c/FFFF55:A] Energieumwandler
+opv_8a_energy_converter.MapEntry: OpV 8[c/FFFF55:A] Energieumwandler
+opv_alloy_smelter.MapEntry: Legendäre Legierungsschmelzofen
+opv_arc_furnace.MapEntry: Legendärer Lichtbogenofen
+opv_assembler.MapEntry: Legendärer Monteur
+opv_autoclave.MapEntry: Legendärer Autoklav
+opv_battery_buffer_16x.MapEntry: Überlastete Spannung 16x Batteriepuffer
+opv_battery_buffer_4x.MapEntry: Überlastete Spannung 4x Batteriepuffer
+opv_battery_buffer_8x.MapEntry: Überlastete Spannung 8x Batteriepuffer
+opv_bender.MapEntry: Legendärer Biegemaschine
+opv_brewery.MapEntry: Legendäre Brauerei
+opv_canner.MapEntry: Legendäre Abfüllanlage
+opv_centrifuge.MapEntry: Legendäre Zentrifuge
+opv_charger_4x.MapEntry: Überlastete Spannung 4x Turbolader
+opv_chemical_bath.MapEntry: Legendäres Chemikalienbad
+opv_chemical_reactor.MapEntry: Legendärer Chemiereaktor
+opv_circuit_assembler.MapEntry: Legendärer Schaltungsmonteur
+opv_compressor.MapEntry: Legendärer Kompressor
+opv_cutter.MapEntry: Legendärer Schneider
+opv_diode.MapEntry: OpV-Diode
+opv_distillery.MapEntry: Legendäre Destillationsanlage
+opv_dual_input_hatch.MapEntry: OpV Dual Eingangsklappe
+opv_dual_output_hatch.MapEntry: OpV Dual Output Hatch
+opv_electric_furnace.MapEntry: Legendärer Elektroofen
+opv_electrolyzer.MapEntry: Legendäre Elektrolyseanlage
+opv_electromagnetic_separator.MapEntry: Legendärer elektromagnetischer Separator
+opv_energy_input_hatch.MapEntry: OpV Energy Hatch
+opv_energy_input_hatch_16a.MapEntry: OpV 16A Energieklappe
+opv_energy_input_hatch_4a.MapEntry: OpV 4A Energieklappe
+opv_energy_output_hatch.MapEntry: OpV Dynamo Hatch
+opv_energy_output_hatch_16a.MapEntry: OpV 16A Dynamo-Klappe
+opv_energy_output_hatch_4a.MapEntry: OpV 4A Dynamo Klappe
+opv_extractor.MapEntry: Legendärer Extraktor
+opv_extruder.MapEntry: Legendärer Extruder
+opv_fermenter.MapEntry: Legendärer Fermentierer
+opv_fluid_heater.MapEntry: Legendärer Flüssigkeitserhitzer
+opv_fluid_passthrough_hatch.MapEntry: OpV-Flüssigkeitsdurchgangsklappe
+opv_fluid_solidifier.MapEntry: Legendärer Flüssigkeitsverfestiger
+opv_forge_hammer.MapEntry: Legendärer Schmiedehammer
+opv_forming_press.MapEntry: Legendäre Formpresse
+opv_gas_collector.MapEntry: Legendärer Gassammler
+opv_input_bus.MapEntry: OpV-Eingangsbus
+opv_input_hatch.MapEntry: OpV-Eingangsklappe
+opv_input_hatch_4x.MapEntry: OpV Vierfach-Eingangsklappe
+opv_input_hatch_9x.MapEntry: OpV Neunfache Eingangsklappe
+opv_item_passthrough_hatch.MapEntry: OpV-Item-Durchgangsklappe
+opv_laser_engraver.MapEntry: Legendärer Lasergravierer
+opv_lathe.MapEntry: Legendäre Drehmaschine
+opv_macerator.MapEntry: Legendärer Zerkleinerer
+opv_machine_casing.MapEntry: OpV-Maschinengehäuse
+opv_machine_hull.MapEntry: OpV [c/FFFFFF:Maschinengehäuse]
+opv_mixer.MapEntry: Legendärer Mixer
+opv_muffler_hatch.MapEntry: Schalldämpferklappe OpV
+opv_ore_washer.MapEntry: Legendärer Erzwäscher
+opv_output_bus.MapEntry: OpV-Ausgangsbus
+opv_output_hatch.MapEntry: OpV-Ausgangsklappe
+opv_output_hatch_4x.MapEntry: OpV-Vierfach-Ausgangsklappe
+opv_output_hatch_9x.MapEntry: OpV Neunfache Output Hatch
+opv_packer.MapEntry: Legendäre Packstation
+opv_polarizer.MapEntry: Legendärer Polarisator
+opv_quantum_chest.MapEntry: Quantentruhe XIII
+opv_quantum_tank.MapEntry: Quantentank XIII
+opv_rock_crusher.MapEntry: Legendärer Steinbrecher
+opv_rotor_holder.MapEntry: OpV-Rotorhalter
+opv_scanner.MapEntry: Legendärer Scanner
+opv_sifter.MapEntry: Legendärer Sieber
+opv_substation_input_hatch_64a.MapEntry: OpV 64A Umspannwerk-Energieklappe
+opv_substation_output_hatch_64a.MapEntry: OpV 64A Umspannwerks-Dynamo-Klappe
+opv_thermal_centrifuge.MapEntry: Legendäre Thermozentrifuge
+opv_transformer_16a.MapEntry: Überlastete Spannung Leistungstransformator
+opv_transformer_1a.MapEntry: Überlastete Spannung Transformator
+opv_transformer_2a.MapEntry: Überlastete Spannung Hi-Amp (2x) Transformator
+opv_transformer_4a.MapEntry: Überlastete Spannung Hi-Amp (4x) Transformator
+opv_wiremill.MapEntry: Legendäres Drahtwerk
+orange_borderless_lamp.MapEntry: Orange randlose Lampe
+orange_lamp.MapEntry: Orangefarbene Lampe
+orange_large_metal_sheet.MapEntry: Orange großes Metallblech
+orange_metal_sheet.MapEntry: Orangefarbenes Metallblech
+orange_studs.MapEntry: Oranger Nietenblock
+overworld_marker.MapEntry: Oberwelt
+palladium_substation.MapEntry: Palladium-Umspannwerksgehäuse
+petrified_foam.MapEntry: Versteinerter Schaum
+pink_borderless_lamp.MapEntry: Rosa randlose Lampe
+pink_lamp.MapEntry: Rosa Lampe
+pink_large_metal_sheet.MapEntry: Rosa großes Metallblech
+pink_metal_sheet.MapEntry: Rosa Metallblech
+pink_studs.MapEntry: Rosar Nietenblock
+plascrete.MapEntry: Plastbeton
+plasma_large_turbine.MapEntry: Große Plasmaturbine
+polished_dark_concrete.MapEntry: Polierter dunkler Beton
+polished_light_concrete.MapEntry: Polierter Leichtbeton
+polished_marble.MapEntry: Polierter Marmor
+polished_red_granite.MapEntry: Polierter roter Granit
+powderbarrel.MapEntry: Pulverfass
+power_substation.MapEntry: Umspannwerk
+primitive_blast_furnace.MapEntry: Primitiver Hochofen
+primitive_pump.MapEntry: Primitive Pumpe
+ptfe_pipe_casing.MapEntry: PTFE-Rohrgehäuse
+pump_deck.MapEntry: Pumpendeck
+pump_hatch.MapEntry: Pumpenklappe
+purple_borderless_lamp.MapEntry: Lila randlose Lampe
+purple_lamp.MapEntry: Lila Lampe
+purple_large_metal_sheet.MapEntry: Lila großes Metallblech
+purple_metal_sheet.MapEntry: Lila Metallblech
+purple_studs.MapEntry: Lila Nietenblock
+pyrolyse_oven.MapEntry: Pyrolyseofen
+radioactive_hazard_sign_block.MapEntry: Block für radioaktive Gefahrenzeichen
+reaction_safe_mixing_casing.MapEntry: Reaktionssicheres Mischgehäuse
+red_borderless_lamp.MapEntry: Rote randlose Lampe
+red_granite.MapEntry: Roter Granit
+red_granite_bricks.MapEntry: Rote Granitsteine
+red_granite_cobblestone.MapEntry: Kopfsteinpflaster aus rotem Granit
+red_granite_small_tile.MapEntry: Kleine Fliese aus rotem Granit
+red_granite_tile.MapEntry: Rote Granitfliese
+red_granite_windmill_a.MapEntry: Windmühle aus rotem Granit A
+red_granite_windmill_b.MapEntry: Windmühle aus rotem Granit B
+red_lamp.MapEntry: Rote Lampe
+red_large_metal_sheet.MapEntry: Rotes großes Blech
+red_metal_sheet.MapEntry: Rotes Blech
+red_studs.MapEntry: Roter Nietenblock
+reinforced_foam.MapEntry: Verstärkter Schaumstoff
+reinforced_stone.MapEntry: Verstärkter Stein
+research_station.MapEntry: Forschungsstation
+reservoir_hatch.MapEntry: Reservoirklappe
+robust_machine_casing.MapEntry: Robustes Maschinengehäuse aus Wolframstahl
+rtm_alloy_coil_block.MapEntry: RTM-Legierungs-Heizspulenblock
+rubber_button.MapEntry: Gummiknopf
+rubber_door.MapEntry: Gummitür
+rubber_fence.MapEntry: Gummizaun
+rubber_fence_gate.MapEntry: Gummizauntor
+rubber_hanging_sign.MapEntry: Gummi-Wandschild
+rubber_leaves.MapEntry: Gummiblätter
+rubber_log.MapEntry: Gummischeit
+rubber_planks.MapEntry: Gummiplanken
+rubber_pressure_plate.MapEntry: Gummidruckplatte
+rubber_sapling.MapEntry: Gummisetzling
+rubber_sign.MapEntry: Gummi-Wandschild
+rubber_slab.MapEntry: Gummiplatte
+rubber_stairs.MapEntry: Gummitreppen
+rubber_trapdoor.MapEntry: Gummi-Falltür
+rubber_wood.MapEntry: Gummiholz
+secure_maceration_casing.MapEntry: Sichere Mazerationshülle
+shock_proof_cutting_casing.MapEntry: Stoßsicheres Schneidgehäuse
+slicing_blades.MapEntry: Schneidklingen
+small_dark_concrete_bricks.MapEntry: Kleine dunkle Betonsteine
+small_duct_pipe.MapEntry: Kleines Kanalrohr
+small_light_concrete_bricks.MapEntry: Kleine helle Betonsteine
+small_marble_bricks.MapEntry: Kleine Marmorsteine
+small_red_granite_bricks.MapEntry: Kleine rote Granitsteine
+solid_machine_casing.MapEntry: Solides Maschinengehäuse
+spatial_storage_hazard_sign_block.MapEntry: Gefahrenzeichenblock für räumliche Lagerung
+square_dark_concrete_bricks.MapEntry: Quadratische dunkle Betonsteine
+square_light_concrete_bricks.MapEntry: Quadratische helle Betonsteine
+square_marble_bricks.MapEntry: Quadratische Marmorsteine
+square_red_granite_bricks.MapEntry: Quadratische rote Granitsteine
+stable_machine_casing.MapEntry: Stabiles Maschinengehäuse aus Titan
+stainless_steel_crate.MapEntry: Edelstahlkiste
+stainless_steel_drum.MapEntry: Edelstahltrommel
+stainless_steel_gearbox.MapEntry: Getriebegehäuse aus Edelstahl
+stainless_steel_turbine_casing.MapEntry: Rostfreies Turbinengehäuse
+steam_grinder.MapEntry: Dampfmühle
+steam_input_bus.MapEntry: Steam-Eingabebus
+steam_input_hatch.MapEntry: Dampfeinlassklappe
+steam_large_turbine.MapEntry: Große Dampfturbine
+steam_machine_casing.MapEntry: Dampfmaschinengehäuse
+steam_output_bus.MapEntry: Dampfausgangsbus
+steam_oven.MapEntry: Dampfofen
+steel_brick_casing.MapEntry: Gemauertes Schmiedeeisengehäuse
+steel_crate.MapEntry: Stahlkiste
+steel_drum.MapEntry: Stahltrommel
+steel_firebox_casing.MapEntry: Feuerraumgehäuse aus Stahl
+steel_gearbox.MapEntry: Getriebegehäuse aus Stahl
+steel_large_boiler.MapEntry: Großer Stahlkessel
+steel_machine_casing.MapEntry: Massives Maschinengehäuse aus Stahl
+steel_multiblock_tank.MapEntry: Stahl-Multiblock-Tank
+steel_pipe_casing.MapEntry: Stahlrohrgehäuse
+steel_tank_valve.MapEntry: Tankventil aus Stahl
+steel_turbine_casing.MapEntry: Magnalium-Turbinengehäuse
+sterilizing_filter_casing.MapEntry: Sterilisierendes Filtergehäuse
+stress_proof_casing.MapEntry: Spannungsfestes Gehäuse
+stripped_rubber_log.MapEntry: Abgestreifter Gummistamm
+stripped_rubber_wood.MapEntry: Abgestreiftes Gummiholz
+sturdy_machine_casing.MapEntry: Robustes HSS-E-Maschinengehäuse
+superconducting_coil.MapEntry: Supraleitender Spulenblock
+tempered_glass.MapEntry: Gehärtetes Glas
+the_end_marker.MapEntry: Das Ende
+the_nether_marker.MapEntry: Der Nether
+titanium_crate.MapEntry: Titankiste
+titanium_drum.MapEntry: Titantrommel
+titanium_firebox_casing.MapEntry: Feuerraumgehäuse aus Titan
+titanium_gearbox.MapEntry: Getriebegehäuse aus Titan
+titanium_large_boiler.MapEntry: Großer Titankessel
+titanium_pipe_casing.MapEntry: Rohrgehäuse aus Titan
+titanium_turbine_casing.MapEntry: Turbinengehäuse aus Titan
+treated_wood_button.MapEntry: Behandelter Holzknopf
+treated_wood_door.MapEntry: Behandelte Holztür
+treated_wood_fence.MapEntry: Behandelter Holzzaun
+treated_wood_fence_gate.MapEntry: Zauntor aus behandeltem Holz
+treated_wood_hanging_sign.MapEntry: Wandschild aus behandeltem Holz zum Aufhängen
+treated_wood_planks.MapEntry: Behandelte Holzbretter
+treated_wood_pressure_plate.MapEntry: Druckplatte aus behandeltem Holz
+treated_wood_sign.MapEntry: Wandschild aus behandeltem Holz
+treated_wood_slab.MapEntry: Behandelte Holzplatte
+treated_wood_stairs.MapEntry: Treppen aus behandeltem Holz
+treated_wood_trapdoor.MapEntry: Falltür aus behandeltem Holz
+trinium_coil_block.MapEntry: Trinium-Heizspulenblock
+tritanium_coil_block.MapEntry: Tritanium-Heizspulenblock
+tungsten_steel_crate.MapEntry: Wolframstahlkiste
+tungsten_steel_drum.MapEntry: Trommel aus Wolframstahl
+tungstensteel_firebox_casing.MapEntry: Feuerraumgehäuse aus Wolframstahl
+tungstensteel_gearbox.MapEntry: Getriebegehäuse aus Wolframstahl
+tungstensteel_large_boiler.MapEntry: Großer Wolframstahlkessel
+tungstensteel_pipe_casing.MapEntry: Rohrgehäuse aus Wolframstahl
+tungstensteel_turbine_casing.MapEntry: Turbinengehäuse aus Wolframstahl
+turret_hazard_sign_block.MapEntry: Geschützturm-Gefahrenschildblock
+uev_1024a_laser_source_hatch.MapEntry: "[c/55FF55:UEV] 1.024[c/FFFF55:A] Laserquellenklappe"
+uev_1024a_laser_target_hatch.MapEntry: "[c/55FF55:UEV] 1.024[c/FFFF55:A] Laserzielklappe"
+uev_16a_energy_converter.MapEntry: "[c/55FF55:UEV] 16[c/FFFF55:A] Energieumwandler"
+uev_1a_energy_converter.MapEntry: "[c/55FF55:UEV] 1[c/FFFF55:A] Energieumwandler"
+uev_256a_laser_source_hatch.MapEntry: "[c/55FF55:UEV] 256[c/FFFF55:A] Laserquellenklappe"
+uev_256a_laser_target_hatch.MapEntry: "[c/55FF55:UEV] 256[c/FFFF55:A] Laserzielklappe"
+uev_4096a_laser_source_hatch.MapEntry: "[c/55FF55:UEV] 4.096[c/FFFF55:A] Laserquellenklappe"
+uev_4096a_laser_target_hatch.MapEntry: "[c/55FF55:UEV] 4.096[c/FFFF55:A] Laserzielklappe"
+uev_4a_energy_converter.MapEntry: "[c/55FF55:UEV] 4[c/FFFF55:A] Energieumwandler"
+uev_8a_energy_converter.MapEntry: "[c/55FF55:UEV] 8[c/FFFF55:A] Energieumwandler"
+uev_alloy_smelter.MapEntry: "[c/55FF55:Epischer Legierungsschmelzofen II]"
+uev_arc_furnace.MapEntry: "[c/55FF55:Epischer Lichtbogenofen II]"
+uev_assembler.MapEntry: "[c/55FF55:Epischer Montierer II]"
+uev_autoclave.MapEntry: "[c/55FF55:Epischer Autoklav II]"
+uev_battery_buffer_16x.MapEntry: "[c/55FF55:Ultra-Überspannung] 16-facher Batteriepuffer"
+uev_battery_buffer_4x.MapEntry: "[c/55FF55:Ultra-Überspannung] 4x Batteriepuffer"
+uev_battery_buffer_8x.MapEntry: "[c/55FF55:Extrem hohe Spannung] 8x Batteriepuffer"
+uev_bender.MapEntry: "[c/55FF55:Epos Biegemaschine II]"
+uev_brewery.MapEntry: "[c/55FF55:Epische Brauerei II]"
+uev_canner.MapEntry: "[c/55FF55:Epische Abfüllanlage II]"
+uev_centrifuge.MapEntry: "[c/55FF55:Epische Zentrifuge II]"
+uev_charger_4x.MapEntry: "[c/55FF55:Ultra-Überspannung] 4x Turbolader"
+uev_chemical_bath.MapEntry: "[c/55FF55:Episches Chemikalienbad II]"
+uev_chemical_reactor.MapEntry: "[c/55FF55:Epischer Chemiereaktor II]"
+uev_circuit_assembler.MapEntry: "[c/55FF55:Epischer Schaltkreis Montierer II]"
+uev_compressor.MapEntry: "[c/55FF55:Epischer Compressor II]"
+uev_cutter.MapEntry: "[c/55FF55:Epischer Schneider II]"
+uev_diode.MapEntry: "[c/55FF55:UEV-Diode]"
+uev_distillery.MapEntry: "[c/55FF55:Epische Destillationsanlage II]"
+uev_dual_input_hatch.MapEntry: "[c/55FF55:UEV Dual-Input-Klappe]"
+uev_dual_output_hatch.MapEntry: "[c/55FF55:UEV-Doppelausgangsklappe]"
+uev_electric_furnace.MapEntry: "[c/55FF55:Epischer Elektroofen II]"
+uev_electrolyzer.MapEntry: "[c/55FF55:Epische Elektrolyseanlage II]"
+uev_electromagnetic_separator.MapEntry: "[c/55FF55:Epischer elektromagnetischer Separator II]"
+uev_energy_input_hatch.MapEntry: "[c/55FF55:UEV-Energieklappe]"
+uev_energy_input_hatch_16a.MapEntry: "[c/55FF55:UEV 16A Energieklappe]"
+uev_energy_input_hatch_4a.MapEntry: "[c/55FF55:UEV 4A Energieklappe]"
+uev_energy_output_hatch.MapEntry: "[c/55FF55:UEV Dynamo Klappe]"
+uev_energy_output_hatch_16a.MapEntry: "[c/55FF55:UEV 16A Dynamo-Klappe]"
+uev_energy_output_hatch_4a.MapEntry: "[c/55FF55:UEV 4A Dynamo-Klappe]"
+uev_extractor.MapEntry: "[c/55FF55:Epischer Extraktor II]"
+uev_extruder.MapEntry: "[c/55FF55:Epischer Extruder II]"
+uev_fermenter.MapEntry: "[c/55FF55:Epischer Fermentierer II]"
+uev_fluid_heater.MapEntry: "[c/55FF55:Epischer Flüssigkeitserhitzer II]"
+uev_fluid_passthrough_hatch.MapEntry: "[c/55FF55:UEV-Flüssigkeitsdurchlass]"
+uev_fluid_solidifier.MapEntry: "[c/55FF55:Epischer Flüssigkeitsverfestiger II]"
+uev_forge_hammer.MapEntry: "[c/55FF55:Epischer Schmiedehammer II]"
+uev_forming_press.MapEntry: "[c/55FF55:Epische Formpresse II]"
+uev_gas_collector.MapEntry: "[c/55FF55:Epischer Gassammler II]"
+uev_input_bus.MapEntry: "[c/55FF55:UEV-Eingangsbus]"
+uev_input_hatch.MapEntry: "[c/55FF55:UEV-Eingangsklappe]"
+uev_input_hatch_4x.MapEntry: "[c/55FF55:UEV-Vierfach-Eingangsklappe]"
+uev_input_hatch_9x.MapEntry: "[c/55FF55:UEV Neunfache Eingangsklappe]"
+uev_item_passthrough_hatch.MapEntry: "[c/55FF55:UEV-Itemsdurchreiche]"
+uev_laser_engraver.MapEntry: "[c/55FF55:Epischer Lasergravierer II]"
+uev_lathe.MapEntry: "[c/55FF55:Epische Drehmaschine II]"
+uev_macerator.MapEntry: "[c/55FF55:Epischer Zerkleinerer II]"
+uev_machine_casing.MapEntry: UEV-Maschinengehäuse
+uev_machine_hull.MapEntry: "[c/55FF55:UEV][c/FFFFFF:Maschinengehäuse]"
+uev_mixer.MapEntry: "[c/55FF55:Epischer Mixer II]"
+uev_muffler_hatch.MapEntry: Schalldämpferklappe [c/55FF55:UEV]
+uev_ore_washer.MapEntry: "[c/55FF55:Epischer Erzwäscher II]"
+uev_output_bus.MapEntry: "[c/55FF55:UEV-Ausgangsbus]"
+uev_output_hatch.MapEntry: "[c/55FF55:UEV-Ausgabeklappe]"
+uev_output_hatch_4x.MapEntry: "[c/55FF55:UEV-Vierfach-Ausgangsklappe]"
+uev_output_hatch_9x.MapEntry: "[c/55FF55:UEV Neunfache Output Hatch]"
+uev_packer.MapEntry: "[c/55FF55:Epische Packstation II]"
+uev_polarizer.MapEntry: "[c/55FF55:Epischer Polarisator II]"
+uev_quantum_chest.MapEntry: Quantentruhe X
+uev_quantum_tank.MapEntry: Quantentank X
+uev_rock_crusher.MapEntry: "[c/55FF55:Epischer Steinbrecher II]"
+uev_rotor_holder.MapEntry: "[c/55FF55:UEV-Rotorhalter]"
+uev_scanner.MapEntry: "[c/55FF55:Epischer Scanner II]"
+uev_sifter.MapEntry: "[c/55FF55:Episches Sieb II]"
+uev_substation_input_hatch_64a.MapEntry: "[c/55FF55:Energieklappe des Umspannwerks UEV 64A]"
+uev_substation_output_hatch_64a.MapEntry: "[c/55FF55:UEV 64A Umspannwerk-Dynamo-Klappe]"
+uev_thermal_centrifuge.MapEntry: "[c/55FF55:Epische Thermozentrifuge II]"
+uev_transformer_16a.MapEntry: "[c/55FF55:Ultra-Überspannung] Leistungstransformator"
+uev_transformer_1a.MapEntry: "[c/55FF55:Ultra-Überspannungstransformator]."
+uev_transformer_2a.MapEntry: "[c/55FF55:Ultra-Überspannung] Hi-Amp (2x) Transformator"
+uev_transformer_4a.MapEntry: "[c/55FF55:Ultra-Überspannung] Hi-Amp (4x) Transformator"
+uev_wiremill.MapEntry: "[c/55FF55:Epos Drahtwerk II]"
+uhv_1024a_laser_source_hatch.MapEntry: "[c/AA0000:UHV] 1.024[c/FFFF55:A] Laserquellenklappe"
+uhv_1024a_laser_target_hatch.MapEntry: "[c/AA0000:UHV] 1.024[c/FFFF55:A] Laserzielklappe"
+uhv_16a_energy_converter.MapEntry: "[c/AA0000:UHV] 16[c/FFFF55:A] Energieumwandler"
+uhv_1a_energy_converter.MapEntry: "[c/AA0000:UHV] 1[c/FFFF55:A] Energieumwandler"
+uhv_256a_laser_source_hatch.MapEntry: "[c/AA0000:UHV] 256[c/FFFF55:A] Laserquellenklappe"
+uhv_256a_laser_target_hatch.MapEntry: "[c/AA0000:UHV] 256[c/FFFF55:A] Laserzielklappe"
+uhv_4096a_laser_source_hatch.MapEntry: "[c/AA0000:UHV] 4.096[c/FFFF55:A] Laserquellenklappe"
+uhv_4096a_laser_target_hatch.MapEntry: "[c/AA0000:UHV] 4.096[c/FFFF55:A] Laserzielklappe"
+uhv_4a_energy_converter.MapEntry: "[c/AA0000:UHV] 4[c/FFFF55:A] Energieumwandler"
+uhv_8a_energy_converter.MapEntry: "[c/AA0000:UHV] 8[c/FFFF55:A] Energieumwandler"
+uhv_alloy_smelter.MapEntry: "[c/AA0000:Epische Legierungsschmelzofen]"
+uhv_arc_furnace.MapEntry: "[c/AA0000:Epischer Lichtbogenofen]"
+uhv_assembler.MapEntry: "[c/AA0000:UHV Montierer]"
+uhv_autoclave.MapEntry: "[c/AA0000:Epischer Autoklav]"
+uhv_battery_buffer_16x.MapEntry: "[c/AA0000:Ultrahochspannung] 16x Batteriepuffer"
+uhv_battery_buffer_4x.MapEntry: "[c/AA0000:Ultrahochspannung] 4x Batteriepuffer"
+uhv_battery_buffer_8x.MapEntry: "[c/AA0000:Ultrahochspannung] 8x Batteriepuffer"
+uhv_bender.MapEntry: "[c/AA0000:Epischer Biegemaschine]"
+uhv_brewery.MapEntry: "[c/AA0000:Epische Brauerei]"
+uhv_canner.MapEntry: "[c/AA0000:Epische Abfüllanlage]"
+uhv_centrifuge.MapEntry: "[c/AA0000:Epische Zentrifuge]"
+uhv_charger_4x.MapEntry: "[c/AA0000:Ultrahochspannung] 4x Turbolader"
+uhv_chemical_bath.MapEntry: "[c/AA0000:Episches Chemikalienbad]"
+uhv_chemical_reactor.MapEntry: "[c/AA0000:Epischer Chemiereaktor]"
+uhv_circuit_assembler.MapEntry: "[c/AA0000:UHV Schaltkreis-Montierer]"
+uhv_compressor.MapEntry: "[c/AA0000:Epischer Kompressor]"
+uhv_cutter.MapEntry: "[c/AA0000:Epischer Schneider]"
+uhv_diode.MapEntry: "[c/AA0000:UHV-Diode]"
+uhv_distillery.MapEntry: "[c/AA0000:Epische Destillationsanlage]"
+uhv_dual_input_hatch.MapEntry: "[c/AA0000:UHV-Dual-Input-Klappe]"
+uhv_dual_output_hatch.MapEntry: "[c/AA0000:UHV-Doppelausgangsklappe]"
+uhv_electric_furnace.MapEntry: "[c/AA0000:Epischer Elektroofen]"
+uhv_electrolyzer.MapEntry: "[c/AA0000:Epische Elektrolyseanlage]"
+uhv_electromagnetic_separator.MapEntry: "[c/AA0000:Epischer elektromagnetischer Separator]"
+uhv_energy_input_hatch.MapEntry: "[c/AA0000:UHV-Energieklappe]"
+uhv_energy_input_hatch_16a.MapEntry: "[c/AA0000:UHV 16A Energieklappe]"
+uhv_energy_input_hatch_4a.MapEntry: "[c/AA0000:UHV 4A Energieklappe]"
+uhv_energy_output_hatch.MapEntry: "[c/AA0000:UHV-Dynamo-Klappe]"
+uhv_energy_output_hatch_16a.MapEntry: "[c/AA0000:UHV 16A Dynamo-Klappe]"
+uhv_energy_output_hatch_4a.MapEntry: "[c/AA0000:UHV 4A Dynamo-Klappe]"
+uhv_extractor.MapEntry: "[c/AA0000:Epischer Extraktor]"
+uhv_extruder.MapEntry: "[c/AA0000:Epischer Extruder]"
+uhv_fermenter.MapEntry: "[c/AA0000:Epischer Fermentierer]"
+uhv_fluid_heater.MapEntry: "[c/AA0000:Epischer Flüssigkeitserhitzer]"
+uhv_fluid_passthrough_hatch.MapEntry: "[c/AA0000:UHV-Flüssigkeitsdurchgangsklappe]"
+uhv_fluid_solidifier.MapEntry: "[c/AA0000:Epischer Flüssigkeitsverfestiger]"
+uhv_forge_hammer.MapEntry: "[c/AA0000:Epischer Schmiedehammer]"
+uhv_forming_press.MapEntry: "[c/AA0000:Epische Formpresse]"
+uhv_gas_collector.MapEntry: "[c/AA0000:Epischer Gassammler]"
+uhv_hermetic_casing.MapEntry: Hermetisches Gehäuse IX
+uhv_input_bus.MapEntry: "[c/AA0000:UHV-Eingangsbus]"
+uhv_input_hatch.MapEntry: "[c/AA0000:UHV-Eingangsklappe]"
+uhv_input_hatch_4x.MapEntry: "[c/AA0000:UHV-Vierfach-Eingangsklappe]"
+uhv_input_hatch_9x.MapEntry: "[c/AA0000:UHV Neunfache-Eingangsklappe]"
+uhv_item_passthrough_hatch.MapEntry: "[c/AA0000:Durchreiche Klappe für UHV-Items]"
+uhv_laser_engraver.MapEntry: "[c/AA0000:Epischer Lasergravierer]"
+uhv_lathe.MapEntry: "[c/AA0000:Epische Drehmaschine]"
+uhv_macerator.MapEntry: "[c/AA0000:UHV Zerkleinerer]"
+uhv_machine_casing.MapEntry: UHV-Maschinengehäuse
+uhv_machine_hull.MapEntry: "[c/AA0000:UHV][c/FFFFFF:Maschinengehäuse]"
+uhv_mixer.MapEntry: "[c/AA0000:Epischer Mixer]"
+uhv_muffler_hatch.MapEntry: Schalldämpferklappe [c/AA0000:UHV]
+uhv_ore_washer.MapEntry: "[c/AA0000:Epischer Erzwäscher]"
+uhv_output_bus.MapEntry: "[c/AA0000:UHV-Ausgangsbus]"
+uhv_output_hatch.MapEntry: "[c/AA0000:UHV-Ausgangsklappe]"
+uhv_output_hatch_4x.MapEntry: "[c/AA0000:UHV-Vierfach-Ausgangsklappe]"
+uhv_output_hatch_9x.MapEntry: "[c/AA0000:UHV Neunfache-Ausgangsklappe]"
+uhv_packer.MapEntry: "[c/AA0000:Epische Packstation]"
+uhv_polarizer.MapEntry: "[c/AA0000:Epischer Polarisator]"
+uhv_quantum_chest.MapEntry: Quantentruhe IX
+uhv_quantum_tank.MapEntry: Quantentank IX
+uhv_rock_crusher.MapEntry: "[c/AA0000:Epischer Steinbrecher]"
+uhv_rotor_holder.MapEntry: "[c/AA0000:UHV-Rotorhalter]"
+uhv_scanner.MapEntry: "[c/AA0000:Epischer Scanner]"
+uhv_sifter.MapEntry: "[c/AA0000:Epischer Sieber]"
+uhv_substation_input_hatch_64a.MapEntry: "[c/AA0000:UHV 64A-Umspannwerk-Energieklappe]"
+uhv_substation_output_hatch_64a.MapEntry: "[c/AA0000:UHV 64A Umspannwerk-Dynamo-Klappe]"
+uhv_thermal_centrifuge.MapEntry: "[c/AA0000:Epische Thermozentrifuge]"
+uhv_transformer_16a.MapEntry: "[c/AA0000:Ultrahochspannungs]-Leistungstransformator"
+uhv_transformer_1a.MapEntry: "[c/AA0000:Ultrahochspannungs]-Transformator"
+uhv_transformer_2a.MapEntry: "[c/AA0000:Ultrahochspannungs] Hi-Amp (2x) Transformator"
+uhv_transformer_4a.MapEntry: "[c/AA0000:Ultrahochspannungs] Hi-Amp (4x) Transformator"
+uhv_ultimate_battery.MapEntry: Ultimativer UHV-Kondensator
+uhv_wiremill.MapEntry: "[c/AA0000:UHV Drahtwerk]"
+uiv_1024a_laser_source_hatch.MapEntry: "[c/00AA00:UIV] 1.024[c/FFFF55:A] Laserquellenklappe"
+uiv_1024a_laser_target_hatch.MapEntry: "[c/00AA00:UIV] 1.024[c/FFFF55:A] Laserzielklappe"
+uiv_16a_energy_converter.MapEntry: "[c/00AA00:UIV] 16[c/FFFF55:A] Energieumwandler"
+uiv_1a_energy_converter.MapEntry: "[c/00AA00:UIV] 1[c/FFFF55:A] Energieumwandler"
+uiv_256a_laser_source_hatch.MapEntry: "[c/00AA00:UIV] 256[c/FFFF55:A] Laserquellenklappe"
+uiv_256a_laser_target_hatch.MapEntry: "[c/00AA00:UIV] 256[c/FFFF55:A] Laserzielklappe"
+uiv_4096a_laser_source_hatch.MapEntry: "[c/00AA00:UIV] 4.096[c/FFFF55:A] Laserquellenklappe"
+uiv_4096a_laser_target_hatch.MapEntry: "[c/00AA00:UIV] 4.096[c/FFFF55:A] Laserzielklappe"
+uiv_4a_energy_converter.MapEntry: "[c/00AA00:UIV] 4[c/FFFF55:A] Energieumwandler"
+uiv_8a_energy_converter.MapEntry: "[c/00AA00:UIV] 8[c/FFFF55:A] Energieumwandler"
+uiv_alloy_smelter.MapEntry: "[c/00AA00:Epischer Legierungsschmelzofenr III]"
+uiv_arc_furnace.MapEntry: "[c/00AA00:Epischer Lichtbogenofen III]"
+uiv_assembler.MapEntry: "[c/00AA00:Epischer Montierer III]"
+uiv_autoclave.MapEntry: "[c/00AA00:Epischer Autoklav III]"
+uiv_battery_buffer_16x.MapEntry: "[c/00AA00:Ultra Immense Spannung] 16x Batteriepuffer"
+uiv_battery_buffer_4x.MapEntry: "[c/00AA00:Ultra Immense Spannung] 4x Batteriepuffer"
+uiv_battery_buffer_8x.MapEntry: "[c/00AA00:Ultra Immense Spannung] 8x Batteriepuffer"
+uiv_bender.MapEntry: "[c/00AA00:Epos Biegemaschine III]"
+uiv_brewery.MapEntry: "[c/00AA00:Epische Brauerei III]"
+uiv_canner.MapEntry: "[c/00AA00:Epische Abfüllanlage III]"
+uiv_centrifuge.MapEntry: "[c/00AA00:Epische Zentrifuge III]"
+uiv_charger_4x.MapEntry: "[c/00AA00:Ultra Immense Spannung] 4x Turbolader"
+uiv_chemical_bath.MapEntry: "[c/00AA00:Episches Chemikalienbad III]"
+uiv_chemical_reactor.MapEntry: "[c/00AA00:Epischer Chemiereaktor III]"
+uiv_circuit_assembler.MapEntry: "[c/00AA00:Epischer Schaltkreis Montierer III]"
+uiv_compressor.MapEntry: "[c/00AA00:Epischer Kompressor III]"
+uiv_cutter.MapEntry: "[c/00AA00:Epischer Schneider III]"
+uiv_diode.MapEntry: "[c/00AA00:UIV-Diode]"
+uiv_distillery.MapEntry: "[c/00AA00:Epische Destillationsanlage III]"
+uiv_dual_input_hatch.MapEntry: "[c/00AA00:UIV Dual-Input-Klappe]"
+uiv_dual_output_hatch.MapEntry: "[c/00AA00:UIV Dual-Output-Klappe]"
+uiv_electric_furnace.MapEntry: "[c/00AA00:Epischer Elektroofen III]"
+uiv_electrolyzer.MapEntry: "[c/00AA00:Epische Elektrolyseanlage III]"
+uiv_electromagnetic_separator.MapEntry: "[c/00AA00:Epischer elektromagnetischer Separator III]"
+uiv_energy_input_hatch.MapEntry: "[c/00AA00:UIV-Energieklappe]"
+uiv_energy_input_hatch_16a.MapEntry: "[c/00AA00:UIV 16A Energieklappe]"
+uiv_energy_input_hatch_4a.MapEntry: "[c/00AA00:UIV 4A Energieklappe]"
+uiv_energy_output_hatch.MapEntry: "[c/00AA00:UIV-Dynamo-Klappe]"
+uiv_energy_output_hatch_16a.MapEntry: "[c/00AA00:UIV 16A Dynamo-Klappe]"
+uiv_energy_output_hatch_4a.MapEntry: "[c/00AA00:UIV 4A Dynamo-Klappe]"
+uiv_extractor.MapEntry: "[c/00AA00:Epischer Extraktor III]"
+uiv_extruder.MapEntry: "[c/00AA00:Epischer Extruder III]"
+uiv_fermenter.MapEntry: "[c/00AA00:Epischer Fermentierer III]"
+uiv_fluid_heater.MapEntry: "[c/00AA00:Epischer Fluiderhitzer III]"
+uiv_fluid_passthrough_hatch.MapEntry: "[c/00AA00:UIV-Flüssigkeitsdurchlassklappe]"
+uiv_fluid_solidifier.MapEntry: "[c/00AA00:Epischer Flüssigkeitsverfestiger III]"
+uiv_forge_hammer.MapEntry: "[c/00AA00:Epischer Schmiedehammer III]"
+uiv_forming_press.MapEntry: "[c/00AA00:Epische Formpresse III]"
+uiv_gas_collector.MapEntry: "[c/00AA00:Epischer Gassammler III]"
+uiv_input_bus.MapEntry: "[c/00AA00:UIV-Eingangsbus]"
+uiv_input_hatch.MapEntry: "[c/00AA00:UIV-Eingangsklappe]"
+uiv_input_hatch_4x.MapEntry: "[c/00AA00:UIV-Vierfach-Eingabeklappe]"
+uiv_input_hatch_9x.MapEntry: "[c/00AA00:UIV Neunfache-Eingabeklappe]"
+uiv_item_passthrough_hatch.MapEntry: "[c/00AA00:UIV-Item-Durchgangsklappe]"
+uiv_laser_engraver.MapEntry: "[c/00AA00:Epischer Lasergravierer III]"
+uiv_lathe.MapEntry: "[c/00AA00:Epische Drehmaschine III]"
+uiv_macerator.MapEntry: "[c/00AA00:Epischer Zerkleinerer III]"
+uiv_machine_casing.MapEntry: UIV-Maschinengehäuse
+uiv_machine_hull.MapEntry: "[c/00AA00:UIV][c/FFFFFF:Maschinengehäuse]"
+uiv_mixer.MapEntry: "[c/00AA00:Epischer Mixer III]"
+uiv_muffler_hatch.MapEntry: Schalldämpferklappe [c/00AA00:UIV]
+uiv_ore_washer.MapEntry: "[c/00AA00:Epischer Erzwäscher III]"
+uiv_output_bus.MapEntry: "[c/00AA00:UIV-Ausgabebus]"
+uiv_output_hatch.MapEntry: "[c/00AA00:UIV-Ausgabeschraffur]"
+uiv_output_hatch_4x.MapEntry: "[c/00AA00:UIV Vierfach-Ausgabeklappe]"
+uiv_output_hatch_9x.MapEntry: "[c/00AA00:UIV Neunfache Output Hatch]"
+uiv_packer.MapEntry: "[c/00AA00:Epische Packstation III]"
+uiv_polarizer.MapEntry: "[c/00AA00:Epischer Polarisator III]"
+uiv_quantum_chest.MapEntry: Quantentruhe XI
+uiv_quantum_tank.MapEntry: Quantentank XI
+uiv_rock_crusher.MapEntry: "[c/00AA00:Epischer Steinbrecher III]"
+uiv_rotor_holder.MapEntry: "[c/00AA00:UIV-Rotorhalter]"
+uiv_scanner.MapEntry: "[c/00AA00:Epischer Scanner III]"
+uiv_sifter.MapEntry: "[c/00AA00:Episches Sieb III]"
+uiv_substation_input_hatch_64a.MapEntry: "[c/00AA00:UIV 64A Umspannwerk-Energieklappe]"
+uiv_substation_output_hatch_64a.MapEntry: "[c/00AA00:UIV 64A Umspannwerk-Dynamo-Klappe]"
+uiv_thermal_centrifuge.MapEntry: "[c/00AA00:Epische Thermozentrifuge III]"
+uiv_transformer_16a.MapEntry: "[c/00AA00:Ultra-Immense-Spannungs-]-Leistungstransformator"
+uiv_transformer_1a.MapEntry: "[c/00AA00:Ultra-Immense-Spannungstransformator]."
+uiv_transformer_2a.MapEntry: "[c/00AA00:Ultra Immense Voltage] Hi-Amp (2x) Transformator"
+uiv_transformer_4a.MapEntry: "[c/00AA00:Ultra Immense Voltage] Hi-Amp (4x) Transformator"
+uiv_wiremill.MapEntry: "[c/00AA00:Epos Drahtwerk III]"
+ulv_16a_energy_converter.MapEntry: "[c/555555:ULV] 16[c/FFFF55:A] Energieumwandler"
+ulv_1a_energy_converter.MapEntry: "[c/555555:ULV] 1[c/FFFF55:A] Energieumwandler"
+ulv_4a_energy_converter.MapEntry: "[c/555555:ULV] 4[c/FFFF55:A] Energieumwandler"
+ulv_8a_energy_converter.MapEntry: "[c/555555:ULV] 8[c/FFFF55:A] Energieumwandler"
+ulv_battery_buffer_16x.MapEntry: "[c/555555:Ultra-Low-Voltage] 16-facher Batteriepuffer"
+ulv_battery_buffer_4x.MapEntry: "[c/555555:Ultra-Low-Voltage] 4x Batteriepuffer"
+ulv_battery_buffer_8x.MapEntry: "[c/555555:Ultra-Low-Voltage] 8x Batteriepuffer"
+ulv_charger_4x.MapEntry: "[c/555555:Ultra-Low-Voltage] 4x Turbolader"
+ulv_energy_input_hatch.MapEntry: "[c/555555:ULV-Energieklappe]"
+ulv_energy_output_hatch.MapEntry: "[c/555555:ULV-Dynamo-Klappe]"
+ulv_input_bus.MapEntry: "[c/555555:ULV-Eingangsbus]"
+ulv_input_hatch.MapEntry: "[c/555555:ULV-Eingangsklappe]"
+ulv_machine_casing.MapEntry: ULV-Maschinengehäuse
+ulv_machine_hull.MapEntry: "[c/555555:ULV][c/FFFFFF:Maschinengehäuse]"
+ulv_output_bus.MapEntry: "[c/555555:ULV-Ausgangsbus]"
+ulv_output_hatch.MapEntry: "[c/555555:ULV-Ausgabeklappe]"
+ulv_transformer_16a.MapEntry: "[c/555555:Ultra-Niedrigspannungs-]-Leistungstransformator"
+ulv_transformer_1a.MapEntry: "[c/555555:Ultra-Niedrigspannungstransformator]."
+ulv_transformer_2a.MapEntry: "[c/555555:Ultra-Low-Voltage] Hi-Amp (2x) Transformator"
+ulv_transformer_4a.MapEntry: "[c/555555:Ultra-Low-Voltage] Hi-Amp (4x) Transformator"
+uv_1024a_laser_source_hatch.MapEntry: "[c/00AAAA:UV] 1.024[c/FFFF55:A] Laserquellenklappe"
+uv_1024a_laser_target_hatch.MapEntry: "[c/00AAAA:UV] 1.024[c/FFFF55:A] Laserzielklappe"
+uv_16a_energy_converter.MapEntry: "[c/FF5555:UV] 16[c/FFFF55:A] Energieumwandler"
+uv_1a_energy_converter.MapEntry: "[c/FF5555:UV] 1[c/FFFF55:A] Energieumwandler"
+uv_256a_laser_source_hatch.MapEntry: "[c/00AAAA:UV] 256[c/FFFF55:A] Laserquellenklappe"
+uv_256a_laser_target_hatch.MapEntry: "[c/00AAAA:UV] 256[c/FFFF55:A] Laserzielklappe"
+uv_4096a_laser_source_hatch.MapEntry: "[c/00AAAA:UV] 4.096[c/FFFF55:A] Laserquellenklappe"
+uv_4096a_laser_target_hatch.MapEntry: "[c/00AAAA:UV] 4.096[c/FFFF55:A] Laserzielklappe"
+uv_4a_energy_converter.MapEntry: "[c/FF5555:UV] 4[c/FFFF55:A] Energieumwandler"
+uv_8a_energy_converter.MapEntry: "[c/FF5555:UV] 8[c/FFFF55:A] Energieumwandler"
+uv_alloy_smelter.MapEntry: "[c/FF5555:Ultrahochentwickelter Legierungsschmelzer VI]"
+uv_arc_furnace.MapEntry: "[c/FF5555:Ultrahochentwickelter Lichtbogenofen VI]"
+uv_assembler.MapEntry: "[c/FF5555:Ultrahochentwickelter Montierer VI]"
+uv_autoclave.MapEntry: "[c/FF5555:Ultrahochentwickelter Autoklav VI]"
+uv_battery_buffer_16x.MapEntry: "[c/FF5555:Ultraspannung] 16x Batteriepuffer"
+uv_battery_buffer_4x.MapEntry: "[c/FF5555:Ultraspannung] 4x Batteriepuffer"
+uv_battery_buffer_8x.MapEntry: "[c/FF5555:Ultraspannung] 8x Batteriepuffer"
+uv_bender.MapEntry: "[c/FF5555:Ultrahochentwickelte Biegemaschine VI]"
+uv_brewery.MapEntry: "[c/00AAAA:Ultimative Brauerei]"
+uv_canner.MapEntry: "[c/FF5555:Ultrahochentwickelte Abfüllanlage VI]"
+uv_centrifuge.MapEntry: "[c/FF5555:Ultrahochentwickelte Zentrifuge VI]"
+uv_charger_4x.MapEntry: "[c/00AAAA:Ultimative Spannung] 4x Turbolader"
+uv_chemical_bath.MapEntry: "[c/00AAAA:Ultimatives Chemikalienbad]"
+uv_chemical_reactor.MapEntry: "[c/FF5555:Ultrahochentwickelter Chemiereaktor VI]"
+uv_circuit_assembler.MapEntry: "[c/FF5555:Ultrahochentwickelter Schaltkreis-Montierer VI]"
+uv_compressor.MapEntry: "[c/FF5555:Ultrahochentwickelter Kompressor VI]"
+uv_cutter.MapEntry: "[c/FF5555:Ultrahochentwickelter Schneider VI]"
+uv_diode.MapEntry: "[c/00AAAA:UV-Diode]"
+uv_distillery.MapEntry: "[c/00AAAA:Ultimative Destillationsanlage]"
+uv_dual_input_hatch.MapEntry: "[c/00AAAA:UV-Doppeleingangsklappe]"
+uv_dual_output_hatch.MapEntry: "[c/00AAAA:UV-Doppelausgangsklappe]"
+uv_electric_furnace.MapEntry: "[c/FF5555:Ultrahochentwickelter Elektroofen VI]"
+uv_electrolyzer.MapEntry: "[c/FF5555:Ultrahochentwickelter Elektrolyseur VI]"
+uv_electromagnetic_separator.MapEntry: "[c/00AAAA:Ultimativer elektromagnetischer Separator]"
+uv_energy_input_hatch.MapEntry: "[c/00AAAA:UV-Energieklappe]"
+uv_energy_input_hatch_16a.MapEntry: "[c/00AAAA:UV 16A Energieklappe]"
+uv_energy_input_hatch_4a.MapEntry: "[c/00AAAA:UV 4A Energieklappe]"
+uv_energy_output_hatch.MapEntry: "[c/00AAAA:UV-Dynamo-Klappe]"
+uv_energy_output_hatch_16a.MapEntry: "[c/00AAAA:UV 16A Dynamo-Klappe]"
+uv_energy_output_hatch_4a.MapEntry: "[c/00AAAA:UV 4A Dynamo-Klappe]"
+uv_extractor.MapEntry: "[c/FF5555:Ultrahochentwickelter Extraktor VI]"
+uv_extruder.MapEntry: "[c/FF5555:Ultrahochentwickelter Extruder VI]"
+uv_fermenter.MapEntry: "[c/00AAAA:Ultimativer Fermentierer]"
+uv_fluid_heater.MapEntry: "[c/FF5555:Ultrahochentwickelter Flüssigkeitserhitzer VI]"
+uv_fluid_passthrough_hatch.MapEntry: "[c/00AAAA:UV-Flüssigkeits-Durchgangsklappe]"
+uv_fluid_solidifier.MapEntry: "[c/00AAAA:Ultimativer Flüssigkeitsverfestiger]"
+uv_forge_hammer.MapEntry: "[c/00AAAA:Ultimativer Schmiedehammer]"
+uv_forming_press.MapEntry: "[c/00AAAA:Ultimative Formpresse]"
+uv_fusion_reactor.MapEntry: Fusionsreaktorcomputer MK III
+uv_gas_collector.MapEntry: "[c/00AAAA:Ultimativer Gassammler]"
+uv_hermetic_casing.MapEntry: Hermetisches Gehäuse VIII
+uv_input_bus.MapEntry: "[c/00AAAA:UV-Eingangsbus]"
+uv_input_hatch.MapEntry: "[c/00AAAA:UV-Eingangsklappe]"
+uv_input_hatch_4x.MapEntry: "[c/00AAAA:UV-Vierfach-Eingangsklappe]"
+uv_input_hatch_9x.MapEntry: "[c/00AAAA:UV-Nicht-Eingabeklappe]"
+uv_item_passthrough_hatch.MapEntry: "[c/00AAAA:Durchreiche Klappe für UV-Items]"
+uv_lapotronic_battery.MapEntry: UV-Lapotronik-Kondensator
+uv_laser_engraver.MapEntry: "[c/00AAAA:Ultimativer Lasergravierer]"
+uv_lathe.MapEntry: "[c/00AAAA:Ultimative Drehmaschine]"
+uv_macerator.MapEntry: "[c/FF5555:Ultrahochentwickelter Zerkleinerer VI]"
+uv_machine_casing.MapEntry: UV-Maschinengehäuse
+uv_machine_hull.MapEntry: "[c/FF5555:UV][c/FFFFFF:Maschinengehäuse]"
+uv_mixer.MapEntry: "[c/FF5555:Ultrahochentwickelter Mischer VI]"
+uv_muffler_hatch.MapEntry: Schalldämpferklappe [c/00AAAA:UV]
+uv_ore_washer.MapEntry: "[c/00AAAA:Ultimativer Erzwäscher]"
+uv_output_bus.MapEntry: "[c/00AAAA:UV-Ausgangsbus]"
+uv_output_hatch.MapEntry: "[c/00AAAA:UV-Ausgangsklappe]"
+uv_output_hatch_4x.MapEntry: "[c/00AAAA:UV-Vierfach-Ausgangsklappe]"
+uv_output_hatch_9x.MapEntry: "[c/00AAAA:UV-Nicht-Ausgangsklappe]"
+uv_packer.MapEntry: "[c/00AAAA:Ultimative Packstation]"
+uv_parallel_hatch.MapEntry: Super-Parallel-Steuerklappe
+uv_polarizer.MapEntry: "[c/00AAAA:Ultimativer Polarisator]"
+uv_quantum_chest.MapEntry: Quantentruhe VIII
+uv_quantum_tank.MapEntry: Quantentank VIII
+uv_rock_crusher.MapEntry: "[c/00AAAA:Ultimativer Steinbrecher]"
+uv_rotor_holder.MapEntry: "[c/00AAAA:UV-Rotorhalter]"
+uv_scanner.MapEntry: "[c/00AAAA:Ultimativer Scanner]"
+uv_sifter.MapEntry: "[c/00AAAA:Ultimativer Sichter]"
+uv_substation_input_hatch_64a.MapEntry: "[c/00AAAA:Energieklappe für Umspannwerk UV 64A]"
+uv_substation_output_hatch_64a.MapEntry: "[c/00AAAA:UV 64A-Unterstations-Dynamo-Klappe]"
+uv_thermal_centrifuge.MapEntry: "[c/00AAAA:Ultimative Thermozentrifuge]"
+uv_transformer_16a.MapEntry: "[c/00AAAA:Ultimative Spannung] Leistungstransformator"
+uv_transformer_1a.MapEntry: "[c/00AAAA:Ultimativer Spannungstransformator]."
+uv_transformer_2a.MapEntry: "[c/00AAAA:Ultimative Spannung] Hi-Amp (2x) Transformator"
+uv_transformer_4a.MapEntry: "[c/00AAAA:Ultimative Spannung] Hi-Amp (4x) Transformator"
+uv_wiremill.MapEntry: "[c/FF5555:Ultrahochentwickeltes Drahtwerk VI]"
+uv_world_accelerator.MapEntry: "[c/00AAAA:Ultimativer Weltbeschleuniger]"
+uxv_1024a_laser_source_hatch.MapEntry: "[c/FFFF55:UXV] 1.024[c/FFFF55:A] Laserquellenklappe"
+uxv_1024a_laser_target_hatch.MapEntry: "[c/FFFF55:UXV] 1.024[c/FFFF55:A] Laserzielklappe"
+uxv_16a_energy_converter.MapEntry: "[c/FFFF55:UXV] 16[c/FFFF55:A] Energieumwandler"
+uxv_1a_energy_converter.MapEntry: "[c/FFFF55:UXV] 1[c/FFFF55:A] Energieumwandler"
+uxv_256a_laser_source_hatch.MapEntry: "[c/FFFF55:UXV] 256[c/FFFF55:A] Laserquellenklappe"
+uxv_256a_laser_target_hatch.MapEntry: "[c/FFFF55:UXV] 256[c/FFFF55:A] Laserzielklappe"
+uxv_4096a_laser_source_hatch.MapEntry: "[c/FFFF55:UXV] 4.096[c/FFFF55:A] Laserquellenklappe"
+uxv_4096a_laser_target_hatch.MapEntry: "[c/FFFF55:UXV] 4.096[c/FFFF55:A] Laserzielklappe"
+uxv_4a_energy_converter.MapEntry: "[c/FFFF55:UXV] 4[c/FFFF55:A] Energieumwandler"
+uxv_8a_energy_converter.MapEntry: "[c/FFFF55:UXV] 8[c/FFFF55:A] Energieumwandler"
+uxv_alloy_smelter.MapEntry: "[c/FFFF55:Epische Legierungsschmelzofen IV]"
+uxv_arc_furnace.MapEntry: "[c/FFFF55:Epischer Lichtbogenofen IV]"
+uxv_assembler.MapEntry: "[c/FFFF55:Epischer Montierer IV]"
+uxv_autoclave.MapEntry: "[c/FFFF55:Epischer Autoklav IV]"
+uxv_battery_buffer_16x.MapEntry: "[c/FFFF55:Ultra-Extreme-Spannung] 16-facher Batteriepuffer"
+uxv_battery_buffer_4x.MapEntry: "[c/FFFF55:Ultra-Extreme-Spannung] 4x Batteriepuffer"
+uxv_battery_buffer_8x.MapEntry: "[c/FFFF55:Ultra-Extreme-Spannung] 8x Batteriepuffer"
+uxv_bender.MapEntry: "[c/FFFF55:Epos Biegemaschine IV]"
+uxv_brewery.MapEntry: "[c/FFFF55:Epische Brauerei IV]"
+uxv_canner.MapEntry: "[c/FFFF55:Epische Abfüllanlage IV]"
+uxv_centrifuge.MapEntry: "[c/FFFF55:Epische Zentrifuge IV]"
+uxv_charger_4x.MapEntry: "[c/FFFF55:Ultra-Extreme-Spannung] 4x Turbolader"
+uxv_chemical_bath.MapEntry: "[c/FFFF55:Episches Chemikalienbad IV]"
+uxv_chemical_reactor.MapEntry: "[c/FFFF55:Epischer Chemiereaktor IV]"
+uxv_circuit_assembler.MapEntry: "[c/FFFF55:Epischer Schaltkreis Montierer IV]"
+uxv_compressor.MapEntry: "[c/FFFF55:Epischer Kompressor IV]"
+uxv_cutter.MapEntry: "[c/FFFF55:Epischer Schneider IV]"
+uxv_diode.MapEntry: "[c/FFFF55:UXV-Diode]"
+uxv_distillery.MapEntry: "[c/FFFF55:Epische Destillationsanlage IV]"
+uxv_dual_input_hatch.MapEntry: "[c/FFFF55:UXV Dual-Input-Klappe]"
+uxv_dual_output_hatch.MapEntry: "[c/FFFF55:UXV Dual-Output-Klappe]"
+uxv_electric_furnace.MapEntry: "[c/FFFF55:Epischer Elektroofen IV]"
+uxv_electrolyzer.MapEntry: "[c/FFFF55:Epische Elektrolyseanlage IV]"
+uxv_electromagnetic_separator.MapEntry: "[c/FFFF55:Epischer elektromagnetischer Separator IV]"
+uxv_energy_input_hatch.MapEntry: "[c/FFFF55:UXV Energy Hatch]"
+uxv_energy_input_hatch_16a.MapEntry: "[c/FFFF55:UXV 16A Energieklappe]"
+uxv_energy_input_hatch_4a.MapEntry: "[c/FFFF55:UXV 4A Energieklappe]"
+uxv_energy_output_hatch.MapEntry: "[c/FFFF55:UXV Dynamo Klappe]"
+uxv_energy_output_hatch_16a.MapEntry: "[c/FFFF55:UXV 16A Dynamo-Klappe]"
+uxv_energy_output_hatch_4a.MapEntry: "[c/FFFF55:UXV 4A Dynamo-Klappe]"
+uxv_extractor.MapEntry: "[c/FFFF55:Epischer Extraktor IV]"
+uxv_extruder.MapEntry: "[c/FFFF55:Epischer Extruder IV]"
+uxv_fermenter.MapEntry: "[c/FFFF55:Epischer Fermentierer IV]"
+uxv_fluid_heater.MapEntry: "[c/FFFF55:Epischer Fluiderhitzer IV]"
+uxv_fluid_passthrough_hatch.MapEntry: "[c/FFFF55:UXV-Flüssigkeitsdurchgangsklappe]"
+uxv_fluid_solidifier.MapEntry: "[c/FFFF55:Epischer Flüssigkeitsverfestiger IV]"
+uxv_forge_hammer.MapEntry: "[c/FFFF55:Epischer Schmiedehammer IV]"
+uxv_forming_press.MapEntry: "[c/FFFF55:Epische Formpresse IV]"
+uxv_gas_collector.MapEntry: "[c/FFFF55:Epischer Gassammler IV]"
+uxv_input_bus.MapEntry: "[c/FFFF55:UXV-Eingangsbus]"
+uxv_input_hatch.MapEntry: "[c/FFFF55:UXV-Eingangsklappe]"
+uxv_input_hatch_4x.MapEntry: "[c/FFFF55:UXV Vierfach-Eingangsklappe]"
+uxv_input_hatch_9x.MapEntry: "[c/FFFF55:UXV Neunfache Eingangsklappe]"
+uxv_item_passthrough_hatch.MapEntry: "[c/FFFF55:UXV-Item-Durchgangsklappe]"
+uxv_laser_engraver.MapEntry: "[c/FFFF55:Epischer Lasergravierer IV]"
+uxv_lathe.MapEntry: "[c/FFFF55:Epische Drehmaschine IV]"
+uxv_macerator.MapEntry: "[c/FFFF55:Epischer Mazerator IV]"
+uxv_machine_casing.MapEntry: UXV-Maschinengehäuse
+uxv_machine_hull.MapEntry: "[c/FFFF55:UXV][c/FFFFFF:Maschinengehäuse]"
+uxv_mixer.MapEntry: "[c/FFFF55:Epischer Mixer IV]"
+uxv_muffler_hatch.MapEntry: Schalldämpferklappe [c/FFFF55:UXV]
+uxv_ore_washer.MapEntry: "[c/FFFF55:Epischer Erzwäscher IV]"
+uxv_output_bus.MapEntry: "[c/FFFF55:UXV-Ausgangsbus]"
+uxv_output_hatch.MapEntry: "[c/FFFF55:UXV-Ausgabeklappe]"
+uxv_output_hatch_4x.MapEntry: "[c/FFFF55:UXV Vierfach-Ausgangsklappe]"
+uxv_output_hatch_9x.MapEntry: "[c/FFFF55:UXV Neunfache Output Hatch]"
+uxv_packer.MapEntry: "[c/FFFF55:Epische Packstation IV]"
+uxv_polarizer.MapEntry: "[c/FFFF55:Epischer Polarisator IV]"
+uxv_quantum_chest.MapEntry: Quantentruhe XII
+uxv_quantum_tank.MapEntry: Quantentank XII
+uxv_rock_crusher.MapEntry: "[c/FFFF55:Epischer Steinbrecher IV]"
+uxv_rotor_holder.MapEntry: "[c/FFFF55:UXV Rotorhalter]"
+uxv_scanner.MapEntry: "[c/FFFF55:Epischer Scanner IV]"
+uxv_sifter.MapEntry: "[c/FFFF55:Episches Sieb IV]"
+uxv_substation_input_hatch_64a.MapEntry: "[c/FFFF55:UXV 64A Energieklappe für Umspannwerk]"
+uxv_substation_output_hatch_64a.MapEntry: "[c/FFFF55:UXV 64A Umspannwerk-Dynamo-Klappe]"
+uxv_thermal_centrifuge.MapEntry: "[c/FFFF55:Epische Thermozentrifuge IV]"
+uxv_transformer_16a.MapEntry: "[c/FFFF55:Ultra-Extreme-Voltage]-Leistungstransformator"
+uxv_transformer_1a.MapEntry: "[c/FFFF55:Ultra-Extreme-Voltage]-Transformator"
+uxv_transformer_2a.MapEntry: "[c/FFFF55:Ultra Extreme Voltage] Hi-Amp (2x) Transformator"
+uxv_transformer_4a.MapEntry: "[c/FFFF55:Ultra Extreme Voltage] Hi-Amp (4x) Transformator"
+uxv_wiremill.MapEntry: "[c/FFFF55:Epos Drahtwerk IV]"
+vacuum_freezer.MapEntry: Vakuum-Gefrierschrank
+vibration_safe_casing.MapEntry: Vibrationssicheres Gehäuse
+void_hazard_sign_block.MapEntry: Leerer Gefahrenzeichenblock
+watertight_casing.MapEntry: Wasserdichtes Gehäuse
+white_borderless_lamp.MapEntry: Weiße randlose Lampe
+white_lamp.MapEntry: Weiße Lampe
+white_large_metal_sheet.MapEntry: Weißes großes Metallblech
+white_metal_sheet.MapEntry: Weißes Metallblech
+white_studs.MapEntry: Weißer Nietenblock
+wood_crate.MapEntry: Holzkiste
+wood_drum.MapEntry: Holzfass
+wood_wall.MapEntry: Holzwand
+wooden_multiblock_tank.MapEntry: Holz-Multiblock-Tank
+wooden_tank_valve.MapEntry: Tankventil aus Holz
+yellow_borderless_lamp.MapEntry: Gelbe randlose Lampe
+yellow_lamp.MapEntry: Gelbe Lampe
+yellow_large_metal_sheet.MapEntry: Gelbes großes Metallblech
+yellow_metal_sheet.MapEntry: Gelbes Blech
+yellow_stripes_block_a.MapEntry: Gelbe Streifen Block A
+yellow_stripes_block_b.MapEntry: Gelbe Streifen Block B
+yellow_studs.MapEntry: Gelber Nietenblock
+zpm_1024a_laser_source_hatch.MapEntry: "[c/FF5555:ZPM] 1.024[c/FFFF55:A] Laserquellenklappe"
+zpm_1024a_laser_target_hatch.MapEntry: "[c/FF5555:ZPM] 1.024[c/FFFF55:A] Laserzielklappe"
+zpm_16a_energy_converter.MapEntry: "[c/55FFFF:ZPM] 16[c/FFFF55:A] Energieumwandler"
+zpm_1a_energy_converter.MapEntry: "[c/55FFFF:ZPM] 1[c/FFFF55:A] Energieumwandler"
+zpm_256a_laser_source_hatch.MapEntry: "[c/FF5555:ZPM] 256[c/FFFF55:A] Laserquellenklappe"
+zpm_256a_laser_target_hatch.MapEntry: "[c/FF5555:ZPM] 256[c/FFFF55:A] Laserzielklappe"
+zpm_4096a_laser_source_hatch.MapEntry: "[c/FF5555:ZPM] 4.096[c/FFFF55:A] Laserquellenklappe"
+zpm_4096a_laser_target_hatch.MapEntry: "[c/FF5555:ZPM] 4.096[c/FFFF55:A] Laserzielklappe"
+zpm_4a_energy_converter.MapEntry: "[c/55FFFF:ZPM] 4[c/FFFF55:A] Energieumwandler"
+zpm_8a_energy_converter.MapEntry: "[c/55FFFF:ZPM] 8[c/FFFF55:A] Energieumwandler"
+zpm_alloy_smelter.MapEntry: "[c/FF5555:Elite Legierungsschmelzofen III]"
+zpm_arc_furnace.MapEntry: "[c/FF5555:Elite-Lichtbogenofen III]"
+zpm_assembler.MapEntry: "[c/55FFFF:ZPM Montierer]"
+zpm_autoclave.MapEntry: "[c/FF5555:Elite-Autoklav III]"
+zpm_battery_buffer_16x.MapEntry: "[c/FF5555:ZPM-Spannung] 16x Batteriepuffer"
+zpm_battery_buffer_4x.MapEntry: "[c/FF5555:ZPM-Spannung] 4x Batteriepuffer"
+zpm_battery_buffer_8x.MapEntry: "[c/FF5555:ZPM-Spannung] 8x Batteriepuffer"
+zpm_bender.MapEntry: "[c/FF5555:Elite Biegemaschine III]"
+zpm_brewery.MapEntry: "[c/FF5555:Elitebrauerei III]"
+zpm_canner.MapEntry: "[c/FF5555:Elite Abfüllanlage III]"
+zpm_centrifuge.MapEntry: "[c/FF5555:Elite-Zentrifuge III]"
+zpm_charger_4x.MapEntry: "[c/FF5555:ZPM-Spannung] 4x Turbolader"
+zpm_chemical_bath.MapEntry: "[c/FF5555:Elite-Chemikalienbad III]"
+zpm_chemical_reactor.MapEntry: "[c/FF5555:Elite-Chemiereaktor III]"
+zpm_circuit_assembler.MapEntry: "[c/55FFFF:ZPM Schaltkreis-Montierer]"
+zpm_compressor.MapEntry: "[c/FF5555:Elite-Kompressor III]"
+zpm_cutter.MapEntry: "[c/FF5555:Eliteschneider III]"
+zpm_diode.MapEntry: "[c/FF5555:ZPM-Diode]"
+zpm_distillery.MapEntry: "[c/FF5555:Elite Destillationsanlage III]"
+zpm_dual_input_hatch.MapEntry: "[c/FF5555:ZPM Dual-Input-Klappe]"
+zpm_dual_output_hatch.MapEntry: "[c/FF5555:ZPM Dual-Output-Klappe]"
+zpm_electric_furnace.MapEntry: "[c/FF5555:Elite-Elektroofen III]"
+zpm_electrolyzer.MapEntry: "[c/FF5555:Elite-Elektrolyseanlage III]"
+zpm_electromagnetic_separator.MapEntry: "[c/FF5555:Elite Elektromagnetischer Separator III]"
+zpm_energy_input_hatch.MapEntry: "[c/FF5555:ZPM-Energieklappe]"
+zpm_energy_input_hatch_16a.MapEntry: "[c/FF5555:ZPM 16A Energieklappe]"
+zpm_energy_input_hatch_4a.MapEntry: "[c/FF5555:ZPM 4A Energieklappe]"
+zpm_energy_output_hatch.MapEntry: "[c/FF5555:ZPM Dynamo Klappe]"
+zpm_energy_output_hatch_16a.MapEntry: "[c/FF5555:ZPM 16A Dynamo-Klappe]"
+zpm_energy_output_hatch_4a.MapEntry: "[c/FF5555:ZPM 4A Dynamo-Klappe]"
+zpm_extractor.MapEntry: "[c/FF5555:Elite-Extraktor III]"
+zpm_extruder.MapEntry: "[c/FF5555:Elite-Extruder III]"
+zpm_fermenter.MapEntry: "[c/FF5555:Elite-Fermentierer III]"
+zpm_fluid_heater.MapEntry: "[c/FF5555:Elite-Flüssigkeitserhitzer III]"
+zpm_fluid_passthrough_hatch.MapEntry: "[c/FF5555:ZPM-Flüssigkeitsdurchgangsklappe]"
+zpm_fluid_solidifier.MapEntry: "[c/FF5555:Elite Flüssigkeitsverfestiger III]"
+zpm_forge_hammer.MapEntry: "[c/FF5555:Elite-Schmiedehammer III]"
+zpm_forming_press.MapEntry: "[c/FF5555:Elite Formpresse III]"
+zpm_fusion_reactor.MapEntry: Fusionsreaktorcomputer MK II
+zpm_gas_collector.MapEntry: "[c/FF5555:Elite-Gassammler III]"
+zpm_hermetic_casing.MapEntry: Hermetisches Gehäuse VII
+zpm_input_bus.MapEntry: "[c/FF5555:ZPM-Eingangsbus]"
+zpm_input_hatch.MapEntry: "[c/FF5555:ZPM-Eingangsklappe]"
+zpm_input_hatch_4x.MapEntry: "[c/FF5555:ZPM Vierfach-Eingangsklappe]"
+zpm_input_hatch_9x.MapEntry: "[c/FF5555:ZPM Neunfache-Eingabeklappe]"
+zpm_item_passthrough_hatch.MapEntry: "[c/FF5555:ZPM-Item-Durchgangsklappe]"
+zpm_lapotronic_battery.MapEntry: ZPM Lapotronischer-Kondensator
+zpm_laser_engraver.MapEntry: "[c/FF5555:Elite-Lasergravierer III]"
+zpm_lathe.MapEntry: "[c/FF5555:Elite-Drehmaschine III]"
+zpm_macerator.MapEntry: "[c/55FFFF:ZPM Zerkleinerer]"
+zpm_machine_casing.MapEntry: ZPM-Maschinengehäuse
+zpm_machine_hull.MapEntry: "[c/55FFFF:ZPM][c/FFFFFF:Maschinengehäuse]"
+zpm_mixer.MapEntry: "[c/FF5555:Elite-Mixer III]"
+zpm_muffler_hatch.MapEntry: Schalldämpferklappe [c/FF5555:ZPM]
+zpm_ore_washer.MapEntry: "[c/FF5555:Elite-Erzwäscher III]"
+zpm_output_bus.MapEntry: "[c/FF5555:ZPM-Ausgangsbus]"
+zpm_output_hatch.MapEntry: "[c/FF5555:ZPM-Ausgabeklappe]"
+zpm_output_hatch_4x.MapEntry: "[c/FF5555:ZPM Vierfach-Ausgabeklappe]"
+zpm_output_hatch_9x.MapEntry: "[c/FF5555:ZPM Neunfache Output Hatch]"
+zpm_packer.MapEntry: "[c/FF5555:Elite Packstation III]"
+zpm_parallel_hatch.MapEntry: Ultimative Parallelkontrollklappe
+zpm_polarizer.MapEntry: "[c/FF5555:Elite Polarisator III]"
+zpm_quantum_chest.MapEntry: Quantentruhe VII
+zpm_quantum_tank.MapEntry: Quantentank VII
+zpm_rock_crusher.MapEntry: "[c/FF5555:Elite Steinbrecher III]"
+zpm_rotor_holder.MapEntry: "[c/FF5555:ZPM-Rotorhalter]"
+zpm_scanner.MapEntry: "[c/FF5555:Elite-Scanner III]"
+zpm_sifter.MapEntry: "[c/FF5555:Elite Sieb III]"
+zpm_substation_input_hatch_64a.MapEntry: "[c/FF5555:ZPM 64A Energieklappe für Umspannwerk]"
+zpm_substation_output_hatch_64a.MapEntry: "[c/FF5555:ZPM 64A Umspannwerk-Dynamo-Klappe]"
+zpm_thermal_centrifuge.MapEntry: "[c/FF5555:Elite Thermozentrifuge III]"
+zpm_transformer_16a.MapEntry: "[c/FF5555:ZPM-Spannung] Leistungstransformator"
+zpm_transformer_1a.MapEntry: "[c/FF5555:ZPM-Spannung] Transformator"
+zpm_transformer_2a.MapEntry: "[c/FF5555:ZPM-Spannung] Hi-Amp (2x) Transformator"
+zpm_transformer_4a.MapEntry: "[c/FF5555:ZPM-Spannung] Hi-Amp (4x) Transformator"
+zpm_wiremill.MapEntry: "[c/55FFFF:ZPM Drahtwerk]"
+zpm_world_accelerator.MapEntry: "[c/FF5555:Elite World Accelerator III]"
+// TooManyItemsTile.MapEntry: Too Many Items
+// aluminium_frame.MapEntry: Aluminium Frame
+// black_steel_frame.MapEntry: Black Steel Frame
+// blue_steel_frame.MapEntry: Blue Steel Frame
+// bronze_frame.MapEntry: Bronze Frame
+// europium_frame.MapEntry: Europium Frame
+// glowstone_block.MapEntry: Glowstone Block
+// hastelloy_c_276_frame.MapEntry: Hastelloy C 276 Frame
+// hastelloy_x_frame.MapEntry: Hastelloy X Frame
+// hsla_steel_frame.MapEntry: Hsla Steel Frame
+// hsse_frame.MapEntry: Hsse Frame
+// hssg_frame.MapEntry: Hssg Frame
+// hsss_frame.MapEntry: Hsss Frame
+// incoloy_ma_956_frame.MapEntry: Incoloy Ma 956 Frame
+// invar_frame.MapEntry: Invar Frame
+// iridium_frame.MapEntry: Iridium Frame
+// maraging_steel_300_frame.MapEntry: Maraging Steel 300 Frame
+// naquadah_alloy_frame.MapEntry: Naquadah Alloy Frame
+// neutronium_frame.MapEntry: Neutronium Frame
+// polytetrafluoroethylene_frame.MapEntry: Polytetrafluoroethylene Frame
+// raw_almandine_block.MapEntry: Raw Almandine Block
+// raw_aluminium_block.MapEntry: Raw Aluminium Block
+// raw_alunite_block.MapEntry: Raw Alunite Block
+// raw_amethyst_block.MapEntry: Raw Amethyst Block
+// raw_apatite_block.MapEntry: Raw Apatite Block
+// raw_asbestos_block.MapEntry: Raw Asbestos Block
+// raw_barite_block.MapEntry: Raw Barite Block
+// raw_basaltic_mineral_sand_block.MapEntry: Raw Basaltic Mineral Sand Block
+// raw_bastnasite_block.MapEntry: Raw Bastnasite Block
+// raw_bauxite_block.MapEntry: Raw Bauxite Block
+// raw_bentonite_block.MapEntry: Raw Bentonite Block
+// raw_beryllium_block.MapEntry: Raw Beryllium Block
+// raw_blue_topaz_block.MapEntry: Raw Blue Topaz Block
+// raw_bornite_block.MapEntry: Raw Bornite Block
+// raw_calcite_block.MapEntry: Raw Calcite Block
+// raw_cassiterite_block.MapEntry: Raw Cassiterite Block
+// raw_cassiterite_sand_block.MapEntry: Raw Cassiterite Sand Block
+// raw_certus_quartz_block.MapEntry: Raw Certus Quartz Block
+// raw_chalcocite_block.MapEntry: Raw Chalcocite Block
+// raw_chalcopyrite_block.MapEntry: Raw Chalcopyrite Block
+// raw_chromite_block.MapEntry: Raw Chromite Block
+// raw_cinnabar_block.MapEntry: Raw Cinnabar Block
+// raw_coal_block.MapEntry: Raw Coal Block
+// raw_cobalt_block.MapEntry: Raw Cobalt Block
+// raw_cobaltite_block.MapEntry: Raw Cobaltite Block
+// raw_cooperite_block.MapEntry: Raw Cooperite Block
+// raw_copper_block.MapEntry: Raw Copper Block
+// raw_diamond_block.MapEntry: Raw Diamond Block
+// raw_diatomite_block.MapEntry: Raw Diatomite Block
+// raw_electrotine_block.MapEntry: Raw Electrotine Block
+// raw_emerald_block.MapEntry: Raw Emerald Block
+// raw_fullers_earth_block.MapEntry: Raw Fullers Earth Block
+// raw_galena_block.MapEntry: Raw Galena Block
+// raw_garnet_sand_block.MapEntry: Raw Garnet Sand Block
+// raw_garnierite_block.MapEntry: Raw Garnierite Block
+// raw_glauconite_sand_block.MapEntry: Raw Glauconite Sand Block
+// raw_goethite_block.MapEntry: Raw Goethite Block
+// raw_gold_block.MapEntry: Raw Gold Block
+// raw_granitic_mineral_sand_block.MapEntry: Raw Granitic Mineral Sand Block
+// raw_graphite_block.MapEntry: Raw Graphite Block
+// raw_green_sapphire_block.MapEntry: Raw Green Sapphire Block
+// raw_grossular_block.MapEntry: Raw Grossular Block
+// raw_gypsum_block.MapEntry: Raw Gypsum Block
+// raw_hematite_block.MapEntry: Raw Hematite Block
+// raw_ilmenite_block.MapEntry: Raw Ilmenite Block
+// raw_iron_block.MapEntry: Raw Iron Block
+// raw_kyanite_block.MapEntry: Raw Kyanite Block
+// raw_lapis_block.MapEntry: Raw Lapis Block
+// raw_lazurite_block.MapEntry: Raw Lazurite Block
+// raw_lead_block.MapEntry: Raw Lead Block
+// raw_lepidolite_block.MapEntry: Raw Lepidolite Block
+// raw_lithium_block.MapEntry: Raw Lithium Block
+// raw_magnesite_block.MapEntry: Raw Magnesite Block
+// raw_magnetite_block.MapEntry: Raw Magnetite Block
+// raw_malachite_block.MapEntry: Raw Malachite Block
+// raw_mica_block.MapEntry: Raw Mica Block
+// raw_molybdenite_block.MapEntry: Raw Molybdenite Block
+// raw_molybdenum_block.MapEntry: Raw Molybdenum Block
+// raw_monazite_block.MapEntry: Raw Monazite Block
+// raw_naquadah_block.MapEntry: Raw Naquadah Block
+// raw_neodymium_block.MapEntry: Raw Neodymium Block
+// raw_nether_quartz_block.MapEntry: Raw Nether Quartz Block
+// raw_nickel_block.MapEntry: Raw Nickel Block
+// raw_oilsands_block.MapEntry: Raw Oilsands Block
+// raw_olivine_block.MapEntry: Raw Olivine Block
+// raw_opal_block.MapEntry: Raw Opal Block
+// raw_palladium_block.MapEntry: Raw Palladium Block
+// raw_pentlandite_block.MapEntry: Raw Pentlandite Block
+// raw_pitchblende_block.MapEntry: Raw Pitchblende Block
+// raw_platinum_block.MapEntry: Raw Platinum Block
+// raw_plutonium_block.MapEntry: Raw Plutonium Block
+// raw_pollucite_block.MapEntry: Raw Pollucite Block
+// raw_powellite_block.MapEntry: Raw Powellite Block
+// raw_pyrite_block.MapEntry: Raw Pyrite Block
+// raw_pyrochlore_block.MapEntry: Raw Pyrochlore Block
+// raw_pyrolusite_block.MapEntry: Raw Pyrolusite Block
+// raw_pyrope_block.MapEntry: Raw Pyrope Block
+// raw_quartzite_block.MapEntry: Raw Quartzite Block
+// raw_realgar_block.MapEntry: Raw Realgar Block
+// raw_red_garnet_block.MapEntry: Raw Red Garnet Block
+// raw_redstone_block.MapEntry: Raw Redstone Block
+// raw_rock_salt_block.MapEntry: Raw Rock Salt Block
+// raw_ruby_block.MapEntry: Raw Ruby Block
+// raw_salt_block.MapEntry: Raw Salt Block
+// raw_saltpeter_block.MapEntry: Raw Saltpeter Block
+// raw_sapphire_block.MapEntry: Raw Sapphire Block
+// raw_scheelite_block.MapEntry: Raw Scheelite Block
+// raw_silver_block.MapEntry: Raw Silver Block
+// raw_soapstone_block.MapEntry: Raw Soapstone Block
+// raw_sodalite_block.MapEntry: Raw Sodalite Block
+// raw_spessartine_block.MapEntry: Raw Spessartine Block
+// raw_sphalerite_block.MapEntry: Raw Sphalerite Block
+// raw_spodumene_block.MapEntry: Raw Spodumene Block
+// raw_stibnite_block.MapEntry: Raw Stibnite Block
+// raw_sulfur_block.MapEntry: Raw Sulfur Block
+// raw_talc_block.MapEntry: Raw Talc Block
+// raw_tantalite_block.MapEntry: Raw Tantalite Block
+// raw_tetrahedrite_block.MapEntry: Raw Tetrahedrite Block
+// raw_thorium_block.MapEntry: Raw Thorium Block
+// raw_tin_block.MapEntry: Raw Tin Block
+// raw_topaz_block.MapEntry: Raw Topaz Block
+// raw_tricalcium_phosphate_block.MapEntry: Raw Tricalcium Phosphate Block
+// raw_trona_block.MapEntry: Raw Trona Block
+// raw_tungstate_block.MapEntry: Raw Tungstate Block
+// raw_uraninite_block.MapEntry: Raw Uraninite Block
+// raw_vanadium_magnetite_block.MapEntry: Raw Vanadium Magnetite Block
+// raw_wulfenite_block.MapEntry: Raw Wulfenite Block
+// raw_yellow_garnet_block.MapEntry: Raw Yellow Garnet Block
+// raw_yellow_limonite_block.MapEntry: Raw Yellow Limonite Block
+// raw_zeolite_block.MapEntry: Raw Zeolite Block
+// redstone_block.MapEntry: Redstone Block
+// ruridit_frame.MapEntry: Ruridit Frame
+// stainless_steel_frame.MapEntry: Stainless Steel Frame
+// steel_frame.MapEntry: Steel Frame
+// titanium_frame.MapEntry: Titanium Frame
+// treated_wood_frame.MapEntry: Treated Wood Frame
+// tritanium_frame.MapEntry: Tritanium Frame
+// tungsten_carbide_frame.MapEntry: Tungsten Carbide Frame
+// tungsten_frame.MapEntry: Tungsten Frame
+// tungsten_steel_frame.MapEntry: Tungsten Steel Frame
+// ultimet_frame.MapEntry: Ultimet Frame
+// watertight_steel_frame.MapEntry: Watertight Steel Frame
+// wood_frame.MapEntry: Wood Frame
+// ulv_macerator.MapEntry: ULV Macerator
+// max_macerator.MapEntry: MAX Macerator
+// ulv_alloy_smelter.MapEntry: ULV Alloy Smelter
+// max_alloy_smelter.MapEntry: MAX Alloy Smelter
+// ulv_brewery.MapEntry: ULV Brewery
+// max_brewery.MapEntry: MAX Brewery
+// ulv_compressor.MapEntry: ULV Compressor
+// max_compressor.MapEntry: MAX Compressor
+// ulv_extractor.MapEntry: ULV Extractor
+// max_extractor.MapEntry: MAX Extractor
+// ulv_forge_hammer.MapEntry: ULV Forge Hammer
+// max_forge_hammer.MapEntry: MAX Forge Hammer
+// ulv_bender.MapEntry: ULV Bender
+// max_bender.MapEntry: MAX Bender
+// ulv_lathe.MapEntry: ULV Lathe
+// max_lathe.MapEntry: MAX Lathe
+// ulv_polarizer.MapEntry: ULV Polarizer
+// max_polarizer.MapEntry: MAX Polarizer
+// ulv_wiremill.MapEntry: ULV Wiremill
+// max_wiremill.MapEntry: MAX Wiremill
+// ulv_electromagnetic_separator.MapEntry: ULV Electromagnetic Separator
+// max_electromagnetic_separator.MapEntry: MAX Electromagnetic Separator
+// ulv_packer.MapEntry: ULV Packer
+// max_packer.MapEntry: MAX Packer
+// ulv_fluid_solidifier.MapEntry: ULV Fluid Solidifier
+// max_fluid_solidifier.MapEntry: MAX Fluid Solidifier
+// ulv_chemical_reactor.MapEntry: ULV Chemical Reactor
+// max_chemical_reactor.MapEntry: MAX Chemical Reactor
+// ulv_electrolyzer.MapEntry: ULV Electrolyzer
+// max_electrolyzer.MapEntry: MAX Electrolyzer
+// ulv_centrifuge.MapEntry: ULV Centrifuge
+// max_centrifuge.MapEntry: MAX Centrifuge
+// ulv_arc_furnace.MapEntry: ULV Arc Furnace
+// max_arc_furnace.MapEntry: MAX Arc Furnace
+// ulv_cutter.MapEntry: ULV Cutter
+// max_cutter.MapEntry: MAX Cutter
+// ulv_extruder.MapEntry: ULV Extruder
+// max_extruder.MapEntry: MAX Extruder
+// ulv_scanner.MapEntry: ULV Scanner
+// max_scanner.MapEntry: MAX Scanner
+// ulv_laser_engraver.MapEntry: ULV Laser Engraver
+// max_laser_engraver.MapEntry: MAX Laser Engraver
+// ulv_sifter.MapEntry: ULV Sifter
+// max_sifter.MapEntry: MAX Sifter
+// ulv_thermal_centrifuge.MapEntry: ULV Thermal Centrifuge
+// max_thermal_centrifuge.MapEntry: MAX Thermal Centrifuge
+// ulv_gas_collector.MapEntry: ULV Gas Collector
+// max_gas_collector.MapEntry: MAX Gas Collector
+// ulv_air_scrubber.MapEntry: ULV Air Scrubber
+// iv_air_scrubber.MapEntry: IV Air Scrubber
+// luv_air_scrubber.MapEntry: LuV Air Scrubber
+// zpm_air_scrubber.MapEntry: ZPM Air Scrubber
+// uv_air_scrubber.MapEntry: UV Air Scrubber
+// uhv_air_scrubber.MapEntry: UHV Air Scrubber
+// uev_air_scrubber.MapEntry: UEV Air Scrubber
+// uiv_air_scrubber.MapEntry: UIV Air Scrubber
+// uxv_air_scrubber.MapEntry: UXV Air Scrubber
+// opv_air_scrubber.MapEntry: OpV Air Scrubber
+// max_air_scrubber.MapEntry: MAX Air Scrubber
+// ulv_electric_furnace.MapEntry: ULV Electric Furnace
+// max_electric_furnace.MapEntry: MAX Electric Furnace
+// ulv_rock_crusher.MapEntry: ULV Rock Crusher
+// max_rock_crusher.MapEntry: MAX Rock Crusher
+// ulv_distillery.MapEntry: ULV Distillery
+// max_distillery.MapEntry: MAX Distillery
+// ulv_mixer.MapEntry: ULV Mixer
+// max_mixer.MapEntry: MAX Mixer
+// ulv_autoclave.MapEntry: ULV Autoclave
+// max_autoclave.MapEntry: MAX Autoclave
+// ulv_ore_washer.MapEntry: ULV Ore Washer
+// max_ore_washer.MapEntry: MAX Ore Washer
+// ulv_chemical_bath.MapEntry: ULV Chemical Bath
+// max_chemical_bath.MapEntry: MAX Chemical Bath
+// ulv_fluid_heater.MapEntry: ULV Fluid Heater
+// max_fluid_heater.MapEntry: MAX Fluid Heater
+// ulv_fermenter.MapEntry: ULV Fermenter
+// max_fermenter.MapEntry: MAX Fermenter
+// ulv_canner.MapEntry: ULV Canner
+// max_canner.MapEntry: MAX Canner
+// ulv_assembler.MapEntry: ULV Assembler
+// max_assembler.MapEntry: MAX Assembler
+// ulv_forming_press.MapEntry: ULV Forming Press
+// max_forming_press.MapEntry: MAX Forming Press
+// ulv_circuit_assembler.MapEntry: ULV Circuit Assembler
+// max_circuit_assembler.MapEntry: MAX Circuit Assembler
+// ulv_steam_turbine.MapEntry: ULV Steam Turbine
+// ev_steam_turbine.MapEntry: EV Steam Turbine
+// iv_steam_turbine.MapEntry: IV Steam Turbine
+// luv_steam_turbine.MapEntry: LuV Steam Turbine
+// zpm_steam_turbine.MapEntry: ZPM Steam Turbine
+// uv_steam_turbine.MapEntry: UV Steam Turbine
+// uhv_steam_turbine.MapEntry: UHV Steam Turbine
+// uev_steam_turbine.MapEntry: UEV Steam Turbine
+// uiv_steam_turbine.MapEntry: UIV Steam Turbine
+// uxv_steam_turbine.MapEntry: UXV Steam Turbine
+// opv_steam_turbine.MapEntry: OpV Steam Turbine
+// max_steam_turbine.MapEntry: MAX Steam Turbine
+// ulv_solar_panel_machine.MapEntry: ULV Solar Panel
+// lv_solar_panel_machine.MapEntry: LV Solar Panel
+// mv_solar_panel_machine.MapEntry: MV Solar Panel
+// hv_solar_panel_machine.MapEntry: HV Solar Panel
+// ev_solar_panel_machine.MapEntry: EV Solar Panel
+// iv_solar_panel_machine.MapEntry: IV Solar Panel
+// luv_solar_panel_machine.MapEntry: LuV Solar Panel
+// zpm_solar_panel_machine.MapEntry: ZPM Solar Panel
+// uv_solar_panel_machine.MapEntry: UV Solar Panel
+// uhv_solar_panel_machine.MapEntry: UHV Solar Panel
+// uev_solar_panel_machine.MapEntry: UEV Solar Panel
+// uiv_solar_panel_machine.MapEntry: UIV Solar Panel
+// uxv_solar_panel_machine.MapEntry: UXV Solar Panel
+// opv_solar_panel_machine.MapEntry: OpV Solar Panel
+// max_solar_panel_machine.MapEntry: MAX Solar Panel
+// ulv_lamp.MapEntry: ULV Lamp
+// lv_lamp.MapEntry: LV Lamp
+// mv_lamp.MapEntry: MV Lamp
+// hv_lamp.MapEntry: HV Lamp
+// ev_lamp.MapEntry: EV Lamp
+// iv_lamp.MapEntry: IV Lamp
+// luv_lamp.MapEntry: LuV Lamp
+// zpm_lamp.MapEntry: ZPM Lamp
+// uv_lamp.MapEntry: UV Lamp
+// uhv_lamp.MapEntry: UHV Lamp
+// uev_lamp.MapEntry: UEV Lamp
+// uiv_lamp.MapEntry: UIV Lamp
+// uxv_lamp.MapEntry: UXV Lamp
+// opv_lamp.MapEntry: OpV Lamp
+// max_lamp.MapEntry: MAX Lamp
+// iv_block_breaker.MapEntry: IV Block Breaker
+// luv_block_breaker.MapEntry: LuV Block Breaker
+// zpm_block_breaker.MapEntry: ZPM Block Breaker
+// ev_miner.MapEntry: EV Miner
+// max_256a_laser_target_hatch.MapEntry: MAX 256A Laser Target Hatch
+// max_256a_laser_source_hatch.MapEntry: MAX 256A Laser Source Hatch
+// max_1024a_laser_target_hatch.MapEntry: MAX 1024A Laser Target Hatch
+// max_1024a_laser_source_hatch.MapEntry: MAX 1024A Laser Source Hatch
+// max_4096a_laser_target_hatch.MapEntry: MAX 4096A Laser Target Hatch
+// max_4096a_laser_source_hatch.MapEntry: MAX 4096A Laser Source Hatch

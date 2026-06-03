@@ -35,7 +35,7 @@ public static class MultiblockDisplayText
 	private const string EmptyComponent = "";
 
 	// DEVIATION - upstream's verbatim line is
-	// `Language.GetTextValue(reason)` against the raw `gtceu.recipe_logic.*`
+	// `Tr(reason)` against the raw `gtceu.recipe_logic.*`
 	// / `gtceu.recipe_modifier.*` key, resolved through MC's lang file. We
 	// route through this delegate which forwards to `RecipeStatusText.Resolve`
 	// (TerrariaCompat-side) -> our existing `Mods.GregTechCEuTerraria.Recipe
@@ -48,6 +48,17 @@ public static class MultiblockDisplayText
 	// mapping at `Mod.Load` (`MultiblockLocale.RegisterAll`). Default identity
 	// - without the hook, raw key strings would leak to the GUI.
 	public static Func<string, string> FailReasonResolver { get; set; } = id => id;
+
+	// Namespacing resolver for the raw upstream `gtceu.*` keys
+	public static Func<string, string> KeyResolver { get; set; } = k => k;
+
+	internal static string Tr(string key, params object[] args)
+	{
+		LocalizedText text = Language.GetText(KeyResolver(key));
+		if (args.Length == 0) return text.Value;
+		try { return text.Format(args); }
+		catch { return text.Value; }
+	}
 
 	// Construct a new Multiblock Display Text builder. Automatically adds the
 	// "Invalid Structure" line if the structure is not formed.
@@ -80,8 +91,8 @@ public static class MultiblockDisplayText
 			{
 				// Upstream: red "Invalid Structure" with a grey hover tooltip.
 				// We surface both as visible lines (no hover affordance).
-				textList.Add(Language.GetTextValue("gtceu.multiblock.invalid_structure"));
-				textList.Add(Language.GetTextValue("gtceu.multiblock.invalid_structure.tooltip"));
+				textList.Add(Tr("gtceu.multiblock.invalid_structure"));
+				textList.Add(Tr("gtceu.multiblock.invalid_structure.tooltip"));
 			}
 		}
 
@@ -116,7 +127,7 @@ public static class MultiblockDisplayText
 				string energyFormatted = maxVoltage.ToString("N0");
 				int voltageTier = VoltageTiers.FloorTierByVoltage(maxVoltage);
 				string voltageName = VoltageTiers.ShortName((VoltageTier)voltageTier);
-				_textList.Add(Language.GetTextValue("gtceu.multiblock.max_energy_per_tick",
+				_textList.Add(Tr("gtceu.multiblock.max_energy_per_tick",
 					energyFormatted, voltageName));
 			}
 			return this;
@@ -128,7 +139,7 @@ public static class MultiblockDisplayText
 			if (!_isStructureFormed) return this;
 			if (tier < (int)VoltageTier.ULV || tier > (int)VoltageTier.MAX) return this;
 			string voltageName = VoltageTiers.ShortName((VoltageTier)tier);
-			_textList.Add(Language.GetTextValue("gtceu.multiblock.max_recipe_tier", voltageName));
+			_textList.Add(Tr("gtceu.multiblock.max_recipe_tier", voltageName));
 			return this;
 		}
 
@@ -141,7 +152,7 @@ public static class MultiblockDisplayText
 				string energyFormatted = energyUsage.ToString("N0");
 				string voltageName = VoltageTiers.ShortName(
 					(VoltageTier)VoltageTiers.TierByVoltage(energyUsage));
-				_textList.Add(Language.GetTextValue("gtceu.multiblock.energy_consumption",
+				_textList.Add(Tr("gtceu.multiblock.energy_consumption",
 					energyFormatted, voltageName));
 			}
 			return this;
@@ -158,7 +169,7 @@ public static class MultiblockDisplayText
 				string energyFormatted = maxVoltage.ToString("N0");
 				string voltageName = VoltageTiers.ShortName(
 					(VoltageTier)VoltageTiers.FloorTierByVoltage(maxVoltage));
-				_textList.Add(Language.GetTextValue("gtceu.multiblock.max_energy_per_tick",
+				_textList.Add(Tr("gtceu.multiblock.max_energy_per_tick",
 					energyFormatted, voltageName));
 			}
 			return this;
@@ -173,7 +184,7 @@ public static class MultiblockDisplayText
 				string energyFormatted = maxVoltage.ToString("N0");
 				string voltageName = VoltageTiers.ShortName(
 					(VoltageTier)VoltageTiers.FloorTierByVoltage(maxVoltage));
-				_textList.Add(Language.GetTextValue("gtceu.multiblock.max_energy_per_tick_amps",
+				_textList.Add(Tr("gtceu.multiblock.max_energy_per_tick_amps",
 					energyFormatted, amperage, voltageName));
 			}
 			return this;
@@ -186,7 +197,7 @@ public static class MultiblockDisplayText
 			if (!_isStructureFormed) return this;
 			if (maxCWUt > 0)
 			{
-				_textList.Add(Language.GetTextValue("gtceu.multiblock.computation.max",
+				_textList.Add(Tr("gtceu.multiblock.computation.max",
 					maxCWUt.ToString("N0")));
 			}
 			return this;
@@ -197,7 +208,7 @@ public static class MultiblockDisplayText
 			if (!_isStructureFormed) return this;
 			if (_isActive && currentCWUt > 0)
 			{
-				_textList.Add(Language.GetTextValue("gtceu.multiblock.computation.usage",
+				_textList.Add(Tr("gtceu.multiblock.computation.usage",
 					currentCWUt.ToString("N0") + " CWU/t"));
 			}
 			return this;
@@ -219,7 +230,7 @@ public static class MultiblockDisplayText
 		{
 			if (!_isStructureFormed) return this;
 			if (!checkState || !_isWorkingEnabled)
-				_textList.Add(Language.GetTextValue(_pausedKey));
+				_textList.Add(Tr(_pausedKey));
 			return this;
 		}
 
@@ -228,7 +239,7 @@ public static class MultiblockDisplayText
 		{
 			if (!_isStructureFormed) return this;
 			if (!checkState || _isActive)
-				_textList.Add(Language.GetTextValue(_runningKey));
+				_textList.Add(Tr(_runningKey));
 			return this;
 		}
 
@@ -237,7 +248,7 @@ public static class MultiblockDisplayText
 		{
 			if (!_isStructureFormed) return this;
 			if (!checkState || (_isWorkingEnabled && !_isActive))
-				_textList.Add(Language.GetTextValue(_idlingKey));
+				_textList.Add(Tr(_idlingKey));
 			return this;
 		}
 
@@ -247,7 +258,7 @@ public static class MultiblockDisplayText
 		{
 			if (!_isStructureFormed || !_isActive) return this;
 			int currentProgress = (int)(progressPercent * 100);
-			_textList.Add(Language.GetTextValue("gtceu.multiblock.progress_percent", currentProgress));
+			_textList.Add(Tr("gtceu.multiblock.progress_percent", currentProgress));
 			return this;
 		}
 
@@ -266,7 +277,7 @@ public static class MultiblockDisplayText
 			int currentProgress = (int)(progressPercent * 100);
 			double currentInSec = currentDuration / 20.0;
 			double maxInSec     = maxDuration     / 20.0;
-			_textList.Add(Language.GetTextValue("gtceu.multiblock.progress",
+			_textList.Add(Tr("gtceu.multiblock.progress",
 				currentInSec.ToString("0.00"),
 				maxInSec.ToString("0.00"),
 				currentProgress));
@@ -306,7 +317,7 @@ public static class MultiblockDisplayText
 				if (!seen.Add(text)) continue;
 				if (!headerAdded)
 				{
-					_textList.Add(Language.GetTextValue("gtceu.recipe_logic.setup_fail"));
+					_textList.Add(Tr("gtceu.recipe_logic.setup_fail"));
 					headerAdded = true;
 				}
 				_textList.Add(" - " + text);
@@ -320,7 +331,7 @@ public static class MultiblockDisplayText
 		{
 			if (batchEnabled && batchAmount > 0)
 			{
-				_textList.Add(Language.GetTextValue("gtceu.multiblock.batch_enabled",
+				_textList.Add(Tr("gtceu.multiblock.batch_enabled",
 					batchAmount.ToString("N0")));
 			}
 			return this;
@@ -330,7 +341,7 @@ public static class MultiblockDisplayText
 		{
 			if (subtickParallels > 1)
 			{
-				_textList.Add(Language.GetTextValue("gtceu.multiblock.subtick_parallels",
+				_textList.Add(Tr("gtceu.multiblock.subtick_parallels",
 					subtickParallels.ToString("N0")));
 			}
 			return this;
@@ -340,7 +351,7 @@ public static class MultiblockDisplayText
 		{
 			if (totalRuns > 1)
 			{
-				_textList.Add(Language.GetTextValue("gtceu.multiblock.total_runs",
+				_textList.Add(Tr("gtceu.multiblock.total_runs",
 					totalRuns.ToString("N0")));
 			}
 			return this;
@@ -377,7 +388,7 @@ public static class MultiblockDisplayText
 					var maxStack = provider.GetMaxSizeStack();
 					if (maxStack.Count == 0) continue;
 					stack = maxStack[0];
-					displaycount = Language.GetTextValue("gtceu.gui.content.range",
+					displaycount = Tr("gtceu.gui.content.range",
 						provider.CountProvider.GetMinValue(),
 						provider.CountProvider.GetMaxValue());
 					if (item.Chance < item.MaxChance)
@@ -405,13 +416,13 @@ public static class MultiblockDisplayText
 				if (countD < maxDurationSec)
 				{
 					string key = "gtceu.multiblock.output_line." + (rounded ? "2" : "0");
-					_textList.Add(Language.GetTextValue(key, itemName, displaycount,
+					_textList.Add(Tr(key, itemName, displaycount,
 						(maxDurationSec / countD).ToString("0.00")));
 				}
 				else
 				{
 					string key = "gtceu.multiblock.output_line." + (rounded ? "3" : "1");
-					_textList.Add(Language.GetTextValue(key, itemName, displaycount,
+					_textList.Add(Tr(key, itemName, displaycount,
 						(countD / maxDurationSec).ToString("0.00")));
 				}
 			}
@@ -429,7 +440,7 @@ public static class MultiblockDisplayText
 					var maxStack = provider.GetMaxSizeFluid();
 					if (maxStack.Length == 0) continue;
 					stack = maxStack[0];
-					displaycount = Language.GetTextValue("gtceu.gui.content.range",
+					displaycount = Tr("gtceu.gui.content.range",
 						provider.CountProvider.GetMinValue(),
 						provider.CountProvider.GetMaxValue());
 					if (fluid.Chance < fluid.MaxChance)
@@ -457,13 +468,13 @@ public static class MultiblockDisplayText
 				if (amountD < maxDurationSec)
 				{
 					string key = "gtceu.multiblock.output_line." + (rounded ? "2" : "0");
-					_textList.Add(Language.GetTextValue(key, fluidName, displaycount,
+					_textList.Add(Tr(key, fluidName, displaycount,
 						(maxDurationSec / amountD).ToString("0.00")));
 				}
 				else
 				{
 					string key = "gtceu.multiblock.output_line." + (rounded ? "3" : "1");
-					_textList.Add(Language.GetTextValue(key, fluidName, displaycount,
+					_textList.Add(Tr(key, fluidName, displaycount,
 						(amountD / maxDurationSec).ToString("0.00")));
 				}
 			}
@@ -479,8 +490,8 @@ public static class MultiblockDisplayText
 			// Upstream: registryName.toLanguageKey() -> "<namespace>.<path>" - for
 			// `gtceu:electric_blast_furnace` that's `gtceu.electric_blast_furnace`.
 			// Our RegistryName is the bare path, so prepend the gtceu namespace.
-			string modeName = Language.GetTextValue($"gtceu.{recipeType.RegistryName}");
-			_textList.Add(Language.GetTextValue("gtceu.gui.machinemode", modeName));
+			string modeName = Tr($"gtceu.{recipeType.RegistryName}");
+			_textList.Add(Tr("gtceu.gui.machinemode", modeName));
 			return this;
 		}
 
@@ -492,7 +503,7 @@ public static class MultiblockDisplayText
 			if (numParallels > 1)
 			{
 				string key = exact ? "gtceu.multiblock.parallel.exact" : "gtceu.multiblock.parallel";
-				_textList.Add(Language.GetTextValue(key, numParallels.ToString("N0")));
+				_textList.Add(Tr(key, numParallels.ToString("N0")));
 			}
 			return this;
 		}
@@ -501,7 +512,7 @@ public static class MultiblockDisplayText
 		{
 			if (!_isStructureFormed) return this;
 			if (isLowPower)
-				_textList.Add(Language.GetTextValue("gtceu.multiblock.not_enough_energy"));
+				_textList.Add(Tr("gtceu.multiblock.not_enough_energy"));
 			return this;
 		}
 
@@ -509,7 +520,7 @@ public static class MultiblockDisplayText
 		{
 			if (!_isStructureFormed) return this;
 			if (isLowComputation)
-				_textList.Add(Language.GetTextValue("gtceu.multiblock.computation.not_enough_computation"));
+				_textList.Add(Tr("gtceu.multiblock.computation.not_enough_computation"));
 			return this;
 		}
 
@@ -517,7 +528,7 @@ public static class MultiblockDisplayText
 		{
 			if (!_isStructureFormed) return this;
 			if (isTooLow)
-				_textList.Add(Language.GetTextValue("gtceu.multiblock.not_enough_energy_output"));
+				_textList.Add(Tr("gtceu.multiblock.not_enough_energy_output"));
 			return this;
 		}
 
@@ -533,23 +544,23 @@ public static class MultiblockDisplayText
 			{
 				AddMaintenanceProblemHeader();
 				if ((maintenanceProblems        & 1) == 0)
-					_textList.Add(Language.GetTextValue("gtceu.multiblock.universal.problem.wrench"));
+					_textList.Add(Tr("gtceu.multiblock.universal.problem.wrench"));
 				if (((maintenanceProblems >> 1) & 1) == 0)
-					_textList.Add(Language.GetTextValue("gtceu.multiblock.universal.problem.screwdriver"));
+					_textList.Add(Tr("gtceu.multiblock.universal.problem.screwdriver"));
 				if (((maintenanceProblems >> 2) & 1) == 0)
-					_textList.Add(Language.GetTextValue("gtceu.multiblock.universal.problem.soft_mallet"));
+					_textList.Add(Tr("gtceu.multiblock.universal.problem.soft_mallet"));
 				if (((maintenanceProblems >> 3) & 1) == 0)
-					_textList.Add(Language.GetTextValue("gtceu.multiblock.universal.problem.hard_hammer"));
+					_textList.Add(Tr("gtceu.multiblock.universal.problem.hard_hammer"));
 				if (((maintenanceProblems >> 4) & 1) == 0)
-					_textList.Add(Language.GetTextValue("gtceu.multiblock.universal.problem.wire_cutter"));
+					_textList.Add(Tr("gtceu.multiblock.universal.problem.wire_cutter"));
 				if (((maintenanceProblems >> 5) & 1) == 0)
-					_textList.Add(Language.GetTextValue("gtceu.multiblock.universal.problem.crowbar"));
+					_textList.Add(Tr("gtceu.multiblock.universal.problem.crowbar"));
 			}
 			return this;
 		}
 
 		private void AddMaintenanceProblemHeader() =>
-			_textList.Add(Language.GetTextValue("gtceu.multiblock.universal.has_problems"));
+			_textList.Add(Tr("gtceu.multiblock.universal.has_problems"));
 
 		// Two-line "Muffler obstructed!" + tooltip-line warning.
 		public Builder AddMufflerObstructedLine(bool isObstructed)
@@ -557,8 +568,8 @@ public static class MultiblockDisplayText
 			if (!_isStructureFormed) return this;
 			if (isObstructed)
 			{
-				_textList.Add(Language.GetTextValue("gtceu.multiblock.universal.muffler_obstructed"));
-				_textList.Add(Language.GetTextValue("gtceu.multiblock.universal.muffler_obstructed.tooltip"));
+				_textList.Add(Tr("gtceu.multiblock.universal.muffler_obstructed"));
+				_textList.Add(Tr("gtceu.multiblock.universal.muffler_obstructed.tooltip"));
 			}
 			return this;
 		}
@@ -567,7 +578,7 @@ public static class MultiblockDisplayText
 		public Builder AddFuelNeededLine(string? fuelName, int previousRecipeDuration)
 		{
 			if (!_isStructureFormed || !_isActive || fuelName is null) return this;
-			_textList.Add(Language.GetTextValue("gtceu.multiblock.turbine.fuel_needed",
+			_textList.Add(Tr("gtceu.multiblock.turbine.fuel_needed",
 				fuelName, previousRecipeDuration.ToString("N0")));
 			return this;
 		}
@@ -590,7 +601,7 @@ public static class MultiblockDisplayText
 		// Current EU/t this turbine is producing.
 		public Builder AddCurrentEnergyProductionLine(long euOutput)
 		{
-			_textList.Add(Language.GetTextValue("gtceu.multiblock.turbine.energy_per_tick_maxed",
+			_textList.Add(Tr("gtceu.multiblock.turbine.energy_per_tick_maxed",
 				euOutput.ToString("N0")));
 			return this;
 		}

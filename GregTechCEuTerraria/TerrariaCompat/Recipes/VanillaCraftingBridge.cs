@@ -282,10 +282,10 @@ public static class VanillaCraftingBridge
 
 	private static bool MatchesContainer(Item it, FluidIngredient fluid)
 	{
-		if (it.ModItem is FluidCellItem cell)
+		if (it.ModItem is Api.Capability.IFluidHandlerItem handler)
 		{
-			var fs = cell.GetFluidStack();
-			return !fs.IsEmpty && fluid.TestStack(fs) && fs.Amount >= fluid.Amount;
+			var fs = handler.GetTank(0);
+			return !fs.IsEmpty && fluid.TestStack(fs);
 		}
 		return BucketMatches(it.type, fluid);
 	}

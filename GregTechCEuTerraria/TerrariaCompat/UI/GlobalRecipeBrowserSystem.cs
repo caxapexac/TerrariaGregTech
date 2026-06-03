@@ -50,6 +50,7 @@ public sealed class GlobalRecipeBrowserSystem : ModSystem
 		// Pre-bake search-text cache + loot registry so the first open doesn't hitch.
 		if (!Main.dedServ)
 		{
+			GlobalRecipeBrowserState.SyncLocaleCaches();
 			RecipeSearch.WarmCache();
 			_state?.Warm();
 			Loot.LootRegistry.Warm();

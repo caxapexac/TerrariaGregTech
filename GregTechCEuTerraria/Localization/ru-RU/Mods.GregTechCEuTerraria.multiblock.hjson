@@ -1,0 +1,99 @@
+invalid_structure: {
+	$parentVal: Неверная структура.
+	tooltip: Этот блок является контроллером многоблочной структуры. для получения справки по созданию см. шаблон структуры в JEI.
+}
+
+max_energy_per_tick: Макс. EU/т: [c/55FF55:{0} ({1}])
+max_recipe_tier: Макс. уровень рецепта: {0}
+energy_consumption: Энергопотребление: {0} EU/т
+max_energy_per_tick_amps: Макс. EU/т: {0} ({1}A {2})
+
+computation: {
+	max: Макс. CWU/т: {0}
+	usage: Использует: {0} CWU/т
+	not_enough_computation: "[c/FF5555:ВНИМАНИЕ:][c/FFFFFF: Машине требуется больше вычислений.]"
+}
+
+idling: "[c/FFAA00:Холостой ход.]"
+work_paused: Работа приостановлена.
+running: Работает отлично.
+data_bank.providing: Передача данных.
+research_station.researching: "[c/FFAA00:Исследование.]"
+progress: Прогресс: {0}s / {1}s ({2}%%)
+progress_percent: Прогресс: {0}%%
+batch_enabled: - {0}x из Группирования
+subtick_parallels: - {0}x от Ускорения
+total_runs: Выполняет {0} рецептов за раз
+
+parallel: {
+	$parentVal: Выполняет до {0} рецептов одновременно
+	exact: - {0}x от Параллелей
+}
+
+not_enough_energy: ВНИМАНИЕ: Машине нужно больше энергии.
+not_enough_energy_output: "[c/FFFF55:Совет:][c/FFFFFF: Энергетический выходной разъем слишком низок!]"
+
+universal: {
+	has_problems: Механизм неисправен!
+
+	problem: {
+		wrench: "[c/AAAAAA:Труба расшатана. (][c/55FF55:Ключ][c/AAAAAA:)]"
+		screwdriver: "[c/AAAAAA:Винты не закручены. (][c/55FF55:Отвертка][c/AAAAAA:)]"
+		soft_mallet: "[c/AAAAAA:Что-то заклинило. (][c/55FF55:Киянка][c/AAAAAA:)]"
+		hard_hammer: "[c/AAAAAA:Корпус имеет вмятины. (][c/55FF55:Кувалда][c/AAAAAA:)]"
+		wire_cutter: "[c/AAAAAA:Проводка перегорела. (][c/55FF55:Кусачки][c/AAAAAA:)]"
+		crowbar: "[c/AAAAAA:Что-то попало внутрь. (][c/55FF55:Монтировка][c/AAAAAA:)]"
+	}
+
+	muffler_obstructed: {
+		$parentVal: Что то мешает Люку глушителя.
+		tooltip: Перед Люком глушителя должно быть пустое место.
+	}
+}
+
+turbine: {
+	fuel_needed: Потребляет {0} за {1} тиков
+	energy_per_tick_maxed: Выход: {0} EU/т
+}
+
+output_line: {
+	0: "{0} x [c/FFFF55:{1}] ({2}s/ea)"
+	1: "{0} x [c/FFFF55:{1}] ({2}/s)"
+	2: "{0} ≈ [c/FFFF55:{1}] ({2}s/ea)"
+	3: "{0} ≈ [c/FFFF55:{1}] ({2}/s)"
+}
+
+blast_furnace.max_temperature: Максимальная температура: {0}
+pyrolyse_oven.speed: Скорость обработки: {0}%%
+
+multi_furnace: {
+	heating_coil_level: Уровень нагр. катушки: {0}
+	heating_coil_discount: EU усиление нагр. катушки: {0}x
+}
+
+cracking_unit.energy: Энергопотребление: {0}%%
+
+steam: {
+	steam_stored: Пар: {0} / {1} mВ
+	low_steam: Недостаточно пара для работы!
+}
+
+large_boiler: {
+	temperature: Температура: {0}K / {1}K
+	steam_output: Выход пара: {0} мВ/т
+	throttle: Дроссель: {0}
+	throttle_modify: Изменить дроссель:
+}
+
+waiting: ВНИМАНИЕ: Машина ждет.
+
+cleanroom: {
+	clean_state: Статус: [c/55FF55:ЧИСТАЯ]
+	dirty_state: Статус: [c/AA0000:ЗАГРЯЗНЕНА]
+	clean_amount: Чистота: [c/55FF55:{0}%%]
+}
+
+dimensions: {
+	0: Размеры:
+	// 1.2d: "[c/55FF55:{0}]x[c/55FF55:{1}]"
+}

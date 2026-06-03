@@ -31,7 +31,8 @@ namespace GregTechCEuTerraria.Api.Fluids;
 public sealed class FluidType
 {
 	public string Id { get; }
-	public string DisplayName { get; }
+	public string DisplayName => ResolveDisplayName();
+	private readonly string _bakedDisplayName;
 	public uint Color { get; }
 	// Mirrors upstream FluidBuilder.isColorEnabled - false means the fluid
 	// ships a baked custom texture and should NOT be color-tinted when drawn.
@@ -83,7 +84,7 @@ public sealed class FluidType
 		IEnumerable<FluidAttribute>? attributes)
 	{
 		Id = id;
-		DisplayName = displayName;
+		_bakedDisplayName = displayName;
 		Color = color;
 		IsColorEnabled = isColorEnabled;
 		State = state;
@@ -118,6 +119,18 @@ public sealed class FluidType
 
 	public bool IsGaseous => State == FluidState.GAS;
 	public bool IsPlasma  => State == FluidState.PLASMA;
+
+	private string ResolveDisplayName()
+	{
+		if (SourceMaterialId != null && Id == SourceMaterialId)
+		{
+			string key = "Mods.GregTechCEuTerraria.Materials." + SourceMaterialId;
+			var text = Terraria.Localization.Language.GetText(key);
+			if (text.Value != key)
+				return text.Value;
+		}
+		return _bakedDisplayName;
+	}
 
 	public override string ToString() => Id;
 }
