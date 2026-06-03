@@ -120,7 +120,6 @@ UV Tritanium Yttrium-Barium-Cuprate Americium
 
 ### TODO
 
-- research station, data stick, data cable, HPCA and other relevant stuff
 - gregify vanilla recipes (optional mod config flag) so vanilla progression is nearly impossible without progressing gregtech - e.g. all weapons are crafted specifically in gt machines
 - stargate ? moonlord gate ?
 - Post Moon Lord Macrocosm compatibility
@@ -138,6 +137,10 @@ UV Tritanium Yttrium-Barium-Cuprate Americium
 
 - Junction `GregTechCEuTerraria/` into `%USERPROFILE%\Documents\My Games\Terraria\tModLoader\ModSources\GregTechCEuTerraria` (mklink /J "%USERPROFILE%\Documents\My Games\Terraria\tModLoader\ModSources\GregTechCEuTerraria" "D:\NotWork\TerrariaGregTech\GregTechCEuTerraria")
 - Build in tModLoader
+
+## AI Usage
+
+Some people asked, yes, Claude was used to speed up the porting process, of course. Theres no fun in manually rewriting stuff line by line, and the existing AST-based java->c# porters are too dumb for such a complex thing
 
 ## License
 
