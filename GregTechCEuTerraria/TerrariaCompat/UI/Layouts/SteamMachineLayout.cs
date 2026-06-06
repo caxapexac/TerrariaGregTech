@@ -6,15 +6,10 @@ using GregTechCEuTerraria.TerrariaCompat.Machine.Steam;
 
 namespace GregTechCEuTerraria.TerrariaCompat.UI.Layouts;
 
-// Layout for SimpleSteamMachine - the steam-powered processing machines.
-//
-// Mirrors GenericMachineLayout's `input | arrow | output` grid, but the
-// right-side fixture is the steam tank (a fluid widget) instead of an EU
-// energy bar: a steam machine is powered by steam, not EU. No overclock /
-// EU-per-tick labels (steam machines don't voltage-overclock).
+// Layout for SimpleSteamMachine
 public static class SteamMachineLayout
 {
-	private const int SlotStride = 22;     // matches UISlot.NativeUnscaledSize
+	private const int SlotStride = 22; // UISlot.NativeUnscaledSize
 	private const int GroupPad   = 4;
 	private const int MaxCols    = 3;
 	private const int ArrowSize  = 22;
@@ -44,30 +39,34 @@ public static class SteamMachineLayout
 		int steamH  = Math.Max(SlotStride * 2, templateH - 4);
 		int totalW  = leftPad + templateW + 6 + steamW + 12;
 		int footerY = 40 + templateH + 10;
-		int totalH  = footerY + 22;
+		// Low-tier output-cap warning (steam macerator keeps 1 of 4)
+		string? byproductWarn = OutputLimitWarning.Text(m, outCount);
+		int warnY   = footerY + 16;
+		int totalH  = byproductWarn != null ? warnY + 14 : footerY + 22;
 
 		var layout = new MachineUILayout { Width = totalW, Height = totalH, Title = title };
 
 		EmitItemGrid(layout, inCount,  leftPad + inputsBaseX,  40 + (templateH - inH)  / 2, isOutput: false, "Input");
 		EmitItemGrid(layout, outCount, leftPad + outputsBaseX, 40 + (templateH - outH) / 2, isOutput: true,  "Output");
 
-		// Progress arrow.
+		// Progress arrow
 		layout.Widgets.Add(new ProgressArrowWidgetSpec(X: leftPad + arrowX, Y: arrowY, Progress: () => m.Progress01));
 
-		// Steam machines have no programmed-circuit slot upstream - no widget here.
-
-		// Steam tank - the steam machine's "power gauge" (IO.IN, single tank).
+		// Steam tank - the steam machine's "power gauge" (IO.IN, single tank)
 		layout.Widgets.Add(new FluidSlotWidgetSpec(X: leftPad + steamX, Y: 40,
 			Width: steamW, Height: steamH, Direction: IO.IN, TankIndex: 0));
 
-		// Footer status line.
+		// Footer status line
 		layout.Widgets.Add(new DynamicLabelWidgetSpec(X: leftPad, Y: footerY,
 			Getter: () => RecipeStatusText.StatusLine(m.Recipe, "Running"), Scale: 0.7f));
+
+		if (byproductWarn != null)
+			layout.Widgets.Add(new LabelWidgetSpec(X: leftPad, Y: warnY, Text: byproductWarn,
+				Scale: 0.6f, Color: OutputLimitWarning.Color));
 
 		return layout;
 	}
 
-	// Item grid measurement - cols capped at 3, rows wrap.
 	private static (int W, int H) MeasureItems(int count)
 	{
 		if (count <= 0) return (0, 0);

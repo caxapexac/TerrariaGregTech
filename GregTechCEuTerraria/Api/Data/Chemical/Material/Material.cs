@@ -19,8 +19,6 @@ public sealed class Material
 	public string? Element { get; init; }                 // periodic symbol: "Fe", "Cu", "Al"
 	public string? Formula { get; init; }
 
-	// Which physical/visual forms this material has. Driven by upstream builder
-	// methods .ingot/.dust/.gem/.ore/.wood/.polymer/.fluid/.liquid/.gas/.plasma.
 	public List<string> Forms { get; init; } = new();
 
 	// Upstream MaterialFlag names. NOT YET PORTED - the materials registry dump
@@ -33,23 +31,19 @@ public sealed class Material
 
 	public List<MaterialComponent> Components { get; init; } = new();
 
+	// Dust/ingot/gem harvest level = upstream DustProperty.harvestLevel (default 2 = "iron")
+	public int? HarvestLevel { get; init; }
+
 	public int? MeltingPointK { get; init; }              // from .liquid(temp) / .liquid(new FluidBuilder().temperature(t))
 	public int? BlastTemperatureK { get; init; }          // from .blast(temp, ...) / .blastTemp(temp, ...)
 	public string? BlastGasTier { get; init; }            // "LOW" | "MID" | "HIGH" | "HIGHER" | "HIGHEST"
 
-	// Cable / wire properties from upstream .cableProperties(V[tier], amp, loss
-	// [, isSuperconductor, criticalTempK]). Drives placeable wire+cable items
-	// per Phase B of the cable port. CableTier is one of our VoltageTier names.
 	public string? CableTier { get; init; }
 	public int? CableAmperage { get; init; }
 	public int? CableLoss { get; init; }
 	public bool? CableIsSuperconductor { get; init; }
 	public int? CableCriticalTempK { get; init; }
 
-	// Tool property from upstream .toolStats(...). Drives the tool port
-	// (Api/Item/Tool). Deserialized straight off the `tool` block in
-	// materials.json. Null for materials that generate no tools.
-	// Material.HasTool() == upstream material.hasProperty(PropertyKey.TOOL).
 	public ToolProperty? Tool { get; init; }
 
 	public bool HasTool() => Tool != null;
@@ -83,21 +77,8 @@ public sealed class Material
 
 	public bool HasRotor() => Rotor != null;
 
-	// Records features we recognized but haven't ported yet (toolStats, cable,
-	// hazard, etc.). Kept in JSON so we can audit coverage without re-running
-	// the extractor.
 	public List<string> Unported { get; init; } = new();
 
-	// === Fluid property ===========================================================
-	//
-	// Mirrors upstream `material.getProperty(PropertyKey.FLUID)`. Populated at
-	// Mod.Load by FluidLoader for materials whose Forms list contains LIQUID /
-	// GAS / PLASMA / FLUID. Null until then (and stays null for materials with
-	// no fluid forms).
-	//
-	// Material.HasFluid()                  == upstream material.hasFluid()
-	// Material.GetFluid()                  == upstream material.getFluid()
-	// Material.GetFluid(FluidStorageKey)   == upstream material.getFluid(key)
 	public FluidProperty? FluidProperty { get; internal set; }
 
 	public bool HasFluid() => FluidProperty?.Get() != null;
@@ -107,19 +88,12 @@ public sealed class Material
 	public FluidType? GetFluid(FluidStorageKey key) =>
 		FluidProperty?.Get(key);
 
-	// Temperature (Kelvin) of this material's fluid form under `key`.
-	// Falls back to the primary fluid's temperature when key is null. Returns
-	// 0 if the material has no fluid (caller should HasFluid()-guard).
 	public int GetFluidTemperature(FluidStorageKey? key = null)
 	{
 		var fluid = key is null ? GetFluid() : GetFluid(key);
 		return fluid?.Temperature ?? 0;
 	}
 
-	// Verbatim port of upstream Material.getFluidBuilder - the queued
-	// FluidBuilder for a key, used by FluidBuilder's plasma-temperature
-	// inference. Valid only during FluidProperty.RegisterFluids (before the
-	// queue is consumed).
 	public FluidBuilder? GetFluidBuilder(FluidStorageKey key) =>
 		FluidProperty?.GetQueuedBuilder(key);
 

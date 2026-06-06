@@ -11,29 +11,16 @@ using Terraria.ModLoader;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Machine;
 
-// The machine-definition table - one row per machine kind. This is the data
-// that used to be scattered across ~36 thin *TileEntity.cs subclasses (recipe
-// type, slot/tank counts, steam/battery params). Mirrors upstream GregTech's
-// registerSimpleMachines data rows.
-//
-// RegisterAll() runs once at Mod.Load, BEFORE any machine tile/item registers,
-// so MachineRegistry is fully populated when TieredMachineFactory enumerates it.
+// Mirrors upstream registerSimpleMachines data rows.
 public static class MachineDefinitions
 {
-	private static readonly VoltageTier[] AllTiers =
-		(VoltageTier[])Enum.GetValues(typeof(VoltageTier));
+	private static readonly VoltageTier[] AllTiers = (VoltageTier[])Enum.GetValues(typeof(VoltageTier));
 
-	// Steam boilers aren't voltage-tiered - they register a single variant.
-	// A 1-element list keeps them in the uniform "one tile+item per tier" loop.
+	// Steam boilers aren't voltage-tiered - they register a single variant
 	private static readonly VoltageTier[] OneTier = { VoltageTier.LV };
-	// MAX tier "pin" for creative debug machines. Renders with the purple MAX
-	// voltage casing (block/casings/voltage/max/side) - upstream's creative_chest
-	// / creative_tank / creative_energy all parent off the MAX casing.
 	private static readonly VoltageTier[] MaxTier = { VoltageTier.MAX };
 
-	// Transformer registration range: ULV..OpV. A transformer steps
-	// tier<->tier+1, so the top tier (MAX) has nothing to step to. Mirrors
-	// TransformerMachine.Tiers (inlined to keep this table tML-free).
+	// Transformer steps tier<->tier+1
 	private static readonly VoltageTier[] TransformerTiers =
 	{
 		VoltageTier.ULV, VoltageTier.LV,  VoltageTier.MV,  VoltageTier.HV,
@@ -44,8 +31,7 @@ public static class MachineDefinitions
 
 	// The Quantum Tank / Quantum Chest family splits its voltage range across
 	// two upstream ids: LV..EV register as `super_tank` / `super_chest`,
-	// IV..OpV as `quantum_tank` / `quantum_chest` - same machine family, two
-	// ids. (Matches the exact upstream-registered set; no ULV / MAX variant.)
+	// IV..OpV as `quantum_tank` / `quantum_chest`
 	private static readonly VoltageTier[] SuperTiers =
 		{ VoltageTier.LV, VoltageTier.MV, VoltageTier.HV, VoltageTier.EV };
 
@@ -107,11 +93,29 @@ public static class MachineDefinitions
 		VoltageTier.OpV,
 	};
 
+	// Used by the steam macerator, steam grinder/oven, and the simple generators
+	private static Func<VoltageTier, IReadOnlyDictionary<object, int>> ConstOutputLimit(
+		params (object cap, int n)[] entries)
+	{
+		var d = new Dictionary<object, int>();
+		foreach (var (cap, n) in entries) d[cap] = n;
+		IReadOnlyDictionary<object, int> ro = d;
+		return _ => ro;
+	}
+
+	private static readonly Func<VoltageTier, IReadOnlyDictionary<object, int>> MaceratorOutputLimit =
+		tier => new Dictionary<object, int>
+		{
+			[ItemRecipeCapability.CAP] = (int)tier switch { 1 or 2 => 1, 3 => 3, _ => 4 },
+		};
+
+	private static readonly Func<VoltageTier, IReadOnlyDictionary<object, int>> GeneratorOutputLimit =
+		ConstOutputLimit((ItemRecipeCapability.CAP, 0), (FluidRecipeCapability.CAP, 0));
+
 	public static void RegisterAll()
 	{
 		MachineRegistry.Clear();
 
-		// === Hull - tiered passthrough (crafting intermediate) ==============
 		MachineRegistry.Register(new MachineDefinition
 		{
 			Id = "machine_hull", Label = "Machine Hull",
@@ -124,8 +128,7 @@ public static class MachineDefinitions
 			LayoutKey = "none",
 		});
 
-		// === WorkableTiered - recipe-driven processing machines =============
-		Wtm("macerator",   "Macerator",   GTRecipeTypes.MACERATOR, 1, 4);
+		Wtm("macerator",   "Macerator",   GTRecipeTypes.MACERATOR, 1, 4, outputLimits: MaceratorOutputLimit);
 		Wtm("alloy_smelter", "Alloy Smelter", GTRecipeTypes.ALLOY_SMELTER, 2, 1, circuit: true);
 		Wtm("brewery",     "Brewery",     GTRecipeTypes.BREWERY,   1, 0, inTanks: 1, outTanks: 1);
 		Wtm("compressor",  "Compressor",  GTRecipeTypes.COMPRESSOR, 1, 1);
@@ -135,16 +138,12 @@ public static class MachineDefinitions
 		Wtm("lathe",       "Lathe",       GTRecipeTypes.LATHE,      1, 2);
 		Wtm("polarizer",   "Polarizer",   GTRecipeTypes.POLARIZER,  1, 1);
 		Wtm("wiremill",    "Wiremill",    GTRecipeTypes.WIREMILL,   2, 1, circuit: true);
-		Wtm("electromagnetic_separator", "Electromagnetic Separator",
-			GTRecipeTypes.ELECTROMAGNETIC_SEPARATOR, 1, 3);
+		Wtm("electromagnetic_separator", "Electromagnetic Separator", GTRecipeTypes.ELECTROMAGNETIC_SEPARATOR, 1, 3);
 		Wtm("packer",      "Packer",      GTRecipeTypes.PACKER,     2, 2, circuit: true);
 		Wtm("fluid_solidifier", "Fluid Solidifier", GTRecipeTypes.FLUID_SOLIDIFIER, 1, 1, inTanks: 1);
-		Wtm("chemical_reactor", "Chemical Reactor", GTRecipeTypes.CHEMICAL_REACTOR,
-			2, 2, inTanks: 3, outTanks: 2, circuit: true);
-		Wtm("electrolyzer", "Electrolyzer", GTRecipeTypes.ELECTROLYZER,
-			2, 6, inTanks: 1, outTanks: 6, circuit: true);
-		Wtm("centrifuge",  "Centrifuge",  GTRecipeTypes.CENTRIFUGE,
-			2, 6, inTanks: 1, outTanks: 6, circuit: true);
+		Wtm("chemical_reactor", "Chemical Reactor", GTRecipeTypes.CHEMICAL_REACTOR, 2, 2, inTanks: 3, outTanks: 2, circuit: true);
+		Wtm("electrolyzer", "Electrolyzer", GTRecipeTypes.ELECTROLYZER, 2, 6, inTanks: 1, outTanks: 6, circuit: true);
+		Wtm("centrifuge",  "Centrifuge",  GTRecipeTypes.CENTRIFUGE, 2, 6, inTanks: 1, outTanks: 6, circuit: true);
 		Wtm("arc_furnace",        "Arc Furnace",        GTRecipeTypes.ARC_FURNACE,        1, 4, inTanks: 1, outTanks: 1);
 		Wtm("cutter",             "Cutter",             GTRecipeTypes.CUTTER,             1, 2, inTanks: 1);
 		Wtm("extruder",           "Extruder",           GTRecipeTypes.EXTRUDER,           2, 1);
@@ -168,7 +167,6 @@ public static class MachineDefinitions
 		Wtm("forming_press", "Forming Press", GTRecipeTypes.FORMING_PRESS, 6, 1, circuit: true);
 		Wtm("circuit_assembler", "Circuit Assembler", GTRecipeTypes.CIRCUIT_ASSEMBLER, 6, 1, inTanks: 1, circuit: true);
 
-		// === SimpleGenerator - recipe-driven generators =====================
 		MachineRegistry.Register(new MachineDefinition
 		{
 			Id = "steam_turbine", Label = "Steam Turbine",
@@ -177,11 +175,11 @@ public static class MachineDefinitions
 			RecipeType = GTRecipeTypes.STEAM_TURBINE,
 			InputSlotCount = 0, OutputSlotCount = 0,
 			InputFluidTankCount = 1, OutputFluidTankCount = 1,
+			OutputLimits = GeneratorOutputLimit,
 			OverlayDir = "block/generators/steam_turbine", OverlayBasename = "overlay_side",
 			LayoutKey = "steam_turbine",
 		});
-		// Gas Turbine - GAS_TURBINE_FUELS.setMaxIOSize(0, 0, 1, 0): one fuel-gas
-		// input tank, no output tank.
+
 		MachineRegistry.Register(new MachineDefinition
 		{
 			Id = "gas_turbine", Label = "Gas Turbine",
@@ -190,12 +188,11 @@ public static class MachineDefinitions
 			RecipeType = GTRecipeTypes.GAS_TURBINE,
 			InputSlotCount = 0, OutputSlotCount = 0,
 			InputFluidTankCount = 1, OutputFluidTankCount = 0,
+			OutputLimits = GeneratorOutputLimit,
 			OverlayDir = "block/generators/gas_turbine", OverlayBasename = "overlay_side",
 			LayoutKey = "steam_turbine",
 		});
-		// Combustion Generator - burns a liquid fuel (one input tank). Runs the
-		// upstream combustion_generator fuel recipes (diesel, ethanol, gasoline,
-		// biodiesel, ...) - see GTRecipeTypes.COMBUSTION.
+
 		MachineRegistry.Register(new MachineDefinition
 		{
 			Id = "combustion", Label = "Combustion Generator",
@@ -204,11 +201,11 @@ public static class MachineDefinitions
 			RecipeType = GTRecipeTypes.COMBUSTION,
 			InputSlotCount = 0, OutputSlotCount = 0,
 			InputFluidTankCount = 1, OutputFluidTankCount = 0,
+			OutputLimits = GeneratorOutputLimit,
 			OverlayDir = "block/generators/combustion", OverlayBasename = "overlay_top",
 			LayoutKey = "steam_turbine",
 		});
 
-		// === SteamSolidBoiler - not voltage-tiered (single variant each) ====
 		MachineRegistry.Register(new MachineDefinition
 		{
 			Id = "lp_steam_solid_boiler", Label = "Coal Boiler",
@@ -232,20 +229,12 @@ public static class MachineDefinitions
 			LayoutKey = "coal_boiler",
 		});
 
-		// === SteamSolarBoiler - sunlight-powered boilers =====================
 		SolarBoiler("lp_steam_solar_boiler", "Solar Boiler",    highPressure: false);
 		SolarBoiler("hp_steam_solar_boiler", "HP Solar Boiler", highPressure: true);
-
-		// === SteamLiquidBoiler - liquid-fuel boilers (burn creosote / lava) ==
 		LiquidBoiler("lp_steam_liquid_boiler", "Liquid Boiler",    highPressure: false);
 		LiquidBoiler("hp_steam_liquid_boiler", "HP Liquid Boiler", highPressure: true);
 
-		// === SimpleSteam - steam-powered processing machines ================
-		// Each registers an LP + HP variant. They run the electric recipe
-		// types (capped at LV, 2x duration on low-pressure) and pay the recipe
-		// EU cost in steam - see SimpleSteamMachine. Item-only: no recipe fluid
-		// handlers (upstream parity); the steam tank is the EU substitute.
-		Steam("macerator",     "Macerator",     GTRecipeTypes.MACERATOR,        1, 4);
+		Steam("macerator",     "Macerator",     GTRecipeTypes.MACERATOR,        1, 4, outputLimits: ConstOutputLimit((ItemRecipeCapability.CAP, 1)));
 		Steam("compressor",    "Compressor",    GTRecipeTypes.COMPRESSOR,       1, 1);
 		Steam("extractor",     "Extractor",     GTRecipeTypes.EXTRACTOR,        1, 1);
 		Steam("alloy_smelter", "Alloy Smelter", GTRecipeTypes.ALLOY_SMELTER,    2, 1);
@@ -253,35 +242,19 @@ public static class MachineDefinitions
 		Steam("furnace",       "Furnace",       GTRecipeTypes.ELECTRIC_FURNACE, 1, 1);
 		Steam("rock_crusher",  "Rock Crusher",  GTRecipeTypes.ROCK_BREAKER,     1, 4);
 
-		// === SteamMiner - steam-powered auto-mining drill ===================
-		// Two variants (lp/hp). Bespoke band-scan loop; no recipe type
-		// (mining is world-driven, not recipe-driven - same shape as our
-		// electric MinerMachine). The steam miner is a Terraria-compat
-		// machine (no upstream singleblock equivalent - upstream's steam_miner
-		// is a different shape), so we deliberately reuse the LV electric
-		// miner's overlay art (`block/machines/miner/overlay_front` - the
-		// proper big miner face plate) instead of upstream's `steam_miner`
-		// PNG (a tiny dial / recipe-display thumbnail that reads as noise on
-		// the brick casing).
 		SteamMiner("lp_steam_miner", "Steam Miner",    overlayDir: "block/machines/miner", highPressure: false);
 		SteamMiner("hp_steam_miner", "HP Steam Miner", overlayDir: "block/machines/miner", highPressure: true);
 
-		// === BatteryBuffer - buffers + charger ==============================
-		// Charger is just a buffer with OutputAmps == 0 (receive-only).
 		Battery("battery_buffer_4x",  "4x Battery Buffer",  4,  BatteryBufferAmps.Normal,  outputAmps: 4);
 		Battery("battery_buffer_8x",  "8x Battery Buffer",  8,  BatteryBufferAmps.Normal,  outputAmps: 8);
 		Battery("battery_buffer_16x", "16x Battery Buffer", 16, BatteryBufferAmps.Normal,  outputAmps: 16);
 		Battery("charger_4x",         "Turbo Charger",      4,  BatteryBufferAmps.Charger, outputAmps: 0);
 
-		// === Transformer - 4 baseAmp variants, ULV..OpV =====================
-		// No GUI (LayoutKey "none"); custom 2-face rendering lives on the
-		// surviving TransformerTile/TransformerItem subclasses.
 		Transformer("transformer_1a",  "Transformer",              1);
 		Transformer("transformer_2a",  "Hi-Amp (2x) Transformer",  2);
 		Transformer("transformer_4a",  "Hi-Amp (4x) Transformer",  4);
 		Transformer("transformer_16a", "Power Transformer",        16);
 
-		// === SolarPanel / Lamp / SuperTank - single-class families ==========
 		MachineRegistry.Register(new MachineDefinition
 		{
 			Id = "solar_panel_machine", Label = "Solar Panel",
@@ -300,9 +273,6 @@ public static class MachineDefinitions
 			LayoutKey = "none",
 		});
 
-		// === Long-distance pipeline endpoints (GUI-less, LV, screwdriver IO) ===
-		// Single-tier LV blocks that cap an LD pipe run. No GUI; the player flips
-		// IN/OUT with a screwdriver. Front overlay = the item/fluid hatch arrow.
 		MachineRegistry.Register(new MachineDefinition
 		{
 			Id = "long_distance_item_pipeline_endpoint", Label = "Long Distance Item Pipeline Endpoint",
@@ -320,7 +290,6 @@ public static class MachineDefinitions
 			LayoutKey = "none",
 		});
 
-		// === Fisher - upstream GTMachines.FISHER (LV..LuV) ===================
 		MachineRegistry.Register(new MachineDefinition
 		{
 			Id = "fisher", Label = "Fisher",
@@ -332,12 +301,6 @@ public static class MachineDefinitions
 			LayoutKey = "fisher",
 		});
 
-		// === World Accelerator - adapted port of GTMachines.WORLD_ACCELERATOR =
-		// Upstream is a per-block random-tick + adjacent BlockEntity accelerator
-		// (LV..UV). Adapted: random-tick only; routes each per-tick pick through
-		// vanilla's WorldGen.UpdateWorld_{Overground,Underground}Tile dispatcher
-		// (reflection - vanilla's own random-update path). Square area side =
-		// 2*tier+1. See WorldAcceleratorMachine.
 		MachineRegistry.Register(new MachineDefinition
 		{
 			Id = "world_accelerator", Label = "World Accelerator",
@@ -348,10 +311,6 @@ public static class MachineDefinitions
 			LayoutKey = "world_accelerator",
 		});
 
-		// === Block Breaker - adapted port of GTMachines.BLOCK_BREAKER =========
-		// Upstream is a front-facing single-block drill (LV..EV). Adapted to
-		// Terraria's 2D facing-less world as a dig-down drill: range scales
-		// LV=16 -> LuV=512 tiles BELOW the machine
 		MachineRegistry.Register(new MachineDefinition
 		{
 			Id = "block_breaker", Label = "Block Breaker",
@@ -362,12 +321,6 @@ public static class MachineDefinitions
 			LayoutKey = "block_breaker",
 		});
 
-		// === Miner - adapted port of GTMachines.MINER ========================
-		// Upstream is a front-facing single-block ore harvester (LV..HV) that
-		// chunks a 3D box downward. Adapted: scan a tier-keyed WxD band
-		// (LV 16x500 -> EV 64x2000) directly below the machine. Ore tiles only
-		// (TileID.Sets.Ore). Drops route through (tier+1)^2 internal cache +
-		// AutoOutput. See MinerMachine.
 		MachineRegistry.Register(new MachineDefinition
 		{
 			Id = "miner", Label = "Miner",
@@ -378,13 +331,6 @@ public static class MachineDefinitions
 			LayoutKey = "miner",
 		});
 
-		// === Pump - adapted port of GTMachines.PUMP ==========================
-		// Upstream is a front-facing single-block fluid pump (LV..EV) that
-		// drains source-fluid blocks in a 3D box. Adapted: scan the same WxD
-		// band as Miner, find tiles passing vanilla's bucket-fill gate
-		// (target.liquid > 0 && 3x3 sum > 100), drain target + top up from
-		// 3x3 neighbours to 255 units = 1000 mB. Two tanks (water + lava),
-		// 16 buckets x tier each. See PumpMachine.
 		MachineRegistry.Register(new MachineDefinition
 		{
 			Id = "pump", Label = "Pump",
@@ -437,17 +383,6 @@ public static class MachineDefinitions
 			LayoutKey = "super_chest",
 		});
 
-		// === Creative storage + energy (debug / testing) ====================
-		// 1:1 port of upstream's `creative_chest` / `creative_tank` /
-		// `creative_energy_container`. Non-tiered (one of each, pinned at MAX
-		// for the purple max-voltage casing - upstream's models all parent off
-		// `casings/voltage/max/side`). Overlays:
-		//   - creative_chest / _tank -> `overlay_creativecontainer` (the white-pink
-		//     "C" sprite from the quantum_container template's screen) +
-		//     `overlay_creativecontainer_emissive` (the 14-frame rainbow strip)
-		//   - creative_energy -> upstream emits `overlay = void` (transparent) +
-		//     `overlay_emissive = overlay_energy_emitter`. Layer it as an
-		//     emissive only.
 		MachineRegistry.Register(new MachineDefinition
 		{
 			Id = "creative_chest", Label = "Creative Chest",
@@ -503,17 +438,9 @@ public static class MachineDefinitions
 			OverlayBasename = "overlay_front",
 			LayoutKey       = "primitive_blast_furnace",
 			PatternFactory  = BuildPrimitiveBlastFurnacePattern,
-			// Project-local QoL: 10x speed (DurationMultiplier 0.1). Non-
-			// upstream - see GTRecipeModifiers.PRIMITIVE_BLAST_FURNACE_SPEEDUP.
 			MultiRecipeModifier = GTRecipeModifiers.PRIMITIVE_BLAST_FURNACE_SPEEDUP,
 		});
 
-		// === Primitive Pump (primitive multi) ===============================
-		// Mirror of GTMultiMachines.PRIMITIVE_PUMP. Biome-keyed water generator -
-		// no recipe station, no EU. Production = biomeModifier x hatchModifier,
-		// x1.5 when raining. Single PumpHatch part exposes the water output.
-		// The pump_hatch part definition is registered first so the pattern's
-		// `Predicates.Abilities(PUMP_FLUID_HATCH)` resolves to its tile.
 		MachineRegistry.Register(new MachineDefinition
 		{
 			Id = "pump_hatch", Label = "Pump Hatch",
@@ -545,7 +472,6 @@ public static class MachineDefinitions
 		LargeBoiler("steel",         "Large Steel Boiler",         "solid_machine_casing",   "steel_pipe_casing",         "steel_firebox_casing",        1300,  6);
 		LargeBoiler("titanium",      "Large Titanium Boiler",      "stable_machine_casing",  "titanium_pipe_casing",      "titanium_firebox_casing",     2000,  8);
 		LargeBoiler("tungstensteel", "Large Tungstensteel Boiler", "robust_machine_casing",  "tungstensteel_pipe_casing", "tungstensteel_firebox_casing", 3000, 12);
-		// === Multiblock parts (tiered I/O) ==================================
 
 		ItemBus("input_bus",  "Input Bus",  IO.IN,  AllTiers);
 		ItemBus("output_bus", "Output Bus", IO.OUT, AllTiers);
@@ -580,7 +506,6 @@ public static class MachineDefinitions
 		{
 			Id = "rotor_holder", Label = "Rotor Holder",
 			Family = MachineFamily.RotorHolder,
-			// Upstream `GTValues.tiersBetween(HV, isHighTier ? OpV : UV)`
 			Tiers = new[]
 			{
 				VoltageTier.HV,  VoltageTier.EV,  VoltageTier.IV,  VoltageTier.LuV,
@@ -669,12 +594,9 @@ public static class MachineDefinitions
 			LayoutKey = "none",
 		});
 
-
-		// One-way energy valve. Allowed in Cleanroom walls
+		// TODO tiers and paththrough maybe
 		Diode("diode", "Diode");
 
-		// === Steam multi I/O parts ==========================================
-		// Mirror of GTMachines.{STEAM_IMPORT_BUS, STEAM_EXPORT_BUS, STEAM_HATCH}.
 		MachineRegistry.Register(new MachineDefinition
 		{
 			Id = "steam_input_bus", Label = "Steam Input Bus",
@@ -722,7 +644,6 @@ public static class MachineDefinitions
 			LayoutKey = "fluid_hatch",
 		});
 
-		// === Electric Blast Furnace (EBF) ==================================
 		MachineRegistry.Register(new MachineDefinition
 		{
 			Id = "electric_blast_furnace", Label = "Electric Blast Furnace",
@@ -738,15 +659,12 @@ public static class MachineDefinitions
 			FusedCasingTileName    = "heatproof_machine_casing",
 		});
 
-		// === Cleanroom multi controller ====================================
-		// Enclosed rectangular room (5-15 wide along the horizontal axis).
 		MachineRegistry.Register(new MachineDefinition
 		{
 			Id = "cleanroom", Label = "Cleanroom",
 			Family = MachineFamily.MultiblockCleanroom,
 			Tiered = false, Tiers = new[] { VoltageTier.LV },
-			// Cleanroom runs CleanroomLogic (a recipe-less cleanliness ratchet),
-			RecipeType = GTRecipeTypes.DUMMY,
+			RecipeType = GTRecipeTypes.DUMMY, // Cleanroom runs CleanroomLogic
 			Casing = MachineCasing.Voltage,
 			OverlayDir = "block/multiblock/cleanroom",
 			OverlayBasename = "overlay_top",
@@ -755,7 +673,6 @@ public static class MachineDefinitions
 			FusedCasingTileName    = "plascrete",
 		});
 
-		// === Large Chemical Reactor (LCR) ===================================
 		MachineRegistry.Register(new MachineDefinition
 		{
 			Id = "large_chemical_reactor", Label = "Large Chemical Reactor",
@@ -771,7 +688,6 @@ public static class MachineDefinitions
 			FusedCasingTileName    = "inert_machine_casing",
 		});
 
-		// === Vacuum Freezer =====================================================
 		MachineRegistry.Register(new MachineDefinition
 		{
 			Id = "vacuum_freezer", Label = "Vacuum Freezer",
@@ -787,7 +703,6 @@ public static class MachineDefinitions
 			FusedCasingTileName    = "frostproof_machine_casing",
 		});
 
-		// === Implosion Compressor ===============================================
 		MachineRegistry.Register(new MachineDefinition
 		{
 			Id = "implosion_compressor", Label = "Implosion Compressor",
@@ -803,7 +718,6 @@ public static class MachineDefinitions
 			FusedCasingTileName    = "solid_machine_casing",
 		});
 
-		// === Large Autoclave ====================================================
 		MachineRegistry.Register(new MachineDefinition
 		{
 			Id = "large_autoclave", Label = "Large Crystallization Chamber",
@@ -819,8 +733,6 @@ public static class MachineDefinitions
 			FusedCasingTileName    = "watertight_casing",
 		});
 
-		// === Distillation Tower (per-layer fluid output routing) =================
-		// Single-input -> N-fluid-output column
 		MachineRegistry.Register(new MachineDefinition
 		{
 			Id = "distillation_tower", Label = "Distillation Tower",
@@ -832,13 +744,10 @@ public static class MachineDefinitions
 			OverlayBasename = "overlay_front",
 			LayoutKey = "generic_multi",
 			PatternFactory = BuildDistillationTowerPattern,
-			// Upstream `.recipeModifiers(OC_NON_PERFECT_SUBTICK, BATCH_MODE)`.
-			// BATCH_MODE deferred (see LCR comment)
-			MultiRecipeModifier = GTRecipeModifiers.OC_NON_PERFECT_SUBTICK,
+			MultiRecipeModifier = GTRecipeModifiers.OC_NON_PERFECT_SUBTICK, // BATCH_MODE deferred (just lag optimization)
 			FusedCasingTileName = "clean_machine_casing",
 		});
 
-		// === Large Distillery (dual-mode: distillation_tower + distillery) =======
 		MachineRegistry.Register(new MachineDefinition
 		{
 			Id = "large_distillery", Label = "Large Distillery",
@@ -854,8 +763,6 @@ public static class MachineDefinitions
 			FusedCasingTileName = "watertight_casing",
 		});
 
-		// === Assembly Line (ordered-input multi) ================================
-		// Like distillation_tower but horizontal AND ordered on input
 		MachineRegistry.Register(new MachineDefinition
 		{
 			Id = "assembly_line", Label = "Assembly Line",
@@ -867,26 +774,23 @@ public static class MachineDefinitions
 			OverlayBasename = "overlay_front",
 			LayoutKey = "generic_multi",
 			PatternFactory = BuildAssemblyLinePattern,
-			// Upstream `.recipeModifiers(DEFAULT_ENVIRONMENT_REQUIREMENT, OC_NON_PERFECT)`.
-			// DEFAULT_ENVIRONMENT_REQUIREMENT is the cleanroom-or-hazard modifier
-			// (unported environmental hazard subsystem)
 			MultiRecipeModifier = GTRecipeModifiers.OC_NON_PERFECT_SUBTICK,
 			FusedCasingTileName = "steel_machine_casing",
 		});
 
-		// === Steam parallel multis (steam_grinder + steam_oven) ==================
 		MachineRegistry.Register(new MachineDefinition
 		{
 			Id = "steam_grinder", Label = "Steam Grinder",
 			Family = MachineFamily.MultiblockSteamParallel,
 			Tiered = false, Tiers = OneTier,
 			RecipeType = GTRecipeTypes.MACERATOR,
+			OutputLimits = ConstOutputLimit((ItemRecipeCapability.CAP, 1)),
 			Casing = MachineCasing.Voltage,
 			OverlayDir = "block/multiblock/steam_grinder",
 			OverlayBasename = "overlay_front",
 			LayoutKey = "steam_parallel_multi",
 			PatternFactory = BuildSteamGrinderPattern,
-			FusedCasingTileName = "bronze_brick_casing",
+			FusedCasingTileName = "steam_machine_casing",
 		});
 		MachineRegistry.Register(new MachineDefinition
 		{
@@ -894,15 +798,15 @@ public static class MachineDefinitions
 			Family = MachineFamily.MultiblockSteamParallel,
 			Tiered = false, Tiers = OneTier,
 			RecipeType = GTRecipeTypes.ELECTRIC_FURNACE,
+			OutputLimits = ConstOutputLimit((ItemRecipeCapability.CAP, 1)),
 			Casing = MachineCasing.Voltage,
 			OverlayDir = "block/multiblock/steam_oven",
 			OverlayBasename = "overlay_front",
 			LayoutKey = "steam_parallel_multi",
 			PatternFactory = BuildSteamOvenPattern,
-			FusedCasingTileName = "bronze_brick_casing",
+			FusedCasingTileName = "steam_machine_casing",
 		});
 
-		// === Tier-4 generator multis (large_combustion_engine, large_*_turbine) =
 		LargeCombustionEngine("large_combustion_engine",  "Large Combustion Engine",       (int)VoltageTier.EV,
 			"stable_machine_casing", "titanium_gearbox",     "engine_intake_casing",
 			"block/multiblock/generator/large_combustion_engine");
@@ -920,11 +824,6 @@ public static class MachineDefinitions
 			GTRecipeTypes.PLASMA_GENERATOR, "tungstensteel_turbine_casing",  "tungstensteel_gearbox",
 			"block/multiblock/generator/large_plasma_turbine", needsMuffler: false);
 
-		// === Tier-4 world-I/O multis (large_miner, fluid_drilling_rig) ==========
-		// Adapted from upstream: instead of mining real 3D ore blocks / depleting
-		// per-chunk fluid veins, we run a biome-keyed lottery - see
-		// `Multiblock.Electric.BiomeWorldIOTables` for the per-biome ore pools and
-		// the per-biome fluid pick
 		LargeMiner("ev_large_miner",  "Large Miner",  VoltageTier.EV,
 			"solid_machine_casing",   "steel");
 		LargeMiner("iv_large_miner",  "Advanced Large Miner",  VoltageTier.IV,
@@ -939,7 +838,6 @@ public static class MachineDefinitions
 		FluidDrillingRig("ev_fluid_drilling_rig", "Advanced Fluid Drilling Rig II", VoltageTier.EV,
 			"robust_machine_casing",  "tungsten_steel");
 
-		// === Fusion Reactor (3 tiers - LuV / ZPM / UV) ==========================
 		FusionReactor("luv_fusion_reactor", "Fusion Reactor Mk I",   VoltageTier.LuV,
 			"fusion_casing",      "superconducting_coil");
 		FusionReactor("zpm_fusion_reactor", "Fusion Reactor Mk II",  VoltageTier.ZPM,
@@ -947,15 +845,12 @@ public static class MachineDefinitions
 		FusionReactor("uv_fusion_reactor",  "Fusion Reactor Mk III", VoltageTier.UV,
 			"fusion_casing_mk3",  "fusion_coil");
 
-		// === Active transformer (power converter) ==============================
 		MachineRegistry.Register(new MachineDefinition
 		{
 			Id = "active_transformer", Label = "Active Transformer",
 			Family = MachineFamily.MultiblockActiveTransformer,
 			Tiered = false, Tiers = new[] { VoltageTier.UV },
-			// Upstream `.recipeType(DUMMY_RECIPES)` - the multi has its own
-			// per-tick conversion loop, no recipe matching.
-			RecipeType = GTRecipeTypes.DUMMY,
+			RecipeType = GTRecipeTypes.DUMMY, // has its own per-tick conversion loop
 			Casing = MachineCasing.Voltage,
 			OverlayDir = "block/multiblock/data_bank", OverlayBasename = "overlay_front",
 			LayoutKey = "generic_multi",
@@ -963,7 +858,6 @@ public static class MachineDefinitions
 			FusedCasingTileName = "high_power_casing",
 		});
 
-		// === Power Substation (bulk EU storage) ================================
 		MachineRegistry.Register(new MachineDefinition
 		{
 			Id = "power_substation", Label = "Power Substation",
@@ -979,7 +873,6 @@ public static class MachineDefinitions
 			FusedCasingTileName = "palladium_substation",
 		});
 
-		// === Research / computation subsystem ==================================
 		MachineRegistry.Register(new MachineDefinition
 		{
 			Id = "high_performance_computation_array", Label = "High Performance Computing Array",
@@ -1032,8 +925,6 @@ public static class MachineDefinitions
 			PatternFactory = () => BuildResearchStationPattern(),
 		});
 
-		// --- Research parts ---------------------------------------------------
-		// Object holder (ZPM) - research station pedestal.
 		MachineRegistry.Register(new MachineDefinition
 		{
 			Id = "object_holder", Label = "Object Holder",
@@ -1045,7 +936,6 @@ public static class MachineDefinitions
 			LayoutKey = "object_holder",
 		});
 
-		// HPCA grid components (ZPM)
 		void Hpca(string id, string label, Multiblock.Part.Hpca.HpcaComponentKind kind, string overlay) =>
 			MachineRegistry.Register(new MachineDefinition
 			{
@@ -1066,7 +956,6 @@ public static class MachineDefinitions
 		Hpca("hpca_active_cooler_component",        "HPCA Active Cooler Component",        Multiblock.Part.Hpca.HpcaComponentKind.ActiveCooler,       "active_cooler");
 		Hpca("hpca_bridge_component",               "HPCA Bridge Component",               Multiblock.Part.Hpca.HpcaComponentKind.Bridge,             "bridge");
 
-		// Data access hatches (HV/EV/LuV/MAX) - research-data store + recipe gate.
 		void DataAccess(string id, string label, VoltageTier tier, bool creative) =>
 			MachineRegistry.Register(new MachineDefinition
 			{
@@ -1086,7 +975,6 @@ public static class MachineDefinitions
 		DataAccess("advanced_data_access_hatch", "Advanced Data Access Hatch", VoltageTier.LuV, false);
 		DataAccess("creative_data_access_hatch", "Creative Data Access Hatch", VoltageTier.MAX, true);
 
-		// Optical computation hatches (ZPM) - CWU transmitter / receiver.
 		void CompHatch(string id, string label, bool transmitter, Api.Machine.Multiblock.PartAbility ability) =>
 			MachineRegistry.Register(new MachineDefinition
 			{
@@ -1104,7 +992,6 @@ public static class MachineDefinitions
 		CompHatch("computation_transmitter_hatch", "Computation Data Transmission Hatch", true,  Api.Machine.Multiblock.PartAbility.COMPUTATION_DATA_TRANSMISSION);
 		CompHatch("computation_receiver_hatch",    "Computation Data Reception Hatch",    false, Api.Machine.Multiblock.PartAbility.COMPUTATION_DATA_RECEPTION);
 
-		// Optical data hatches (LuV) - research-data transmitter / receiver.
 		void DataHatch(string id, string label, bool transmitter, Api.Machine.Multiblock.PartAbility ability) =>
 			MachineRegistry.Register(new MachineDefinition
 			{
@@ -1122,7 +1009,6 @@ public static class MachineDefinitions
 		DataHatch("data_transmitter_hatch", "Optical Data Transmission Hatch", true,  Api.Machine.Multiblock.PartAbility.OPTICAL_DATA_TRANSMISSION);
 		DataHatch("data_receiver_hatch",    "Optical Data Reception Hatch",    false, Api.Machine.Multiblock.PartAbility.OPTICAL_DATA_RECEPTION);
 
-		// === Bulk-ported standard processing multis ============================
 		Std("large_centrifuge",        "Large Centrifugal Unit",      BuildLargeCentrifugePattern,        "vibration_safe_casing",            "block/multiblock/gcym/large_centrifuge",        GTRecipeTypes.CENTRIFUGE, GTRecipeTypes.THERMAL_CENTRIFUGE);
 		Std("large_electrolyzer",      "Large Electrolysis Chamber",  BuildLargeElectrolyzerPattern,      "nonconducting_casing",             "block/multiblock/gcym/large_electrolyzer",      GTRecipeTypes.ELECTROLYZER);
 		Std("large_electromagnet",     "Large Electromagnet",         BuildLargeElectromagnetPattern,     "nonconducting_casing",             "block/multiblock/gcym/large_electrolyzer",      GTRecipeTypes.ELECTROMAGNETIC_SEPARATOR, GTRecipeTypes.POLARIZER);
@@ -1139,15 +1025,11 @@ public static class MachineDefinitions
 		Std("large_extruder",          "Large Extrusion Machine",     BuildLargeExtruderPattern,          "stress_proof_casing",              "block/multiblock/gcym/large_extruder",          GTRecipeTypes.EXTRUDER);
 		Std("large_solidifier",        "Large Solidification Array",  BuildLargeSolidifierPattern,        "watertight_casing",                "block/multiblock/gcym/large_solidifier",        GTRecipeTypes.FLUID_SOLIDIFIER);
 		Std("large_wiremill",          "Large Wire Factory",          BuildLargeWiremillPattern,          "stress_proof_casing",              "block/multiblock/gcym/large_wiremill",          GTRecipeTypes.WIREMILL);
-		// Upstream LargeChemicalBath / LargeMixer each attach a
-		// MultiblockFluidRendererTrait - an in-world 3D render of the input-hatch
-		// fluid inside the structure's cavity. Deliberately omitted
 		Std("large_chemical_bath",     "Large Chemical Bath",         BuildLargeChemicalBathPattern,      "watertight_casing",                "block/multiblock/gcym/large_chemical_bath",     GTRecipeTypes.CHEMICAL_BATH, GTRecipeTypes.ORE_WASHER);
 		Std("large_maceration_tower",  "Large Maceration Tower",      BuildLargeMacerationTowerPattern,   "secure_maceration_casing",         "block/multiblock/gcym/large_maceration_tower",  GTRecipeTypes.MACERATOR);
 		Std("large_mixer",             "Large Mixing Vessel",         BuildLargeMixerPattern,             "reaction_safe_mixing_casing",      "block/multiblock/gcym/large_mixer",             GTRecipeTypes.MIXER);
 		Std("mega_vacuum_freezer",     "Bulk Blast Chiller",          BuildMegaVacuumFreezerPattern,      "frostproof_machine_casing",        "block/multiblock/gcym/mega_vacuum_freezer",     GTRecipeTypes.VACUUM_RECIPES);
 
-		// === Tier-2: coil-based multis =========================================
 		Coil("multi_smelter",        "Multi Smelter",               BuildMultiSmelterPattern,       "heatproof_machine_casing",
 			"block/multiblock/multi_furnace",           GTRecipeModifiers.MULTI_SMELTER_PARALLEL,
 			Multiblock.CoilAdditionalDisplay.MultiSmelterCoilStats,
@@ -1180,16 +1062,13 @@ public static class MachineDefinitions
 			LayoutKey       = "none",
 		});
 
-		// === Multiblock tanks (3 storage controllers + 3 valve parts) =========
 		MultiblockTankValve("wooden_tank_valve", "Wooden Tank Valve", "wood_wall");
-		MultiblockTankValve("bronze_tank_valve", "Bronze Tank Valve", "bronze_brick_casing");
+		MultiblockTankValve("bronze_tank_valve", "Bronze Tank Valve", "steam_machine_casing");
 		MultiblockTankValve("steel_tank_valve",  "Steel Tank Valve",  "steel_machine_casing");
 		MultiblockTank("wooden_multiblock_tank", "Wooden Multiblock Tank", "wood",   250_000,   "wood_wall",            "wooden_tank_valve");
-		MultiblockTank("bronze_multiblock_tank", "Bronze Multiblock Tank", "bronze", 500_000,   "bronze_brick_casing",  "bronze_tank_valve");
+		MultiblockTank("bronze_multiblock_tank", "Bronze Multiblock Tank", "bronze", 500_000,   "steam_machine_casing",  "bronze_tank_valve");
 		MultiblockTank("steel_multiblock_tank",  "Steel Multiblock Tank",  null,     1_000_000, "steel_machine_casing", "steel_tank_valve");
 
-		// === Drums - per-material fluid storage (verbatim GTMachines) ========
-		// Capacity = upstream buckets x 1000 mB. Non-tiered: id is `<mat>_drum`.
 		Drum("wood_drum",            "Wooden Drum",           "wood",             16_000);
 		Drum("bronze_drum",          "Bronze Drum",           "bronze",           32_000);
 		Drum("steel_drum",           "Steel Drum",            "steel",            64_000);
@@ -1199,8 +1078,6 @@ public static class MachineDefinitions
 		Drum("titanium_drum",        "Titanium Drum",         "titanium",        512_000);
 		Drum("tungsten_steel_drum",  "Tungstensteel Drum",    "tungsten_steel", 1024_000);
 
-		// === Crates - per-material item storage (verbatim GTMachines) ========
-		// Capacity = inventory slot count. Non-tiered: id is `<mat>_crate`.
 		Crate("wood_crate",            "Wooden Crate",          "wood",             27);
 		Crate("bronze_crate",          "Bronze Crate",          "bronze",           54);
 		Crate("steel_crate",           "Steel Crate",           "steel",            72);
@@ -1210,7 +1087,6 @@ public static class MachineDefinitions
 		Crate("tungsten_steel_crate",  "Tungstensteel Crate",   "tungsten_steel",  144);
 	}
 
-	// One crate - a per-material item-storage machine (MachineFamily.Crate)
 	private static void Crate(string id, string label, string materialId, int slotCount)
 	{
 		MachineRegistry.Register(new MachineDefinition
@@ -1226,7 +1102,6 @@ public static class MachineDefinitions
 		});
 	}
 
-	// One drum - a per-material fluid-storage machine (MachineFamily.Drum)
 	private static void Drum(string id, string label, string materialId, int capacity)
 	{
 		MachineRegistry.Register(new MachineDefinition
@@ -1242,20 +1117,6 @@ public static class MachineDefinitions
 		});
 	}
 
-	// One item-bus row - input_bus / output_bus x all tiers. The universal
-	// tile/item resolves Texture from OverlayDir/OverlayBasename; upstream's
-	// `colorOverlayTieredHullModel(OVERLAY_ITEM_HATCH_{IN,OUT}, overlay_pipe,
-	// ...)` composites a tier-colored hull + overlay_pipe + overlay_pipe_{in,out}.
-	// Renderer composition is per-part fidelity; we use the upstream overlay
-	// PNG directly - `block/part/overlay_pipe_{in,out}`. Casing stays Voltage
-	// (the tier-colored hull base layer).
-	// Part overlay textures live under `block/overlay/machine/` (upstream
-	// mirror). Multi-layer composition mirrors upstream model JSONs:
-	//   - Item bus / fluid hatch: parent `hatch_machine[_emissive]` ->
-	//       casing + `overlay_pipe[_4x|_9x]` + directional + `_emissive`.
-	//   - Energy hatch: parent `2_layer/tinted/front` ->
-	//       casing + `overlay_energy_Na_tinted` (tintindex 2) + directional +
-	//       `_emissive`.
 	private const string PartOverlayDir = "block/overlay/machine";
 
 	private static void ItemBus(string id, string label, IO io, VoltageTier[] tiers)
@@ -1288,8 +1149,6 @@ public static class MachineDefinitions
 			9 => "overlay_pipe_9x",
 			_ => "overlay_pipe",
 		};
-		// Abilities: base IMPORT_FLUIDS / EXPORT_FLUIDS + slot-density variant
-		// (1X/4X/9X). Mirrors upstream `.abilities(IMPORT_FLUIDS, IMPORT_FLUIDS_NX)`.
 		var baseAbility = io == IO.IN ? Api.Machine.Multiblock.PartAbility.IMPORT_FLUIDS
 		                              : Api.Machine.Multiblock.PartAbility.EXPORT_FLUIDS;
 		var slotAbility = slots switch
@@ -1359,16 +1218,11 @@ public static class MachineDefinitions
 		});
 	}
 
-
-	// PNG naming quirk: upstream's 2A hatch uses the `1a` PNG art (single
-	// circular cap) - see `energy_input_hatch.json` referencing
-	// `overlay_energy_1a_*`. The 4A / 16A / 64A variants use their own art.
-	// `pngAmp` maps amperage -> PNG-name prefix accordingly.
 	private static void EnergyHatchDef(string id, string label, IO io, int amperage, VoltageTier[] tiers)
 	{
 		string ioTok = io == IO.IN ? "in" : "out";
 		int pngAmp = amperage == 2 ? 1 : amperage;
-		// 64A -> SUBSTATION_*, 2/4/16 -> standard INPUT/OUTPUT (upstream split).
+		// 64A -> SUBSTATION_*, 2/4/16 -> standard INPUT/OUTPUT
 		Api.Machine.Multiblock.PartAbility ability;
 		if (amperage == 64)
 			ability = io == IO.IN ? Api.Machine.Multiblock.PartAbility.SUBSTATION_INPUT_ENERGY
@@ -1415,7 +1269,6 @@ public static class MachineDefinitions
 		});
 	}
 
-	// Upstream BatteryBufferMachine.java:45-46 amp constants.
 	private static class BatteryBufferAmps
 	{
 		public const long Normal  = 2L;
@@ -1424,7 +1277,8 @@ public static class MachineDefinitions
 
 	private static void Wtm(string id, string label, Api.Recipe.GTRecipeType recipeType,
 		int inSlots, int outSlots, int inTanks = 0, int outTanks = 0,
-		bool circuit = false, string layout = "generic")
+		bool circuit = false, string layout = "generic",
+		Func<VoltageTier, IReadOnlyDictionary<object, int>>? outputLimits = null)
 	{
 		MachineRegistry.Register(new MachineDefinition
 		{
@@ -1436,12 +1290,10 @@ public static class MachineDefinitions
 			InputFluidTankCount = inTanks, OutputFluidTankCount = outTanks,
 			UsesCircuit = circuit,
 			LayoutKey = layout,
+			OutputLimits = outputLimits,
 		});
 	}
 
-	// One sunlight-powered boiler. Non-tiered - the id matches upstream
-	// (lp_steam_solar_boiler). No fuel; the STEAM_BOILER recipe type is
-	// nominal - SteamSolarBoiler heats off sunlight, not a fuel recipe.
 	private static void SolarBoiler(string id, string label, bool highPressure)
 	{
 		MachineRegistry.Register(new MachineDefinition
@@ -1459,8 +1311,6 @@ public static class MachineDefinitions
 		});
 	}
 
-	// One liquid-fuel boiler. Non-tiered - id matches upstream
-	// (lp_steam_liquid_boiler). Burns the STEAM_BOILER fluid-fuel recipes.
 	private static void LiquidBoiler(string id, string label, bool highPressure)
 	{
 		MachineRegistry.Register(new MachineDefinition
@@ -1478,16 +1328,17 @@ public static class MachineDefinitions
 		});
 	}
 
-	// One steam processing machine - registers both an LP and an HP variant.
 	private static void Steam(string shortName, string label, Api.Recipe.GTRecipeType recipeType,
-		int inSlots, int outSlots)
+		int inSlots, int outSlots,
+		Func<VoltageTier, IReadOnlyDictionary<object, int>>? outputLimits = null)
 	{
-		SteamVariant(shortName, label, recipeType, inSlots, outSlots, "lp", "Steam ",    highPressure: false);
-		SteamVariant(shortName, label, recipeType, inSlots, outSlots, "hp", "HP Steam ", highPressure: true);
+		SteamVariant(shortName, label, recipeType, inSlots, outSlots, "lp", "Steam ",    highPressure: false, outputLimits);
+		SteamVariant(shortName, label, recipeType, inSlots, outSlots, "hp", "HP Steam ", highPressure: true,  outputLimits);
 	}
 
 	private static void SteamVariant(string shortName, string label, Api.Recipe.GTRecipeType recipeType,
-		int inSlots, int outSlots, string prefix, string pressureLabel, bool highPressure)
+		int inSlots, int outSlots, string prefix, string pressureLabel, bool highPressure,
+		Func<VoltageTier, IReadOnlyDictionary<object, int>>? outputLimits = null)
 	{
 		MachineRegistry.Register(new MachineDefinition
 		{
@@ -1498,11 +1349,9 @@ public static class MachineDefinitions
 			Tiers  = OneTier,
 			RecipeType = recipeType,
 			InputSlotCount = inSlots, OutputSlotCount = outSlots,
+			OutputLimits = outputLimits,
 			IsHighPressure = highPressure,
 			Casing = highPressure ? MachineCasing.BrickedSteel : MachineCasing.BrickedBronze,
-			// Upstream's workableSteamHullModel reuses the electric machine's
-			// overlay (block/machines/macerator), NOT a steam-specific one -
-			// so point at the shared overlay rather than deriving from the id.
 			OverlayDir = $"block/machines/{shortName}",
 			LayoutKey = "steam_machine",
 		});
@@ -1515,8 +1364,6 @@ public static class MachineDefinitions
 			Id     = id, Label = label,
 			Family = MachineFamily.SteamMiner,
 			Tiered = false, Tiers = OneTier,
-			// No recipe type - mining is world-driven, like the electric
-			// MinerMachine
 			IsHighPressure = highPressure,
 			Casing = highPressure ? MachineCasing.BrickedSteel : MachineCasing.BrickedBronze,
 			OverlayDir = overlayDir,
@@ -1541,32 +1388,6 @@ public static class MachineDefinitions
 		});
 	}
 
-	// PatternFactory closure for `coke_oven`. Builds a `BlockPattern` from
-	// the hand-authored 2D shape in `MultiblockShapes.CokeOven` + a char ->
-	// predicate map. Tile lookups are deferred (closure) so they fire AFTER
-	// `TieredMachineFactory` has registered both tiles.
-	//
-	// Pattern:
-	//   "XXX"   X = casing OR hatch
-	//   "XYX"   Y = controller (this multi)
-	//   "XXX"
-	//
-	// Upstream `setMaxGlobalLimited(5)` on the hatch slot is dropped per
-	// MultiblockShapes.cs convention (numbers don't translate at 2D scale).
-	// PatternFactory closure for `electric_blast_furnace`. Uses the
-	// `MultiblockShapes.ElectricBlastFurnace` fixed 5x5 shape.
-	//
-	// Char legend:
-	//   X - heatproof casing OR any allowed hatch (energy/item/fluid/maintenance)
-	//   C - heating coil (any single tier - captured into MatchContext)
-	//   S - controller
-	//   M - muffler hatch
-	// Upstream `.where(...)` chain:
-	//   X = casing.setMinGlobalLimited(10) | autoAbilities(definition.recipeTypes)
-	//                                      | autoAbilities(true, false, false)
-	//   C = heatingCoils().setExactLimit(1) | abilities | casing
-	//   P = blocks(CASING_POLYTETRAFLUOROETHYLENE_PIPE.get())
-	//   S = controller(blocks(definition.block))
 	private static IBlockPattern BuildLCRPattern()
 	{
 		var lcrDef    = MachineRegistry.Get("large_chemical_reactor")!;
@@ -1616,23 +1437,6 @@ public static class MachineDefinitions
 		});
 	}
 
-	// Mirror of GTMultiMachines.java:447-470 (distillation_tower). 2D-collapsed
-	// to a vertical column - `MultiblockShapes.DistillationTower`.
-	//   Y = controller row casing + recipe-typed I/O abilities (input fluid /
-	//       input energy / output items) + maintenance.
-	//   Z = wall casing OR per-layer EXPORT_FLUIDS OR maintenance - verbatim
-	//       upstream Z = casing.or(exportPredicate).or(maint). In a minimal
-	//       3-tall tower the two Y cells fill with INPUT_ENERGY + IMPORT_
-	//       FLUIDS, so the required maintenance has to land on a Z cell.
-	//   X = wall casing OR one EXPORT_FLUIDS per layer (body + head rows are
-	//       all output layers).
-	//
-	// Upstream computes `maint` once as a local and passes the SAME
-	// `TraceabilityPredicate` to both Y and Z. The matcher's GlobalCount is
-	// keyed by `SimplePredicate` identity - sharing the instance means a
-	// hatch in Y or Z increments ONE counter. We can't use `StandardWall`
-	// for Y here (it would build its own maint instance), so the predicate
-	// is composed manually mirroring upstream's chain order.
 	private static IBlockPattern BuildDistillationTowerPattern()
 	{
 		var def = MachineRegistry.Get("distillation_tower")!;
@@ -1681,17 +1485,9 @@ public static class MachineDefinitions
 		});
 	}
 
-	// `Std(...)` - registers one of the bulk-ported standard processing multis.
-	// Same family (shared electric entity), same layout, same modifier; only
-	// id / label / casing / overlay / pattern differ.
 	private static void Std(string id, string label, Func<IBlockPattern> patternFactory,
 		string fusedCasingTile, string overlayDir, params Api.Recipe.GTRecipeType[] recipeTypes)
 	{
-		// Multi-mode multis (extractor+canner / cutter+lathe / large_brewer's
-		// 3 recipe types) get the array; single-mode multis populate both
-		// RecipeType and RecipeTypes so any reader path resolves. Without this
-		// `WorkableMultiblockMachine.GetRecipeType` throws - the ServerTick
-		// runs RecipeLogic.SearchRecipe every frame, which calls GetRecipeType.
 		MachineRegistry.Register(new MachineDefinition
 		{
 			Id = id, Label = label,
@@ -1943,30 +1739,10 @@ public static class MachineDefinitions
 			['E'] = casing.Or(energyIn),
 			['O'] = casing.Or(fluidOut),
 			['I'] = casing.Or(fluidIn),
-			// Upstream's 15x15 ring has an air-filled cavity. 'A' is the
-			// interior; the matcher requires it to be empty (no tile present).
-			// '#' = any cell is auto-mapped by BlockPattern.
 			['A'] = Predicates.Air(),
 		});
 	}
 
-	// Mirror of GTMultiMachines.ACTIVE_TRANSFORMER pattern (GTMultiMachines.java:967-975).
-	//
-	// === Documented adaptations =================================================
-	//
-	//   - DEVIATION: upstream's `getHatchPredicates`
-	//     (ActiveTransformerMachine.java:162-169) uses per-ability
-	//     `setPreviewCount` only - no min. Upstream RELIES on the controller's
-	//     `onStructureFormed` to silently bail when `powerInput.isEmpty() ||
-	//     powerOutput.isEmpty()`, producing the same generic "Invalid
-	//     Structure!" message a 2D player has no good way to act on.
-	//     We borrow upstream's OWN sibling POWER_SUBSTATION predicate shape
-	//     (verbatim from GTMultiMachines.java:1009-1012) so the matcher
-	//     refuses early with a player-actionable candidate list
-	//   - Upstream's `.setMinGlobalLimited(12)` on the casing predicate is a
-	//     3D-cube constant - the cube has 27 X-cells (25 after subtracting
-	//     controller + coil). Our 2D shape has 7 X-cells total; min 12 is
-	//     unsatisfiable. Scaled to `SetMinGlobalLimited(2)`
 	private static IBlockPattern BuildActiveTransformerPattern()
 	{
 		var def    = MachineRegistry.Get("active_transformer")!;
@@ -1988,23 +1764,6 @@ public static class MachineDefinitions
 		});
 	}
 
-	// Mirror of GTMultiMachines.POWER_SUBSTATION pattern (GTMultiMachines.java:997-1015).
-	// === Documented adaptations =================================================
-	//
-	//   - Upstream `setMinGlobalLimited(MIN_CASINGS=14)` is calibrated to its
-	//     27-X-cell 3D shape (5x5xN - 5 controller-row-removals). Our 2D
-	//     collapse has 6 X cells total (rows 2-3 minus the controller). Scaled
-	//     to `SetMinGlobalLimited(3)` - keeps the "most X cells are casing"
-	//     intent within our cell budget.
-	//   - Upstream `autoAbilities(true, false, false)` on X cells adds the
-	//     maintenance hatch ability. Maintenance isn't a ported subsystem;
-	//     dropped here (the controller's GetPassiveDrain returns the raw rate
-	//     without maintenance multipliers).
-	//   - Battery predicate composes from PssBatteryData.All (9 tile names);
-	//     no `setMinGlobalLimited(1)` because the controller's OnStructureFormed
-	//     invariant (`if (batteries.isEmpty()) onStructureInvalid()`) already
-	//     rejects an empty-battery structure with an actionable line via the
-	//     persisted-unformed-reason path.
 	private static IBlockPattern BuildPowerSubstationPattern()
 	{
 		var def    = MachineRegistry.Get("power_substation")!;
@@ -2037,7 +1796,7 @@ public static class MachineDefinitions
 	private static IBlockPattern BuildSteamGrinderPattern()
 	{
 		var def    = MachineRegistry.Get("steam_grinder")!;
-		var casing = Predicates.Blocks("bronze_brick_casing");
+		var casing = Predicates.Blocks("steam_machine_casing");
 		var steamIn  = Predicates.Abilities(Api.Machine.Multiblock.PartAbility.STEAM_IMPORT_ITEMS);
 		var steamOut = Predicates.Abilities(Api.Machine.Multiblock.PartAbility.STEAM_EXPORT_ITEMS);
 		var steamEnergy = Predicates.Abilities(Api.Machine.Multiblock.PartAbility.STEAM).SetExactLimit(1);
@@ -2051,7 +1810,7 @@ public static class MachineDefinitions
 	private static IBlockPattern BuildSteamOvenPattern()
 	{
 		var def         = MachineRegistry.Get("steam_oven")!;
-		var casing      = Predicates.Blocks("bronze_brick_casing");
+		var casing      = Predicates.Blocks("steam_machine_casing");
 		var firebox     = Predicates.Blocks("bronze_firebox_casing");
 		var steamIn     = Predicates.Abilities(Api.Machine.Multiblock.PartAbility.STEAM_IMPORT_ITEMS);
 		var steamOut    = Predicates.Abilities(Api.Machine.Multiblock.PartAbility.STEAM_EXPORT_ITEMS);
@@ -2089,11 +1848,6 @@ public static class MachineDefinitions
 		});
 	}
 
-	// === Research / computation pattern factories =========================
-	// Line-for-line mirrors of GTResearchMachines.java `.where(...)` chains,
-	// mapped onto the user-authored shapes in MultiblockShapes. Where the 2D
-	// shape collapsed several upstream cell roles into one char, that char's
-	// predicate is the union of the collapsed roles (documented per cell).
 	private static IBlockPattern BuildHpcaPattern()
 	{
 		var def = MachineRegistry.Get("high_performance_computation_array")!;
@@ -2161,15 +1915,6 @@ public static class MachineDefinitions
 				.Or(Predicates.Abilities(Api.Machine.Multiblock.PartAbility.MAINTENANCE)),
 		});
 	}
-
-	// ============================================================================
-	// *** Standard processing-multi factories ***
-	// ============================================================================
-	// 2D adaptations:
-	//   - `setMinGlobalLimited(N)` dropped - calibrated for 3D shapes; see
-	//     `Predicates.StandardWall` for the rationale.
-	//   - `setExactLimit(1)` retained verbatim - kept so a single-allowed cell
-	//     stays single.
 
 	private static IBlockPattern BuildLargeCentrifugePattern()
 	{
@@ -2412,15 +2157,6 @@ public static class MachineDefinitions
 		});
 	}
 
-	// ============================================================================
-	// *** Coil-based multi factories (Tier-2) ***
-	// ============================================================================
-	// Mirror upstream's `.pattern(definition -> ...)` chains in GTMultiMachines.java
-	// and GCYMMachines.java. Each multi's wall predicate is the same StandardWall
-	// composition; the heating-coil cell uses `Predicates.HeatingCoils()` (which
-	// captures the coil tier into the match context for the row's recipe modifier
-	// to consume).
-
 	private static IBlockPattern BuildMultiSmelterPattern()
 	{
 		var def = MachineRegistry.Get("multi_smelter")!;
@@ -2505,34 +2241,17 @@ public static class MachineDefinitions
 		});
 	}
 
-	// PatternFactory closure for `cleanroom`. Resolves the four wall/glass/filter
-	// tile types lazily (after CasingRegistry has run) and builds a
-	// `RepeatableBlockPattern` from `MultiblockShapes.Cleanroom`.
-	//
-	// Char legend:
-	//   X - sealed wall (plascrete / cleanroom_glass / energy hatch /
-	//       maintenance hatch / passthrough hatch / iron door)
-	//   F - cleanroom filter casing (filter_casing / sterilizing_filter_casing)
-	//   S - controller (this multi)
-	//   ' ' - interior cell: `CleanroomMachine.InnerPredicateMatch` (accepts
-	//       all non-banned MetaMachines + air; accumulates receivers).
 	private static IBlockPattern BuildCleanroomPattern()
 	{
-		// Mirror of GTMultiMachines.java:864-882 .pattern() chain. Cleanroom
-		// doesn't use autoAbilities upstream - its walls accept PASSTHROUGH_HATCH
+		// Cleanroom doesn't use autoAbilities upstream - its walls accept PASSTHROUGH_HATCH
 		// (max 30) + INPUT_ENERGY (min 1, max 3) + MAINTENANCE (exact 1) alongside
-		// the casing. Verbatim per-ability declaration.
+		// the casing
 		var cleanroomDef = MachineRegistry.Get("cleanroom")!;
 		var wallPred = Predicates.Blocks("plascrete", "cleanroom_glass")
-			// Upstream `setMaxGlobalLimited(3, 2)` - 3 globally, 2 per face. We
-			// only enforce the global; per-face has no 2D analogue.
 			.Or(Predicates.Abilities(Api.Machine.Multiblock.PartAbility.INPUT_ENERGY)
 				.SetMinGlobalLimited(1).SetMaxGlobalLimited(3))
-			// Upstream `blocks(MAINTENANCE_HATCH).setExactLimit(1)`. We bind to
-			// the ability (same set in our port) + ExactLimit(1) for parity.
 			.Or(Predicates.Abilities(Api.Machine.Multiblock.PartAbility.MAINTENANCE)
 				.SetExactLimit(1))
-			// Upstream `setMaxGlobalLimited(30, 3)` - 30 globally, 3 per face.
 			.Or(Predicates.Abilities(Api.Machine.Multiblock.PartAbility.PASSTHROUGH_HATCH)
 				.SetMaxGlobalLimited(30));
 
@@ -2699,8 +2418,6 @@ public static class MachineDefinitions
 		});
 	}
 
-	// Shared pattern factory - same 3x3 shape for all three tiers, per-tier
-	// (casing / valve) tile names bound at construction
 	private static IBlockPattern BuildMultiblockTankPattern(string id,
 		string casingTile, string valveTile)
 	{

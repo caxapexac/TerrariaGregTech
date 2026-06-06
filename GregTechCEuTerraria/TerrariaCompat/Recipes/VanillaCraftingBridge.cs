@@ -3,7 +3,6 @@ using GregTechCEuTerraria.Api.Capability.Recipe;
 using GregTechCEuTerraria.Api.Fluids;
 using GregTechCEuTerraria.Api.Recipe;
 using GregTechCEuTerraria.Api.Recipe.Ingredient;
-using GregTechCEuTerraria.TerrariaCompat.Items.Fluids;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;
@@ -17,54 +16,40 @@ namespace GregTechCEuTerraria.TerrariaCompat.Recipes;
 
 // At Mod.AddRecipes, walks RecipeRegistry.ForStation(...) for every station with
 // a Terraria-tile equivalent and pushes fully-resolvable recipes into the
-// vanilla Recipe API. Unresolvable refs are silently skipped + summary-logged.
-// Fully resolvable = every input is a resolved type or vanilla-RecipeGroup tag,
-// every non-fluid output is a resolved type, >=1 input + >=1 item output, no
-// unsupported features (fluids / circuit selectors / machine-only metadata).
+// vanilla Recipe API
 public static class VanillaCraftingBridge
 {
-	// Station id = recipe.RecipeType.RegistryName (= the recipe's `type`
-	// field with the namespace stripped - see GTRecipeSerializer). KEYS MUST be
-	// those exact Minecraft-recipe-type names, NOT friendly aliases (the old
-	// aliased table matched 0 recipes). crafting_shaped_strict is GTCEu's
-	// no-mirror shaped crafting; still ordinary crafting-table.
+	// Station id = recipe.RecipeType.RegistryName
 	private static readonly Dictionary<string, int> StationToTile = new()
 	{
 		{ "crafting_shaped",        TileID.WorkBenches },
 		{ "crafting_shapeless",     TileID.WorkBenches },
 		{ "crafting_shaped_strict", TileID.WorkBenches },
-		// GTCEu energy-transfer recipe - charge metadata ignored (ToolItem
-		// derives its own capacity).
 		{ "crafting_shaped_energy_transfer", TileID.WorkBenches },
-		// ShapedFluidContainerRecipe - fluid cell handled via condition +
-		// callback (see fluid-requirement path in TryBuild).
 		{ "crafting_shaped_fluid_container", TileID.WorkBenches },
 		{ "smelting",               TileID.Furnaces },
-		{ "blasting",               TileID.Furnaces },   // blast-furnace folds onto furnace
+		{ "blasting",               TileID.Furnaces },
 		{ "smoking",                TileID.CookingPots },
 		{ "campfire_cooking",       TileID.Campfire },
 	};
 
 	// DEVIATION: every GT crafting-TABLE recipe (shaped / shapeless / strict /
-	// energy-transfer / fluid-container) is hand-craftable in 2D - no tile required
-	// (walking to a workbench for every plate/screw/rod is friction without benefit;
-	// the inventory grid accepts arbitrary patterns). Smelting / blasting / cooking
-	// are NOT here, so they keep their StationToTile tile (a Furnace recipe needs a
-	// furnace, etc.). Original GT.Hand-only gate was gt.Data.GetBool("GT.Hand").
-	private static readonly HashSet<string> HandStations = new()
+	// energy-transfer / fluid-container) is hand-craftable
+	internal static readonly HashSet<string> HandStations = new()
 	{
 		"crafting_shaped", "crafting_shapeless", "crafting_shaped_strict",
 		"crafting_shaped_energy_transfer", "crafting_shaped_fluid_container",
 	};
 
-	private static int _emptyCellType;       // empty cell returned on fluid-container craft
+	internal static bool IsHandStation(string station) => station.Length > 0 && HandStations.Contains(station);
+	internal static bool TryGetStationTile(string station, out int tile) => StationToTile.TryGetValue(station, out tile);
+
 	private static LocalizedText _fluidConditionText = null!;
 
 	public static void Register(Mod mod)
 	{
 		BridgeRegistered.Clear();
 		GTToVanilla.Clear();
-		_emptyCellType = mod.TryFind<ModItem>("fluid_cell", out var cell) ? cell.Type : 0;
 		_fluidConditionText = Language.GetOrRegister(
 			"Mods.GregTechCEuTerraria.RecipeConditions.FluidContainer",
 			() => "Requires the fluid held in a cell or bucket");
@@ -77,8 +62,6 @@ public static class VanillaCraftingBridge
 		var seen = new HashSet<string>();
 		_deduped = 0;
 
-		// Two passes - hand (no-tile) stations first so they win dedup over a tiled
-		// variant with the same result + ingredient multiset.
 		for (int pass = 0; pass < 2; pass++)
 		{
 			bool handPass = pass == 0;
@@ -98,7 +81,6 @@ public static class VanillaCraftingBridge
 		mod.Logger.Info($"[recipes] total registered {totalRegistered} / {totalConsidered}" +
 			$"  ({_deduped} duplicates dropped)");
 
-		// Surface the top unresolved refs to direct the next VanillaItemMap pass.
 		LogTopMisses(mod, "unresolved items", unresolvedItems);
 		LogTopMisses(mod, "unresolved tags",  unresolvedTags);
 	}
@@ -113,15 +95,13 @@ public static class VanillaCraftingBridge
 		var itemOutputs = gt.GetOutputContents(ItemRecipeCapability.CAP);
 		var fluidInputs = gt.GetInputContents(FluidRecipeCapability.CAP);
 
-		if (fluidInputs.Count > 0) return false;                  // vanilla can't drink fluids
-		// Circuit selectors are machine-only.
+		if (fluidInputs.Count > 0) return false;
 		foreach (var c in itemInputs)
 			if (((Ingredient)c.Payload) is IntCircuitIngredient) return false;
 		if (itemInputs.Count == 0 || itemOutputs.Count == 0) return false;
 
 		int maxChance = Api.Recipe.Chance.Logic.ChanceLogic.GetMaxChancedValue();
 
-		// First deterministic (chance == max) item output.
 		RecipeContent? outContent = null;
 		foreach (var o in itemOutputs)
 			if (o.Chance >= maxChance) { outContent = o; break; }
@@ -132,8 +112,6 @@ public static class VanillaCraftingBridge
 			return false;
 		}
 
-		// Fluid-container inputs become a condition + callback (Terraria's
-		// type-only matcher can't express filled_cell + NBT).
 		var resolved = new List<(bool isGroup, int itemOrGroupId, int count)>(itemInputs.Count);
 		var fluidReqs = new List<(FluidIngredient fluid, int units)>();
 		bool hasCatalyst = false;
@@ -160,9 +138,6 @@ public static class VanillaCraftingBridge
 		}
 		if (resolved.Count == 0 && fluidReqs.Count == 0) return false;
 
-		// Dedup pure-item recipes by (result + ingredient multiset). Tile-
-		// agnostic: hand form registers in pass 1, tiled variants drop here.
-		// Fluid recipes skip dedup - signature can't capture fluid identity.
 		if (fluidReqs.Count == 0)
 		{
 			var parts = resolved
@@ -178,18 +153,13 @@ public static class VanillaCraftingBridge
 			if (isGroup) recipe.AddRecipeGroup(itemOrGroupId, count);
 			else         recipe.AddIngredient(itemOrGroupId, count);
 		}
-		// Hand-craftable (crafting-table family) recipes get NO tile - craftable in
-		// the inventory grid anywhere. Smelting / blasting / cooking keep their tile.
+
 		if (!isHand)
 			recipe.AddTile(tileId);
 
-		// Crafting-tool catalysts required but never consumed (GregTech parity).
 		if (hasCatalyst)
 			recipe.AddConsumeIngredientCallback(NoConsumeCatalysts);
 
-		// Adaptation of ShapedFluidContainerRecipe - gate on the player holding
-		// the fluid (cell or vanilla bucket), consume on craft. The container
-		// item is never a formal Terraria ingredient.
 		foreach (var (fluid, units) in fluidReqs)
 		{
 			var f = fluid;
@@ -204,22 +174,10 @@ public static class VanillaCraftingBridge
 		return true;
 	}
 
-	// Recipes pushed into Main.recipe[] from GT JSON. NativeRecipeProxy Pass B
-	// skips these so a JSON-sourced recipe isn't mirrored back as a "native"
-	// duplicate. Reference-identity HashSet - the Recipe instance stored here
-	// is the same one .Register() adds.
 	public static readonly HashSet<Terraria.Recipe> BridgeRegistered = new();
 
-	// GTRecipe -> source Terraria.Recipe. Populated by this bridge + by
-	// NativeRecipeProxy. Used by the recipe browser's Craft button to gate by
-	// recipe identity, not output type - without it, a row whose output matches
-	// some OTHER recipe in availableRecipe[] would light up Craft on the wrong
-	// row (Red Brick has several producers; only one is craftable from current
-	// inventory).
 	public static readonly Dictionary<GTRecipe, Terraria.Recipe> GTToVanilla = new();
 
-	// Peels Sized/IntProvider wrappers to detect FluidContainerIngredient;
-	// `units` = container-cell count the pattern asked for.
 	private static bool TryPeelFluidContainer(Ingredient ing, out FluidIngredient fluid, out int units)
 	{
 		fluid = null!;
@@ -253,31 +211,38 @@ public static class VanillaCraftingBridge
 		return found >= units;
 	}
 
-	// Documented simplification: whole-container consumption - a cell larger
-	// than the recipe asks for is consumed entirely; the 1000 mB fluid_cell
-	// makes it exact for the common case.
+	// Mirrors upstream ShapedFluidContainerRecipe.getRemainingItems +
+	// FluidContainerIngredient.getExtractedStack
 	private static void ConsumeFluidContainers(FluidIngredient fluid, int units)
 	{
 		var inv = Main.LocalPlayer.inventory;
 		int remaining = units;
-		int returnedCells = 0, returnedBuckets = 0;
+		int returnedBuckets = 0;
 		for (int i = 0; i < inv.Length && remaining > 0; i++)
 		{
 			var it = inv[i];
 			if (it is null || it.IsAir || !MatchesContainer(it, fluid)) continue;
-			bool isCell = it.ModItem is FluidCellItem;
-			int take = System.Math.Min(remaining, it.stack);
-			it.stack -= take;
-			remaining -= take;
+			// Drainable container
+			if (it.ModItem is Api.Capability.IFluidHandlerItem handler
+			    && handler.Drain(fluid.Amount, simulate: false).Amount >= fluid.Amount)
+			{
+				remaining--;
+				continue;
+			}
+
+			// Non-drainable container
+			it.stack -= 1;
 			if (it.stack <= 0) it.TurnToAir();
-			if (isCell) returnedCells += take;
-			else        returnedBuckets += take;
+			returnedBuckets++;
+			remaining--;
 		}
-		var src = new EntitySource_Misc("gtceu:fluid_container_recipe");
-		if (returnedCells > 0 && _emptyCellType > 0)
-			global::GregTechCEuTerraria.TerrariaCompat.Utils.PlayerGive.Give(Main.LocalPlayer, src, _emptyCellType, returnedCells);
+
 		if (returnedBuckets > 0)
-			global::GregTechCEuTerraria.TerrariaCompat.Utils.PlayerGive.Give(Main.LocalPlayer, src, ItemID.EmptyBucket, returnedBuckets);
+		{
+			var src = new EntitySource_Misc("gtceu:fluid_container_recipe");
+			global::GregTechCEuTerraria.TerrariaCompat.Utils.PlayerGive.Give(
+				Main.LocalPlayer, src, ItemID.EmptyBucket, returnedBuckets);
+		}
 	}
 
 	private static bool MatchesContainer(Item it, FluidIngredient fluid)
@@ -305,8 +270,6 @@ public static class VanillaCraftingBridge
 		    && fluid.Amount <= 1000;
 	}
 
-	// Peels Sized/IntProvider wrappers (carrying count) then routes the inner
-	// ItemStack/Tag/NBTPredicate.
 	private static bool TryResolveItem(Ingredient ing, out int itemType, out int count, out string key)
 	{
 		itemType = 0; count = 1; key = RefKey(ing);
@@ -326,7 +289,6 @@ public static class VanillaCraftingBridge
 			case NBTPredicateIngredient nbt when nbt.ItemType > 0:
 				itemType = nbt.ItemType;
 				return true;
-			// Single-resolved tags collapse to the item (most material tags).
 			case TagIngredient tag when tag.ResolvedTypes.Count == 1:
 				itemType = tag.ResolvedTypes[0];
 				return true;
@@ -366,9 +328,6 @@ public static class VanillaCraftingBridge
 		return true;
 	}
 
-	// Tag-shape -> "Any X Y" label (cosmetic - matcher is item-id-based).
-	// Examples: "gtceu:circuits/lv" -> "Any LV Circuit"; "forge:rods" -> "Any
-	// Rod"; "forge:ingots/iron" -> "Any Iron Ingot".
 	private static string BuildLabel(string tag)
 	{
 		int colon = tag.IndexOf(':');
@@ -407,8 +366,6 @@ public static class VanillaCraftingBridge
 		return sb.ToString();
 	}
 
-	// Zero consumption in both directions - catalyst never eaten on craft,
-	// never returned on shimmer decraft.
 	private static void NoConsumeCatalysts(Terraria.Recipe recipe, int type, ref int amount, bool isDecrafting)
 	{
 		if (Items.Tools.ToolItemLoader.CatalystItemTypes.Contains(type))

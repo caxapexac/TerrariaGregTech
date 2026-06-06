@@ -63,6 +63,7 @@ public static class MaterialJsonLoader
 					Forms = raw.Forms,
 					Flags = raw.Flags,
 					Components = raw.Components,
+					HarvestLevel = raw.HarvestLevel,
 					MeltingPointK = raw.MeltingPointK,
 					BlastTemperatureK = raw.BlastTemperatureK,
 					BlastGasTier = raw.BlastGasTier,

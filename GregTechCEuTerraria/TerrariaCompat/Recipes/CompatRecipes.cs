@@ -9,54 +9,34 @@ using Terraria.ID;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Recipes;
 
-// Recipes the port needs but the extracted bundle (Data/Recipes/all.json)
-// doesn't have. Kept here rather than in all.json - that file is regenerated
-// by snapshot-recipes.py and edits would be lost.
-//
-// JSON shape goes through the same GTRecipeSerializer + IngredientResolver as
-// the bundle - refs resolve via VanillaSubstitution identically. Hand recipes
-// that need a vanilla RecipeGroup live in VanillaCraftingBridgeSystem instead.
+// Recipes the port needs but all.json doesn't have
+// JSON shape goes through the same GTRecipeSerializer + IngredientResolver as the bundle
 public static class CompatRecipes
 {
 	public static readonly System.Collections.Generic.HashSet<string> OverriddenIds = new()
 	{
 		// --- Overrides (replaced in Json below) ---
-		// Steam miners + LP steam macerator - upstream uses 2x diamond corners;
-		// diamonds are scarcer in Terraria's steam age, so swap for tier-matched
-		// rods. HP steam_macerator has no diamond corners and isn't overridden.
 		"shaped/steam_miner_bronze",
 		"shaped/steam_miner_steel",
 		"shaped/steam_macerator_bronze",
 
-		// --- Pure drops (no replacement) ---
+		// --- Removal ---
 		"cutter/cut_stone_into_slab",
 		"cutter/cut_stone_into_slab_water",
 		"cutter/cut_stone_into_slab_distilled_water",
 	};
 
 
-	// JSON additions, each documented with the upstream bug or gap it fixes:
+	// additional compat recipes:
 	//
-	// - steam_boiler/compat_wood - upstream's FuelRecipes.addBoilerFuel sources
-	//   steam_boiler fuels from the vanilla furnace burn-time map, but datagen
-	//   runs before item tags are bound so tag-based fuels (#logs, #planks) never
-	//   reach the shipped set. duration 300 = MC log/plank burn time.
+
 	//
-	// - compat_rubber_ingot + compat_rubber_plate - upstream produces rubber
-	//   plates only via Alloy Smelter / Cutter / Extractor, but the player needs
-	//   them BEFORE LV machines (electric_pump etc.). Two hand-driven steps:
-	//   smelt sticky_resin -> ingot, hammer-craft ingot -> plate.
+	// -
 	//
-	// - compat_wrought_iron - Iron has setSmeltingInto(WroughtIron) at
-	//   FirstDegreeMaterials.java:734 but the only getSmeltingInto() consumers
-	//   are magnetic-material redirects, so the vanilla-furnace redirect was
-	//   never wired. lv_machine_hull needs wrought-iron plates, so without this
-	//   the bootstrap loop is broken. Mirrors the mechanic setSmeltingInto was
-	//   designed to express.
-	//
-	// - compat_{ulv,lv}_{input,output}_{hatch,bus} - hand-craftable ULV/LV
-	//   multiblock hatches + buses.
-	private const string Json = """
+	// -
+
+	// compat_{ulv,lv}_{input,output}_{hatch,bus} - make ULV/LV hatches/buses in hand.
+	private const string HatchesAndBuses = """
 	[
 	  { "id": "crafting_shaped/compat_ulv_input_hatch", "type": "minecraft:crafting_shaped",
 	    "inputs":  { "item": [
@@ -128,8 +108,15 @@ public static class CompatRecipes
 	      { "content": { "type": "gtceu:sized", "count": 2,
 	        "ingredient": { "item": "gtceu:rubber_ingot" } } }
 	    ] },
-	    "outputs": { "item": [ { "content": { "item": "gtceu:lv_output_bus" } } ] } },
+	    "outputs": { "item": [ { "content": { "item": "gtceu:lv_output_bus" } } ] } }
+	]
+	""";
 
+	// steam_boiler/compat_wood - use wood as boiler fuel
+	// compat_rubber_ingot + compat_rubber_plate - make rubber plates in hand
+	// compat_wrought_iron - Iron smelting into WroughtIron
+	private const string Bootstrap = """
+	[
 	  { "id": "steam_boiler/compat_wood", "type": "gtceu:steam_boiler", "duration": 300,
 	    "inputs": { "item": [ { "content": { "type": "gtceu:sized", "count": 1,
 	      "ingredient": { "tag": "minecraft:logs" } } } ] } },
@@ -149,8 +136,13 @@ public static class CompatRecipes
 	        "ingredient": { "item": "gtceu:rubber_ingot" } } },
 	      { "content": { "tag": "gtceu:tools/crafting_hammers" } }
 	    ] },
-	    "outputs": { "item": [ { "content": { "item": "gtceu:rubber_plate" } } ] } },
+	    "outputs": { "item": [ { "content": { "item": "gtceu:rubber_plate" } } ] } }
+	]
+	""";
 
+	// Steam miners + LP steam macerator - remove diamond from the recipe
+	private const string SteamMachineOverrides = """
+	[
 	  { "id": "crafting_shaped/compat_steam_miner_bronze", "type": "minecraft:crafting_shaped",
 	    "inputs":  { "item": [
 	      { "content": { "type": "gtceu:sized", "count": 2,
@@ -185,8 +177,14 @@ public static class CompatRecipes
 	      { "content": { "type": "gtceu:sized", "count": 4,
 	        "ingredient": { "item": "gtceu:tin_alloy_normal_fluid_pipe" } } }
 	    ] },
-	    "outputs": { "item": [ { "content": { "item": "gtceu:hp_steam_miner" } } ] } },
+	    "outputs": { "item": [ { "content": { "item": "gtceu:hp_steam_miner" } } ] } }
+	]
+	""";
 
+	// coke clay without brick form
+	// simple pipes
+	private const string Misc = """
+	[
 	  { "id": "crafting_shaped/compat_compressed_coke_clay_formless", "type": "minecraft:crafting_shaped",
 	    "inputs":  { "item": [
 	      { "content": { "type": "gtceu:sized", "count": 3,
@@ -211,8 +209,13 @@ public static class CompatRecipes
 	        "ingredient": { "tag": "minecraft:logs" } } }
 	    ] },
 	    "outputs": { "item": [ { "content": { "type": "gtceu:sized", "count": 4,
-	      "ingredient": { "item": "gtceu:simple_fluid_pipe" } } } ] } },
+	      "ingredient": { "item": "gtceu:simple_fluid_pipe" } } } ] } }
+	]
+	""";
 
+	// boss summons
+	private const string Casings = """
+	[
 	  { "id": "chemical_reactor/compat_dirty_stainless_steel_casing", "type": "gtceu:chemical_reactor", "duration": 300,
 	    "inputs":  { "item": [
 	      { "content": { "item": "gtceu:clean_machine_casing" } },
@@ -251,15 +254,72 @@ public static class CompatRecipes
 	]
 	""";
 
-	// Per-tier crafting recipes for our custom-block machines (lamps + solar
-	// panels). Upstream registers neither - lamps were unused content and our
-	// solar panel block is a hybrid (steam_turbine + solar_panel cover) that
-	// upstream produces as separate items.
-	//   - `<tier>_lamp` <- `<tier>_machine_casing` + torch
-	//   - `<tier>_solar_panel_machine` <- `<tier>_steam_turbine` + `<tier>_solar_panel` (cover)
-	// Lamps span all 15 tiers (ulv..max). Solar panel blocks ship ULV + LV only
-	// - MV+ tier covers exist but have no craft route, so the higher-tier solar
-	// panel blocks have no recipe either.
+	// compat_clay_from_sand (+ _hand) - there is no infinite clay source, so we need a way to get it from sand
+	private const string Clay = """
+	[
+	  { "id": "chemical_bath/compat_clay_from_sand", "type": "gtceu:chemical_bath", "duration": 200,
+	    "inputs":  {
+	      "item":  [ { "content": { "type": "gtceu:sized", "count": 10, "ingredient": { "item": "minecraft:sand" } } } ],
+	      "fluid": [ { "content": { "amount": 1000, "value": { "tag": "forge:water" } } } ]
+	    },
+	    "tickInputs": { "eu": [ { "content": 16 } ] },
+	    "outputs": { "item": [ { "content": { "type": "gtceu:sized", "count": 10, "ingredient": { "item": "minecraft:clay" } } } ] } },
+
+	  { "id": "crafting_shaped_fluid_container/compat_clay_from_sand_hand", "type": "gtceu:crafting_shaped_fluid_container",
+	    "inputs":  {
+	      "item": [
+	        { "content": { "type": "gtceu:sized", "count": 8, "ingredient": { "item": "minecraft:sand" } } },
+	        { "content": { "type": "gtceu:fluid_container", "fluid": { "amount": 1000, "value": { "tag": "forge:water" } } } }
+	      ]
+	    },
+	    "outputs": { "item": [ { "content": { "type": "gtceu:sized", "count": 8, "ingredient": { "item": "minecraft:clay" } } } ] } }
+	]
+	""";
+
+	// compat_pressure_plate - needed for early game covers but aren't craftable in vanilla terraria (post-dungeon selling)
+	private const string TerrariaIntermediates = """
+	[
+	  { "id": "assembler/compat_heavy_weighted_pressure_plate", "type": "gtceu:assembler", "duration": 100,
+	    "inputs":  { "item": [ { "content": { "type": "gtceu:sized", "count": 2,
+	      "ingredient": { "tag": "forge:plates/iron" } } } ] },
+	    "tickInputs": { "eu": [ { "content": 16 } ] },
+	    "outputs": { "item": [ { "content": { "item": "minecraft:heavy_weighted_pressure_plate" } } ] } },
+
+	  { "id": "assembler/compat_light_weighted_pressure_plate", "type": "gtceu:assembler", "duration": 100,
+	    "inputs":  { "item": [ { "content": { "type": "gtceu:sized", "count": 2,
+	      "ingredient": { "tag": "forge:plates/gold" } } } ] },
+	    "tickInputs": { "eu": [ { "content": 16 } ] },
+	    "outputs": { "item": [ { "content": { "item": "minecraft:light_weighted_pressure_plate" } } ] } }
+	]
+	""";
+
+	// compat_terra_prisma - because some people dont like bullet hell
+	private const string TerraPrisma = """
+	[
+	  { "id": "assembler/compat_terra_prisma", "type": "gtceu:assembler", "duration": 2400,
+	    "inputs":  {
+	      "item":  [
+	        { "content": { "item": "gtceu:wetware_processor_assembly" } },
+	        { "content": { "type": "gtceu:sized", "count": 4, "ingredient": { "item": "gtceu:zpm_emitter" } } },
+	        { "content": { "type": "gtceu:sized", "count": 2, "ingredient": { "item": "gtceu:zpm_field_generator" } } },
+	        { "content": { "type": "gtceu:sized", "count": 8, "ingredient": { "item": "gtceu:europium_plate" } } },
+	        { "content": { "type": "gtceu:sized", "count": 16, "ingredient": { "item": "gtceu:fine_europium_wire" } } }
+	      ],
+	      "fluid": [ { "content": { "amount": 1000, "value": { "fluid": "gtceu:soldering_alloy" } } } ]
+	    },
+	    "tickInputs": { "eu": [ { "content": 131072 } ] },
+	    "recipeConditions": [ { "type": "gtceu:cleanroom" } ],
+	    "outputs": { "item": [ { "content": { "item": "terraria:EmpressBlade" } } ] } }
+	]
+	""";
+
+	private static readonly string[] JsonGroups =
+	{
+		HatchesAndBuses, Bootstrap, SteamMachineOverrides, Misc, Casings, Clay,
+		TerrariaIntermediates, TerraPrisma,
+	};
+
+	// Per-tier crafting recipes for our custom-block machines
 	private static readonly string[] LampTiers =
 	{
 		"ulv","lv","mv","hv","ev","iv","luv","zpm","uv","uhv","uev","uiv","uxv","opv","max",
@@ -289,18 +349,11 @@ public static class CompatRecipes
 		  "outputs": { "item": [ { "content": { "item": "gtceu:{{tier}}_solar_panel_machine" } } ] } }
 		""";
 
-	// Parse the supplemental recipes into (station, recipe) pairs for the
-	// caller (RecipeJsonLoader) to merge into RecipeRegistry.
 	public static List<(string Station, GTRecipe Recipe)> Build(IIngredientResolver resolver)
 	{
 		var result = new List<(string, GTRecipe)>();
-		using var doc = JsonDocument.Parse(Json);
-		foreach (var el in doc.RootElement.EnumerateArray())
-		{
-			string id = el.GetProperty("id").GetString()!;
-			var recipe = GTRecipeSerializer.Read(el, resolver, id);
-			result.Add((recipe.RecipeType.RegistryName, recipe));
-		}
+		foreach (var group in JsonGroups)
+			ParseArray(group, resolver, result);
 		foreach (var tier in LampTiers)
 			ParseOne(LampRecipe(tier), resolver, result);
 		foreach (var tier in SolarPanelTiers)
@@ -308,11 +361,23 @@ public static class CompatRecipes
 		return result;
 	}
 
+	private static void ParseArray(string json, IIngredientResolver resolver, List<(string, GTRecipe)> result)
+	{
+		using var doc = JsonDocument.Parse(json);
+		foreach (var el in doc.RootElement.EnumerateArray())
+			ParseElement(el, resolver, result);
+	}
+
 	private static void ParseOne(string json, IIngredientResolver resolver, List<(string, GTRecipe)> result)
 	{
 		using var doc = JsonDocument.Parse(json);
-		string id = doc.RootElement.GetProperty("id").GetString()!;
-		var recipe = GTRecipeSerializer.Read(doc.RootElement, resolver, id);
+		ParseElement(doc.RootElement, resolver, result);
+	}
+
+	private static void ParseElement(JsonElement el, IIngredientResolver resolver, List<(string, GTRecipe)> result)
+	{
+		string id = el.GetProperty("id").GetString()!;
+		var recipe = GTRecipeSerializer.Read(el, resolver, id);
 		result.Add((recipe.RecipeType.RegistryName, recipe));
 	}
 
@@ -334,16 +399,13 @@ public static class CompatRecipes
 
 	// For each vanilla ore that has a raw_X -> crushed_X macerator recipe,
 	// emit a parallel recipe that consumes 1 vanilla ore directly and yields
-	// 16x the raw-recipe output at 2x EU/t (same duration). Keeps the macerator
-	// shortcut numerically equivalent to "1 vanilla ore -> 16 raw_X (hand
-	// recipe) -> 16 macerate runs" while costing the player extra power.
+	// 16x the raw-recipe output at 2x EU/t (same duration)
 	public static List<GTRecipe> BuildVanillaOreMaceratorRecipes(
 		IReadOnlyDictionary<string, List<GTRecipe>> byStation)
 	{
 		var result = new List<GTRecipe>();
 		if (!byStation.TryGetValue("macerator", out var macerator)) return result;
 
-		// Index once - we read up to 8 source recipes.
 		var bySrcId = new Dictionary<string, GTRecipe>(macerator.Count);
 		foreach (var r in macerator) bySrcId[r.Id] = r;
 
@@ -355,7 +417,6 @@ public static class CompatRecipes
 			string srcId = $"macerator/macerate_raw_{material}_ore_to_crushed_ore";
 			if (!bySrcId.TryGetValue(srcId, out var src)) continue;
 
-			// Replace the single item input (1x raw_X tag) with 1x vanilla ore.
 			var inputs = new Dictionary<object, List<Api.Recipe.Content.Content>>(src.Inputs.Count);
 			foreach (var (cap, list) in src.Inputs)
 			{

@@ -680,7 +680,12 @@ public class RecipeLogic : MachineTrait, IWorkable
 
 	public override void Save(TagCompound tag) => WriteCore(tag, includeTransient: true);
 
-	public override void SaveForSync(TagCompound tag) => WriteCore(tag, includeTransient: false);
+	public override void SaveForSync(TagCompound tag)
+	{
+		WriteCore(tag, includeTransient: false);
+		if (Machine.ViewerCount > 0 && _lastRecipe != null)
+			tag["lastRecipeBlob"] = GTRecipeNbt.Save(_lastRecipe);
+	}
 
 	private void WriteCore(TagCompound tag, bool includeTransient)
 	{

@@ -8,17 +8,15 @@ using Terraria.GameContent;
 
 namespace GregTechCEuTerraria.TerrariaCompat.UI.Widgets;
 
-// SSOT for display-only fluid-slot rendering + hover tooltip across browser
-// surfaces (recipe rows, favorites, ...). Live machine widgets (UIFluidSlot
-// etc.) stay separate - they carry click/fill behaviour. fallbackLabel covers a
-// null fluid (unresolved tag/attr); EmitTooltip's extraLine is appended verbatim
-// so callers attach chance/container notes without forking the helper.
+// display-only fluid-slot rendering + hover tooltip across browser surfaces
+// Live machine widgets (UIFluidSlot etc.) stay separate - they carry click/fill behaviour
 public static class BrowserFluidSlot
 {
 	private const int LabelHeight = 10;
 
 	public static void Draw(SpriteBatch sb, Rectangle dest, FluidType? fluid,
-		int amountMb = 0, string? fallbackLabel = null, Color? lightColor = null)
+		int amountMb = 0, string? fallbackLabel = null, Color? lightColor = null,
+		int amountBottomInset = LabelHeight)
 	{
 		var tint = lightColor ?? Color.White;
 		float alpha = tint.A / 255f;
@@ -53,7 +51,7 @@ public static class BrowserFluidSlot
 		if (amountMb > 0)
 		{
 			Terraria.Utils.DrawBorderString(sb, amountMb.ToString(),
-				new Vector2(dest.X + 2, dest.Bottom - LabelHeight),
+				new Vector2(dest.X + 2, dest.Bottom - amountBottomInset),
 				tint, 0.6f);
 		}
 	}

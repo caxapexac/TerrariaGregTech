@@ -159,9 +159,12 @@ public static class RecipeSearch
 				break;
 
 			case TagIngredient tag:
-				sb.Append(StripNamespace(tag.TagName)).Append(' ');
-				foreach (var t in tag.GetItems())
-					AppendItemDisplayName(sb, t.type);
+				string tagBare = StripNamespace(tag.TagName);
+				sb.Append(tagBare).Append(' ');
+				// Skip crafting tools to avoid bloat
+				if (!tagBare.StartsWith("tools/", System.StringComparison.Ordinal))
+					foreach (var t in tag.GetItems())
+						AppendItemDisplayName(sb, t.type);
 				break;
 
 			case SizedIngredient sized:

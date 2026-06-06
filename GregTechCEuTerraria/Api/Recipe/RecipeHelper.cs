@@ -4,21 +4,9 @@ using GregTechCEuTerraria.Common.Energy;
 
 namespace GregTechCEuTerraria.Api.Recipe;
 
-// PARTIAL - port of com.gregtechceu.gtceu.api.recipe.RecipeHelper.
-//
-// Upstream's matchContents / matchTickRecipe / handleRecipeIO / trimRecipeOutputs
-// were collapsed into the IRecipeLogicMachine machine surface
-// (handleRecipeIO collapsed into IRecipeLogicMachine.
-// {TryMatchInputContents, ...}). MatchRecipe + EU-tier helpers wrap that
-// surface for the recipe-modifier chain.
+// port of com.gregtechceu.gtceu.api.recipe.RecipeHelper.
 public static class RecipeHelper
 {
-	// Verbatim port of upstream `RecipeHelper.matchRecipe(machine, recipe)`.
-	// Routes through `IRecipeLogicMachine.TryMatchInputContents` - the same
-	// flat hook RecipeLogic.MatchRecipe uses. Mirrors upstream's
-	// `matchContents(machine, recipe, IO.IN)` minus the TickInputs check
-	// (callers building a synthetic recipe like the combustion engine's
-	// lubricant recipe have no tick inputs).
 	public static ActionResult MatchRecipe(
 		Api.Machine.Feature.IRecipeLogicMachine machine, GTRecipe recipe)
 	{
@@ -27,13 +15,6 @@ public static class RecipeHelper
 		return machine.TryMatchInputContents(recipe, itemIn, fluidIn);
 	}
 
-	// Verbatim port of upstream `RecipeHelper.handleRecipeIO(machine, recipe,
-	// io, chanceCaches)`. Routes to the machine's IO.IN consume hook or IO.OUT
-	// deposit hook (the same flat hooks RecipeLogic.HandleRecipeIO uses).
-	// `chanceCaches` arg upstream threads through to ChanceLogic.roll for
-	// chanced outputs; we don't surface that yet on the flat hooks (chanced
-	// roll happens inside the trait's HandleRecipeInner per-content), so the
-	// arg is accepted-but-unused. Callers can pass null today.
 	public static ActionResult HandleRecipeIO(
 		Api.Machine.Feature.IRecipeLogicMachine machine,
 		GTRecipe recipe,
@@ -51,16 +32,6 @@ public static class RecipeHelper
 			: machine.DepositOutputContents(recipe, items, fluids, machine.GetRecipeLogic());
 	}
 
-	// === Unified recipe-IO entry (Phase 1 of the recipe-IO surface parity) ===
-	// Port of upstream `RecipeHelper.handleRecipe(holder, recipe, io, contents,
-	// chanceCaches, isTick, simulate)`. The recipe ALREADY stores its contents as
-	// capability-keyed maps (`Inputs` / `Outputs` / `TickInputs` / `TickOutputs`,
-	// each with ITEM / FLUID / EU / CWU entries), so this just selects the right
-	// map for (io, isTick) and dispatches the WHOLE map through the holder's single
-	// `HandleRecipe` walk - one call, all capabilities together (vs the legacy
-	// per-cap fan-out). Behaviour is identical while the transitional shim
-	// (`IRecipeLogicMachine.HandleRecipe` default) re-splits to the legacy hooks;
-	// multiblocks override `HandleRecipe` to run the real group-aware dispatch.
 	public static ActionResult HandleRecipe(
 		Api.Machine.Feature.IRecipeLogicMachine machine,
 		GTRecipe recipe, Api.Capability.Recipe.IO io, bool isTick, bool simulate)
@@ -71,11 +42,6 @@ public static class RecipeHelper
 		return machine.HandleRecipe(recipe, io, contents, isTick, simulate, machine.GetRecipeLogic());
 	}
 
-	// Port of upstream `RecipeHelper.matchContents(holder, recipe)` =
-	// `matchRecipe(IO.IN) && matchRecipe(IO.OUT room) && matchTickRecipe(IO.IN)`.
-	// All three are simulate-only (no mutation). First failing branch wins, so
-	// capability+io failure attribution is preserved. Identical to the legacy
-	// MatchRecipe (regular-IN match -> regular-OUT room -> tick-IN feasibility).
 	public static ActionResult MatchContents(
 		Api.Machine.Feature.IRecipeLogicMachine machine, GTRecipe recipe)
 	{
@@ -87,7 +53,82 @@ public static class RecipeHelper
 	}
 
 
-	// Verbatim port of getRealEUt - inputEUt if non-empty, else outputEUt.
+	public static GTRecipe TrimRecipeOutputs(
+		GTRecipe recipe,
+		System.Collections.Generic.IReadOnlyDictionary<object, int>? trimLimits)
+	{
+		if (trimLimits == null || trimLimits.Count == 0) return recipe;
+		bool allUnlimited = true;
+		foreach (var v in trimLimits.Values)
+			if (v != -1) { allUnlimited = false; break; }
+		if (allUnlimited) return recipe;
+
+		var copy = recipe.Copy();
+
+		copy.Outputs.Clear();
+		foreach (var kv in DoTrim(recipe.Outputs, trimLimits)) copy.Outputs[kv.Key] = kv.Value;
+		copy.TickOutputs.Clear();
+		foreach (var kv in DoTrim(recipe.TickOutputs, trimLimits)) copy.TickOutputs[kv.Key] = kv.Value;
+
+		return copy;
+	}
+
+	public static System.Collections.Generic.Dictionary<object, System.Collections.Generic.List<Content.Content>>
+		DoTrim(
+			System.Collections.Generic.Dictionary<object, System.Collections.Generic.List<Content.Content>> current,
+			System.Collections.Generic.IReadOnlyDictionary<object, int> trimLimits)
+	{
+		var outputs =
+			new System.Collections.Generic.Dictionary<object, System.Collections.Generic.List<Content.Content>>(current.Count);
+
+		foreach (var entry in current)
+		{
+			var cap = entry.Key;
+			var contents = entry.Value;
+			if (contents.Count == 0) continue;
+			int n = trimLimits.TryGetValue(cap, out var lim) ? lim : -1;
+			if (n == 0) continue;
+
+			if (!outputs.TryGetValue(cap, out var list))
+			{
+				list = new System.Collections.Generic.List<Content.Content>();
+				outputs[cap] = list;
+			}
+			if (n == -1)
+			{
+				list.AddRange(contents);
+				continue;
+			}
+
+			int added = 0;
+			var chanced = new System.Collections.Generic.List<Content.Content>();
+			// Add non-chanced contents with priority
+			foreach (var content in contents)
+			{
+				if (added == n) break;
+				if (content.IsChanced)
+				{
+					chanced.Add(content);
+				}
+				else
+				{
+					list.Add(content);
+					added++;
+				}
+			}
+
+			// Add as many chanced contents as needed
+			if (added < n)
+			{
+				int rem = System.Math.Min(chanced.Count, n - added);
+				list.AddRange(chanced.GetRange(0, rem));
+			}
+		}
+
+		return outputs;
+	}
+
+
 	public static EnergyStack GetRealEUt(GTRecipe recipe)
 	{
 		var stack = recipe.InputEUt;
@@ -95,9 +136,6 @@ public static class RecipeHelper
 		return recipe.OutputEUt;
 	}
 
-	// Verbatim port of getRealEUtWithIO. Upstream returns an EnergyStack.WithIO
-	// record; we return a (stack, isInput) tuple - EnergyStack.WithIO itself
-	// is not ported (Codec/network-only otherwise).
 	public static (EnergyStack Stack, bool IsInput) GetRealEUtWithIO(GTRecipe recipe)
 	{
 		var stack = recipe.InputEUt;
@@ -105,7 +143,6 @@ public static class RecipeHelper
 		return (recipe.OutputEUt, false);
 	}
 
-	// Verbatim port of getRecipeEUtTier.
 	public static int GetRecipeEUtTier(GTRecipe recipe)
 	{
 		var stack = GetRealEUt(recipe);
@@ -114,10 +151,6 @@ public static class RecipeHelper
 		return VoltageTiers.TierByVoltage(eut);
 	}
 
-	// Verbatim port of getPreOCRecipeEuTier - the recipe's base EU/t tier before
-	// any overclock shifts have been applied. Used by chance-boost calculations
-	// (display lines + chanced-output rolls), where `chanceTier = preOCTier +
-	// recipe.ocLevel`.
 	public static int GetPreOCRecipeEuTier(GTRecipe recipe)
 	{
 		var stack = GetRealEUt(recipe);

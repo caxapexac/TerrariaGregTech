@@ -10,6 +10,7 @@ using GregTechCEuTerraria.Api.Machine.Trait;
 using GregTechCEuTerraria.Api.Pattern;
 using GregTechCEuTerraria.Api.Recipe;
 using GregTechCEuTerraria.Api.Recipe.Modifier;
+using GregTechCEuTerraria.Common.Machine.Trait;
 using GregTechCEuTerraria.TerrariaCompat.Net;
 using GregTechCEuTerraria.TerrariaCompat.Utils;
 using Microsoft.Xna.Framework;
@@ -18,10 +19,8 @@ namespace GregTechCEuTerraria.TerrariaCompat.Machine.Multiblock;
 
 // Port of WorkableMultiblockMachine. MultiblockControllerMachine + RecipeLogic
 // with per-IO CapabilitiesProxy + CapabilitiesFlat aggregated on form.
-// Dropped: CleanroomReceiverTrait, IMufflableMachine (only state),
-// activeBlocks BlockState toggling, muffler sound, MachineRenderState.
-// RecipeLogic dispatches via IRecipeLogicMachine hooks (we route them through
-// CapabilitiesProxy -> DispatchContents = verbatim RecipeRunner.handleContents).
+// Dropped: IMufflableMachine (only state), activeBlocks BlockState toggling,
+// muffler sound, MachineRenderState
 public abstract class WorkableMultiblockMachine : MultiblockControllerMachine, IWorkableMultiController, IVoidable
 {
 	private RecipeLogic? _recipeLogic;
@@ -29,9 +28,6 @@ public abstract class WorkableMultiblockMachine : MultiblockControllerMachine, I
 
 	public int ActiveRecipeType { get; private set; }
 
-	// Verbatim MachineModeFancyConfigurator.setActiveRecipeTypeAndUpdateTickSubs:
-	// without the resubscribe an idle multi stays unsubscribed until the next
-	// bus notification.
 	public void SetActiveRecipeType(int idx)
 	{
 		var types = GetRecipeTypes();
@@ -45,11 +41,8 @@ public abstract class WorkableMultiblockMachine : MultiblockControllerMachine, I
 	}
 
 	public Dictionary<IO, List<RecipeHandlerList>> CapabilitiesProxy { get; } = new();
-
-	// IO -> (RecipeCapability singleton -> handler list).
 	public Dictionary<IO, Dictionary<object, List<object>>> CapabilitiesFlat { get; } = new();
 
-	// State-only - sound suppression deferred.
 	public bool IsMuffled { get; private set; }
 
 	private GTRecipeType[]? _recipeTypes;
@@ -71,8 +64,10 @@ public abstract class WorkableMultiblockMachine : MultiblockControllerMachine, I
 		_recipeLogic?.UpdateTickSubscription();
 	}
 	public MultiblockVoidingMode GetVoidingMode() => VoidingMode;
-	// LargeTurbineMachine overrides to true (lets EU buffer overflow silently drop).
-	public virtual bool CanVoidRecipeOutputs(object capability) => VoidingMode.CanVoid(capability);
+
+	public virtual bool CanVoidRecipeOutputs(object capability) =>
+		VoidingMode.CanVoid(capability) ||
+		(GetOutputLimits() is { } limits && limits.TryGetValue(capability, out var n) && n == 0);
 
 	protected WorkableMultiblockMachine() : base() { }
 
@@ -83,6 +78,10 @@ public abstract class WorkableMultiblockMachine : MultiblockControllerMachine, I
 		_recipeLogic = CreateRecipeLogic();
 		Traits.Attach(_recipeLogic);
 		Traits.RegisterPersistent("recipe", _recipeLogic);
+
+		var cleanroomReceiver = new CleanroomReceiverTrait();
+		Traits.Attach(cleanroomReceiver);
+		Traits.RegisterPersistent("CleanroomReceiver", cleanroomReceiver);
 	}
 
 	protected virtual RecipeLogic CreateRecipeLogic() => new();
@@ -96,9 +95,6 @@ public abstract class WorkableMultiblockMachine : MultiblockControllerMachine, I
 		base.OnStructureFormed();
 		EnsureRecipeLogic();
 
-		// Upstream calls onStructureFormed unconditionally; the slow-cadence
-		// re-walk on a formed multi re-enters here repeatedly. Clear up front
-		// or _traitSubscriptions leaks per re-walk.
 		foreach (var sub in _traitSubscriptions) sub.Unsubscribe();
 		_traitSubscriptions.Clear();
 		CapabilitiesProxy.Clear();
@@ -118,12 +114,10 @@ public abstract class WorkableMultiblockMachine : MultiblockControllerMachine, I
 			{
 				if (!handlerList.IsValid(io)) continue;
 				AddHandlerList(handlerList);
-				// Wake the recipe scanner on bus/tank change.
 				_traitSubscriptions.Add(handlerList.Subscribe(_recipeLogic!.UpdateTickSubscription));
 			}
 		}
 
-		// Controller's own handler traits (usually none; preserved for parity).
 		var ioTraits = new Dictionary<IO, List<object>>();
 		foreach (var trait in Traits.AllTraits)
 		{
@@ -144,7 +138,6 @@ public abstract class WorkableMultiblockMachine : MultiblockControllerMachine, I
 			_traitSubscriptions.Add(handlerList.Subscribe(_recipeLogic!.UpdateTickSubscription));
 		}
 
-		// Kick once on form so recipe scanning starts against fresh handlers.
 		_recipeLogic!.UpdateTickSubscription();
 	}
 
@@ -165,11 +158,9 @@ public abstract class WorkableMultiblockMachine : MultiblockControllerMachine, I
 		CapabilitiesFlat.Clear();
 		foreach (var sub in _traitSubscriptions) sub.Unsubscribe();
 		_traitSubscriptions.Clear();
-		// Don't reset RecipeLogic - chunk-unload mid-recipe should resume.
 		_recipeLogic?.UpdateTickSubscription();
 	}
 
-	// Verbatim IRecipeCapabilityHolder.addHandlerList.
 	public void AddHandlerList(RecipeHandlerList handlerList)
 	{
 		if (handlerList == RecipeHandlerList.NO_DATA) return;
@@ -209,14 +200,11 @@ public abstract class WorkableMultiblockMachine : MultiblockControllerMachine, I
 		return GetRealRecipe(recipe);
 	}
 
-	// Verbatim fullModifyRecipe (java:204) - without this every multi runs at
-	// raw speed (no overclock / no parallel-hatch).
-	public virtual GTRecipe? FullModifyRecipe(GTRecipe recipe) => DoModifyRecipe(recipe);
+	public virtual GTRecipe? FullModifyRecipe(GTRecipe recipe)
+		=> DoModifyRecipe(Api.Recipe.RecipeHelper.TrimRecipeOutputs(recipe, GetOutputLimits()));
 
-	// Verbatim RecipeLogic.java:316-326 (MachineControllerCover preventPowerFail).
 	public virtual bool PreventPowerFail() => HasPowerFailPreventingCover();
 
-	// Captured so CheckMatchedRecipeAvailable can surface modifier Cancel reasons.
 	private string? _lastModifierFailReason;
 	public string? GetLastModifierFailReason() => _lastModifierFailReason;
 

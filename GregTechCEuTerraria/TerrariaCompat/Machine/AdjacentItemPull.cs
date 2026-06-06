@@ -5,10 +5,7 @@ using GregTechCEuTerraria.Api.Capability.Recipe;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Machine;
 
-// Pull side of AdjacentItemPush. Shape matches upstream
-// NotifiableItemStackHandler.importFromNearby(side). Used by multiblock input
-// buses; the non-multi processing machines never auto-pull upstream either
-// (input comes via ConveyorCover / pipes).
+// Pull side of AdjacentItemPush. Shape matches upstream NotifiableItemStackHandler.importFromNearby(side)
 public static class AdjacentItemPull
 {
 	// side=None scans full perimeter; exclude drops one cardinal from a scan.
@@ -29,9 +26,11 @@ public static class AdjacentItemPull
 
 			for (int srcSlot = 0; srcSlot < srcHandler.SlotCount; srcSlot++)
 			{
+				var peek = srcHandler.GetSlot(srcSlot);
+				if (peek.IsAir || !ourFilter(peek)) continue;
+
 				var available = srcHandler.Extract(srcSlot, maxPerSlot, simulate: true);
-				if (available is null || available.IsAir || available.stack <= 0) continue;
-				if (!ourFilter(available)) continue;
+				if (available.IsAir || available.stack <= 0) continue;
 
 				for (int destSlot = destSlotStart; destSlot < destSlotStart + destSlotCount; destSlot++)
 				{

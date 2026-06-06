@@ -12,17 +12,7 @@ namespace GregTechCEuTerraria.TerrariaCompat.Net.Actions;
 // Dump button (extract one stack to the clicking player), and the in-GUI
 // Insert slot click (deposit the player's cursor into storage). Server-
 // authoritative throughout (mirrors how the Super Tank's toggles route through
-// TankConfigSetAction).
-//
-// Op-conditional payload:
-//   Locked / Voiding / AutoOutput -> bool _value
-//   Dump                          -> bool _value (unused; kept for wire shape)
-//   Insert                        -> Item _cursor (the player's claimed cursor)
-//
-// Insert delivers the leftover back via CursorUpdatePacket(Delivery.Cursor),
-// which directly mutates Main.mouseItem on the originator. This bypasses
-// vanilla SyncEquipment's "ignore-self" gate (MessageBuffer.cs:403) - the same
-// gate that caused the dupe in the old tile-RMB-ChestInsertPacket path.
+// TankConfigSetAction)
 public sealed class ChestAction : IMachineAction
 {
 	public enum Op : byte
@@ -42,8 +32,6 @@ public sealed class ChestAction : IMachineAction
 
 	public ChestAction() { }
 	public ChestAction(Op op, bool value) { _op = op; _value = value; }
-	// Insert overload - detach from Main.mouseItem so the wire copy can't be
-	// mutated post-send (same convention as SlotAction's cursor field).
 	public ChestAction(Op op, Item cursor) { _op = op; _cursor = cursor.Clone(); }
 
 	public void Write(BinaryWriter w)
@@ -77,7 +65,8 @@ public sealed class ChestAction : IMachineAction
 				if (Main.netMode == NetmodeID.Server)
 					CursorUpdatePacket.SendTo(byWhoAmI, leftover, CursorUpdatePacket.Delivery.Cursor);
 				else
-					Main.mouseItem = leftover;
+					// Insert may return the shared CustomItemStackHandler.Empty sentinel on a full insert
+					Main.mouseItem = leftover.IsAir ? new Item() : leftover;
 				break;
 		}
 	}

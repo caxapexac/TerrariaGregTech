@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework;
 namespace GregTechCEuTerraria.Api.Machine.Feature;
 
 // port of com.gregtechceu.gtceu.api.machine.feature.IRecipeLogicMachine.
-public interface IRecipeLogicMachine : IWorkable
+public interface IRecipeLogicMachine : IWorkable, IVoidable
 {
 	// (not stuck on no-power, no-redstone, etc.).
 	bool IsRecipeLogicAvailable() => true;

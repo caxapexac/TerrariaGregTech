@@ -190,9 +190,27 @@ REMOVED_EXACT_IDS = (
 )
 
 
+KEEP_RECIPE_IDS = frozenset((
+    "assembler/cover_fluid_detector",
+    "assembler/cover_item_detector",
+    "assembler/cover_shutter",
+))
+
+REMOVED_RECIPE_IDS = frozenset((
+    "arc_furnace/arc_fluid_detector_cover",
+    "macerator/macerate_fluid_detector_cover",
+    "arc_furnace/arc_item_detector_cover",
+    "macerator/macerate_item_detector_cover",
+    "arc_furnace/arc_shutter_module_cover",
+    "macerator/macerate_shutter_module_cover",
+))
+
+
 def mentions_removed(recipe_id, obj):
     """True if a recipe involves any REMOVED_TOKENS (substring) or
     REMOVED_EXACT_IDS (whole-string) material/item."""
+    if recipe_id in KEEP_RECIPE_IDS:
+        return False
     rid = recipe_id.lower()
     if any(tok in rid for tok in REMOVED_TOKENS):
         return True
@@ -324,9 +342,13 @@ def main():
     dropped_ae2 = 0
     dropped_stripped = 0
     dropped_recipe_type = 0
+    dropped_recipe_id = 0
     for recipe_id, obj in walk_recipes(args.input):
         entry = {"id": recipe_id}
         entry.update(obj)
+        if recipe_id in REMOVED_RECIPE_IDS:
+            dropped_recipe_id += 1
+            continue
         if obj.get("type") in REMOVED_RECIPE_TYPES:
             dropped_recipe_type += 1
             continue
@@ -373,6 +395,8 @@ def main():
         print(f"  dropped {dropped_stripped:,} log-stripping recipes (stripped wood is a no-op in Terraria)")
     if dropped_recipe_type:
         print(f"  dropped {dropped_recipe_type:,} recipes of unported types ({', '.join(REMOVED_RECIPE_TYPES)})")
+    if dropped_recipe_id:
+        print(f"  dropped {dropped_recipe_id:,} recipes by exact id ({', '.join(sorted(REMOVED_RECIPE_IDS))})")
 
     args.output.parent.mkdir(parents=True, exist_ok=True)
     print(f"Writing {len(recipes):,} recipes to {args.output.relative_to(REPO_ROOT)}...")

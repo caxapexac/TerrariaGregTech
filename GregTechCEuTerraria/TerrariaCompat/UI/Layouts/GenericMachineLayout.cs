@@ -5,15 +5,12 @@ using GregTechCEuTerraria.TerrariaCompat.Machine;
 
 namespace GregTechCEuTerraria.TerrariaCompat.UI.Layouts;
 
-// 1:1 port of upstream GTRecipeTypeUI.addInventorySlotGroup +
-// createEditableUITemplate (GTRecipeTypeUI.java:200-217). Per side, walks
-// (capability, count) pairs ordered by RecipeCapability.COMPARATOR (items then
-// fluids); slots at (idx%3, idx/3), max 3 cols, row break between capabilities.
-// Template = `2 x maxWidth + arrowGap`.
+// port of GTRecipeTypeUI.addInventorySlotGroup + createEditableUITemplate
 //
-// Deviations: slot stride = 22 (vanilla-inventory alignment) instead of 18;
-// energy bar + circuit selector added as side fixtures; status + EU readout
-// below. Fluid slots are 22x22 (uniform-grid parity, no taller tanks).
+// adaptations:
+//  slot stride = 22 (vanilla-inventory alignment) instead of 18
+//  energy bar + circuit selector added as side fixtures
+//  status + EU readout below
 public static class GenericMachineLayout
 {
 	private const int SlotStride = 22;     // matches UISlot.NativeUnscaledSize
@@ -62,7 +59,10 @@ public static class GenericMachineLayout
 		int ocLabelY  = arrowY + ArrowSize + 2;
 		int euLabelY  = ocLabelY + 10;
 		int footerY   = System.Math.Max(40 + templateH + 6, euLabelY + 10);
-		int totalH    = footerY + 22;
+		// Low-tier output-cap warning sits as a final row under the footer.
+		string? byproductWarn = OutputLimitWarning.Text(m, m.OutputSlots);
+		int warnY     = footerY + 16;
+		int totalH    = byproductWarn != null ? warnY + 14 : footerY + 22;
 
 		var layout = new MachineUILayout
 		{
@@ -79,8 +79,6 @@ public static class GenericMachineLayout
 			isOutput: false,
 			sectionLabel: "Input");
 
-		// Output indices restart at 0 - widgets carry the IN/OUT direction,
-		// the machine resolves the actual handler index. No hand-split here.
 		EmitGroup(layout, m, outputEntries,
 			baseX: leftPad + outputsBaseX,
 			baseY: outputsBaseY,
@@ -110,6 +108,10 @@ public static class GenericMachineLayout
 		layout.Widgets.Add(new DynamicLabelWidgetSpec(X: leftPad + energyX - 4, Y: footerY, Getter: () =>
 			$"{m.EnergyStored:N0} EU", Scale: 0.55f));
 
+		if (byproductWarn != null)
+			layout.Widgets.Add(new LabelWidgetSpec(X: leftPad, Y: warnY, Text: byproductWarn,
+				Scale: 0.6f, Color: OutputLimitWarning.Color));
+
 		return layout;
 	}
 
@@ -123,8 +125,6 @@ public static class GenericMachineLayout
 		return list;
 	}
 
-	// Mirror of upstream addInventorySlotGroup measurement (lines 290-317):
-	//   maxCount x stride + 2*pad  wide,  totalRows x stride + 2*pad  tall.
 	private static (int W, int H) MeasureGroup(List<Entry> entries)
 	{
 		int maxCount = 0;
@@ -139,8 +139,6 @@ public static class GenericMachineLayout
 		        totalRows * SlotStride + 2 * GroupPad);
 	}
 
-	// Mirror of upstream addInventorySlotGroup emission (lines 318-337):
-	// walk slots at (idx%3, idx/3); after each capability pad idx to next row.
 	private static void EmitGroup(MachineUILayout layout, WorkableTieredMachine m,
 		List<Entry> entries, int baseX, int baseY,
 		int slotStartIndex, int fluidTankStartIndex, bool isOutput, string sectionLabel)

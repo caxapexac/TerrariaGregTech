@@ -18,6 +18,9 @@ public sealed class IngredientResolverImpl : IIngredientResolver
 	{
 		if (string.IsNullOrEmpty(upstreamId)) return 0;
 
+		if (upstreamId.StartsWith("terraria:", System.StringComparison.Ordinal))
+			return Terraria.ID.ItemID.Search.TryGetId(upstreamId["terraria:".Length..], out var tid) ? tid : 0;
+
 		// 1. Hand-curated mappings.
 		if (VanillaItemMap.TryGet(upstreamId, out var v)) return v;
 

@@ -13,9 +13,6 @@ using Terraria.UI;
 
 namespace GregTechCEuTerraria.TerrariaCompat.UI;
 
-// Sum-type spec for one widget on a layout - knows its position/sizing and
-// how to materialise itself against an entity (capability-checked). Stateful
-// widgets carry getter/setter delegates closed over the entity reference.
 public abstract record WidgetSpec(int X, int Y)
 {
 	public abstract UIElement Create(MetaMachine entity);
@@ -32,7 +29,6 @@ public sealed record EnergyBarWidgetSpec(int X, int Y, int Width = 18, int Heigh
 	}
 }
 
-// Mirrors upstream ProgressWidget(getTemperaturePercent).
 public sealed record TemperatureBarWidgetSpec(int X, int Y, int Width = 10, int Height = 54)
 	: WidgetSpec(X, Y)
 {
@@ -44,10 +40,11 @@ public sealed record TemperatureBarWidgetSpec(int X, int Y, int Width = 10, int 
 	}
 }
 
-public sealed record LabelWidgetSpec(int X, int Y, string Text, float Scale = 0.85f)
+public sealed record LabelWidgetSpec(int X, int Y, string Text, float Scale = 0.85f,
+	Microsoft.Xna.Framework.Color? Color = null)
 	: WidgetSpec(X, Y)
 {
-	public override UIElement Create(MetaMachine entity) => new UILabel(Text, Scale);
+	public override UIElement Create(MetaMachine entity) => new UILabel(Text, Scale, Color);
 }
 
 public sealed record DynamicLabelWidgetSpec(int X, int Y, Func<string> Getter, float Scale = 0.85f)
@@ -56,8 +53,7 @@ public sealed record DynamicLabelWidgetSpec(int X, int Y, Func<string> Getter, f
 	public override UIElement Create(MetaMachine entity) => new UIDynamicLabel(Getter, Scale);
 }
 
-// Re-evaluates `Func<List<string>>` per frame - analogue of upstream
-// ComponentPanelWidget. Used by every multi layout via MultiblockDisplayText.
+// Re-evaluates `Func<List<string>>` per frame - analogue of upstream ComponentPanelWidget
 public sealed record MultiLineDynamicLabelWidgetSpec(int X, int Y,
 	Func<System.Collections.Generic.IReadOnlyList<string>> Getter,
 	float Scale = 0.85f, float LineHeight = 16f)
@@ -67,7 +63,7 @@ public sealed record MultiLineDynamicLabelWidgetSpec(int X, int Y,
 		new UIMultiLineDynamicLabel(Getter, Scale, LineHeight);
 }
 
-// Default size is the small +/- stepper footprint.
+// Default size is the small +/- stepper footprint
 public sealed record TextButtonWidgetSpec(int X, int Y, Func<string> Label,
 		Action? OnLeft = null, Action? OnRight = null, string? Tooltip = null,
 		int Width = 28, int Height = 18, Func<bool>? Visible = null)
@@ -84,8 +80,7 @@ public sealed record TextButtonWidgetSpec(int X, int Y, Func<string> Label,
 public sealed record ToggleButtonWidgetSpec(int X, int Y, string IconAssetPath, Func<bool> Getter, Action<bool> Setter, string Tooltip)
 	: WidgetSpec(X, Y)
 {
-	// Vertical-split sprite (top=ON / bottom=OFF) - upstream convention for
-	// button_blacklist / button_distinct_buses / button_filter_* / etc.
+	// Vertical-split sprite (top=ON / bottom=OFF) - button_blacklist / button_distinct_buses / button_filter_* / etc.
 	public bool VerticalSplit { get; init; } = false;
 
 	public override UIElement Create(MetaMachine entity)
@@ -125,8 +120,7 @@ public sealed record ProgressArrowWidgetSpec(int X, int Y, Func<float> Progress,
 		new UIProgressArrow(Progress, AssetPath);
 }
 
-// Port of upstream GhostCircuitSlotWidget - binds the machine's 1-slot
-// circuitInventory; mutations go through CircuitSetAction.
+// Port of GhostCircuitSlotWidget
 public sealed record CircuitButtonWidgetSpec(int X, int Y, int Width = 22, int Height = 22)
 	: WidgetSpec(X, Y)
 {
@@ -142,8 +136,7 @@ public sealed record CircuitButtonWidgetSpec(int X, int Y, int Width = 22, int H
 	}
 }
 
-// Bucket fill/drain via RMB. TankIndex is local to Direction; the machine
-// resolves it to its flat IFluidHandler index (UI never hand-splits in/out).
+// Bucket fill/drain via RMB. TankIndex is local to Direction
 public sealed record FluidSlotWidgetSpec(int X, int Y, int Width, int Height, IO Direction, int TankIndex = 0)
 	: WidgetSpec(X, Y)
 {
@@ -155,8 +148,6 @@ public sealed record FluidSlotWidgetSpec(int X, int Y, int Width, int Height, IO
 	}
 }
 
-// SuperChest's storage can exceed Item.maxStack by orders of magnitude, so
-// this is custom rather than reusing UISlot (which assumes Item[] backing).
 public sealed record SuperChestSlotWidgetSpec(int X, int Y, int Size = 22) : WidgetSpec(X, Y)
 {
 	public override UIElement Create(MetaMachine entity)
@@ -167,21 +158,19 @@ public sealed record SuperChestSlotWidgetSpec(int X, int Y, int Size = 22) : Wid
 	}
 }
 
-// Click sets source item; right-click clears.
 public sealed record CreativeSourceItemSlotWidgetSpec(int X, int Y, Func<Terraria.Item> Getter, Action<Terraria.Item?> Setter)
 	: WidgetSpec(X, Y)
 {
 	public override UIElement Create(MetaMachine entity) => new UICreativeSourceItemSlot(Getter, Setter);
 }
 
-// Click with bucket/cell sets source fluid.
 public sealed record CreativeSourceFluidSlotWidgetSpec(int X, int Y, Func<Api.Fluids.FluidType?> Getter, Action<Api.Fluids.FluidType?> Setter)
 	: WidgetSpec(X, Y)
 {
 	public override UIElement Create(MetaMachine entity) => new UICreativeSourceFluidSlot(Getter, Setter);
 }
 
-// Label + [-]/[+] + readout. Used by creative-chest/tank/energy layouts.
+// Label + [-]/[+] + readout
 public sealed record NumericStepperWidgetSpec(int X, int Y, string Label,
 		Func<long> Getter, Action<long> Setter,
 		long Min = 0, long Max = long.MaxValue, long Step = 1, int LabelWidth = 60)
@@ -191,8 +180,7 @@ public sealed record NumericStepperWidgetSpec(int X, int Y, string Label,
 }
 
 // Rebuild-on-signature-change subtree. Used for one-region-swaps-widget-set
-// cases (e.g. ItemCollector filter editor: 3x3 grid vs tag text field).
-// Build closure positions children in already-SCALED pixels.
+// cases (e.g. ItemCollector filter editor: 3x3 grid vs tag text field)
 public sealed record SwappableRegionWidgetSpec(
 	int X, int Y, int Width, int Height,
 	Func<MetaMachine, int> Signature,
@@ -202,7 +190,6 @@ public sealed record SwappableRegionWidgetSpec(
 {
 	public override UIElement Create(MetaMachine entity)
 	{
-		// Width/Height in MC-tile units (BuildPanel's `* s` scales them).
 		var container = new UISwappableContainer(
 			signature: () => Signature(entity),
 			build:     c => Build(c, ContentScale, entity))

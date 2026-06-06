@@ -23,25 +23,15 @@ namespace GregTechCEuTerraria.TerrariaCompat.UI;
 // Rebuilds children whenever Bind is called with a fresh entity/layout.
 public sealed class MachineUIState : UIState
 {
-	// Per-slot seam so adjacent slots don't touch (see BuildPanel widget loop).
 	private const float SlotGap = 1f;
 
 	private MetaMachine? _entity;
 	private MachineUILayout? _layout;
-
-	// Running bottom of the left-side satellite stack in screen pixels relative
-	// to machineTop. Each AppendXxxPanel reads it, places itself, advances by
-	// its outer height + Gap. Reset at the top of BuildPanel.
 	private float _leftStackOffsetPx;
-
-	// Cover settings popup - anchored below the machine panel. _pendingCoverOpen
-	// defers the open out of the draw phase (the RMB is detected during DrawSelf).
 	private CoverSide? _openCoverSide;
 	private UIElement? _coverPopup;
 	private CoverSide? _pendingCoverOpen;
-	// Filter-editor kind at popup build time (0/1/2 = none/simple/tag); a change
-	// rebuilds the popup so the right editor shows and it resizes.
-	private int _coverPopupFilterSig;
+	private int _coverPopupFilterSig; // (0/1/2 = none/simple/tag)
 	private UIElement? _machinePanel;
 
 	public MetaMachine? Entity => _entity;
@@ -71,7 +61,7 @@ public sealed class MachineUIState : UIState
 
 	public void RequestCoverSettings(CoverSide side) => _pendingCoverOpen = side;
 
-	// RMB toggles - opens the popup, or closes if already open on `side`.
+	// RMB toggles - opens the popup, or closes if already open
 	private void ToggleCoverSettings(CoverSide side)
 	{
 		if (_entity is null || _layout is null) return;
@@ -87,9 +77,6 @@ public sealed class MachineUIState : UIState
 
 		var popup = CoverSettingsUI.Build(_entity, side, _layout.Scale);
 		if (popup is null) return;
-
-		// Anchor below the machine panel's ACTUAL rendered bottom (read at
-		// runtime; a tall layout can overflow the spec'd _layout.Height).
 		popup.HAlign = 0.5f;
 		popup.VAlign = 0f;
 		float panelBottom = 0f;
@@ -107,7 +94,7 @@ public sealed class MachineUIState : UIState
 
 	private void CloseCoverSettings()
 	{
-		Widgets.UITextField.UnfocusAll();   // release focused field before teardown
+		Widgets.UITextField.UnfocusAll();
 		_coverPopup?.Remove();
 		_coverPopup = null;
 		_openCoverSide = null;
@@ -116,10 +103,6 @@ public sealed class MachineUIState : UIState
 	public override void Update(GameTime gameTime)
 	{
 		base.Update(gameTime);
-		// Modal mouse capture lives in MachineUISystem.PostUpdateInput (here
-		// in UpdateUI it'd be one frame stale w.r.t. Player.ItemCheck).
-
-		// Cover popup: drain deferred RMB requests and auto-close on cover loss.
 		if (_pendingCoverOpen is { } pending)
 		{
 			_pendingCoverOpen = null;
@@ -129,10 +112,6 @@ public sealed class MachineUIState : UIState
 		{
 			if (_entity is null || _entity.GetCoverAtSide(open) is null)
 				CloseCoverSettings();
-			// Filter-kind changed (item installed/removed/swapped) -> rebuild so
-			// the right editor (matcher grid vs tag field) shows. Deferred until
-			// no mouse button is held - rebuilding mid-click destroys the clicked
-			// widget's press-edge state and the click re-fires every frame.
 			else if (!Main.mouseLeft && !Main.mouseRight
 			         && CoverSettingsUI.FilterEditorSignature(_entity, open) != _coverPopupFilterSig)
 			{
@@ -155,12 +134,11 @@ public sealed class MachineUIState : UIState
 			Width = StyleDimension.FromPixels(_layout.Width * s),
 			Height = StyleDimension.FromPixels(_layout.Height * s),
 			HAlign = 0.5f,
-			VAlign = 0.3f, // upper-middle - doesn't crowd centre with the inventory open
+			VAlign = 0.3f,
 		};
 
 		if (!string.IsNullOrEmpty(_layout.Title))
 		{
-			// Title stays 1x - vanilla UI text isn't pixel art, upscaling is ugly.
 			var title = new UIText(_layout.Title, 1.0f, large: false)
 			{
 				Left = StyleDimension.FromPixels(8 * s),
@@ -172,11 +150,8 @@ public sealed class MachineUIState : UIState
 		foreach (var spec in _layout.Widgets)
 		{
 			var element = spec.Create(_entity);
-			// Scale widget intrinsic size to match panel scale.
 			float w = element.Width.Pixels * s;
 			float h = element.Height.Pixels * s;
-			// Shrink slot/tank widgets by SlotGap on both axes so flush-placed
-			// slots have a 1-px seam to their neighbour.
 			if (element is Widgets.UISlot or Widgets.UIFluidSlot)
 			{
 				w -= SlotGap;
@@ -223,18 +198,13 @@ public sealed class MachineUIState : UIState
 			AppendRecipeBrowser(proc);
 	}
 
-	// IO & cover panel pinned above the machine panel, centered. Each cluster
-	// is 54x54 (cover/item/fluid in that order). Item/fluid carry an 18x18
-	// allow-input-from-output toggle centered below; cover has none.
+	// IO & cover panel pinned above the machine panel, centered
 	private void AppendIOConfigPanel(MetaMachine entity, UITerrariaPanel machinePanel)
 	{
 		bool wantsItem  = entity.SupportsAutoOutputItems;
 		bool wantsFluid = entity.SupportsAutoOutputFluids;
-		// Multi controllers route covers to the left stack via AppendCoverPanelLeft.
-		// Machines opting out of covers (ME Terminal / Storage) show no cluster.
 		bool wantsCover = entity.SupportsCovers
 			&& entity is not Machine.Multiblock.MultiblockControllerMachine;
-		// Parts carry a single IoDirection (not AutoOutputTrait) - separate cluster.
 		var part        = entity as Machine.Multiblock.Part.TieredIOPartMachine;
 		bool wantsPart  = part is not null;
 
@@ -251,11 +221,9 @@ public sealed class MachineUIState : UIState
 		int outerW = innerW + Padding * 2;
 		int outerH = innerH + Padding * 2;
 
-		// Anchored just above the machine panel's top edge (UI-space pixels;
-		// VAlign math relative to a sibling is awkward in tML's UI).
 		float uiH = Main.screenHeight / (Main.UIScale <= 0 ? 1f : Main.UIScale);
 		float machineH  = _layout.Height * s;
-		float machineTop = 0.3f * (uiH - machineH);    // matches machinePanel.VAlign = 0.3
+		float machineTop = 0.3f * (uiH - machineH);
 		float ioH       = outerH * s;
 		const float GapAbove = 6f;
 		float ioTop = System.Math.Max(8f, machineTop - ioH - GapAbove);
@@ -346,9 +314,6 @@ public sealed class MachineUIState : UIState
 
 		if (wantsPart)
 		{
-			// Single-direction part cluster. The auto-output toggle proxies
-			// through WorkingEnabled (structurally identical to auto-output
-			// on a machine); no allow-input toggle (parts have one IoDirection).
 			var partCluster = new UIDirectionSelector(
 				part!.PartIoConfigMode,
 				() => part.IoDirection,
@@ -367,9 +332,7 @@ public sealed class MachineUIState : UIState
 		Append(ioPanel);
 	}
 
-	// Power toggle panel - left of the machine panel, top of the left stack.
-	// Appended to UIState root (not machinePanel) so hit-testing reaches it -
-	// tML skips children whose parent rect doesn't contain the cursor.
+	// Power toggle panel - left of the machine panel, top of the left stack
 	private void AppendPowerTogglePanel(MetaMachine entity, UITerrariaPanel machinePanel)
 	{
 		float s = _layout!.Scale;
@@ -576,9 +539,6 @@ public sealed class MachineUIState : UIState
 		_leftStackOffsetPx += outerH * s + Gap;
 	}
 
-	// Distinct-buses satellite - verbatim port of upstream's
-	// `IDistinctPart.attachConfigurators`. Same sprite (top=ON / bottom=OFF
-	// per upstream's getSubTexture), same tooltip, same click -> SetDistinct.
 	private void AppendDistinctTogglePanel(MetaMachine entity, Api.Machine.Feature.Multiblock.IDistinctPart part)
 	{
 		float s = _layout!.Scale;
@@ -621,7 +581,6 @@ public sealed class MachineUIState : UIState
 			Width  = StyleDimension.FromPixels(BtnSize * s),
 			Height = StyleDimension.FromPixels(BtnSize * s),
 		};
-		// Vertical-split sprite - lazy picker so it survives texture reloads.
 		btn.IconSrcRectFor = on =>
 		{
 			var tex = ModContent.Request<Texture2D>(
@@ -629,8 +588,8 @@ public sealed class MachineUIState : UIState
 				ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
 			int half = tex.Height / 2;
 			return on
-				? new Rectangle(0, 0,    tex.Width, half)   // ON  - upstream getSubTexture(0, 0, 1, 0.5)
-				: new Rectangle(0, half, tex.Width, half);  // OFF - upstream getSubTexture(0, 0.5, 1, 0.5)
+				? new Rectangle(0, 0,    tex.Width, half)
+				: new Rectangle(0, half, tex.Width, half);
 		};
 		btn.TooltipFor = on => "Distinct Buses: " + (on ? "Yes" : "No");
 		distinctPanel.Append(btn);
@@ -694,8 +653,6 @@ public sealed class MachineUIState : UIState
 		}
 	}
 
-	// Mirrors machinePanel's HAlign=0.5, VAlign=0.3 so satellites parented to
-	// the UIState root can anchor against it.
 	private (float Left, float Top, float MachineWidth) MachinePanelScreenAnchor()
 	{
 		float s = _layout!.Scale;
@@ -719,9 +676,6 @@ public sealed class MachineUIState : UIState
 		const int Padding = 4;
 		int outerW = SlotSize + Padding * 2;
 		int outerH = LabelHeight + SlotSize + Padding * 2 + 2;
-
-		// Outside the machine panel's top-right; parented to UIState root so
-		// tML hit-testing reaches it (skips children outside parent rect).
 		const float Gap = 6f;
 		var (machineLeft, machineTop, machineW) = MachinePanelScreenAnchor();
 		var chargerPanel = new UITerrariaPanel
@@ -741,9 +695,6 @@ public sealed class MachineUIState : UIState
 			Top  = StyleDimension.FromPixels(Padding * s),
 		};
 		chargerPanel.Append(label);
-
-		// Upstream charger_slot_overlay - appended before the slot so vanilla
-		// slot rendering composites on top.
 		var bgTex = ModContent.Request<Microsoft.Xna.Framework.Graphics.Texture2D>(
 			"GregTechCEuTerraria/Content/Textures/gui/overlay/charger_slot_overlay");
 		var bg = new UIImage(bgTex)
@@ -769,13 +720,9 @@ public sealed class MachineUIState : UIState
 
 	private void AppendRecipeBrowser(IRecipeLogicMachine proc)
 	{
-		// Per-station recipes filtered by ShowsInRecipeBrowser. Multi-mode multis
-		// rebuild on station change so the browser tracks the selected mode.
 		string currentStation = proc.GetRecipeType().RegistryName;
 		var allRecipes = RecipeRegistry.ForStation(currentStation)
 			.Where(proc.ShowsInRecipeBrowser).ToList();
-		// Skip both panels when nothing is browseable, unless this is a multi-mode
-		// multi (its other modes may have recipes; we want the panels for feedback).
 		bool isMultiMode = proc is TerrariaCompat.Machine.Multiblock.WorkableMultiblockMachine wmmMode
 			&& wmmMode.GetRecipeTypes().Length > 1;
 		if (allRecipes.Count == 0 && !isMultiMode) return;
@@ -783,8 +730,6 @@ public sealed class MachineUIState : UIState
 		float uiScale = Main.UIScale <= 0 ? 1f : Main.UIScale;
 		float uiW = Main.screenWidth / uiScale;
 		float uiH = Main.screenHeight / uiScale;
-
-		// ~28% of UI-space width, clamped; ~78% height split into two panels.
 		float browserW = System.Math.Clamp(uiW * 0.28f, 380f, 560f);
 		float browserTop = uiH * 0.08f;
 		float browserHalfH = (uiH * 0.78f - 8f) / 2f;
@@ -793,8 +738,6 @@ public sealed class MachineUIState : UIState
 			$"[recipe-browser] open for {proc.GetRecipeType().RegistryName} (recipes={allRecipes.Count}) " +
 			$"uiW={uiW:F0} uiH={uiH:F0} panelW={browserW:F0} halfH={browserHalfH:F0}");
 
-		// JEI-style AND-substring search. Tokens cached so the per-frame source
-		// callback doesn't re-tokenize 60 times a second.
 		string[] queryTokens = System.Array.Empty<string>();
 		List<GTRecipe> searchFiltered = allRecipes;
 		void ApplySearchFilter()
@@ -804,7 +747,6 @@ public sealed class MachineUIState : UIState
 			foreach (var r in allRecipes)
 				if (RecipeSearch.Matches(r, queryTokens)) searchFiltered.Add(r);
 
-			// Outputs-first stable sort - producers above consumers.
 			if (searchFiltered.Count > 1)
 			{
 				var ranks = new int[searchFiltered.Count];
@@ -831,8 +773,6 @@ public sealed class MachineUIState : UIState
 			queryTokens = RecipeSearch.Tokenize(text);
 			ApplySearchFilter();
 		}
-		// Re-resolve allRecipes when the multi's active recipe type changes,
-		// without a UI rebuild.
 		bool RebuildIfStationChanged()
 		{
 			string s = proc.GetRecipeType().RegistryName;
@@ -850,9 +790,6 @@ public sealed class MachineUIState : UIState
 			searchPlaceholder: "Search...  *  RMB to clear",
 			onSearchChanged: OnSearchChanged);
 		Append(allPanel);
-
-		// Hover panel filtered by HoverItemTracker; memoized per (kind, key) so
-		// only hover changes trigger a recompute.
 		HoverItemTracker.Kind cachedKind = HoverItemTracker.Kind.None;
 		int cachedType = -1;
 		string? cachedFluid = null;
@@ -952,6 +889,7 @@ public sealed class MachineUIState : UIState
 			Height = StyleDimension.FromPixels(SearchH),
 		};
 		panel.Append(search);
+		list.OnStationFilter = s => search.SetText("@" + s);
 
 		var count = new Widgets.UIDynamicLabel(countLabel, 0.75f)
 		{

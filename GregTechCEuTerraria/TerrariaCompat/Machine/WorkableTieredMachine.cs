@@ -100,8 +100,6 @@ public class WorkableTieredMachine : TieredEnergyMachine, IItemHandler, IFluidHa
 		_                         => base.GetSlotGroup(group),
 	};
 
-	// SlotAction ref-writes bypass CustomItemStackHandler.OnContentsChanged;
-	// fire listeners explicitly so RecipeLogic wakes.
 	public override void NotifySlotGroupChanged(SlotGroup group)
 	{
 		EnsureTraits();
@@ -152,8 +150,6 @@ public class WorkableTieredMachine : TieredEnergyMachine, IItemHandler, IFluidHa
 		Traits.Attach(_autoOutput);
 		Traits.RegisterPersistent("AutoOutput", _autoOutput);
 
-		// WorkableTieredMachine.java:72,94 - both upstream ctors attach a
-		// CleanroomReceiverTrait unconditionally
 		var cleanroomReceiver = new CleanroomReceiverTrait();
 		Traits.Attach(cleanroomReceiver);
 		Traits.RegisterPersistent("CleanroomReceiver", cleanroomReceiver);
@@ -247,12 +243,20 @@ public class WorkableTieredMachine : TieredEnergyMachine, IItemHandler, IFluidHa
 	public virtual bool IsMultiblockController()       => false;
 	public virtual bool PreventPowerFail()             => HasPowerFailPreventingCover();
 
-	public virtual GTRecipe? FullModifyRecipe(GTRecipe recipe)
+	public virtual GTRecipe? FullModifyRecipe(GTRecipe recipe) => DoModifyRecipe(RecipeHelper.TrimRecipeOutputs(recipe, GetOutputLimits()));
+
+	public virtual GTRecipe? DoModifyRecipe(GTRecipe recipe)
 	{
 		var fn = GetRecipeModifier().GetModifier(this, recipe);
 		var result = fn.Apply(recipe);
 		_lastModifierFailReason = result == null ? fn.FailReason : null;
 		return result;
+	}
+
+	public virtual bool CanVoidRecipeOutputs(object capability)
+	{
+		var limits = GetOutputLimits();
+		return limits != null && limits.TryGetValue(capability, out var n) && n == 0;
 	}
 
 	private string? _lastModifierFailReason;

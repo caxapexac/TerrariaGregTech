@@ -1,5 +1,6 @@
 #nullable enable
 using System;
+using System.Collections.Generic;
 using GregTechCEuTerraria.Api.Capability.Recipe;
 using GregTechCEuTerraria.Api.Pattern;
 using GregTechCEuTerraria.Api.Recipe;
@@ -7,19 +8,14 @@ using GregTechCEuTerraria.Common.Energy;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Machine;
 
-// One machine kind as data. Tier is orthogonal (per-entity / per-tile).
-// Mirrors upstream MachineDefinition + registerSimpleMachines. Pure data.
+// One machine kind as data. Mirrors upstream MachineDefinition + registerSimpleMachines
 public sealed class MachineDefinition
 {
 	public string        Id     { get; init; } = "";
 	public string        Label  { get; init; } = "";
 	public MachineFamily Family { get; init; }
 	public (int Width, int Height) Size { get; init; } = (2, 2);
-
-	// 1-element for non-tiered (keeps registration uniform).
 	public VoltageTier[] Tiers { get; init; } = Array.Empty<VoltageTier>();
-
-	// true -> per-tier id ("lv_macerator"); false -> bare ("wooden_drum").
 	public bool Tiered { get; init; } = true;
 
 	// Drum: mB; Crate: slot count. MaterialId -> drum FLUID_PIPE filter + tint.
@@ -30,6 +26,8 @@ public sealed class MachineDefinition
 
 	// Multi-mode multis (multi_smelter etc.); supersedes RecipeType when set.
 	public GTRecipeType[]? RecipeTypes        { get; init; }
+
+	public Func<Common.Energy.VoltageTier, IReadOnlyDictionary<object, int>>? OutputLimits { get; init; }
 
 	public int           InputSlotCount       { get; init; }
 	public int           OutputSlotCount      { get; init; }

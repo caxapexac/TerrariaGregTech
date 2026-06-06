@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using GregTechCEuTerraria.Common.Materials;
 using GregTechCEuTerraria.Api.Data.Chemical.Material;
+using GregTechCEuTerraria.TerrariaCompat.Items.Ammo;
 using GregTechCEuTerraria.TerrariaCompat.Items.Registry;
 using GregTechCEuTerraria.TerrariaCompat.Machine.Rendering;
 using Microsoft.Xna.Framework;
@@ -14,10 +15,7 @@ using Terraria.ModLoader;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Items;
 
-// One ModItem per material x prefix item via MaterialItemRegistry. Rendering
-// replays the dump's RenderLayers verbatim (upstream texture path + exact
-// `Material.getLayerARGB` tint) - no iconset guessing, no tint deviation.
-// `argb == -1` -> opaque white = untinted.
+// One ModItem per material x prefix item via MaterialItemRegistry
 public sealed class MaterialItem : ModItem, ITextureWarmUp
 {
 	private readonly string? _id;
@@ -46,7 +44,8 @@ public sealed class MaterialItem : ModItem, ITextureWarmUp
 	protected override bool CloneNewInstances => true;
 	public override bool IsLoadingEnabled(Mod mod) => _id != null;
 
-	// Primary tex = layer 0; PreDraw composites the rest.
+	public int? MaterialColorRgb => _material?.Color is uint c ? (int)(c & 0xFFFFFF) : null;
+
 	public override string Texture => _layers.Count > 0
 		? TextureRoot + _layers[0].Texture
 		: "Terraria/Images/Item_22";
@@ -55,9 +54,6 @@ public sealed class MaterialItem : ModItem, ITextureWarmUp
 	{
 		base.SetStaticDefaults();
 		if (Main.dedServ) return;
-		// Detect upstream vertical-strip animation on layer 0 (e.g. gem grades
-		// ship an 8-frame column). Force-load via the known path -
-		// TextureAssets.Item[type] isn't populated yet.
 		if (_layers.Count == 0) return;
 		string path = TextureRoot + _layers[0].Texture;
 		if (!ModContent.HasAsset(path)) return;
@@ -82,10 +78,20 @@ public sealed class MaterialItem : ModItem, ITextureWarmUp
 			int? tileType = Tiles.MaterialBlockTileRegistry.Get(_id);
 			if (tileType.HasValue) Item.DefaultToPlaceableTile(tileType.Value);
 		}
+
+		if (_prefix?.Id == "round" && _material is not null)
+		{
+			int hl = _material.HarvestLevel ?? 2;
+			Item.ammo = AmmoID.Bullet;
+			Item.shoot = ModContent.ProjectileType<RoundProjectile>();
+			Item.DamageType = DamageClass.Ranged;
+			Item.damage = 3 + hl * 3;
+			Item.knockBack = 3f;
+			Item.shootSpeed = 16f;
+			Item.consumable = true;
+		}
 	}
 
-	// Upstream TooltipsHandler.appendTooltips: chemical formula as a yellow
-	// literal inserted at index 1 (just below the item name).
 	public override void ModifyTooltips(List<TooltipLine> tooltips)
 	{
 		base.ModifyTooltips(tooltips);
@@ -93,7 +99,7 @@ public sealed class MaterialItem : ModItem, ITextureWarmUp
 		if (string.IsNullOrEmpty(formula)) return;
 		var line = new TooltipLine(Mod, "ChemicalFormula", formula)
 		{
-			OverrideColor = new Color(255, 255, 85), // ChatFormatting.YELLOW
+			OverrideColor = new Color(255, 255, 85),
 		};
 		int nameIdx = tooltips.FindIndex(t => t.Mod == "Terraria" && t.Name == "ItemName");
 		if (nameIdx >= 0) tooltips.Insert(nameIdx + 1, line);
@@ -117,7 +123,6 @@ public sealed class MaterialItem : ModItem, ITextureWarmUp
 		ItemIconBaker.Install(Item.type, iconLayers);
 	}
 
-	// Upstream getLayerARGB (0xAARRGGBB; -1 = untinted opaque-white passthrough).
 	private static Color Tint(int argb) => new(
 		(byte)((argb >> 16) & 0xFF),
 		(byte)((argb >> 8) & 0xFF),

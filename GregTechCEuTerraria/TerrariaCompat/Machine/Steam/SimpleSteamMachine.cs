@@ -76,6 +76,7 @@ public class SimpleSteamMachine : SteamWorkableMachine, IItemHandler
 
 	public override GTRecipe? FullModifyRecipe(GTRecipe recipe)
 	{
+		recipe = RecipeHelper.TrimRecipeOutputs(recipe, GetOutputLimits());
 		if (RecipeHelper.GetRecipeEUtTier(recipe) > (int)VoltageTier.LV)
 			return null;
 		if (!IsHighPressure)

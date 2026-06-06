@@ -1,6 +1,7 @@
 #nullable enable
 using System.Collections.Generic;
 using System.Text;
+using GregTechCEuTerraria.TerrariaCompat.Recipes;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -8,22 +9,28 @@ using Terraria.ModLoader;
 namespace GregTechCEuTerraria.TerrariaCompat.UI.Widgets;
 
 // Maps a recipe station id to the ItemType whose icon represents it, so a
-// recipe row draws a block icon instead of a `@station_id` text chip.
-// Resolution (first hit wins, cached): (1) `<tier>_<station>` lowest registered
-// tier; (2) bare `<station>` (drum/crate/coke_oven); (3) snake->Pascal tile
-// reverse-lookup via TileID.Search + ContentSamples createTile scan (workbench,
-// anvils, every vanilla station). Returns 0 for abstractions like
-// crafting_shaped (caller falls back to text).
+// recipe row draws a block icon instead of a `@station_id` text chip
 public static class StationIcon
 {
 	private static readonly Dictionary<string, int> _cache = new();
-	private static readonly string[] _tiers =
-		{ "lv", "mv", "hv", "ev", "iv", "luv", "zpm", "uv", "uhv", "ulv" };
+	private static readonly string[] _tiers = { "lv", "mv", "hv", "ev", "iv", "luv", "zpm", "uv", "uhv", "ulv" };
 
 	public static int ItemTypeFor(string stationId, Mod? mod)
 	{
 		if (string.IsNullOrEmpty(stationId)) return 0;
 		if (_cache.TryGetValue(stationId, out int cached)) return cached;
+
+		if (VanillaCraftingBridge.IsHandStation(stationId))
+		{
+			_cache[stationId] = ItemID.HandOfCreation;
+			return ItemID.HandOfCreation;
+		}
+
+		if (VanillaCraftingBridge.TryGetStationTile(stationId, out int bridgeTile))
+		{
+			int bridgeItem = FindItemForTile(bridgeTile);
+			if (bridgeItem > 0) { _cache[stationId] = bridgeItem; return bridgeItem; }
+		}
 
 		int found = 0;
 
@@ -50,8 +57,6 @@ public static class StationIcon
 		return found;
 	}
 
-	// Tile -> placer item for RecipeRowRenderer's secondary station chip.
-	// Cached by tile id to skip the ContentSamples scan per row redraw.
 	private static readonly Dictionary<int, int> _tileItemCache = new();
 	public static int ItemTypeForTile(int tileType)
 	{
@@ -64,8 +69,6 @@ public static class StationIcon
 
 	private static int FindItemForTile(int tileType)
 	{
-		// First ItemID whose createTile is the given tile - vanilla pickaxe
-		// resolution does the same.
 		foreach (var (id, item) in ContentSamples.ItemsByType)
 			if (item.createTile == tileType)
 				return id;

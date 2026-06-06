@@ -18,9 +18,7 @@ using RecipeContent = GregTechCEuTerraria.Api.Recipe.Content.Content;
 
 namespace GregTechCEuTerraria.TerrariaCompat.UI.Widgets;
 
-// Draws one recipe as `[in1][in2] -> [out1][out2]`. Items via ItemSlot.Draw,
-// fluids as tinted square + amount label, circuit as the per-value sprite,
-// arrow = empty progress arrow. Pure static, no per-row UIElement instances.
+// Draws one recipe as `[in1][in2] -> [out1][out2]`
 public static class RecipeRowRenderer
 {
 	public const int RowHeight = 40;
@@ -28,7 +26,6 @@ public static class RecipeRowRenderer
 	public const int CellPad   = 2;
 	private const int ArrowSize = 24;
 	private const int LabelHeight = 10;
-	// Tag-ingredient sprite cycles through the member set so all members surface.
 	private const int TagCyclePeriod = 48;
 	private const int CircuitCellWidth = CellSize;
 
@@ -39,12 +36,9 @@ public static class RecipeRowRenderer
 	private const int StationIconSize = 22;
 	private const int CraftButtonWidth  = 52;
 	private const int CraftButtonHeight = 22;
-	// Programmed-circuit sprites (1..33.png = values 0..32). Per upstream's
-	// off-by-one: config value N -> file (N+1).png.
 	private const int MaxCircuit = 32;
 	private static readonly Asset<Texture2D>?[] _circuitByValue = new Asset<Texture2D>?[MaxCircuit + 1];
 
-	// Inventory + fluid snapshots are one-tick cached upstream.
 	private static Dictionary<int, int>?    _invSnapshot;
 	private static Dictionary<string, int>? _fluidSnapshot;
 	private static void EnsureInventorySnapshot()
@@ -53,7 +47,6 @@ public static class RecipeRowRenderer
 		_fluidSnapshot = GlobalRecipeBrowserState.FluidCountsSnapshot();
 	}
 
-	// Cell-backdrop tints behind input slots only (outputs aren't tinted).
 	private static readonly Color TintFull    = new(60, 230, 60);
 	private static readonly Color TintPartial = new(240, 200, 40);
 
@@ -62,15 +55,12 @@ public static class RecipeRowRenderer
 		var inputs  = AllInputs(recipe);
 		var outputs = AllOutputs(recipe);
 		int circuit = ExtractCircuit(recipe, out _);
-		// AllInputs already includes the circuit input - subtract once since
-		// the circuit cell uses its own dedicated width.
 		int cells = inputs.Count + outputs.Count - (circuit >= 0 ? 1 : 0);
 		int w = cells * (CellSize + CellPad) + ArrowSize + 12;
 		if (circuit >= 0) w += CircuitCellWidth + CellPad;
 		return w;
 	}
 
-	// `lightColor` lets callers dim filtered-out rows.
 	public static void Draw(SpriteBatch sb, Rectangle bounds, GTRecipe recipe, Color lightColor)
 	{
 		EnsureInventorySnapshot();
@@ -119,10 +109,8 @@ public static class RecipeRowRenderer
 				new Color(180, 220, 255), 0.7f);
 		}
 
-		// Pass-B native-proxy chip: also-craftable-at vanilla tile. Suppressed
-		// when the native tile == the GT station (e.g. workbench-shapeless).
 		int nativeTile = recipe.Data.GetInt("nativeTile");
-		if (nativeTile > 0)
+		if (nativeTile > 0 && !VanillaCraftingBridge.IsHandStation(stationId))
 		{
 			int nativeItemType = StationIcon.ItemTypeForTile(nativeTile);
 			if (nativeItemType > 0 && nativeItemType != stationItemType)
@@ -133,10 +121,6 @@ public static class RecipeRowRenderer
 			}
 		}
 		long eut = recipe.InputEUt.Voltage > 0 ? recipe.InputEUt.Voltage : recipe.OutputEUt.Voltage;
-		// duration_is_total_cwu (research recipes): Duration is the TOTAL CWU
-		// budget, tick CWU input is the per-tick MINIMUM gating the run.
-		// Show MIN CWU/t prominently + total in parens (the bare total alone
-		// reads like a required rate, which it isn't).
 		bool totalCwu = Api.Recipe.RecipeDataUtil.GetBool(recipe.Data, "duration_is_total_cwu");
 		if (recipe.Duration > 0 || eut > 0)
 		{
@@ -170,8 +154,7 @@ public static class RecipeRowRenderer
 				new Color(255, 210, 110) * (lightColor.A / 255f), 0.62f);
 		}
 
-		// Quick-craft chip - visible only when a matching vanilla recipe is in
-		// Main.availableRecipe[]. Clicks routed in UIRecipeList.DrawSelf.
+		// Quick-craft chip - visible only when a matching vanilla recipe is in Main.availableRecipe[]
 		if (FindAvailableVanillaCraft(recipe) != null)
 			DrawCraftButton(sb, CraftButtonRect(bounds));
 	}
@@ -180,7 +163,6 @@ public static class RecipeRowRenderer
 	{
 		var px = TextureAssets.MagicPixel.Value;
 		sb.Draw(px, btn, new Color(50, 130, 75));
-		// 1-px top+left highlight for the 3D affordance.
 		sb.Draw(px, new Rectangle(btn.X, btn.Y, btn.Width, 1), new Color(160, 220, 180));
 		sb.Draw(px, new Rectangle(btn.X, btn.Y, 1, btn.Height), new Color(160, 220, 180));
 		Terraria.Utils.DrawBorderString(sb, "Craft",
@@ -192,11 +174,6 @@ public static class RecipeRowRenderer
 			bounds.Y + (RowHeight - CraftButtonHeight) / 2,
 			CraftButtonWidth, CraftButtonHeight);
 
-	// Returns the SPECIFIC vanilla recipe this row was sourced from, iff it's
-	// in `availableRecipe[]` (player can craft it now). `GTToVanilla` is the
-	// source of truth - written by VanillaCraftingBridge and NativeRecipeProxy.
-	// Identity-based: matching by output type alone would light Craft on every
-	// recipe producing that item (e.g. Red Brick from clay vs from wall).
 	public static Terraria.Recipe? FindAvailableVanillaCraft(GTRecipe recipe)
 	{
 		if (!VanillaCraftingBridge.GTToVanilla.TryGetValue(recipe, out var rec)) return null;
@@ -211,7 +188,6 @@ public static class RecipeRowRenderer
 		return null;
 	}
 
-	// One line per RecipeCondition joined with " * "; reverse conditions prefixed "Not:".
 	private static string ConditionSummary(GTRecipe recipe)
 	{
 		if (recipe.Conditions.Count == 0) return "";
@@ -231,7 +207,6 @@ public static class RecipeRowRenderer
 		return c.IsReverse ? "Not: " + s : s;
 	}
 
-	// Item type currently rendered at the cursor, or 0 if not on an ingredient cell.
 	public static int HitTest(Rectangle bounds, GTRecipe recipe, Point mouse)
 	{
 		int x = bounds.X + 4;
@@ -271,10 +246,6 @@ public static class RecipeRowRenderer
 
 	private static void DrawIngredient(SpriteBatch sb, Rectangle dest, RecipeContent content, Color lightColor, bool isOutput)
 	{
-		// Inventory-availability backdrop - drawn FIRST so the slot art lays
-		// over a colored fill. Vanilla's slot back is semi-transparent so the
-		// tint shows through as a subtle frame color. Inputs only (no "have"
-		// concept for outputs).
 		if (!isOutput) DrawAvailabilityBackdrop(sb, dest, content, lightColor);
 
 		var ing = (Ingredient)content.Payload;
@@ -285,7 +256,6 @@ public static class RecipeRowRenderer
 			return;
 		}
 
-		// Tag - cycle sprites + stamp a `*` in the top-left as the set marker.
 		if (Inner(ing) is TagIngredient tag && tag.GetItems().Count > 0)
 		{
 			DrawItemSprite(sb, dest, CycleMember(tag), CountOf(ing), lightColor);
@@ -305,16 +275,12 @@ public static class RecipeRowRenderer
 		DrawChanceOverlay(sb, dest, content, lightColor, isOutput);
 	}
 
-	// Stamp research onto a data orb so its imprinted-item preview + tooltip
-	// render (instead of a blank orb). No-op for non-NBT ingredients.
 	private static void StampResearchIfAny(Item item, Ingredient? ing)
 	{
 		if (ing is NBTPredicateIngredient nbt)
 			Items.ResearchDataGlobalItem.StampFromSnbt(item, nbt.OutputNbt);
 	}
 
-	// SetDefaults + per-stack research stamp - so the cheat path spawns what's
-	// shown, not a blank default.
 	public static Item BuildDisplayItem(Api.Recipe.Content.Content content, int itemType)
 	{
 		var item = new Item();
@@ -324,8 +290,6 @@ public static class RecipeRowRenderer
 		return item;
 	}
 
-	// Green/yellow/none backdrop based on carried items vs required amount.
-	// Skipped for non-counted ingredients (circuits, etc.).
 	private static void DrawAvailabilityBackdrop(SpriteBatch sb, Rectangle dest, RecipeContent content, Color lightColor)
 	{
 		if (_invSnapshot is null || _fluidSnapshot is null) return;
@@ -337,7 +301,6 @@ public static class RecipeRowRenderer
 		sb.Draw(TextureAssets.MagicPixel.Value, dest, tint * (0.85f * lightColor.A / 255f));
 	}
 
-	// Vanilla ItemSlot.Draw (slot back + sprite + stack) scaled to fill `dest`.
 	private static void DrawItemSprite(SpriteBatch sb, Rectangle dest, int itemType, int stack, Color lightColor, Ingredient? researchSrc = null)
 	{
 		float prev = Main.inventoryScale;
@@ -371,9 +334,6 @@ public static class RecipeRowRenderer
 			new Color(130, 230, 130) * (lightColor.A / 255f), 1.1f);
 	}
 
-	// Top-right (clear of vanilla stack-count + fluid amount labels). Upstream
-	// Content.Chance / MaxChance (out of 10000): input chance=0 = tool not
-	// consumed; otherwise probabilistic consumption (in) / output (out).
 	private static void DrawChanceOverlay(SpriteBatch sb, Rectangle dest, RecipeContent content, Color lightColor, bool isOutput)
 	{
 		int max = content.MaxChance;
@@ -403,18 +363,13 @@ public static class RecipeRowRenderer
 			tint, scale);
 	}
 
-	// Delegates to BrowserFluidSlot after resolving fluid + amount.
 	private static void DrawFluidCell(SpriteBatch sb, Rectangle dest, Ingredient ing, Color lightColor)
 	{
 		ResolveFluidCell(ing, out var fluid, out int amount, out string? fallback);
-		// Inset 2 px so the availability backdrop shows as a frame around the
-		// opaque fluid cell (the items path gets this via vanilla's translucent back).
 		var inset = new Rectangle(dest.X + 2, dest.Y + 2, dest.Width - 4, dest.Height - 4);
 		BrowserFluidSlot.Draw(sb, inset, fluid, amount, fallback, lightColor);
 	}
 
-	// Shared by DrawFluidCell + EmitIngTooltip so the cell art and tooltip
-	// can never disagree on what the slot is showing.
 	private static void ResolveFluidCell(Ingredient ing,
 		out FluidType? fluid, out int amount, out string? fallbackLabel)
 	{
@@ -474,7 +429,6 @@ public static class RecipeRowRenderer
 		sb.Draw(tex, dest, new Rectangle(0, 0, 20, 20), lightColor);
 	}
 
-	// Tooltip + hit-test mirroring Draw's geometry exactly.
 	public static void EmitTooltipFor(GTRecipe recipe, Rectangle bounds, Point mouse)
 	{
 		int x = bounds.X + 4;
@@ -502,16 +456,16 @@ public static class RecipeRowRenderer
 			x += CellSize + CellPad;
 		}
 
-		// Trailing metadata area. Station icon -> station name + conditions;
-		// elsewhere -> conditions only.
 		string stationId = recipe.RecipeType.RegistryName ?? "";
+		float labelX = x + 6;
 		int stationItemType = StationIcon.ItemTypeFor(stationId, GetMod());
 		if (stationItemType > 0)
 		{
-			var iconRect = new Rectangle(x + 6, cy + 1, StationIconSize, StationIconSize);
+			var iconRect = new Rectangle((int)labelX, cy + 1, StationIconSize, StationIconSize);
 			if (iconRect.Contains(mouse))
 			{
-				string label = Humanize(stationId);
+				string label = VanillaCraftingBridge.IsHandStation(stationId)
+					? "By Hand" : Humanize(stationId);
 				var text = new System.Text.StringBuilder(label);
 				if (recipe.Conditions.Count > 0)
 				{
@@ -521,6 +475,23 @@ public static class RecipeRowRenderer
 				}
 				Main.instance.MouseText(text.ToString());
 				return;
+			}
+			labelX += StationIconSize + 4;
+		}
+
+		int nativeTile = recipe.Data.GetInt("nativeTile");
+		if (nativeTile > 0 && !VanillaCraftingBridge.IsHandStation(stationId))
+		{
+			int nativeItemType = StationIcon.ItemTypeForTile(nativeTile);
+			if (nativeItemType > 0 && nativeItemType != stationItemType)
+			{
+				var alsoRect = new Rectangle((int)labelX, cy + 1, StationIconSize, StationIconSize);
+				if (alsoRect.Contains(mouse))
+				{
+					Main.instance.MouseText(Lang.GetItemNameValue(nativeItemType));
+					return;
+				}
+				labelX += StationIconSize + 4;
 			}
 		}
 
@@ -533,8 +504,50 @@ public static class RecipeRowRenderer
 		}
 	}
 
-	// Hover-only - must NOT push into HoverItemTracker (the browser arms a
-	// suppress guard while the cursor is in its panels; clicks bypass it).
+	private static int TrailingStartX(GTRecipe recipe, Rectangle bounds)
+	{
+		int x = bounds.X + 4;
+		int circuit = ExtractCircuit(recipe, out var circuitContent);
+		if (circuit >= 0) x += CircuitCellWidth + CellPad;
+		foreach (var c in AllInputs(recipe))
+		{
+			if (ReferenceEquals(c, circuitContent)) continue;
+			x += CellSize + CellPad;
+		}
+		x += ArrowSize + 6 + 2;
+		foreach (var _ in AllOutputs(recipe))
+			x += CellSize + CellPad;
+		return x;
+	}
+
+	public static string? StationChipAt(GTRecipe recipe, Rectangle bounds, Point mouse)
+	{
+		string stationId = recipe.RecipeType.RegistryName ?? "";
+		if (stationId.Length == 0) return null;
+
+		int cy = bounds.Y + 2;
+		float labelX = TrailingStartX(recipe, bounds) + 6;
+
+		int stationItemType = StationIcon.ItemTypeFor(stationId, GetMod());
+		if (stationItemType > 0)
+		{
+			if (new Rectangle((int)labelX, cy + 1, StationIconSize, StationIconSize).Contains(mouse))
+				return stationId;
+			labelX += StationIconSize + 4;
+		}
+
+		int nativeTile = recipe.Data.GetInt("nativeTile");
+		if (nativeTile > 0 && !VanillaCraftingBridge.IsHandStation(stationId))
+		{
+			int nativeItemType = StationIcon.ItemTypeForTile(nativeTile);
+			if (nativeItemType > 0 && nativeItemType != stationItemType
+			    && new Rectangle((int)labelX, cy + 1, StationIconSize, StationIconSize).Contains(mouse))
+				return stationId;
+		}
+		return null;
+	}
+
+
 	private static void EmitIngTooltip(RecipeContent content, bool isOutput)
 	{
 		var ing = (Ingredient)content.Payload;
@@ -550,14 +563,11 @@ public static class RecipeRowRenderer
 		if (IsFluid(ing))
 		{
 			ResolveFluidCell(ing, out var fluid, out int amount, out string? fallback);
-			// FluidContainerIngredient is satisfied by a filled bucket/cell.
-			string containerNote = Inner(ing) is FluidContainerIngredient
-				? "\nin a filled container (bucket / cell)" : "";
+			string containerNote = Inner(ing) is FluidContainerIngredient ? "\nin a filled container (bucket / cell)" : "";
 			BrowserFluidSlot.EmitTooltip(fluid, amount, fallback, containerNote + chanceLine);
 			return;
 		}
 
-		// Tag ingredient - name the tag, then list every acceptable member.
 		if (Inner(ing) is TagIngredient tag && tag.GetItems().Count > 0)
 		{
 			var members = tag.GetItems();
@@ -598,8 +608,6 @@ public static class RecipeRowRenderer
 		Main.instance.MouseText($"{ShortLabel(ing)}\n(unresolved){chanceLine}");
 	}
 
-	// Content (Ingredient + chance) under the cursor, used for click-driven
-	// filter selection. Same hit-test geometry as EmitTooltipFor.
 	public static RecipeContent? IngredientAt(GTRecipe recipe, Rectangle bounds, Point mouse)
 	{
 		int x = bounds.X + 4;
@@ -621,7 +629,6 @@ public static class RecipeRowRenderer
 		return null;
 	}
 
-	// Item types touched by the recipe (input union output) for HoverItemTracker.
 	public static HashSet<int> ItemTypesInRecipe(GTRecipe recipe)
 	{
 		var set = new HashSet<int>();
@@ -632,7 +639,6 @@ public static class RecipeRowRenderer
 		return set;
 	}
 
-	// Item types consumed - backs U "used as ingredient".
 	public static HashSet<int> InputItemTypesInRecipe(GTRecipe recipe)
 	{
 		var set = new HashSet<int>();
@@ -641,7 +647,6 @@ public static class RecipeRowRenderer
 		return set;
 	}
 
-	// Item types produced - backs R "how to obtain".
 	public static HashSet<int> OutputItemTypesInRecipe(GTRecipe recipe)
 	{
 		var set = new HashSet<int>();
@@ -650,7 +655,6 @@ public static class RecipeRowRenderer
 		return set;
 	}
 
-	// Tag -> every member; FluidContainerIngredient -> every candidate container.
 	private static void AddItemTypes(RecipeContent c, HashSet<int> sink)
 	{
 		if (Inner((Ingredient)c.Payload) is TagIngredient tag)
@@ -669,8 +673,6 @@ public static class RecipeRowRenderer
 		if (t > 0) sink.Add(t);
 	}
 
-	// Fluid ids (FluidRegistry bare keys) touched by the recipe. Unresolved
-	// refs still contribute (namespace stripped) so "water" matches "minecraft:water".
 	public static HashSet<string> FluidIdsInRecipe(GTRecipe recipe)
 	{
 		var set = new HashSet<string>();
@@ -705,7 +707,6 @@ public static class RecipeRowRenderer
 		}
 	}
 
-	// Items then fluids - matches legacy display order.
 	private static List<RecipeContent> AllInputs(GTRecipe recipe)
 	{
 		var list = new List<RecipeContent>();
@@ -722,8 +723,6 @@ public static class RecipeRowRenderer
 		return list;
 	}
 
-	// First IntCircuitIngredient input (peeled), or (-1, null). The carrier
-	// lets the renderer skip the circuit from the normal input loop.
 	private static int ExtractCircuit(GTRecipe recipe, out RecipeContent? carrier)
 	{
 		foreach (var c in recipe.GetInputContents(ItemRecipeCapability.CAP))
@@ -738,8 +737,6 @@ public static class RecipeRowRenderer
 		return -1;
 	}
 
-	// Peels SizedIngredient / IntProviderIngredient. Upstream RecipeCapability
-	// dispatches on the inner; wrappers carry count/sampling info only.
 	private static Ingredient Inner(Ingredient ing) => ing switch
 	{
 		SizedIngredient sized      => Inner(sized.Inner),
@@ -757,8 +754,6 @@ public static class RecipeRowRenderer
 	private static bool IsFluid(Ingredient ing) =>
 		Inner(ing) is FluidIngredient or IntProviderFluidIngredient or FluidContainerIngredient;
 
-	// The FluidIngredient a content displays as. FluidContainerIngredient is
-	// an ITEM ingredient but reads best as "this much of this fluid".
 	private static FluidIngredient? FluidPart(Ingredient ing) => Inner(ing) switch
 	{
 		FluidIngredient fi          => fi,
@@ -782,9 +777,6 @@ public static class RecipeRowRenderer
 		return colon >= 0 ? id.Substring(colon + 1) : id;
 	}
 
-	// Inline item icon via ItemSlot.Draw (same path UISlot uses) - vanilla owns
-	// frame + sprite + glow + scale fit. Main.inventoryScale = target /
-	// VanillaNativeSlotPixels; restored in try/finally so it doesn't leak.
 	private static readonly Item[] _stationSlotItem = { new() };
 	private const float VanillaNativeSlotPixels = 52f;
 	private static void DrawItemIconFit(SpriteBatch sb, Rectangle dest, int itemType, Color tint)

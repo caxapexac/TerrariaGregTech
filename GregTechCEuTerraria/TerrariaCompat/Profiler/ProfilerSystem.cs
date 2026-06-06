@@ -11,25 +11,32 @@ namespace GregTechCEuTerraria.TerrariaCompat.Profiler;
 // Drives per-tick sampling and provides JSON dump-to-disk. Hooks into
 // PostUpdateEverything (runs on both server and clients in MP, unlike
 // PostUpdateWorld which is server-only) so samples advance on every machine
-// that opens the profiler.
-//
-// Reset on world load so the window starts fresh each session.
+// that opens the profiler
 public sealed class ProfilerSystem : ModSystem
 {
-	// Delta tracking for cumulative .NET counters so we can surface them as
-	// per-second rates. Reset alongside the rest of the profiler state.
 	private static int  _lastGc0, _lastGc1, _lastGc2;
 	private static long _lastAllocBytes;
 	private static bool _gcBaselineSet;
+
+	// Real wall-clock timing
+	private static long   _lastFrameTs, _lastSampleTs, _updateStartTs;
+	private static double _frameMsSum, _frameMsMax, _updatePhaseMsSum;
+	private static int    _frameCount;
+
+	// Stamped at the start of the update loop
+	public override void PreUpdateEntities()
+	{
+		if (Profiler.Enabled)
+			_updateStartTs = System.Diagnostics.Stopwatch.GetTimestamp();
+	}
 
 	public override void OnWorldLoad()
 	{
 		Profiler.Reset();
 		_gcBaselineSet = false;
-
-		// Pre-populate the static built-in gauges so they show up in the UI
-		// immediately (before their first non-zero value). Order here drives
-		// the UI display order.
+		_lastFrameTs = _lastSampleTs = _updateStartTs = 0;
+		_frameMsSum = _frameMsMax = _updatePhaseMsSum = 0;
+		_frameCount = 0;
 		Profiler.Gauge("engine", "fps", (long)Main.frameRate);
 	}
 
@@ -37,15 +44,37 @@ public sealed class ProfilerSystem : ModSystem
 
 	public override void PostUpdateEverything()
 	{
-		// Master gate (GTConfig.EnableProfiler) - skip ALL sampling, GC reads,
-		// memory probing + MP sync when profiling is off.
 		if (!Profiler.Enabled) return;
-		// Sample every N frames (10 Hz). Skipping the early loading frames
-		// avoids a noisy first sample where world load itself dominates.
+		long nowTs = System.Diagnostics.Stopwatch.GetTimestamp();
+		double tickFreq = System.Diagnostics.Stopwatch.Frequency;
+		if (_lastFrameTs != 0)
+		{
+			double frameMs = (nowTs - _lastFrameTs) * 1000.0 / tickFreq;
+			_frameMsSum += frameMs;
+			_frameCount++;
+			if (frameMs > _frameMsMax) _frameMsMax = frameMs;
+		}
+		_lastFrameTs = nowTs;
+		if (_updateStartTs != 0)
+			_updatePhaseMsSum += (nowTs - _updateStartTs) * 1000.0 / tickFreq;
+
+		// Sample every N frames (10 Hz)
 		if (Main.GameUpdateCount % (ulong)Profiler.SamplePeriodFrames != 0) return;
 
-		// Built-in gauges - refreshed every sample so the graph stays current
-		// even without a more specific hook.
+		double realWindowSec = _lastSampleTs != 0
+			? (nowTs - _lastSampleTs) / tickFreq
+			: Profiler.SamplePeriodFrames / 60.0;
+		_lastSampleTs = nowTs;
+
+		double realFrameAvgMs = _frameCount > 0 ? _frameMsSum / _frameCount : 0;
+		double realFrameMaxMs = _frameMsMax;
+		double updatePhaseAvgMs = _frameCount > 0 ? _updatePhaseMsSum / _frameCount : 0;
+		Profiler.Gauge("engine", "real_frame_ms",     (long)realFrameAvgMs);
+		Profiler.Gauge("engine", "real_frame_ms_max", (long)realFrameMaxMs);
+		Profiler.Gauge("engine", "update_phase_ms",   (long)updatePhaseAvgMs);
+		_frameMsSum = _frameMsMax = _updatePhaseMsSum = 0;
+		_frameCount = 0;
+
 		Profiler.Gauge("engine", "fps", (long)Main.frameRate);
 		int activeNpcs = 0;
 		foreach (var n in Main.npc) if (n != null && n.active) activeNpcs++;
@@ -60,27 +89,19 @@ public sealed class ProfilerSystem : ModSystem
 		long heapMb = GC.GetTotalMemory(forceFullCollection: false) >> 20;
 		Profiler.Gauge("engine", "managed_heap_mb", heapMb);
 		// Alarm (chat + error log) if the heap crosses the danger threshold,
-		// before it OOM-crashes the game. Throttled inside Check().
+		// before it OOM-crashes the game
 		MemoryGuard.Check(heapMb);
 
-		// GC pressure - gauge of cumulative collections per generation. Sample
-		// deltas in the UI show "this many GCs this second" (a Gen2 burst
-		// during gameplay is usually the smoking gun for a managed-heap
-		// pressure problem).
 		int gc0 = GC.CollectionCount(0), gc1 = GC.CollectionCount(1), gc2 = GC.CollectionCount(2);
 		long allocBytes = GC.GetTotalAllocatedBytes(precise: false);
 		Profiler.Gauge("engine", "gc_gen0_total", gc0);
 		Profiler.Gauge("engine", "gc_gen1_total", gc1);
 		Profiler.Gauge("engine", "gc_gen2_total", gc2);
-		// Per-sample deltas so spikes show up in the graph instead of being
-		// hidden inside a monotonically-increasing total. First sample after
-		// world load is suppressed (would otherwise dump the entire boot-time
-		// alloc history into one bucket).
 		int  gc0Delta = 0, gc1Delta = 0, gc2Delta = 0;
 		long allocDelta = 0;
 		if (_gcBaselineSet)
 		{
-			double sec = Profiler.SamplePeriodFrames / 60.0;
+			double sec = realWindowSec;
 			gc0Delta = gc0 - _lastGc0;
 			gc1Delta = gc1 - _lastGc1;
 			gc2Delta = gc2 - _lastGc2;
@@ -93,19 +114,9 @@ public sealed class ProfilerSystem : ModSystem
 		_lastGc0 = gc0; _lastGc1 = gc1; _lastGc2 = gc2; _lastAllocBytes = allocBytes;
 		_gcBaselineSet = true;
 
-		// Aggregates - computed BEFORE SampleAll so the per-counter deltas
-		// they sum are still measurable. Frame-budget total walks every
-		// Timer counter and sums its since-last-sample delta in
-		// stopwatch ticks -> ms; the result is the total CPU time spent in
-		// instrumented `tick.*` scopes during the just-finished sample
-		// window. Network-in walks every counter under "net.in.bytes" and
-		// sums their since-last-sample deltas in bytes.
 		double frameBudgetTotalMsPerSec = 0;
 		double netInBytesPerSec        = 0;
-		double sampleWindowSec         = Profiler.SamplePeriodFrames / 60.0;
-		// Top-timer accumulator for the spike snapshot. Only allocates a
-		// list when we end up over threshold. We keep a small fixed list of
-		// (timer, ms) to scan once and pick top-5 lazily.
+		double sampleWindowSec         = realWindowSec;
 		List<(string name, double ms)>? timerDeltas = null;
 		foreach (var c in Profiler.All)
 		{
@@ -130,27 +141,25 @@ public sealed class ProfilerSystem : ModSystem
 		Profiler.Gauge("aggregate", "frame_budget_ms_s", (long)frameBudgetTotalMsPerSec);
 		Profiler.Gauge("aggregate", "net_in_bytes_s",    (long)netInBytesPerSec);
 
-		// Per-machine memory attribution (count + serialized-state KB per machine
-		// id) - slow cadence (~5 s) since it serializes every machine. Answers
-		// "which machine eats memory". Must run BEFORE SampleAll so the fresh
-		// gauges get snapshotted this tick.
 		if (Profiler.CurrentSampleIndex % 50 == 0)
 			MachineMemoryProbe.Sample();
 
-		// Spike snapshot before SampleAll - we want the raw delta-ms for the
-		// just-finished window, not the post-sample zeros. Threshold is on
-		// ms-per-sec budget (~ ms in window x 10), so anything above
-		// SpikeThresholdMs/sec is roughly >50ms of work in the 100ms window.
-		if (frameBudgetTotalMsPerSec > Profiler.SpikeThresholdMs && timerDeltas != null)
+		if (realFrameMaxMs > Profiler.SpikeFrameMs)
 		{
-			timerDeltas.Sort((a, b) => b.ms.CompareTo(a.ms));
-			int take = System.Math.Min(5, timerDeltas.Count);
-			var top = new List<(string, double)>(take);
-			for (int i = 0; i < take; i++) top.Add(timerDeltas[i]);
+			List<(string, double)> top;
+			if (timerDeltas != null)
+			{
+				timerDeltas.Sort((a, b) => b.ms.CompareTo(a.ms));
+				int take = System.Math.Min(5, timerDeltas.Count);
+				top = new List<(string, double)>(take);
+				for (int i = 0; i < take; i++) top.Add(timerDeltas[i]);
+			}
+			else top = new List<(string, double)>();
 			Profiler.RecordSpike(new Profiler.SpikeRecord
 			{
 				SampleIndex    = Profiler.CurrentSampleIndex,
 				FrameBudgetMs  = frameBudgetTotalMsPerSec,
+				RealFrameMs    = realFrameMaxMs,
 				HeapMb         = GC.GetTotalMemory(false) >> 20,
 				ActiveMachines = Terraria.DataStructures.TileEntity.ByID.Count,
 				Gc0Delta       = gc0Delta,
@@ -161,19 +170,13 @@ public sealed class ProfilerSystem : ModSystem
 			});
 		}
 
-		Profiler.SampleAll();
+		Profiler.SampleAll(realWindowSec);
 		Profiler.AdvanceSampleIndex();
 
-		// Server: push our snapshot to viewing clients. Same cadence as the
-		// pipe / energy stat broadcasts (the wire is the right bandwidth axis).
 		if (Main.netMode == Terraria.ID.NetmodeID.Server)
 			TerrariaCompat.Net.ProfilerSyncPacket.Broadcast();
 	}
 
-	// JSON dump - System.Text.Json isn't available in the tML target without
-	// an extra dependency, so we hand-roll a minimal writer (keeps "use
-	// existing tML API + avoid unsafe" honest). Format is human-readable and
-	// diff-friendly.
 	public static string DumpToFile()
 	{
 		var sb = new StringBuilder();
@@ -183,9 +186,6 @@ public sealed class ProfilerSystem : ModSystem
 		sb.Append("  \"world\": \"").Append(JsonEscape(Main.worldName ?? "")).Append("\",\n");
 		sb.Append("  \"window_seconds\": ").Append(Profiler.WindowSamples * Profiler.SamplePeriodFrames / 60.0).Append(",\n");
 		sb.Append("  \"sample_interval_ms\": ").Append(Profiler.SamplePeriodFrames * 1000.0 / 60.0).Append(",\n");
-		// Oldest sample's wall-clock origin. Newest sample timestamp is
-		// always = "timestamp" above. Indices map left->right oldest->newest
-		// in counters[*].samples[], matching the UI graph.
 		double windowMs = Profiler.WindowSamples * Profiler.SamplePeriodFrames * 1000.0 / 60.0;
 		sb.Append("  \"samples_origin_utc\": \"").Append(DateTime.UtcNow.AddMilliseconds(-windowMs).ToString("yyyy-MM-ddTHH:mm:ss.fffZ")).Append("\",\n");
 		sb.Append("  \"current_sample_index\": ").Append(Profiler.CurrentSampleIndex).Append(",\n");
@@ -198,6 +198,7 @@ public sealed class ProfilerSystem : ModSystem
 			sb.Append("    {");
 			sb.Append("\"sample_index\":").Append(s.SampleIndex).Append(',');
 			sb.Append("\"frame_budget_ms_s\":").Append(F(s.FrameBudgetMs)).Append(',');
+			sb.Append("\"real_frame_ms\":").Append(F(s.RealFrameMs)).Append(',');
 			sb.Append("\"heap_mb\":").Append(s.HeapMb).Append(',');
 			sb.Append("\"active_machines\":").Append(s.ActiveMachines).Append(',');
 			sb.Append("\"gc0_delta\":").Append(s.Gc0Delta).Append(',');
@@ -231,8 +232,6 @@ public sealed class ProfilerSystem : ModSystem
 			sb.Append("\"max\":").Append(F(max)).Append(',');
 			sb.Append("\"avg\":").Append(F(avg)).Append(',');
 			sb.Append("\"samples\":[");
-			// Walk samples oldest->newest so the array order matches what the
-			// UI graph plots left->right.
 			int n = c.Samples.Length;
 			for (int i = 0; i < n; i++)
 			{

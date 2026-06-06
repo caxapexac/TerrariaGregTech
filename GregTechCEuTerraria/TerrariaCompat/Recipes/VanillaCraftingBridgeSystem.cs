@@ -4,14 +4,11 @@ using Terraria.ModLoader;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Recipes;
 
-// Bridges RecipeRegistry into Terraria's vanilla crafting. Machine-station
-// recipes stay in the registry and are consumed by WorkableTieredMachine.
+// Bridges RecipeRegistry into Terraria's vanilla crafting
 public sealed class VanillaCraftingBridgeSystem : ModSystem
 {
 	public override void AddRecipeGroups()
 	{
-		// Eager registration - bridge tracks catalyst group ids for the
-		// not-consumed callback. Other tags resolve lazily (TryResolveGroup).
 		ToolRecipeGroups.Register();
 	}
 
@@ -21,17 +18,34 @@ public sealed class VanillaCraftingBridgeSystem : ModSystem
 		AddCompatHandRecipes();
 	}
 
-	// Pass B - runs after Main.recipe[] is fully populated.
 	public override void PostAddRecipes()
 	{
 		NativeRecipeProxy.SynthesizeFromTerrariaRecipes();
+		BlockBridgedRecipesFromMagicStorageRecursion();
 	}
 
-	// Early-game progression fix: upstream gates wood rods + plates behind
-	// Lathe/Bender, so a fresh world has no bare-hands path -> softlock. Two
-	// hand recipes (no tile) unblock them. Registered as Terraria recipes -
-	// not through the bridge - because the bridge collapses tags to single
-	// items and can't express the vanilla Wood RecipeGroup.
+	// Magic Storage builds a recursive crafting tree per enabled recipe at load, we block it
+	private void BlockBridgedRecipesFromMagicStorageRecursion()
+	{
+		if (!ModLoader.TryGetMod("MagicStorage", out var ms)) return;
+		int n = 0;
+		try
+		{
+			foreach (var recipe in VanillaCraftingBridge.BridgeRegistered)
+			{
+				ms.Call("Block Recursion", recipe);
+				n++;
+			}
+		}
+		catch (System.Exception e)
+		{
+			Mod.Logger.Warn($"[magicstorage] Block Recursion call failed after {n} recipes (API mismatch?) - {e.Message}");
+			return;
+		}
+		Mod.Logger.Info($"[magicstorage] blocked {n} bridged recipes from recursive crafting (load-time perf)");
+	}
+
+	// Early-game progression fix
 	private void AddCompatHandRecipes()
 	{
 		if (Mod.TryFind<ModItem>("wood_rod", out var rod))
@@ -44,15 +58,12 @@ public sealed class VanillaCraftingBridgeSystem : ModSystem
 				.AddRecipeGroup(RecipeGroupID.Wood, 1)
 				.Register();
 
-		// Clay block -> 4 clay balls by hand (verbatim MC) - upstream gates
-		// clay balls behind the LV Extractor, blocking the ceramic/fireclay chain.
 		if (Items.MaterialItemRegistry.TryGetByUpstreamId("gtceu:clay_gem", out var clayBall))
 			Terraria.Recipe.Create(clayBall, 4)
 				.AddIngredient(ItemID.ClayBlock, 1)
 				.Register();
 
-		// ItemID.Coal is the Christmas Lump of Coal (maxStack=1, gag item);
-		// workbench converts to GT coal so it's a real fuel.
+		// ItemID.Coal is the Christmas Lump of Coal (maxStack=1, gag item)
 		if (Items.MaterialItemRegistry.TryGetByUpstreamId("gtceu:coal_gem", out var coalGem))
 			Terraria.Recipe.Create(coalGem, 1)
 				.AddIngredient(ItemID.Coal, 1)
@@ -62,11 +73,7 @@ public sealed class VanillaCraftingBridgeSystem : ModSystem
 		AddVanillaOreToRawOreRecipes();
 	}
 
-	// Vanilla pre-HM ore -> GT raw at 1 : OreTileRegistry.RawOrePerBlock. Closes
-	// the iron/copper/gold drop gap (their raw item is upstream's
-	// minecraft:raw_<m>) AND makes worldgen ores feed the standard GT chain.
-	// By-hand so it bootstraps before a workbench. Tungsten has no GT ORE form,
-	// so TungstenOre folds to raw_tungstate.
+	// TODO better ore substitution
 	private void AddVanillaOreToRawOreRecipes()
 	{
 		void Add(string materialId, string prefix, int vanillaItemId)

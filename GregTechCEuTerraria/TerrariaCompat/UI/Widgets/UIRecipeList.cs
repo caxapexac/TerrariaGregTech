@@ -21,24 +21,23 @@ public sealed class UIRecipeList : UIElement
 
 	public Action<GTRecipe>? OnSelectRecipe;
 
-	// Swallow the left-press that's still held when selection mode begins
+	public Action<string>? OnStationFilter;
+
 	private bool _awaitRelease;
 	public void IgnoreHeldClick() => _awaitRelease = true;
 
 	private int _scrollOffsetPx;
-	// Edge-tracked mouse - one action per press, not per held frame.
 	private bool _leftDown;
 	private bool _rightDown;
 
-	// Scrollbar drag - _dragAnchorOffsetPx is the cursor's Y offset INSIDE the
-	// thumb at grab time so dragging tracks 1:1 without snap.
+	// Scrollbar drag - _dragAnchorOffsetPx is the cursor's Y offset
 	private bool _dragging;
 	private int  _dragAnchorOffsetPx;
 
 	private const int ScrollbarWidth = 18;
 	private const int Margin = 6;
 	private const int MinThumbHeight = 28;
-	private const int SelectGutter = 44; // left gutter for the "+" pick button in selection mode
+	private const int SelectGutter = 44;
 	private const int SelectBtnSize = 36;
 
 	private static void DrawPlusButton(SpriteBatch sb, Rectangle rect, bool hot)
@@ -67,8 +66,6 @@ public sealed class UIRecipeList : UIElement
 		_emptyHint = emptyHint;
 	}
 
-	// Resolves a cell's Content into item / fluid / tag - peels Sized /
-	// IntProvider wrappers to reach the concrete typed Ingredient.
 	private static void ResolveCell(Api.Recipe.Content.Content content,
 		out int itemType, out int itemAmount,
 		out FluidType? fluid, out int fluidAmountMb,
@@ -86,7 +83,6 @@ public sealed class UIRecipeList : UIElement
 		};
 		if (itemAmount <= 0) itemAmount = 1;
 		var inner = Inner(raw);
-		// Single-member tags collapse to a normal item click.
 		if (inner is TagIngredient tag && tag.GetItems().Count > 0)
 		{
 			var members = new HashSet<int>();
@@ -118,8 +114,6 @@ public sealed class UIRecipeList : UIElement
 				return;
 		}
 
-		// IntProviderFluidIngredient: Inner returned the unwrapped FluidIngredient;
-		// pick up the rolled amount from the original wrapper here.
 		if (Inner((Ingredient)content.Payload) is IntProviderFluidIngredient ipfi)
 			fluidAmountMb = ipfi.RollSampledCount();
 	}
@@ -130,7 +124,6 @@ public sealed class UIRecipeList : UIElement
 		return colon >= 0 ? id.Substring(colon + 1) : id;
 	}
 
-	// Records the hovered cell for R/U hotkeys (Main.HoverItem doesn't carry fluids).
 	private static void RecordHover(Api.Recipe.Content.Content content)
 	{
 		ResolveCell(content, out int itemType, out _, out var fluid, out _,
@@ -152,7 +145,6 @@ public sealed class UIRecipeList : UIElement
 	public override void ScrollWheel(UIScrollWheelEvent evt)
 	{
 		base.ScrollWheel(evt);
-		// One notch ~ 3 rows.
 		_scrollOffsetPx -= evt.ScrollWheelValue / 6;
 		_scrollOffsetPx = Math.Max(0, _scrollOffsetPx);
 	}
@@ -166,8 +158,6 @@ public sealed class UIRecipeList : UIElement
 
 		spriteBatch.Draw(px, outer, new Color(20, 22, 50) * 0.45f);
 
-		// Suppress vanilla mouse-wheel for the frame; arm the HoverItemTracker
-		// guard so passive hover here doesn't push into the filter (clicks do).
 		if (IsMouseHovering)
 		{
 			Main.LocalPlayer.mouseInterface = true;
@@ -175,7 +165,6 @@ public sealed class UIRecipeList : UIElement
 			HoverItemTracker.SuppressNextHoverPick();
 		}
 
-		// Content rect (right-edge scrollbar gutter reserved).
 		var content = new Rectangle(
 			outer.X + Margin,
 			outer.Y + Margin,
@@ -221,8 +210,6 @@ public sealed class UIRecipeList : UIElement
 			int thumbY = content.Y + (travel > 0 ? (int)(travel * ((float)_scrollOffsetPx / maxOffset)) : 0);
 			thumbRect = new Rectangle(barX, thumbY, ScrollbarWidth, thumbH);
 
-			// LMB-down anywhere in the track begins a drag; on the thumb the
-			// anchor preserves mouse-Y offset (track-click recenters on cursor).
 			if (Main.mouseLeft && !_leftDown && trackRect.Contains(mouse))
 			{
 				_dragging = true;
@@ -252,7 +239,7 @@ public sealed class UIRecipeList : UIElement
 		}
 
 		int hoveredRow = -1;
-		bool picked = false; // a Select-Recipe click exits the row loop AND skips the hover/tooltip block below
+		bool picked = false;
 		int selGutter = OnSelectRecipe != null ? SelectGutter : 0;
 		for (int i = firstRow; i <= lastRow; i++)
 		{
@@ -262,7 +249,6 @@ public sealed class UIRecipeList : UIElement
 				? new Rectangle(rowBounds.X + selGutter, yTop, rowBounds.Width - selGutter, rowH)
 				: rowBounds;
 
-			// Skip hover highlight while dragging (else rows flash as cursor crosses).
 			bool rowHovered = !draggingThisFrame && rowBounds.Contains(mouse) && content.Contains(mouse);
 			if (rowHovered)
 			{
@@ -299,7 +285,6 @@ public sealed class UIRecipeList : UIElement
 				? new Rectangle(content.X + selGutter, hyTop, content.Width - selGutter, rowH)
 				: new Rectangle(content.X, hyTop, content.Width, rowH);
 
-			// Quick-craft chip wins click-priority over any overlapping cell.
 			var craftRecipe = RecipeRowRenderer.FindAvailableVanillaCraft(src[hoveredRow]);
 			var craftBtn    = craftRecipe != null
 				? RecipeRowRenderer.CraftButtonRect(rowBounds)
@@ -308,9 +293,6 @@ public sealed class UIRecipeList : UIElement
 
 			if (overCraft)
 			{
-				// Vanilla parity per iteration: Shift = x10. Don't skip the
-				// per-iter availability re-check - bypassing it dupes the held
-				// cursor item through the swap inside Main.CraftItem.
 				int qty = ItemSlot.ShiftInUse ? 10 : 1;
 				Main.instance.MouseText($"Craft {qty}x {craftRecipe!.createItem.Name}");
 				if (Main.mouseLeft && !_leftDown && !_dragging)
@@ -340,25 +322,38 @@ public sealed class UIRecipeList : UIElement
 			{
 				RecipeRowRenderer.EmitTooltipFor(src[hoveredRow], rowBounds, mouse);
 
-				var ing = RecipeRowRenderer.IngredientAt(src[hoveredRow], rowBounds, mouse);
-				if (ing is not null) RecordHover(ing);
-				if (ing is not null && !_dragging)
+				// Station chip click wins over the (non-overlapping) ingredient
+				// cells - LMB sets the search filter to this recipe's station.
+				string? chipStation = OnStationFilter == null
+					? null
+					: RecipeRowRenderer.StationChipAt(src[hoveredRow], rowBounds, mouse);
+				if (chipStation is not null)
 				{
-					var click = BrowserSlotInteraction.Poll(_leftDown, _rightDown);
-					ResolveCell(ing, out int itemType, out int itemAmt,
-						out var fluid, out int fluidAmt,
-						out string? tagLabel, out var tagMembers);
-					if (tagLabel is not null && tagMembers is not null)
-						BrowserSlotInteraction.HandleTag(click, tagLabel, tagMembers,
-							recipeAmount: itemAmt);
-					else if (fluid is not null)
-						BrowserSlotInteraction.HandleFluid(click, fluid,
-							fluidAmt > 0 ? fluidAmt : (int?)null, inFavoritesPane: false);
-					else if (itemType > 0)
-						BrowserSlotInteraction.HandleItem(click,
-							RecipeRowRenderer.BuildDisplayItem(ing, itemType),
-							inFavoritesPane: false,
-							recipeAmount: itemAmt);
+					if (!_awaitRelease && Main.mouseLeft && !_leftDown && !_dragging)
+						OnStationFilter!(chipStation);
+				}
+				else
+				{
+					var ing = RecipeRowRenderer.IngredientAt(src[hoveredRow], rowBounds, mouse);
+					if (ing is not null) RecordHover(ing);
+					if (ing is not null && !_dragging)
+					{
+						var click = BrowserSlotInteraction.Poll(_leftDown, _rightDown);
+						ResolveCell(ing, out int itemType, out int itemAmt,
+							out var fluid, out int fluidAmt,
+							out string? tagLabel, out var tagMembers);
+						if (tagLabel is not null && tagMembers is not null)
+							BrowserSlotInteraction.HandleTag(click, tagLabel, tagMembers,
+								recipeAmount: itemAmt);
+						else if (fluid is not null)
+							BrowserSlotInteraction.HandleFluid(click, fluid,
+								fluidAmt > 0 ? fluidAmt : (int?)null, inFavoritesPane: false);
+						else if (itemType > 0)
+							BrowserSlotInteraction.HandleItem(click,
+								RecipeRowRenderer.BuildDisplayItem(ing, itemType),
+								inFavoritesPane: false,
+								recipeAmount: itemAmt);
+					}
 				}
 			}
 		}
@@ -374,8 +369,6 @@ public sealed class UIRecipeList : UIElement
 			bool thumbHot = _dragging || thumbRect.Contains(mouse);
 			var thumbColor = thumbHot ? new Color(180, 200, 240) : new Color(140, 160, 220);
 			spriteBatch.Draw(px, thumbRect, thumbColor);
-
-			// Top + left 1-px highlight for the 3D-grabbable affordance.
 			spriteBatch.Draw(px, new Rectangle(thumbRect.X, thumbRect.Y, thumbRect.Width, 1), Color.White * 0.5f);
 			spriteBatch.Draw(px, new Rectangle(thumbRect.X, thumbRect.Y, 1, thumbRect.Height), Color.White * 0.5f);
 

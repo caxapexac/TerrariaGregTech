@@ -7,8 +7,7 @@ using Terraria;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Machine;
 
-// Item counterpart of AdjacentFluidPush. Single-item-per-tick matches upstream
-// autoOutput's small extractItem ceiling so fast producers drain gradually.
+// Item counterpart of AdjacentFluidPush
 public static class AdjacentItemPush
 {
 	public static int Push(MetaMachine source, int sourceSlotStart, int sourceSlotCount,
@@ -18,9 +17,6 @@ public static class AdjacentItemPush
 		return Push(source, outHandler, sourceSlotStart, sourceSlotCount, maxPerSlot, side);
 	}
 
-	// Explicit-handler overload for proxy/multi-handler parts (e.g. CokeOvenHatch
-	// where the facade's slot indices map to the input side, but auto-output
-	// must push from the OUTPUT proxy).
 	public static int Push(MetaMachine source, IItemHandler outHandler,
 		int sourceSlotStart, int sourceSlotCount,
 		int maxPerSlot = 1, IODirection side = IODirection.None)
@@ -29,15 +25,18 @@ public static class AdjacentItemPush
 
 		for (int s = sourceSlotStart; s < sourceSlotStart + sourceSlotCount; s++)
 		{
-			var available = outHandler.Extract(s, maxPerSlot, simulate: true);
-			if (available is null || available.IsAir || available.stack <= 0) continue;
+			var peek = outHandler.GetSlot(s);
+			if (peek.IsAir) continue;
 
 			foreach (var (x, y, srcSide) in AdjacentFluidPush.EnumerateAdjacentCells(source, side))
 			{
-				if (!source.GetItemCapFilter(srcSide, IO.OUT)(available))
+				if (!source.GetItemCapFilter(srcSide, IO.OUT)(peek))
 					continue;
 				var dest = WorldCapability.ItemHandlerAt(x, y, srcSide.Opposite());
 				if (dest is null || ReferenceEquals(dest, outHandler)) continue;
+
+				var available = outHandler.Extract(s, maxPerSlot, simulate: true);
+				if (available.IsAir || available.stack <= 0) break;
 
 				bool insertedAny = false;
 				for (int ds = 0; ds < dest.SlotCount; ds++)

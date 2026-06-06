@@ -7,12 +7,10 @@ using Terraria.ModLoader.IO;
 
 namespace GregTechCEuTerraria.Api.Transfer;
 
-// LOCKED - port of
-// com.gregtechceu.gtceu.api.transfer.item.CustomItemStackHandler.
+// port of com.gregtechceu.gtceu.api.transfer.item.CustomItemStackHandler.
 //
 // Slot-backed item store with content-change callback + per-slot filter +
-// drop-on-destroy helper. Upstream extends Forge's `ItemStackHandler`; we
-// reproduce its surface inline since we don't have Forge.
+// drop-on-destroy helper
 //
 // Documented adaptations:
 //   - Forge ItemStack / NBT -> Terraria Item / TagCompound. Item.IsAir replaces
@@ -23,12 +21,12 @@ public class CustomItemStackHandler : IItemHandlerModifiable
 {
 	public Item[] Stacks;
 
-	// Content-change notifier. Trait subscribers (RecipeLogic, sync packets)
-	// hook this to know when to re-search recipes / mark sync dirty.
+	// Shared "empty" sentinel - the Terraria analog of Forge's ItemStack.EMPTY.
+	// must treat an IsAir return as read-only
+	public static readonly Item Empty = new();
+
 	public Action OnContentsChangedAction { get; set; } = () => { };
 
-	// Per-stack filter. Default accepts any item; subclasses set it to gate
-	// what fits in a slot (fuel-only slot, output-only-when-allowed, etc.).
 	public Predicate<Item> Filter { get; set; } = _ => true;
 
 	public CustomItemStackHandler() { Stacks = System.Array.Empty<Item>(); }
@@ -70,10 +68,9 @@ public class CustomItemStackHandler : IItemHandlerModifiable
 
 	public virtual int GetSlotLimit(int slot) => Item.CommonMaxStack;
 
-	// Mirrors upstream's ItemStackHandler.insertItem.
 	public virtual Item Insert(int slot, Item item, bool simulate)
 	{
-		if (item is null || item.IsAir) return new Item();
+		if (item is null || item.IsAir) return Empty;
 		if (!IsItemValid(slot, item)) return item.Clone();
 
 		var existing = Stacks[slot];
@@ -82,9 +79,6 @@ public class CustomItemStackHandler : IItemHandlerModifiable
 		if (existing.IsAir)
 		{
 			int accept = Math.Min(item.stack, limit);
-			var leftover = item.Clone();
-			leftover.stack = item.stack - accept;
-			if (leftover.stack <= 0) leftover.TurnToAir();
 			if (!simulate)
 			{
 				var placed = item.Clone();
@@ -92,40 +86,40 @@ public class CustomItemStackHandler : IItemHandlerModifiable
 				Stacks[slot] = placed;
 				OnContentsChanged(slot);
 			}
+			int rem = item.stack - accept;
+			if (rem <= 0) return Empty;
+			var leftover = item.Clone();
+			leftover.stack = rem;
 			return leftover;
 		}
 
-		// Same-type stack - top up. Must ALSO pass ItemLoader.CanStack so per-stack
-		// GlobalItem/ModItem differences are honored (e.g. a researched data orb
-		// never merges with a different research - ResearchDataGlobalItem.CanStack);
-		// CanStack checks prefix + the CanStack hooks but NOT type, so we AND it
-		// with the type check.
+		// Same-type stack - top up
 		if (existing.type == item.type &&
 		    Terraria.ModLoader.ItemLoader.CanStack(existing, item))
 		{
 			int room = limit - existing.stack;
 			if (room <= 0) return item.Clone();
 			int accept = Math.Min(item.stack, room);
-			var leftover = item.Clone();
-			leftover.stack = item.stack - accept;
-			if (leftover.stack <= 0) leftover.TurnToAir();
 			if (!simulate)
 			{
 				existing.stack += accept;
 				OnContentsChanged(slot);
 			}
+			int rem = item.stack - accept;
+			if (rem <= 0) return Empty;
+			var leftover = item.Clone();
+			leftover.stack = rem;
 			return leftover;
 		}
 
 		return item.Clone();
 	}
 
-	// Mirrors upstream's ItemStackHandler.extractItem.
 	public virtual Item Extract(int slot, int maxAmount, bool simulate)
 	{
-		if (maxAmount <= 0) return new Item();
+		if (maxAmount <= 0) return Empty;
 		var existing = Stacks[slot];
-		if (existing.IsAir) return new Item();
+		if (existing.IsAir) return Empty;
 		int take = Math.Min(existing.stack, maxAmount);
 		var out_ = existing.Clone();
 		out_.stack = take;
@@ -145,13 +139,9 @@ public class CustomItemStackHandler : IItemHandlerModifiable
 		return out_;
 	}
 
-	// Slot-specific stack limit - clamp by both filter cap and item natural cap.
 	protected virtual int GetStackLimit(int slot, Item stack) =>
 		Math.Min(GetSlotLimit(slot), stack.maxStack);
 
-	// Called from the various mutators above. Subclasses can override the
-	// virtual overload for per-slot reactions; the parameterless variant
-	// fires the OnContentsChangedAction.
 	protected virtual void OnContentsChanged(int slot) => OnContentsChangedAction();
 
 	public virtual void Clear()
@@ -160,8 +150,6 @@ public class CustomItemStackHandler : IItemHandlerModifiable
 		OnContentsChangedAction();
 	}
 
-	// Drop every item to the world at the given tile position. Used by the
-	// NotifiableItemStackHandler trait's onMachineDestroyed.
 	public void DropInventoryInWorld(int tileX, int tileY)
 	{
 		int wx = tileX * 16 + 8;
@@ -173,8 +161,6 @@ public class CustomItemStackHandler : IItemHandlerModifiable
 		}
 		Clear();
 	}
-
-	// === Persistence ========================================================
 
 	public TagCompound SerializeNBT()
 	{

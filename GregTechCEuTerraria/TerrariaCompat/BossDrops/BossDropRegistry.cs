@@ -46,7 +46,7 @@ public static class BossDropRegistry
 	private static readonly TierSpec[] Tiers =
 	{
 		new("Steam", new[] { "bronze", "invar" },                                              null),
-		new("LV",    new[] { "steel", "tin", "copper" },                                       new[] { "vacuum_tube", "resistor", "diode" }),
+		new("LV",    new[] { "steel", "tin", "copper" },                                       new[] { "vacuum_tube", "resistor", "diode", "ender_pearl_gem" }),
 		new("MV",    new[] { "aluminium", "copper", "cupronickel" },                           new[] { "resistor", "transistor", "capacitor" }),
 		new("HV",    new[] { "stainless_steel", "silver", "electrum" },                        new[] { "smd_diode", "smd_resistor", "smd_transistor" }),
 		new("EV",    new[] { "titanium", "aluminium", "kanthal" },                             new[] { "smd_capacitor", "smd_inductor" }),

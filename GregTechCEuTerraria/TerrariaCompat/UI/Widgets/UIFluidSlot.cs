@@ -14,9 +14,6 @@ using Terraria.UI;
 
 namespace GregTechCEuTerraria.TerrariaCompat.UI.Widgets;
 
-// Vertical fill column accepting RMB bucket / fluid-cell transfers. Per-tank
-// version of SuperTankTile.RightClick so multi-tank machines route each
-// click to the right slot.
 public sealed class UIFluidSlot : UIElement
 {
 	private readonly MetaMachine _entity;
@@ -26,9 +23,6 @@ public sealed class UIFluidSlot : UIElement
 	private readonly bool _allowDrain;
 	private bool _rightDown;
 
-	// localTankIndex is local to `direction` - machine resolves to flat handler
-	// index. AllowFill/AllowDrain come from GetTankClickCaps (same source the
-	// server-side FluidSlotAction reads) so UI + server can't disagree.
 	public UIFluidSlot(MetaMachine entity, IO direction, int localTankIndex, int width, int height)
 	{
 		_entity = entity;
@@ -42,24 +36,14 @@ public sealed class UIFluidSlot : UIElement
 	protected override void DrawSelf(SpriteBatch spriteBatch)
 	{
 		var bounds = GetDimensions().ToRectangle();
-		var tex = TextureAssets.MagicPixel.Value;
 		var stored = _handler.GetTank(_tankIndex);
 		int capacity = _handler.GetCapacity(_tankIndex);
 
-		spriteBatch.Draw(tex, bounds, new Color(25, 30, 50) * 0.9f);
-
-		// Fluid column rises from the bottom.
-		if (!stored.IsEmpty && capacity > 0)
-		{
-			float fill = System.Math.Clamp((float)stored.Amount / capacity, 0f, 1f);
-			int fillH = (int)(bounds.Height * fill);
-			if (fillH > 0)
-			{
-				var fillRect = new Rectangle(bounds.X, bounds.Y + bounds.Height - fillH, bounds.Width, fillH);
-				if (!FluidIconRenderer.Draw(spriteBatch, stored.Type!, fillRect))
-					spriteBatch.Draw(tex, fillRect, FluidIconRenderer.RgbColor(stored.Type!.Color));
-			}
-		}
+		if (stored.IsEmpty)
+			spriteBatch.Draw(TextureAssets.MagicPixel.Value, bounds, new Color(25, 30, 50) * 0.9f);
+		else
+			BrowserFluidSlot.Draw(spriteBatch, bounds, stored.Type, stored.Amount,
+				amountBottomInset: 16);
 
 		var border = IsMouseHovering
 			? Color.Lerp(TankFrame.BorderColor, Color.White, 0.5f)
@@ -70,7 +54,6 @@ public sealed class UIFluidSlot : UIElement
 		{
 			Main.LocalPlayer.mouseInterface = true;
 			Main.LocalPlayer.cursorItemIconEnabled = false;
-			// Hint matches the allowed click direction.
 			string hint =
 				  _allowFill  && _allowDrain ? "R-click with a bucket to fill or empty"
 				: _allowFill                 ? "R-click with a bucket to fill"
@@ -80,7 +63,6 @@ public sealed class UIFluidSlot : UIElement
 				? $"Empty  (0 / {capacity:N0} mB)\n{hint}"
 				: $"{stored.Type!.DisplayName}: {stored.Amount:N0} / {capacity:N0} mB\n{hint}";
 			Main.instance.MouseText(label);
-			// Don't reset the browser hover filter on an empty tank.
 			if (!stored.IsEmpty)
 				HoverItemTracker.SetFluid(stored.Type!.Id);
 			HandleClicks();
@@ -88,11 +70,9 @@ public sealed class UIFluidSlot : UIElement
 		_rightDown = Main.mouseRight;
 	}
 
-	// Edge-triggered RMB; simulated outcome gates the splash + packet.
 	private void HandleClicks()
 	{
 		if (!Main.mouseRight || _rightDown) return;
-		// Cursor-only by design - bucket/cell must be on Main.mouseItem.
 		var held = Main.mouseItem;
 		if (held is null || held.IsAir) return;
 		if (!WouldTransfer(held)) return;
@@ -101,8 +81,6 @@ public sealed class UIFluidSlot : UIElement
 		Terraria.Audio.SoundEngine.PlaySound(Terraria.ID.SoundID.Splash);
 	}
 
-	// Mirrors FluidSlotAction.Apply's accept rules - splash + packet gated
-	// identically to the server-side transfer.
 	private bool WouldTransfer(Item held)
 	{
 		var tank = _handler.GetTankAccess(_tankIndex);
@@ -116,7 +94,6 @@ public sealed class UIFluidSlot : UIElement
 				&& tank.Fill(new FluidStack(gf, VanillaFluidBridge.BucketAmount),
 					simulate: true) >= VanillaFluidBridge.BucketAmount;
 
-		// Empty bucket needs a filled-bucket form for the stored fluid.
 		if (held.type == Terraria.ID.ItemID.EmptyBucket)
 		{
 			if (!_allowDrain) return false;

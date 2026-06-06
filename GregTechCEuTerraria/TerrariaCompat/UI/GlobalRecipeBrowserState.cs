@@ -17,29 +17,16 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.UI;
-// Disambiguate - vanilla also has Terraria.GameContent.UI.Elements.UISearchBar.
 using UISearchBar = GregTechCEuTerraria.TerrariaCompat.UI.Widgets.UISearchBar;
 
 namespace GregTechCEuTerraria.TerrariaCompat.UI;
 
-// Full-screen JEI-style recipe browser over RecipeRegistry. Plain substring
-// tokens match recipe id / ingredients / display names; `@station` tokens
-// match the recipe's station (substring, so `@assemb` hits both `assembler`
-// and `assembly_line`). An optional item filter (the chip row, driven by
-// R/U hover) scopes the browser to "how to obtain X" / "X used as ingredient".
+// Full-screen JEI-style recipe browser over RecipeRegistry
 public sealed class GlobalRecipeBrowserState : UIState
 {
-	// How an active item filter scopes `_all`.
 	public enum BrowseFilter { None, Output, Input }
-
-	// Recipes = JEI-style recipe list. Items = Cheat-Sheet-style item grid
-	// (clicks spawn into inventory). Loot = LootRegistry sources (NPC drops,
-	// shops, shimmer); clicks pivot to Recipes "how to obtain". Equippable =
-	// Items narrowed to wearables with a per-category hide column.
 	public enum BrowseMode { Recipes, Items, Loot, Equippable }
 
-	// Equippable-mode hide categories - an item belongs to one or more; the
-	// equippable universe = items with any flag set.
 	[System.Flags]
 	private enum EquipCat
 	{
@@ -56,7 +43,6 @@ public sealed class GlobalRecipeBrowserState : UIState
 		LightPet = 1 << 9,
 	}
 
-	// Toggle labels + flags, in display order.
 	private static readonly (EquipCat Cat, string Name)[] _equipCats =
 	{
 		(EquipCat.Helmet,   "Helmets"),
@@ -83,75 +69,44 @@ public sealed class GlobalRecipeBrowserState : UIState
 	private UITextButton? _hideObviousToggle;
 	private UITextButton? _modeToggle;
 	private BrowseMode _mode = BrowseMode.Recipes;
-	// Mode swaps mutate _panel.Children; click handlers fire inside DrawChildren,
-	// so defer to Update() like _chipPending to avoid "Collection was modified".
 	private bool _modeSwapPending;
 
-	// Single source of truth for the active mode - every call site routes here
-	// so the widget re-mounts on the next Update; no direct `_mode = ...` writes.
 	private void SetMode(BrowseMode m)
 	{
 		if (m == _mode) return;
 		_mode = m;
 		_modeSwapPending = true;
 	}
-	// Items mode universe (ContentSamples.ItemsByType with valid texture),
-	// built once on first use.
+
 	private List<int>? _allItems;
 	private List<int> _filteredItems = new();
-	// Equippable mode - wearable subset; hidden-category bitmask is static so
-	// it persists across opens (all shown by default).
 	private List<int>? _allEquippable;
 	private List<int> _filteredEquippable = new();
 	private static EquipCat _hiddenEquip = EquipCat.None;
 	private static readonly Dictionary<int, EquipCat> _equipCatCache = new();
-	// Per-category "Hide <X>" toggle column - swaps into the mod-hide region
-	// while in Equippable mode (see ApplySettingsForMode).
 	private UIList? _equipList;
 	private UIScrollbar? _equipScroll;
 	private List<LootRegistry.LootEntry> _filteredLoot = new();
-	// Filter chip: _chipHint (no filter) or _chipButton (active filter) - one
-	// at a time, tracked via _chipShown so UpdateChip swaps cleanly.
 	private UIText? _chipHint;
 	private UITextButton? _chipButton;
 	private UIElement? _chipShown;
-	// Pending swap stashed by UpdateChip, applied in Update - swapping inline
-	// from a click handler mutates panel children mid-DrawChildren.
-	private UIElement? _chipPending;
+	private UIElement? _chipPending; // Pending swap stashed by UpdateChip, applied in Update
 	private string _chipLabel = "";
 	private bool _haveOnly;
-	// "Hide obvious recipes" - drops every recipe whose upstream category ends
-	// in `_recycling` (item -> constituent dusts; ~30% of the bundle). Real
-	// maceration under `gtceu:macerator` is kept. Persisted statically.
 	private bool _hideObvious;
 	private static bool _lastHideObvious = true;
-	// Per-mod "Hide <mod>" toggles, persisted across opens (static set of
-	// internal mod names, default OFF). A recipe's owning mod = mod of its
-	// primary output, preferring modded over vanilla; falls back to inputs,
-	// then GregTech for fluid-only recipes. Cached per recipe; _modOrder
-	// caches the display order (Vanilla, GregTech, others alpha).
 	private static readonly HashSet<string> _hiddenMods = new();
 	private static List<string>? _modOrder;
-	// ModOrder reads the item universe, only fully populated post-load.
-	// BuildLayout can run at ModSystem.Load (mod items still registering);
-	// the first Open drops any provisional cache so the next ModOrder is complete.
 	private static bool _modOrderReady;
 	private static readonly Dictionary<GTRecipe, string> _recipeModCache = new();
 	private const string VanillaMod = "Terraria";
 	private const string GregTechMod = "GregTechCEuTerraria";
-	// Mod-hide toggles live in a scrollable UIList so heavily-modded installs
-	// don't overflow the panel. RebuildModToggles runs deferred since the item
-	// universe may still be populating at BuildLayout time.
 	private UIList? _modList;
 	private UIScrollbar? _modScroll;
 	private int _modBtnW;
-	// Periodic re-filter while have-only is active (~0.5 s).
-	private int _haveOnlyTick;
+	private int _haveOnlyTick; // Periodic re-filter while have-only is active (~0.5 s).
 	private List<GTRecipe> _all = new();
 	private List<GTRecipe> _filtered = new();
-
-	// Persists the last search + mode across close -> re-open. ApplyItemFilter /
-	// ApplyFluidFilter still reset the query (explicit pivot).
 	private static string _lastQuery = "";
 	private static BrowseMode _lastMode = BrowseMode.Recipes;
 	public string CurrentQuery => _search?.Text ?? "";
@@ -162,8 +117,6 @@ public sealed class GlobalRecipeBrowserState : UIState
 		_lastHideObvious = _hideObvious;
 	}
 
-	// Active item filter - exactly one of _filterItem / _filterFluid /
-	// _filterTagItems is set when _filter != None.
 	private BrowseFilter _filter = BrowseFilter.None;
 	private int _filterItem;
 	private string? _filterFluid;
@@ -174,55 +127,34 @@ public sealed class GlobalRecipeBrowserState : UIState
 	private const int HeaderPad = 8;
 	private const int SearchH   = 26;
 	private const int ChipH     = 18;
-	// Hint (no filter) is two lines tall; chip BUTTON (active filter) stays one.
-	private const int HintH     = 32;
-	// Ctrl-click Journey-mode cheat applies in every mode - shared line 2 below.
-	private const string CheatHintLine =
-		"Ctrl+LMB: cheat 1 to inventory  *  Ctrl+RMB: a full stack (Journey Mode)";
+	private const int HintH     = 32; // Hint (no filter) is two lines tall; chip BUTTON (active filter) stays one.
+	private const string CheatHintLine = "Ctrl+LMB: cheat 1 to inventory  *  Ctrl+RMB: a full stack (Journey Mode)";
 
-	// Single source of truth for the no-filter header hint per mode (used by
-	// BuildLayout + every UpdateChip refresh, so the cheat line can never drift).
 	private static string HintFor(BrowseMode mode) => mode switch
 	{
-		BrowseMode.Items =>
-			"Items mode: LMB = 1 * Shift+LMB / RMB = full stack * Alt+LMB = pin favorite\n" + CheatHintLine,
-		BrowseMode.Equippable =>
-			"Equippable mode: LMB = 1 * Shift+LMB / RMB = full stack * Alt+LMB = pin favorite\n" + CheatHintLine,
-		BrowseMode.Loot =>
-			"Loot mode: hover an item and press R to scope to that item's vanilla sources\n" + CheatHintLine,
-		_ =>
-			"Tip: hover an item and press R (how to obtain) or U (used as ingredient)\n" + CheatHintLine,
+		BrowseMode.Items => "Items mode: LMB = 1 * Shift+LMB / RMB = full stack * Alt+LMB = pin favorite\n" + CheatHintLine,
+		BrowseMode.Equippable => "Equippable mode: LMB = 1 * Shift+LMB / RMB = full stack * Alt+LMB = pin favorite\n" + CheatHintLine,
+		BrowseMode.Loot => "Loot mode: hover an item and press R to scope to that item's vanilla sources\n" + CheatHintLine,
+		_ => "Tip: hover an item and press R (how to obtain) or U (used as ingredient)\n" + CheatHintLine,
 	};
 
 	public override void OnInitialize() => BuildLayout();
 
-	// (Re)builds the panel for the current screen size. UIState.OnInitialize
-	// runs once, so without this the panel would keep its launch-time pixel
-	// size after any resolution / UI-scale change.
 	private void BuildLayout()
 	{
 		UIItemGrid.WarmVanillaItemTextures();
-
-
 		string preservedQuery = _search?.Text ?? "";
 		RemoveAllChildren();
 
-		// Three-column layout: [settings] [main] [favorites], centred together
-		// as a group. Settings (left) holds the mode / filter toggles + result
-		// count; the main panel's top bar is just the search field + close X.
+		// Three-column layout: [settings] [main] [favorites]
 		const float SetWidth = 156f;
 		const float SetGap   = 6f;
-		float FavWidth = UIFavoritesPanel.PanelWidth;   // real pane width (4-col grid)
+		float FavWidth = UIFavoritesPanel.PanelWidth;
 		const float FavGap   = 6f;
-		// Total horizontal footprint of the two side panels + their gaps - the
-		// main panel width is added on top of this. Used to keep the group on
-		// screen at the small end.
 		float GroupSidePx = SetWidth + SetGap + FavGap + FavWidth;
 
 		// Fixed fraction of the screen, clamped min/max - large monitors render
 		// at a consistent pixel size, only genuinely small screens shrink.
-		// Max width capped so the [settings|main|favorites] group fits.
-		// All dims UI-space (post-UIScale).
 		float uiScale = Main.UIScale <= 0 ? 1f : Main.UIScale;
 		float uiW = Main.screenWidth / uiScale;
 		float uiH = Main.screenHeight / uiScale;
@@ -230,9 +162,6 @@ public sealed class GlobalRecipeBrowserState : UIState
 		float maxH = System.Math.Min(860f, uiH - 24f);
 		float w = System.Math.Clamp(uiW * 0.62f, System.Math.Min(560f, maxW), maxW);
 		float h = System.Math.Clamp(uiH * 0.82f, System.Math.Min(420f, maxH), maxH);
-
-		// Each panel HAlign=0.5; Left offsets its centre from screen centre.
-		// The whole group [set | main | fav] is centred via these offsets.
 		float mainLeft = (SetWidth + SetGap - FavGap - FavWidth) / 2f;
 		float setLeft  = -(SetGap + w + FavGap + FavWidth) / 2f;
 		float favLeft  =  (SetWidth + SetGap + w + FavGap) / 2f;
@@ -259,7 +188,6 @@ public sealed class GlobalRecipeBrowserState : UIState
 		const int CloseW = 24;
 		const int RowGap = 6;
 
-		// Search bar - now the full width of the top row minus the close X.
 		_search = new UISearchBar(
 			placeholder: "Search...  |  RMB to clear",
 			onChanged: Refilter)
@@ -271,7 +199,6 @@ public sealed class GlobalRecipeBrowserState : UIState
 		};
 		_panel.Append(_search);
 
-		// Close button - small 'X' top-right. Vanilla UI parity: ESC also closes.
 		var close = new UIText("X", 1.1f, large: false)
 		{
 			HAlign = 1f,
@@ -283,9 +210,6 @@ public sealed class GlobalRecipeBrowserState : UIState
 		close.OnLeftClick += (_, _) => GlobalRecipeBrowserSystem.Close();
 		_panel.Append(close);
 
-		// Left settings panel. Toggle set is shared across modes (no IsVisible
-		// gating). hide-obvious + have-ingredients are recipe-only no-ops in
-		// other modes but stay put so the layout is stable.
 		_settingsPanel = new UITerrariaPanel
 		{
 			HAlign = 0.5f,
@@ -299,7 +223,7 @@ public sealed class GlobalRecipeBrowserState : UIState
 		const int SetPad  = 8;
 		int setBtnW       = (int)SetWidth - SetPad * 2;
 		int setRowH       = SearchH + 6;
-		int setRow0       = 52;   // below the "Settings" title + count line
+		int setRow0       = 52;
 
 		var setTitle = new UIText("Settings", 0.8f, large: false)
 		{
@@ -308,7 +232,6 @@ public sealed class GlobalRecipeBrowserState : UIState
 		};
 		_settingsPanel.Append(setTitle);
 
-		// Result count "shown / total" for the active mode.
 		var count = new UIDynamicLabel(() => _mode switch
 		{
 			BrowseMode.Items      => $"{_filteredItems.Count:N0} / {(_allItems?.Count ?? 0):N0}",
@@ -360,9 +283,6 @@ public sealed class GlobalRecipeBrowserState : UIState
 		};
 		_settingsPanel.Append(_haveOnlyToggle);
 
-		// Per-mod hide toggles - scrollable column, rebuilt on every Open since
-		// the item universe may still be populating at BuildLayout time. Applies
-		// in every mode (recipes by owning mod, items + loot by item mod).
 		const int ScrollW = 20;
 		int modListTop    = setRow0 + setRowH * 3;
 		int modListH      = System.Math.Max(setRowH * 2, (int)h - modListTop - SetPad);
@@ -374,7 +294,6 @@ public sealed class GlobalRecipeBrowserState : UIState
 			Width       = StyleDimension.FromPixels(_modBtnW),
 			Height      = StyleDimension.FromPixels(modListH),
 			ListPadding = 4f,
-			// Keep ModOrder()'s order; UIList's default CompareTo sort would scramble it.
 			ManualSortMethod = _ => { },
 		};
 		_settingsPanel.Append(_modList);
@@ -385,12 +304,9 @@ public sealed class GlobalRecipeBrowserState : UIState
 			Width  = StyleDimension.FromPixels(ScrollW),
 			Height = StyleDimension.FromPixels(modListH),
 		};
-		// Bind for wheel clamp; UpdateModScrollVisibility appends only on overflow.
 		_modList.SetScrollbar(_modScroll);
 		RebuildModToggles();
 
-		// Equippable-mode hide toggles - same region as the mod list, swapped
-		// in/out by ApplySettingsForMode.
 		_equipList = new UIList
 		{
 			Left        = StyleDimension.FromPixels(SetPad),
@@ -398,7 +314,7 @@ public sealed class GlobalRecipeBrowserState : UIState
 			Width       = StyleDimension.FromPixels(_modBtnW),
 			Height      = StyleDimension.FromPixels(modListH),
 			ListPadding = 4f,
-			ManualSortMethod = _ => { },   // keep _equipCats order
+			ManualSortMethod = _ => { },
 		};
 		_equipScroll = new UIScrollbar
 		{
@@ -411,8 +327,6 @@ public sealed class GlobalRecipeBrowserState : UIState
 		BuildEquipToggles();
 		ApplySettingsForMode();
 
-		// Filter chip - hint when no filter, button when active. UpdateChip
-		// swaps them in/out of the same row position.
 		_chipHint = new UIText(HintFor(_mode), 0.78f, large: false)
 		{
 			Left   = StyleDimension.FromPixels(HeaderPad),
@@ -452,6 +366,7 @@ public sealed class GlobalRecipeBrowserState : UIState
 			Top  = StyleDimension.FromPixels(listTop),
 			Width  = StyleDimension.FromPixels(w - 8),
 			Height = StyleDimension.FromPixels(h - listTop - 4),
+			OnStationFilter = s => _search?.SetText("@" + s),
 		};
 		_grid = new UIItemGrid(() => _filteredItems)
 		{
@@ -477,8 +392,6 @@ public sealed class GlobalRecipeBrowserState : UIState
 		ApplyMode();
 		UpdateChip();
 
-		// Restore preserved search across resolution-rebuild; triggers one
-		// Refilter via the search bar's onChanged.
 		if (preservedQuery.Length > 0) _search?.SetText(preservedQuery);
 
 		_builtScreenW = Main.screenWidth;
@@ -506,8 +419,6 @@ public sealed class GlobalRecipeBrowserState : UIState
 
 	private void ToggleMode()
 	{
-		// Recipes -> Items -> Loot -> Equippable -> Recipes. Search text preserved
-		// across switches; ApplyMode re-runs Refilter for the new mode.
 		SetMode(_mode switch
 		{
 			BrowseMode.Recipes => BrowseMode.Items,
@@ -517,8 +428,6 @@ public sealed class GlobalRecipeBrowserState : UIState
 		});
 	}
 
-	// Swap the active content widget (list / grid / loot). Item/tag filter is
-	// preserved across modes (Items ignores it; Loot honours it).
 	private void ApplyMode()
 	{
 		if (_panel is null || _list is null || _grid is null || _equipGrid is null || _loot is null) return;
@@ -541,8 +450,6 @@ public sealed class GlobalRecipeBrowserState : UIState
 		Refilter(_search?.Text ?? "");
 	}
 
-	// Swaps the lower toggle list between the mod-hide list and the
-	// equip-category list; top toggles stay put across modes.
 	private void ApplySettingsForMode()
 	{
 		if (_settingsPanel is null || _modList is null || _equipList is null) return;
@@ -566,8 +473,6 @@ public sealed class GlobalRecipeBrowserState : UIState
 		}
 	}
 
-	// Called by GlobalRecipeBrowserSystem.Open() - clears any item filter,
-	// pulls every recipe fresh, and restores `_lastQuery` for close->re-open.
 	public void RebuildFromScratch()
 	{
 		_filter = BrowseFilter.None;
@@ -579,17 +484,12 @@ public sealed class GlobalRecipeBrowserState : UIState
 		_search?.SetText(_lastQuery);
 		_hideObvious = _lastHideObvious;
 		SetMode(_lastMode);
-		// SetMode defers to next Update; flush inline here since RebuildFromScratch
-		// runs from Open() (outside DrawChildren) and callers expect a rendered panel.
 		if (_modeSwapPending) { _modeSwapPending = false; ApplyMode(); }
-		// Browser is opened post-load; drop any provisional mod list cached at Load.
 		if (!_modOrderReady) { _modOrderReady = true; _modOrder = null; }
 		RebuildModToggles();
 		RecomputeAll();
 	}
 
-	// Scopes the browser to a single item. Output = "how to obtain X",
-	// Input = "X used as ingredient". Resets the text search.
 	public void ApplyItemFilter(int itemType, BrowseFilter filter)
 	{
 		if (itemType <= 0 || filter == BrowseFilter.None) { ClearFilter(); return; }
@@ -604,7 +504,6 @@ public sealed class GlobalRecipeBrowserState : UIState
 		RecomputeAll();
 	}
 
-	// Fluid variant; driven by R/U over a fluid cell.
 	public void ApplyFluidFilter(string fluidId, string label, BrowseFilter filter)
 	{
 		if (string.IsNullOrEmpty(fluidId) || filter == BrowseFilter.None) { ClearFilter(); return; }
@@ -619,8 +518,6 @@ public sealed class GlobalRecipeBrowserState : UIState
 		RecomputeAll();
 	}
 
-	// Tag variant - matches any item in the tag's resolved set. Without this,
-	// a click on a TagIngredient cell would resolve to the first member only.
 	public void ApplyTagFilter(string tagLabel, HashSet<int> items, BrowseFilter filter)
 	{
 		if (items.Count == 0 || filter == BrowseFilter.None) { ClearFilter(); return; }
@@ -635,7 +532,6 @@ public sealed class GlobalRecipeBrowserState : UIState
 		RecomputeAll();
 	}
 
-	// Preserves the search text so clearing the chip leaves the query intact.
 	private void ClearFilter()
 	{
 		_filter = BrowseFilter.None;
@@ -647,8 +543,6 @@ public sealed class GlobalRecipeBrowserState : UIState
 		RecomputeAll();
 	}
 
-	// Rebuilds `_all` from RecipeRegistry, scoped by the active item filter,
-	// then re-applies the current text search on top.
 	private void RecomputeAll()
 	{
 		_all.Clear();
@@ -688,8 +582,6 @@ public sealed class GlobalRecipeBrowserState : UIState
 		Refilter(_search?.Text ?? "");
 	}
 
-	// Narrows `_all` -> `_filtered` by the JEI-style text search tokens,
-	// then optionally by the "have ingredients" checkbox.
 	private void Refilter(string text)
 	{
 		SyncLocaleCaches();
@@ -722,8 +614,6 @@ public sealed class GlobalRecipeBrowserState : UIState
 			_filtered.AddRange(_all);
 		}
 
-		// Two-key stable sort - see SortByRank. Skipped under Have-ingredients
-		// (every row is 0-missing, only outputs-match would drive).
 		if (_filtered.Count > 1)
 		{
 			var sortInv    = inv    ?? BuildInventoryCounts();
@@ -733,10 +623,6 @@ public sealed class GlobalRecipeBrowserState : UIState
 		}
 	}
 
-	// Packed integer rank - lower is earlier. Bit [16] = not-outputs-match
-	// (recipes producing the search term first); bits [15:0] = count of
-	// unsatisfied inputs (4/5-green ranks above 1/5-green above 0/5-green).
-	// Either key collapses to 0 when not applicable.
 	private const int OutputsMissBit = 1 << 16;
 	private const int MissingMask    = 0xFFFF;
 
@@ -778,8 +664,6 @@ public sealed class GlobalRecipeBrowserState : UIState
 		for (int i = 0; i < n; i++) list.Add(items[i]);
 	}
 
-	// Counts unsatisfied inputs - every ingredient cell that would render red
-	// or yellow. Mirrors the cell-tint logic so the sort matches visible state.
 	private static int CountMissingInputs(GTRecipe recipe,
 		IReadOnlyDictionary<int, int> inv,
 		IReadOnlyDictionary<string, int> fluids)
@@ -807,9 +691,6 @@ public sealed class GlobalRecipeBrowserState : UIState
 	private string HaveLabel() => _haveOnly ? "[x] Have ingredients" : "[ ] Have ingredients";
 	private string HideObviousLabel() => _hideObvious ? "[x] Hide obvious" : "[ ] Hide obvious";
 
-	// True for noise recipes (recycling categories, wiremill bundled-wire
-	// variants, packer wire/cable/dust-size conversions, shapeless wire-gt
-	// doubling/splitting). Cable variants stay - insulation has real cost.
 	private static bool IsObviousRecipe(GTRecipe r)
 	{
 		var cat = r.CategoryId;
@@ -862,10 +743,6 @@ public sealed class GlobalRecipeBrowserState : UIState
 		return false;
 	}
 
-	// Ordered list of mod internal names: Vanilla, GregTech, then others alpha
-	// by display name. Derived from the full item universe (not just recipes)
-	// so the toggles filter Items + Loot too. GregTech added explicitly for
-	// fluid-only recipes that have no resolvable item output.
 	private static List<string> ModOrder()
 	{
 		if (_modOrder is not null) return _modOrder;
@@ -882,21 +759,12 @@ public sealed class GlobalRecipeBrowserState : UIState
 			return string.Compare(ModDisplayName(a), ModDisplayName(b),
 				System.StringComparison.OrdinalIgnoreCase);
 		});
-		// Only cache once recipes actually exist - otherwise the first call
-		// (BuildLayout at ModSystem.Load, before recipes load) would pin an
-		// empty list forever and the toggles would never appear.
 		if (list.Count > 0) _modOrder = list;
 		return list;
 	}
 
 	private static int ModRank(string mod) => mod == VanillaMod ? 0 : mod == GregTechMod ? 1 : 2;
 
-	// (Re)builds the per-mod "Hide <mod>" toggle buttons into the scrollable
-	// list. Idempotent - clears the previous set first. Called from BuildLayout
-	// (layout build / resolution change) and RebuildFromScratch (every Open)
-	// since the item universe may be incomplete at the first BuildLayout (state
-	// Activate()'d at Load). UIList owns each button's position; we only set
-	// width/height - no Left/Top.
 	private void RebuildModToggles()
 	{
 		if (_modList is null) return;
@@ -915,12 +783,9 @@ public sealed class GlobalRecipeBrowserState : UIState
 		UpdateModScrollVisibility();
 	}
 
-	// Show the scrollbar only on overflow. Decided per-(re)build, not per-frame.
 	private void UpdateModScrollVisibility()
 	{
 		if (_modList is null || _modScroll is null || _settingsPanel is null) return;
-		// Don't leave a stray scrollbar behind while Equippable mode shows its
-		// own column - RebuildModToggles can run via RebuildFromScratch.
 		if (_mode == BrowseMode.Equippable)
 		{
 			if (_modScroll.Parent == _settingsPanel) _settingsPanel.RemoveChild(_modScroll);
@@ -945,14 +810,10 @@ public sealed class GlobalRecipeBrowserState : UIState
 	{
 		VanillaMod  => "Vanilla",
 		GregTechMod => "GregTech",
-		// tModLoader's built-in items live under internal name "ModLoader" and
-		// TryGetMod doesn't resolve it; map by hand.
 		"ModLoader" => "tModLoader",
 		_           => ModLoader.TryGetMod(internalName, out var m) ? m.DisplayName : internalName,
 	};
 
-	// Owning mod = primary output's mod, preferring modded over vanilla; falls
-	// back to inputs, then GregTech for fluid-only recipes. Cached per recipe.
 	private static string RecipeModName(GTRecipe r)
 	{
 		if (_recipeModCache.TryGetValue(r, out var cached)) return cached;
@@ -967,11 +828,9 @@ public sealed class GlobalRecipeBrowserState : UIState
 			return outMod;
 		if (PreferModded(Widgets.RecipeRowRenderer.InputItemTypesInRecipe(r), out string inMod))
 			return inMod;
-		return GregTechMod;   // fluid<->fluid - no resolvable items
+		return GregTechMod;
 	}
 
-	// First non-vanilla mod in the set; else Vanilla if any vanilla item present;
-	// else false.
 	private static bool PreferModded(HashSet<int> types, out string mod)
 	{
 		bool sawVanilla = false;
@@ -993,18 +852,12 @@ public sealed class GlobalRecipeBrowserState : UIState
 		return VanillaMod;
 	}
 
-	// Loot-mode filter. Tokenises like the recipe search. Rows whose TARGET
-	// item name matches every token sort first (same "outputs first" semantics
-	// the recipe sort uses).
 	private void RefilterLoot(string text)
 	{
 		var all = LootRegistry.All;
 		string[] tokens = RecipeSearch.Tokenize(text);
 		bool needText = tokens.Length > 0;
 
-		// "How to obtain X" scopes by TargetItem (or tag-filter set). Input filter
-		// has no loot interpretation (sources are NPCs/shops/shimmer, not items)
-		// so it narrows to nothing.
 		bool scopeByItem = _filter == BrowseFilter.Output && _filterItem > 0;
 		bool scopeByTag  = _filter == BrowseFilter.Output && _filterTagItems is not null;
 		bool scopeEmpty  = _filter == BrowseFilter.Input || _filterFluid is not null;
@@ -1054,7 +907,6 @@ public sealed class GlobalRecipeBrowserState : UIState
 		string needle = (text ?? string.Empty).Trim().ToLowerInvariant();
 		bool needText = needle.Length > 0;
 		bool needMod  = _hiddenMods.Count > 0;
-		// Reuse the list instance (closure re-reads the field); Clear keeps capacity.
 		_filteredItems.Clear();
 		if (!needText && !needMod)
 		{
@@ -1131,8 +983,6 @@ public sealed class GlobalRecipeBrowserState : UIState
 		return s;
 	}
 
-	// Classifies an item into equipment categories. Bounds-guards each lookup
-	// since modded items can carry shoot/buffType/mountType past vanilla array lengths.
 	private static EquipCat ClassifyEquip(Item it)
 	{
 		var c = EquipCat.None;
@@ -1173,8 +1023,6 @@ public sealed class GlobalRecipeBrowserState : UIState
 		_filteredEquippable.Clear();
 		foreach (int type in allEquip)
 		{
-			// Hide only when every category the item belongs to is hidden, so
-			// an item in both a hidden + un-hidden category stays.
 			var cat = EquipCatOf(type);
 			if (hidden != EquipCat.None && (cat & ~hidden) == EquipCat.None) continue;
 			if (needMod && _hiddenMods.Contains(ItemModName(type))) continue;
@@ -1211,7 +1059,6 @@ public sealed class GlobalRecipeBrowserState : UIState
 		Refilter(_search?.Text ?? "");
 	}
 
-	// Mirror of UpdateModScrollVisibility for the equip toggle column.
 	private void UpdateEquipScrollVisibility()
 	{
 		if (_equipList is null || _equipScroll is null || _settingsPanel is null) return;
@@ -1229,8 +1076,6 @@ public sealed class GlobalRecipeBrowserState : UIState
 		else if (!need && attached) _settingsPanel.RemoveChild(_equipScroll);
 	}
 
-	// One-tick cache for the inventory + fluid walker - runs at most once per
-	// game tick across all callers (refilter, per-cell renderer, have-only filter).
 	private static uint   _snapTick    = uint.MaxValue;
 	private static Dictionary<int, int>?    _snapInv;
 	private static Dictionary<string, int>? _snapFluids;
@@ -1246,10 +1091,6 @@ public sealed class GlobalRecipeBrowserState : UIState
 	internal static Dictionary<string, int> FluidCountsSnapshot()
 	{ EnsureSnapshot(); return _snapFluids!; }
 
-	// ItemID -> total stack count across vanilla's crafting pool: inventory,
-	// open container, Void Bag (when equipped), every nearby chest within 600 px.
-	// Mirrors `Recipe.CollectItemsToCraftWithFrom` + `CollectItemsFromChests`;
-	// adds cursor + trash slot (player-held).
 	internal static Dictionary<int, int> BuildInventoryCounts() => InventoryCountsSnapshot();
 	private  static Dictionary<int, int> BuildInventoryCountsImpl()
 	{
@@ -1270,16 +1111,12 @@ public sealed class GlobalRecipeBrowserState : UIState
 		Add(Main.mouseItem);
 		Add(player.trashItem);
 
-		// Vanilla parity with Recipe.CollectItemsFromChests.
 		var seen = new HashSet<Item[]>(ReferenceEqualityComparer.Instance);
 		WalkCraftingChests(player, seen, AddArray);
 
 		return counts;
 	}
 
-	// Vanilla `Recipe.CollectItemsFromChests` parity, inlined because the
-	// underlying Player APIs (GetCurrentContainer, NearbyChests) aren't surfaced
-	// by tModLoader's publicized API. `seen` dedupes by item-array reference.
 	private static void WalkCraftingChests(Player player, HashSet<Item[]> seen, System.Action<Item[]?> addArray)
 	{
 		void AddChest(Chest? c)
@@ -1320,10 +1157,6 @@ public sealed class GlobalRecipeBrowserState : UIState
 		}
 	}
 
-	// Every item AND fluid input satisfied. EU/circuit inputs aren't checked
-	// (the filter is "produceable from current items + carried fluid containers").
-	// Fluid-only recipes (e.g. distillery wood_vinegar -> water) must check fluids
-	// independently or they'd false-greenlight with no item inputs.
 	private static bool RecipeCraftableNow(GTRecipe recipe, Dictionary<int, int> inv,
 		Dictionary<string, int> fluidsHeld)
 	{
@@ -1352,12 +1185,6 @@ public sealed class GlobalRecipeBrowserState : UIState
 		return hasAnyInput;
 	}
 
-	// Walks every chest pool BuildInventoryCounts considers through the
-	// abstract `IFluidHandlerItem` interface - any item that exposes fluid
-	// contents (cells, buckets, anything else that implements it later) is
-	// summed uniformly by fluid id, no per-type if-chain. mB-precise:
-	// ten 100 mB cells satisfy a 1000 mB ingredient. Stack count multiplies
-	// (a stack of 8 filled cells contributes 8x their per-cell contents).
 	internal static Dictionary<string, int> BuildFluidCounts() => FluidCountsSnapshot();
 	private  static Dictionary<string, int> BuildFluidCountsImpl()
 	{
@@ -1373,7 +1200,6 @@ public sealed class GlobalRecipeBrowserState : UIState
 		void Add(Item? it)
 		{
 			if (it is null || it.IsAir) return;
-			// Mirrors CoverFilterAction.HeldFluid: vanilla bucket -> GT bucket -> handler.
 			var vanilla = VanillaFluidBridge.StackFor(it.type);
 			if (!vanilla.IsEmpty) { AddStack(vanilla, it.stack); return; }
 			if (it.ModItem is FluidBucketItem bucket && bucket.Fluid is { } gf)
@@ -1400,7 +1226,6 @@ public sealed class GlobalRecipeBrowserState : UIState
 		return fluids;
 	}
 
-	// Any one matching fluid (exact/tag/attribute) in sufficient quantity counts.
 	private static bool HasFluid(Api.Recipe.Content.Content content, Dictionary<string, int> fluids)
 	{
 		var ing = (Ingredient)content.Payload;
@@ -1410,7 +1235,7 @@ public sealed class GlobalRecipeBrowserState : UIState
 			FluidContainerIngredient fc   => fc.Fluid,
 			_                             => null,
 		};
-		if (fi is null) return true;       // not a fluid ingredient - ignore here
+		if (fi is null) return true;
 		int needed = fi.Amount;
 		if (needed <= 0) return true;
 
@@ -1424,8 +1249,6 @@ public sealed class GlobalRecipeBrowserState : UIState
 
 	private static int CountFor(Api.Recipe.Content.Content content)
 	{
-		// Don't unwrap via Inner() - amount lives on the OUTERMOST wrapper,
-		// unwrapping would silently collapse every count to 1.
 		var ing = (Ingredient)content.Payload;
 		return ing switch
 		{
@@ -1435,10 +1258,6 @@ public sealed class GlobalRecipeBrowserState : UIState
 		};
 	}
 
-	// ItemStack/NBT check one type; TagIngredient sums across resolved members
-	// (vanilla RecipeGroup semantics). Unresolved ingredients (ItemType == 0)
-	// are UNSATISFIABLE - treating them as satisfied silently greenlights every
-	// recipe whose ingredients fell off the resolver (the nether_wart bug).
 	private static bool HasAny(Api.Recipe.Content.Content content, int needed,
 		Dictionary<int, int> inv)
 	{
@@ -1464,7 +1283,7 @@ public sealed class GlobalRecipeBrowserState : UIState
 				return false;
 			}
 			case IntCircuitIngredient:
-				// Programmed circuit is a machine-GUI setting, not an inventory item.
+				// Programmed circuit is a machine-GUI setting, not an inventory item. TODO actual circuits
 				return true;
 			default:
 				// Unknown ingredient in the ITEM bucket - conservatively unsatisfiable.
@@ -1479,8 +1298,6 @@ public sealed class GlobalRecipeBrowserState : UIState
 		_                          => ing,
 	};
 
-	// Per-ingredient availability for cell tinting - quantitative analogue of
-	// HasAny/HasFluid so the renderer can distinguish full / partial / none.
 	internal enum AvailabilityState { None, Partial, Full }
 
 	internal static AvailabilityState GetItemAvailability(
@@ -1488,7 +1305,7 @@ public sealed class GlobalRecipeBrowserState : UIState
 		IReadOnlyDictionary<int, int> inv)
 	{
 		int needed = CountFor(content);
-		if (needed <= 0) return AvailabilityState.None;       // not a counted item input
+		if (needed <= 0) return AvailabilityState.None;
 		var ing = Inner((Ingredient)content.Payload);
 		int have = 0;
 		switch (ing)
@@ -1505,13 +1322,12 @@ public sealed class GlobalRecipeBrowserState : UIState
 			{
 				var members = tag.GetItems();
 				if (members.Count == 0) return AvailabilityState.None;
-				// Vanilla RecipeGroup semantics: sum across all members.
 				foreach (var it in members)
 					if (inv.TryGetValue(it.type, out int n)) have += n;
 				break;
 			}
 			case IntCircuitIngredient:
-				return AvailabilityState.None;   // machine setting, not inventory
+				return AvailabilityState.None;
 			default:
 				return AvailabilityState.None;
 		}
@@ -1535,7 +1351,6 @@ public sealed class GlobalRecipeBrowserState : UIState
 		int needed = fi.Amount;
 		if (needed <= 0) return AvailabilityState.None;
 
-		// Best-match across the ingredient's fluid set.
 		int have = 0;
 		if (fi.ExactType is { } exact)
 		{
@@ -1557,7 +1372,6 @@ public sealed class GlobalRecipeBrowserState : UIState
 
 		_chipHint.SetText(HintFor(_mode));
 
-		// Items/Equippable are flat cheat grids - no filter chip, always hint.
 		bool filterable = _mode == BrowseMode.Recipes || _mode == BrowseMode.Loot;
 
 		UIElement desired;
@@ -1587,9 +1401,6 @@ public sealed class GlobalRecipeBrowserState : UIState
 			desired = _chipButton;
 		}
 
-		// Don't mutate panel children here - callers may sit inside DrawChildren
-		// (UIRecipeList.DrawSelf -> ApplyItemFilter -> RecomputeAll -> UpdateChip);
-		// Update() performs the actual swap next frame.
 		_chipPending = desired;
 	}
 
@@ -1605,23 +1416,13 @@ public sealed class GlobalRecipeBrowserState : UIState
 	public override void Update(GameTime gameTime)
 	{
 		base.Update(gameTime);
-
-		// Rebuild on resolution / UI-scale change. BuildLayout preserves search,
-		// mode and filter via instance fields.
 		if (ScreenChanged()) BuildLayout();
-
-		// Apply deferred mode + chip swaps queued during DrawChildren.
 		if (_modeSwapPending)
 		{
 			_modeSwapPending = false;
 			ApplyMode();
 		}
 		ApplyPendingChipSwap();
-
-		// Modal mouse capture lives in GlobalRecipeBrowserSystem.PostUpdateInput
-		// (here in UpdateUI it'd be one frame stale w.r.t. Player.ItemCheck).
-
-		// Periodic refilter while have-only is active.
 		if (_haveOnly && ++_haveOnlyTick >= 30)
 		{
 			_haveOnlyTick = 0;
