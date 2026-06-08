@@ -34,12 +34,14 @@ public class EBFChanNPC : ModNPC
 		NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, drawModifiers);
 
 		Language.GetOrRegister("Mods.GregTechCEuTerraria.NPCs.EBFChanNPC.DisplayName", () => "EBF-chan");
-		Language.GetOrRegister("Mods.GregTechCEuTerraria.NPCs.EBFChan.Bestiary",
+		Language.GetOrRegister("Mods.GregTechCEuTerraria.NPCs.EBFChanNPC.Bestiary",
 			() => "The spirit of a Electric Blast Furnace, settled and friendly now that her Fallen shell is dealt with. She runs a little stall of heat-treated ingredients - and is always hot to the touch.");
-		Language.GetOrRegister("Mods.GregTechCEuTerraria.NPCs.EBFChan.DeathMessage", () => "{0} let her coils go cold...");
-		Language.GetOrRegister("Mods.GregTechCEuTerraria.NPCs.EBFChan.Chat1", () => "Hold on, I'm still cooking your kanthal ingot...");
-		Language.GetOrRegister("Mods.GregTechCEuTerraria.NPCs.EBFChan.Chat2", () => "Don't touch the casing. It's hot. Everything's hot.");
-		Language.GetOrRegister("Mods.GregTechCEuTerraria.NPCs.EBFChan.Chat3", () => "Overclock responsibly. I've seen what happens when you don't.");
+		Language.GetOrRegister("Mods.GregTechCEuTerraria.NPCs.EBFChanNPC.DeathMessage", () => "{0} let her coils go cold...");
+		Language.GetOrRegister("Mods.GregTechCEuTerraria.NPCs.EBFChanNPC.Chat1", () => "Hold on, I'm still cooking your kanthal ingot...");
+		Language.GetOrRegister("Mods.GregTechCEuTerraria.NPCs.EBFChanNPC.Chat2", () => "Don't touch the casing. It's hot. Everything's hot.");
+		Language.GetOrRegister("Mods.GregTechCEuTerraria.NPCs.EBFChanNPC.Chat3", () => "Overclock responsibly. I've seen what happens when you don't.");
+
+		Language.GetOrRegister("Mods.GregTechCEuTerraria.NPCs.EBFChanNPC.Census.SpawnCondition", () => "{$Census.SpawnConditions.Guide}");
 	}
 
 	public override void SetDefaults()
@@ -59,14 +61,14 @@ public class EBFChanNPC : ModNPC
 		AnimationType = NPCID.Guide;
 	}
 
-	public override LocalizedText DeathMessage => Language.GetText("Mods.GregTechCEuTerraria.NPCs.EBFChan.DeathMessage");
+	public override LocalizedText DeathMessage => Language.GetText("Mods.GregTechCEuTerraria.NPCs.EBFChanNPC.DeathMessage");
 
 	public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
 	{
 		bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
 		{
 			BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
-			new FlavorTextBestiaryInfoElement("Mods.GregTechCEuTerraria.NPCs.EBFChan.Bestiary"),
+			new FlavorTextBestiaryInfoElement("Mods.GregTechCEuTerraria.NPCs.EBFChanNPC.Bestiary"),
 		});
 	}
 
@@ -76,14 +78,12 @@ public class EBFChanNPC : ModNPC
 	public override ITownNPCProfile TownNPCProfile() =>
 		new Profiles.DefaultNPCProfile(Texture, ModContent.GetModHeadSlot(HeadTexture));
 
-	public override List<string> SetNPCNameList() => new() { "EBF-chan" };
-
 	public override string GetChat()
 	{
 		WeightedRandom<string> chat = new();
-		chat.Add(Language.GetTextValue("Mods.GregTechCEuTerraria.NPCs.EBFChan.Chat1"));
-		chat.Add(Language.GetTextValue("Mods.GregTechCEuTerraria.NPCs.EBFChan.Chat2"));
-		chat.Add(Language.GetTextValue("Mods.GregTechCEuTerraria.NPCs.EBFChan.Chat3"));
+		chat.Add(Language.GetTextValue("Mods.GregTechCEuTerraria.NPCs.EBFChanNPC.Chat1"));
+		chat.Add(Language.GetTextValue("Mods.GregTechCEuTerraria.NPCs.EBFChanNPC.Chat2"));
+		chat.Add(Language.GetTextValue("Mods.GregTechCEuTerraria.NPCs.EBFChanNPC.Chat3"));
 		return chat;
 	}
 
