@@ -3750,7 +3750,7 @@
         }
       ],
       "subtitle": "Gather more resources!",
-      "desc": "More resources are always nice. You're getting close to entering the age of Steam - Copper and Tin are required in many Steam Age machines, so check the ore tab to find out what veins they can be found in, and get mining!\n\nIf the different ore names are confusing, you can tell which elements an ore holds at a glance by reading the molecular formula in its tooltip. Copper is Cu, Tin is Sn, Iron is Fe, and you can consult a periodic table for the rest. It's time to brush up on your chTMIstry - you'll need it for later.\n\nBe sure to collect lots, as a certain Copper-Tin alloy will be needed to get through the Steam Age."
+      "desc": "More resources are always nice. You're getting close to entering the age of Steam - Copper and Tin are required in many Steam Age machines, so check the ore tab to find out what veins they can be found in, and get mining!\n\nIf the different ore names are confusing, you can tell which elements an ore holds at a glance by reading the molecular formula in its tooltip. Copper is Cu, Tin is Sn, Iron is Fe, and you can consult a periodic table for the rest. It's time to brush up on your chemistry - you'll need it for later.\n\nBe sure to collect lots, as a certain Copper-Tin alloy will be needed to get through the Steam Age."
     },
     {
       "id": "315DBB3B23F95E0D",
@@ -3948,7 +3948,7 @@
           "type": "checkmark"
         }
       ],
-      "desc": "Like 2D Gregtech but interested in 3D?\n\nWe've gathered some GregTech Modern modpacks in this quest.\n\nMonifactory\nMonifactory is a 1.20.1 modpack based on Nomifactory CEu (which was on 1.12.2!). It aims to streamline and simplify the earlier parts of GregTech, while interweaving other tech mods into GTCEu Modern's progression. It also features a Hard and an Expert mode for the challenge-minded!\n\nCosmic Frontiers\n- Ghostipedia et al.\n\nCosmic Frontiers is a 1.20.1 modpack with a focus on interactions between many mods and GTCEu Modern. You'll explore the stars above and travel to the depths below, all whilst tackling intricately woven progression that ties together the mechanical and the arcane.\n\nIn its current state, the pack is considered to be in early alpha. However, progress has been curated through LuV. It's an experience like no other!\n\nAll the Mods: Gravitas 2\n- ATMTeam\n\nStarting from primitive Stone Age technology, hand-knapping your tools and foraging for food, you'll need to progress through the ages covering many classic and new mods. This is seamlessly complemented by mods such as TerraFirmaCraft, Create New Age, Stargate Journey and (obviously) GregTech.\n\nYou'll find yourself transitioning from a primitive beginning, smashing rocks together, to smashing atoms together, soon powering your voyages to the stars and beyond!\n\nStar Technology\n- trulyno\n\nStar Technology is more of a laid-back GregTech skyblock modpack where you play as a scientist stranded in an alternate dimension after a dimensional travel experiment catastrophically fails.\n\nProgression in this pack will take you above and beyond UHV, with numerous unique Stargates to craft, and even a rTMIxed \"Gregified\" Mystical Agriculture.\n\nOnce again, this pack features a Hard mode, and a Desert mode (called Abydos!).\n\nNote that the pack is still under heavy development!"
+      "desc": "Like 2D Gregtech but interested in 3D?\n\nWe've gathered some GregTech Modern modpacks in this quest.\n\nMonifactory\nMonifactory is a 1.20.1 modpack based on Nomifactory CEu (which was on 1.12.2!). It aims to streamline and simplify the earlier parts of GregTech, while interweaving other tech mods into GTCEu Modern's progression. It also features a Hard and an Expert mode for the challenge-minded!\n\nCosmic Frontiers\n- Ghostipedia et al.\n\nCosmic Frontiers is a 1.20.1 modpack with a focus on interactions between many mods and GTCEu Modern. You'll explore the stars above and travel to the depths below, all whilst tackling intricately woven progression that ties together the mechanical and the arcane.\n\nIn its current state, the pack is considered to be in early alpha. However, progress has been curated through LuV. It's an experience like no other!\n\nAll the Mods: Gravitas 2\n- ATMTeam\n\nStarting from primitive Stone Age technology, hand-knapping your tools and foraging for food, you'll need to progress through the ages covering many classic and new mods. This is seamlessly complemented by mods such as TerraFirmaCraft, Create New Age, Stargate Journey and (obviously) GregTech.\n\nYou'll find yourself transitioning from a primitive beginning, smashing rocks together, to smashing atoms together, soon powering your voyages to the stars and beyond!\n\nStar Technology\n- trulyno\n\nStar Technology is more of a laid-back GregTech skyblock modpack where you play as a scientist stranded in an alternate dimension after a dimensional travel experiment catastrophically fails.\n\nProgression in this pack will take you above and beyond UHV, with numerous unique Stargates to craft, and even remixed \"Gregified\" Mystical Agriculture.\n\nOnce again, this pack features a Hard mode, and a Desert mode (called Abydos!).\n\nNote that the pack is still under heavy development!"
     },
     {
       "id": "3296B815876C3181",
@@ -5038,8 +5038,8 @@
     },
     {
       "id": "32EA7E81885C8E87",
-      "icon": "gtceu:lv_wirTMIll",
-      "title": "Basic WirTMIll",
+      "icon": "gtceu:lv_wiremill",
+      "title": "Basic Wiremill",
       "deps": [
         "4B979482EF026BFF",
         "5A8F0124E07D5025"
@@ -5048,13 +5048,13 @@
         {
           "type": "item",
           "items": [
-            "gtceu:lv_wirTMIll"
+            "gtceu:lv_wiremill"
           ],
           "count": 1
         }
       ],
       "subtitle": "No more painful wires!",
-      "desc": "You could make any other LV Machine, but it would be easiest to start with the most useful one. We know, we know... you wanna make some of the crazier stuff first, but trust us, this is the best starting point.\n\nThe WirTMIll lets you make two Wires from one Ingot. That should be three times cheaper than what you were doing up until now! Plus, aren't you sick of crafting Wire Cutters?\n\nTo the right of this Quest, you'll find some important machines which will grant you cheaper intermediates.\n\nNote: Recipes inside LV Machines go up to a maximum usage of 32 EU/t (LV). Anything higher than that and you will need a MV (or better) Machine. Needless to say, we aren't quite there yet.\n\nYou will need a Programmed Circuit for certain recipes. We're sure you don't want to spend a precious Circuit to craft one, so read the dedicated quest for important details.\n\nWith this machine safely crafted - welcome to the age of all things electric!"
+      "desc": "You could make any other LV Machine, but it would be easiest to start with the most useful one. We know, we know... you wanna make some of the crazier stuff first, but trust us, this is the best starting point.\n\nThe Wiremill lets you make two Wires from one Ingot. That should be three times cheaper than what you were doing up until now! Plus, aren't you sick of crafting Wire Cutters?\n\nTo the right of this Quest, you'll find some important machines which will grant you cheaper intermediates.\n\nNote: Recipes inside LV Machines go up to a maximum usage of 32 EU/t (LV). Anything higher than that and you will need a MV (or better) Machine. Needless to say, we aren't quite there yet.\n\nYou will need a Programmed Circuit for certain recipes. We're sure you don't want to spend a precious Circuit to craft one, so read the dedicated quest for important details.\n\nWith this machine safely crafted - welcome to the age of all things electric!"
     },
     {
       "id": "10ECB471A77F5136",
@@ -5214,8 +5214,8 @@
     },
     {
       "id": "330BDB559A7BAB35",
-      "icon": "gtceu:lv_chTMIcal_bath",
-      "title": "Basic ChTMIcal Bath",
+      "icon": "gtceu:lv_chemical_bath",
+      "title": "Basic Chemical Bath",
       "deps": [
         "701BCADAE5CF6CA5"
       ],
@@ -5223,12 +5223,12 @@
         {
           "type": "item",
           "items": [
-            "gtceu:lv_chTMIcal_bath"
+            "gtceu:lv_chemical_bath"
           ],
           "count": 1
         }
       ],
-      "subtitle": "The ChTMIcal Bath bathes...",
+      "subtitle": "The Chemical Bath bathes...",
       "desc": "Outside of Ore Processing:\n\nYou can make Paper out of Wood so that you no longer rely on Sugar Canes*. You're probably sick of them by now, especially if you've played Nomifactory.\n\nThere are some other less important recipes, such as applying colours to various items and blocks, or bleaching them.\n\n* Sugar is still useful as a requirement for TNT production in HV, so don't dismantle your setups.\n\nFor Ore Processing:\n\nSome Crushed Ores have alternate routes when washed into Purified Ore, involving bathing in either Mercury or Sodium Persulfate. This step isn't really important, unless you really want that special Byproduct. This can be a nice alternate source of Gold (hint, hint!)."
     },
     {
@@ -5264,7 +5264,7 @@
         }
       ],
       "subtitle": "Don't want to spend your circuits to select recipes?",
-      "desc": "By clicking the Circuit Configuration Slot in machines, you can create a ghost Programmed Circuit. \n\nThis is a \"fake circuit\" that allows you to select a configuration for recipes. There's no need to spend your circuits crafting Programmed Circuits anymore.\n\nThe purpose of this ghost circuit is to prevent recipe clashes - for example, the same WirTMIll can produce wires of different thicknesses, with the same material!\n\nElectric Machines and Item Input Buses will have a Ghost Circuit Slot.\n\nLore: This feature is originally from GTNH."
+      "desc": "By clicking the Circuit Configuration Slot in machines, you can create a ghost Programmed Circuit. \n\nThis is a \"fake circuit\" that allows you to select a configuration for recipes. There's no need to spend your circuits crafting Programmed Circuits anymore.\n\nThe purpose of this ghost circuit is to prevent recipe clashes - for example, the same Wiremill can produce wires of different thicknesses, with the same material!\n\nElectric Machines and Item Input Buses will have a Ghost Circuit Slot.\n\nLore: This feature is originally from GTNH."
     },
     {
       "id": "37307A46E70011D3",
@@ -5431,7 +5431,7 @@
         }
       ],
       "subtitle": "The Fluid Solidifier solidifies...",
-      "desc": "Build this machine next to your ChTMIcal Reactor to automatically solidify Rubber into Rubber Sheets.\n\nYou can make your ChTMIcal Reactor auto-output if you wrench the side of your ChTMIcal Reactor and enable Fluid auto-output.\n\nThere will be more Fluids to solidify, so you may re-purpose your Fluid Solidifier when not crafting Rubber - or make a second one!"
+      "desc": "Build this machine next to your Chemical Reactor to automatically solidify Rubber into Rubber Sheets.\n\nYou can make your Chemical Reactor auto-output if you wrench the side of your Chemical Reactor and enable Fluid auto-output.\n\nThere will be more Fluids to solidify, so you may re-purpose your Fluid Solidifier when not crafting Rubber - or make a second one!"
     },
     {
       "id": "2E36E5755B2F551C",
@@ -5509,7 +5509,7 @@
         }
       ],
       "subtitle": "Time to sell some Air",
-      "desc": "The Gas Collector collects Air that can then be centrifuged into Oxygen and Nitrogen.\n\nLore: GregTech 5 players remember when they had to use a Compressor with IC2 cells to get Compressed Air... here, cell chTMIstry is no more."
+      "desc": "The Gas Collector collects Air that can then be centrifuged into Oxygen and Nitrogen.\n\nLore: GregTech 5 players remember when they had to use a Compressor with IC2 cells to get Compressed Air... here, cell chemistry is no more."
     },
     {
       "id": "3F123950216DF93B",
@@ -5532,8 +5532,8 @@
     },
     {
       "id": "3D98819A799D2E64",
-      "icon": "gtceu:lv_chTMIcal_reactor",
-      "title": "Basic ChTMIcal Reactor",
+      "icon": "gtceu:lv_chemical_reactor",
+      "title": "Basic Chemical Reactor",
       "deps": [
         "648BCF486E16CCB2"
       ],
@@ -5541,7 +5541,7 @@
         {
           "type": "item",
           "items": [
-            "gtceu:lv_chTMIcal_reactor"
+            "gtceu:lv_chemical_reactor"
           ],
           "count": 1
         },
@@ -5553,8 +5553,8 @@
           "count": 1
         }
       ],
-      "subtitle": "ChTMIstry for dummies",
-      "desc": "The ChTMIcal Reactor will be required for a lot of recipes.\n\nLet's give it a spin - why don't we use your freshly made ChTMIcal Reactor to unlock a new, better recipe for Rubber? Rubber is unusable as a Fluid, so you will need to make another machine to process it further.\n\nYou can't make Rubber using the ChTMIcal Reactor alone, so here are some other machines you might want to aim for: \n\nA Solidifier is useful to solidify your Rubber directly into Rubber Sheets. You'll want these moving forward.\n\nYou could then make use of an Assembler to use your molten Rubber for Cables. This isn't important for Tin Cables, but better cables will need to be made in the Assembler.\n\nNote: Submit a fluid by having it stored in a bucket in your inventory. Sorry - it's an FTB Quests quirk."
+      "subtitle": "Chemistry for dummies",
+      "desc": "The Chemical Reactor will be required for a lot of recipes.\n\nLet's give it a spin - why don't we use your freshly made Chemical Reactor to unlock a new, better recipe for Rubber? Rubber is unusable as a Fluid, so you will need to make another machine to process it further.\n\nYou can't make Rubber using the Chemical Reactor alone, so here are some other machines you might want to aim for: \n\nA Solidifier is useful to solidify your Rubber directly into Rubber Sheets. You'll want these moving forward.\n\nYou could then make use of an Assembler to use your molten Rubber for Cables. This isn't important for Tin Cables, but better cables will need to be made in the Assembler.\n\nNote: Submit a fluid by having it stored in a bucket in your inventory. Sorry - it's an FTB Quests quirk."
     },
     {
       "id": "292938760AB9A12B",
@@ -5579,7 +5579,7 @@
           "count": 1
         }
       ],
-      "subtitle": "GTCE killed cell chTMIstry... GTCE killed Cells!",
+      "subtitle": "GTCE killed cell chemistry... GTCE killed Cells!",
       "desc": "Cells are an alternative form of Fluid storage. All Cell types with the same type and amount of Fluid inside them stack. They can be automatically filled with a Canning Machine.\n\nCells hold one bucket of Fluid.\n\nUniversal Cells hold up to one bucket, but also can store fractions of Buckets. They're particularly ideal if you want to store leftover Fluid without crafting a whole Drum. \n\nCells made from higher tier materials can hold even more fluid, but Drums and Super Tanks will hold more by then.\n\nLike Drums, Cells can be placed into a crafting grid to clear their contents."
     },
     {
@@ -5747,7 +5747,7 @@
         }
       ],
       "subtitle": "Time for server tag wars",
-      "desc": "Unfortunately, this is only an Empty Spray Can, which you have to fill with ChTMIcal Dye before using.\n\nSpray Cans do not provide any functionality involving machines, but can be quite visually appealing and useful!\n\nAny (or almost any) GregTech tile entity (machine, pipe, cable...) can be painted to one of the 16 colors of your choosing. This is great for screenshots, or to separate different setups for convenience in a Multiplayer base. They also help with distinguishing between pipelines and cables.\n\nHolding the Spray Can in the offhand will automatically paint any block you place."
+      "desc": "Unfortunately, this is only an Empty Spray Can, which you have to fill with Chemical Dye before using.\n\nSpray Cans do not provide any functionality involving machines, but can be quite visually appealing and useful!\n\nAny (or almost any) GregTech tile entity (machine, pipe, cable...) can be painted to one of the 16 colors of your choosing. This is great for screenshots, or to separate different setups for convenience in a Multiplayer base. They also help with distinguishing between pipelines and cables.\n\nHolding the Spray Can in the offhand will automatically paint any block you place."
     },
     {
       "id": "63CD0236B337EAAD",
@@ -5867,7 +5867,7 @@
         }
       ],
       "subtitle": "Ackshually, it's Dioxygen...",
-      "desc": "You could waste precious years of your life in TMI looking for the most optimal Oxygen recipe, given the many ways to obtain it. Various minerals will produce it when electrolyzed.\n\nIf only the quest book had more information!\n\nThe best way to get Oxygen is by electrolyzing Silicon Dioxide. Silicon Dioxide is obtained from various sources, most notably Glass Dust. We would highly recommend setting up an automated, passive line of machines for Oxygen via this method! At first, the machines will consume tons of power, but once the machine buffers are filled up, the machines will rarely turn on. \n\nTo figure out how to get renewable Glass for this purpose, check out the relevant quest in the Renewables \\& You section.\n\nAnother method is centrifuging Air after making a Gas Collector, which you might not be able to make just yet. This recipe also gives Nitrogen, which is handy as it can speed up certain Electric Blast Furnace recipes.\n\nTechnically, you could source it by electrolyzing Water. In reality, electrolysis of water is more suitable for Hydrogen production due to the higher energy cost.\n\nTry your best not to void Oxygen! This applies to most fluids and chTMIcals in GregTech, and is a good habit to pick up. The less Oxygen you void, the less energy and time you spend on generating more.\n\nNote: Submit a fluid by having it stored in a bucket in your inventory. Sorry - it's an FTB Quests quirk."
+      "desc": "You could waste precious years of your life in TMI looking for the most optimal Oxygen recipe, given the many ways to obtain it. Various minerals will produce it when electrolyzed.\n\nIf only the quest book had more information!\n\nThe best way to get Oxygen is by electrolyzing Silicon Dioxide. Silicon Dioxide is obtained from various sources, most notably Glass Dust. We would highly recommend setting up an automated, passive line of machines for Oxygen via this method! At first, the machines will consume tons of power, but once the machine buffers are filled up, the machines will rarely turn on. \n\nTo figure out how to get renewable Glass for this purpose, check out the relevant quest in the Renewables \\& You section.\n\nAnother method is centrifuging Air after making a Gas Collector, which you might not be able to make just yet. This recipe also gives Nitrogen, which is handy as it can speed up certain Electric Blast Furnace recipes.\n\nTechnically, you could source it by electrolyzing Water. In reality, electrolysis of water is more suitable for Hydrogen production due to the higher energy cost.\n\nTry your best not to void Oxygen! This applies to most fluids and chemicals in GregTech, and is a good habit to pick up. The less Oxygen you void, the less energy and time you spend on generating more.\n\nNote: Submit a fluid by having it stored in a bucket in your inventory. Sorry - it's an FTB Quests quirk."
     },
     {
       "id": "0EAC071414AEC07E",
@@ -5907,7 +5907,7 @@
         }
       ],
       "subtitle": "I hate byproducts, they're awesome",
-      "desc": "Many materials going forward cannot be smelted directly from any Ores! They are instead obtained as byproducts from processing of other ores. Gallium and Arsenic are among these materials.\n\nFor Gallium, you may, ranged from worst to best (compromising difficulty and yields):\n\n- Electrolyze Sphalerite for a low chance of dust. Note that you lose out on direct smelting value.\n\n- Put Crushed Bauxite in the ChTMIcal Bath. Note that this requires Sodium Persulfate.\n\n- Obtain it as a Byproduct of Sphalerite Ore Processing in the Thermal Centrifuge or Centrifuge.\n\nFor Arsenic, you will have to mine and centrifuge Realgar."
+      "desc": "Many materials going forward cannot be smelted directly from any Ores! They are instead obtained as byproducts from processing of other ores. Gallium and Arsenic are among these materials.\n\nFor Gallium, you may, ranged from worst to best (compromising difficulty and yields):\n\n- Electrolyze Sphalerite for a low chance of dust. Note that you lose out on direct smelting value.\n\n- Put Crushed Bauxite in the Chemical Bath. Note that this requires Sodium Persulfate.\n\n- Obtain it as a Byproduct of Sphalerite Ore Processing in the Thermal Centrifuge or Centrifuge.\n\nFor Arsenic, you will have to mine and centrifuge Realgar."
     },
     {
       "id": "3647B1B964A15E4E",
@@ -5927,7 +5927,7 @@
         }
       ],
       "subtitle": "A Good Board",
-      "desc": "This Circuit Board is used to create MV Circuits!\n\nNote: You have two options when making the Phenolic Printed Circuit Board. If you use Sodium Persulfate or Iron III Chloride, making boards takes only a quarter of the Silver as opposed to the crafting recipe.\n\nHowever, given how painful it may be for you to obtain these chTMIcals right now, you can simply use more Silver by mining most of a Galena Vein...\n\nThe quest for Sodium Persulfate is in the MV chapter, if you're down for some light reading.\n\nLore: Back in GTCEu 1.12.2, these circuit boards were called \"Good Circuit Boards\". Not exactly a fitting name, as they're rather evil to craft."
+      "desc": "This Circuit Board is used to create MV Circuits!\n\nNote: You have two options when making the Phenolic Printed Circuit Board. If you use Sodium Persulfate or Iron III Chloride, making boards takes only a quarter of the Silver as opposed to the crafting recipe.\n\nHowever, given how painful it may be for you to obtain these chemicals right now, you can simply use more Silver by mining most of a Galena Vein...\n\nThe quest for Sodium Persulfate is in the MV chapter, if you're down for some light reading.\n\nLore: Back in GTCEu 1.12.2, these circuit boards were called \"Good Circuit Boards\". Not exactly a fitting name, as they're rather evil to craft."
     },
     {
       "id": "0E72017800A9766C",
@@ -6306,7 +6306,7 @@
         }
       ],
       "subtitle": "Thermal Decomposition",
-      "desc": "The Pyrolyse Oven is an electric equivalent to the Coke Oven. It can produce Coal Coke and Charcoal with a Creosote byproduct just as before, but also has additional Organic Byproducts, the most beneficial of these being Wood Tar.\n\nAnother product is Biomass, which is more pertinent for your progression as of this moment.\n\nThe byproducts can be Distilled for an array of organic resources, with different byproducts giving different ratios of different chTMIcals.\n\nYou will need to take a peek at the Distillation Quest to get to grips with the power of distillation...\n\n\nNote: With 40 EU/t recipes, it needs either 1 MV energy hatch or 2 LV energy hatches. Multiblocks will not use 2A of one tier to reach the next one for recipe voltage minimums. \n\nIn other words, the controller needs to say at least \"MV\" in the GUI to run recipes which say \"MV\" in TMI, even if they can draw enough EU/t with a lower tier hatch configuration. On the bright side, if you're using two LV hatches, you can choose to only power one, leaving the other disconnected - as long as you supply enough EU.\n\n\nThe Pyrolyse Oven remains optional, should you choose to use Breweries instead. However, it is very rewarding to construct one either for Power, or for the various Byproducts, and we highly recommend you give it a look.\n\nThere are recipes that can accept Nitrogen to double the speed. This isn't quite worth pursuing right now, but Nitrogen will eventually be free and infinite.\n\nLore: In GT5u, the structure for the Pyrolyse Oven was infamously a giant box with only 9 coils inside. Players usually spent several minutes debugging what is wrong due to a lack of a TMI preview."
+      "desc": "The Pyrolyse Oven is an electric equivalent to the Coke Oven. It can produce Coal Coke and Charcoal with a Creosote byproduct just as before, but also has additional Organic Byproducts, the most beneficial of these being Wood Tar.\n\nAnother product is Biomass, which is more pertinent for your progression as of this moment.\n\nThe byproducts can be Distilled for an array of organic resources, with different byproducts giving different ratios of different chemicals.\n\nYou will need to take a peek at the Distillation Quest to get to grips with the power of distillation...\n\n\nNote: With 40 EU/t recipes, it needs either 1 MV energy hatch or 2 LV energy hatches. Multiblocks will not use 2A of one tier to reach the next one for recipe voltage minimums. \n\nIn other words, the controller needs to say at least \"MV\" in the GUI to run recipes which say \"MV\" in TMI, even if they can draw enough EU/t with a lower tier hatch configuration. On the bright side, if you're using two LV hatches, you can choose to only power one, leaving the other disconnected - as long as you supply enough EU.\n\n\nThe Pyrolyse Oven remains optional, should you choose to use Breweries instead. However, it is very rewarding to construct one either for Power, or for the various Byproducts, and we highly recommend you give it a look.\n\nThere are recipes that can accept Nitrogen to double the speed. This isn't quite worth pursuing right now, but Nitrogen will eventually be free and infinite.\n\nLore: In GT5u, the structure for the Pyrolyse Oven was infamously a giant box with only 9 coils inside. Players usually spent several minutes debugging what is wrong due to a lack of a TMI preview."
     },
     {
       "id": "6EB68C28BEE24DEF",
@@ -6393,7 +6393,7 @@
         }
       ],
       "subtitle": "Yo, wait - that's alcohol!",
-      "desc": "Put your previously made Biomass into a MV Distillery to make Ethanol.\n\nYou will need this for Ethylene by reacting it with Sulfuric Acid in a MV ChTMIcal Reactor... unless you chose to go down the Oil path.\n\nOnce you have a hefty starting stock of Ethanol, consider making and distilling Fermented Biomass in a Distillation Tower (when you get there!) for extra chTMIcals.\n\nDo not try to use Ethanol as a Power source... it's quite possibly its worst use. If it's organic Power that you want, we suggest taking a look at Benzene instead!"
+      "desc": "Put your previously made Biomass into a MV Distillery to make Ethanol.\n\nYou will need this for Ethylene by reacting it with Sulfuric Acid in a MV Chemical Reactor... unless you chose to go down the Oil path.\n\nOnce you have a hefty starting stock of Ethanol, consider making and distilling Fermented Biomass in a Distillation Tower (when you get there!) for extra chemicals.\n\nDo not try to use Ethanol as a Power source... it's quite possibly its worst use. If it's organic Power that you want, we suggest taking a look at Benzene instead!"
     },
     {
       "id": "6238B2A7ED1BE5A1",
@@ -6419,7 +6419,7 @@
         }
       ],
       "subtitle": "We're still confused on how this is pronounced",
-      "desc": "Distillating Oil will give you Fuel that you will need to desulfurize.\n\nHydrogen Sulfide is perfectly recycled in an Electrolyzer.\n\nTo automate this process, simply place your ChTMIcal Reactor and your Electrolyzer next to each other. Be sure to use your Screwdriver to enable input from the output side.\n\nNaphtha is a good Product source. Keep following the quests to the right for more details."
+      "desc": "Distillating Oil will give you Fuel that you will need to desulfurize.\n\nHydrogen Sulfide is perfectly recycled in an Electrolyzer.\n\nTo automate this process, simply place your Chemical Reactor and your Electrolyzer next to each other. Be sure to use your Screwdriver to enable input from the output side.\n\nNaphtha is a good Product source. Keep following the quests to the right for more details."
     },
     {
       "id": "3E2E161F8CE35138",
@@ -6439,7 +6439,7 @@
         }
       ],
       "subtitle": "Fuel and oil cracking can get complicated...",
-      "desc": "Don't panic! We'll mostly be doing this to get hydrocarbons.\n\nThere are many ways to acquire Ethylene from Oil processing. It's easy to get lost in all the options and recipes!\n\nThe best way is to steam-crack Naphtha in a ChTMIcal Reactor. Be sure to make the Severely Steam-Cracked version for a higher yield of Ethylene.\n\nOnce in HV, you'll have the option to do this recipe in the Cracking Unit at 100% efficiency. Unfortunately, the recipes you are doing with the ChTMIcal Reactor have a loss of 50%.\n\nNote: All of this looks and feels terribly inefficient - we hope that's strong motivation to tier up! The Distillation Tower will be a huge upgrade for petrochem, but you're not quite there... yet. Right now, you'll have to use a Distillery to get Ethylene."
+      "desc": "Don't panic! We'll mostly be doing this to get hydrocarbons.\n\nThere are many ways to acquire Ethylene from Oil processing. It's easy to get lost in all the options and recipes!\n\nThe best way is to steam-crack Naphtha in a Chemical Reactor. Be sure to make the Severely Steam-Cracked version for a higher yield of Ethylene.\n\nOnce in HV, you'll have the option to do this recipe in the Cracking Unit at 100% efficiency. Unfortunately, the recipes you are doing with the Chemical Reactor have a loss of 50%.\n\nNote: All of this looks and feels terribly inefficient - we hope that's strong motivation to tier up! The Distillation Tower will be a huge upgrade for petrochem, but you're not quite there... yet. Right now, you'll have to use a Distillery to get Ethylene."
     },
     {
       "id": "583D0CC4FAA4FC98",
@@ -6570,13 +6570,13 @@
         {
           "type": "item",
           "items": [
-            "gtceu:mv_TMItter"
+            "gtceu:mv_emitter"
           ],
           "count": 1
         }
       ],
       "subtitle": "Hated crafting these in the previous tier?",
-      "desc": "Here's a list of the components you will need in MV. To alleviate the pain, be sure to autocraft or bulk-craft these parts, especially Motors.\n\nFamiliar with the TMItter? This tier's TMItter requires a Flawless Emerald in its recipe, which'll be only attainable with the Sifting Machine for now.\n\nConveyors, Pumps and Robot Arms are objective upgrades to LV versions if you use them as covers.\n\nThis quest unlocks a new tutorial on Overclocking in the Tips and Tricks tab - check it out to learn more!"
+      "desc": "Here's a list of the components you will need in MV. To alleviate the pain, be sure to autocraft or bulk-craft these parts, especially Motors.\n\nFamiliar with the emitter? This tier's emitter requires a Flawless Emerald in its recipe, which'll be only attainable with the Sifting Machine for now.\n\nConveyors, Pumps and Robot Arms are objective upgrades to LV versions if you use them as covers.\n\nThis quest unlocks a new tutorial on Overclocking in the Tips and Tricks tab - check it out to learn more!"
     },
     {
       "id": "0EFEE489906256AA",
@@ -6636,7 +6636,7 @@
         }
       ],
       "subtitle": "Clay is an extremely balanced useful material for electrolysis",
-      "desc": "All four output Dusts obtained from Clay electrolysis are immensely useful.\n\nWe'll ask you to give us a total of 416 Clay Dust for this quest. You may also want to look into other sources of similar materials, such as Sodalite. Check TMI for some ideas.\n\nYou should use the Sodium and/or Lithium to make some MV Batteries.\n\nGrr, all this useless Water you're getting keeps clogging the machine! Maybe you should deal with it by using a Voiding Cover."
+      "desc": "All four output Dusts obtained from Clay electrolysis are immensely useful.\n\nWe'll ask you to give us a total of 416 Clay Dust for this quest. You may also want to look into other sources of similar materials, such as Sodalite. Check emi for some ideas.\n\nYou should use the Sodium and/or Lithium to make some MV Batteries.\n\nGrr, all this useless Water you're getting keeps clogging the machine! Maybe you should deal with it by using a Voiding Cover."
     },
     {
       "id": "5C94CF50090D7DA0",
@@ -6834,7 +6834,7 @@
         }
       ],
       "subtitle": "The power of KubeJS",
-      "desc": "GregTech doesn't provide ways to farm plants or trees, so we made a custom multiblock for the modpack!\n\nThe multiblock Greenhouse will be your source of Wood and other plants if you wish.\n\nIts Wood production should be enough to run 2 Pyrolyse Ovens at their lowest Power.\n\nYou can also use this for automated Resin. The yields are kept low to incentivize other rubber sources later in the game.\n\nNote: With 40 EU/t recipes, it needs either 1 MV energy hatch or 2 LV energy hatches. Multiblocks will not use 2A of one tier to reach the next one for recipe voltage minimums. \n\nIn other words, the controller needs to say at least \"MV\" in the GUI to run recipes which say \"MV\" in TMI, even if they can draw enough EU/t with a lower tier hatch configuration.\n\nNote: The structure requires a lot of Wrought Iron. Make sure you have an Arc Furnace for that.\n\nLore: We originally implemented a ChTMIcal Reactor recipe for wood in the modpack to solve the tree problem. Our implementation turned out to be completely busted, so we decided that a rebalance was due. Hopefully, the Greenhouse is a happy middle ground."
+      "desc": "GregTech doesn't provide ways to farm plants or trees, so we made a custom multiblock for the modpack!\n\nThe multiblock Greenhouse will be your source of Wood and other plants if you wish.\n\nIts Wood production should be enough to run 2 Pyrolyse Ovens at their lowest Power.\n\nYou can also use this for automated Resin. The yields are kept low to incentivize other rubber sources later in the game.\n\nNote: With 40 EU/t recipes, it needs either 1 MV energy hatch or 2 LV energy hatches. Multiblocks will not use 2A of one tier to reach the next one for recipe voltage minimums. \n\nIn other words, the controller needs to say at least \"MV\" in the GUI to run recipes which say \"MV\" in emi, even if they can draw enough EU/t with a lower tier hatch configuration.\n\nNote: The structure requires a lot of Wrought Iron. Make sure you have an Arc Furnace for that.\n\nLore: We originally implemented a Chemical Reactor recipe for wood in the modpack to solve the tree problem. Our implementation turned out to be completely busted, so we decided that a rebalance was due. Hopefully, the Greenhouse is a happy middle ground."
     },
     {
       "id": "1C55AE6AD5BDE304",
@@ -6855,7 +6855,7 @@
         }
       ],
       "subtitle": "Is it getting hot in here?",
-      "desc": "Kanthal Heating Coils are the next major step in progression. They increase the temperature of your Blast Furnace to 2,700K, allowing you to process new materials. They may also accelerate less hot recipes - check the quest to the top-left for details.\n\nYou will need a staggering 128 Ingots for a full set of Coils, which will easily take over an hour. We advise that you move on to other projects while your EBF is hard at work - that or build another one!\n\nAn MV ChTMIcal Bath is required to cool Hot Ingots down. They're hot when held, as the name implies. Maybe you should save your hands and automate this...\n\nWith the construction of a Kanthal EBF, you're now able to make Silicon Ingots, opening up the vast majority of AE2!"
+      "desc": "Kanthal Heating Coils are the next major step in progression. They increase the temperature of your Blast Furnace to 2,700K, allowing you to process new materials. They may also accelerate less hot recipes - check the quest to the top-left for details.\n\nYou will need a staggering 128 Ingots for a full set of Coils, which will easily take over an hour. We advise that you move on to other projects while your EBF is hard at work - that or build another one!\n\nAn MV Chemical Bath is required to cool Hot Ingots down. They're hot when held, as the name implies. Maybe you should save your hands and automate this...\n\nWith the construction of a Kanthal EBF, you're now able to make Silicon Ingots, opening up the vast majority of AE2!"
     },
     {
       "id": "13A976D0D612BC84",
@@ -6874,7 +6874,7 @@
         }
       ],
       "subtitle": "Stop burning your darn hands!",
-      "desc": "This is a guide on how to automatically route all your Hot Ingots to your ChTMIcal Bath, while keeping everything automated in tip-top shape.\n\nThe cheap way would be to use filters, and manually add Hot Ingots one by one... which is so boring! Let's try the fun option.\n\nInstall an Item Tag Filter Cover on the side of your ChTMIcal Bath, open it and set it to whitelist \"hot_ingots\".\n\nFrom here, you can route with any logistics system of your choice.\n\nConnect the output of your EBF(s) to the input of your ChTMIcal Bath and the output dump (Chest or Crate).\nYou can also have a Restrictive Pipe in front of the output dump to ensure the ChTMIcal Bath will be prioritized.\n\nNote: If you wish to know more tags for more automation setups, they will display if you press Shift when hovering over an item. For instance, an item tagged with #forge:plates/copper would be filtered as plates/copper.\n\nOther Note: The Item Tag Filter partially supports regex. Hover over the info icon for more information."
+      "desc": "This is a guide on how to automatically route all your Hot Ingots to your Chemical Bath, while keeping everything automated in tip-top shape.\n\nThe cheap way would be to use filters, and manually add Hot Ingots one by one... which is so boring! Let's try the fun option.\n\nInstall an Item Tag Filter Cover on the side of your Chemical Bath, open it and set it to whitelist \"hot_ingots\".\n\nFrom here, you can route with any logistics system of your choice.\n\nConnect the output of your EBF(s) to the input of your Chemical Bath and the output dump (Chest or Crate).\nYou can also have a Restrictive Pipe in front of the output dump to ensure the Chemical Bath will be prioritized.\n\nNote: If you wish to know more tags for more automation setups, they will display if you press Shift when hovering over an item. For instance, an item tagged with #forge:plates/copper would be filtered as plates/copper.\n\nOther Note: The Item Tag Filter partially supports regex. Hover over the info icon for more information."
     },
     {
       "id": "375684F9CBEF9132",
@@ -7230,7 +7230,7 @@
         }
       ],
       "subtitle": "Autocrafting at last!",
-      "desc": "Patterns are used for AE2 autocrafting. Using Polyvinyl Chloride increases the yield by 4 times, and higher-tier plastics have even greater yields.\n\nDon't get too excited, though - to really get into the automation side of AE2, you'll need to get some Silicon Ingots first.\n\nA sub-note for autocrafting... whilst it's possible to perform chTMIcal chains on-demand with AE2, doing so can build some bad habits that'll come back around to bite you in higher tiers. We urge you to passive things wherever you can."
+      "desc": "Patterns are used for AE2 autocrafting. Using Polyvinyl Chloride increases the yield by 4 times, and higher-tier plastics have even greater yields.\n\nDon't get too excited, though - to really get into the automation side of AE2, you'll need to get some Silicon Ingots first.\n\nA sub-note for autocrafting... whilst it's possible to perform chemical chains on-demand with AE2, doing so can build some bad habits that'll come back around to bite you in higher tiers. We urge you to passive things wherever you can."
     },
     {
       "id": "6C53B01A05FFF1DC",
@@ -7295,7 +7295,7 @@
         }
       ],
       "subtitle": "It's a Casio on a Plastic Board",
-      "desc": "At this point, you have all the tools available to start making Plastic Boards. Higher-tier polymers in future will increase your PCB yields substantially.\n\nThe recipe chains are starting to get pretty long, so we recommend processing large batches in two dedicated ChTMIcal Reactors."
+      "desc": "At this point, you have all the tools available to start making Plastic Boards. Higher-tier polymers in future will increase your PCB yields substantially.\n\nThe recipe chains are starting to get pretty long, so we recommend processing large batches in two dedicated Chemical Reactors."
     },
     {
       "id": "4353AB0E20601AEC",
@@ -7323,7 +7323,7 @@
         }
       ],
       "subtitle": "Let's etch some Copper off Circuit Boards!",
-      "desc": "Sodium Persulfate can be used in Ore Processing in the ChTMIcal Bath to get various bonus outputs you would not normally obtain. It's completely optional, but pretty rewarding.\n\nWait, stop! That's only a distraction - the real topic of this Quest is...\n\nSodium Persulfate and Iron III Chloride are used to make cheaper Good Circuit Boards, as their inclusion cuts Silver usage by a factor of four.\n\nThey're also required to make Plastic Circuit Boards.\n\nMaking Sodium Persulfate will yield Hydrochloric Acid as a coproduct, which you may re-use to make Iron III Chloride. This should the best approach right now, but the decision is entirely yours.\n\nWith more automation later in the game, Iron III Chloride will be the cheaper and more straight forward path.\n\nThis Quest requires both Fluids to complete. You'll need both anyway..."
+      "desc": "Sodium Persulfate can be used in Ore Processing in the Chemical Bath to get various bonus outputs you would not normally obtain. It's completely optional, but pretty rewarding.\n\nWait, stop! That's only a distraction - the real topic of this Quest is...\n\nSodium Persulfate and Iron III Chloride are used to make cheaper Good Circuit Boards, as their inclusion cuts Silver usage by a factor of four.\n\nThey're also required to make Plastic Circuit Boards.\n\nMaking Sodium Persulfate will yield Hydrochloric Acid as a coproduct, which you may re-use to make Iron III Chloride. This should the best approach right now, but the decision is entirely yours.\n\nWith more automation later in the game, Iron III Chloride will be the cheaper and more straight forward path.\n\nThis Quest requires both Fluids to complete. You'll need both anyway..."
     },
     {
       "id": "316FF60D6FFE97CE",
@@ -7343,7 +7343,7 @@
         }
       ],
       "subtitle": "\"...what he thought was H2O was H2SO4!\"",
-      "desc": "TMI might look a little overwhelming here, so we'll go through the best path for Sulfuric Acid here.\n\nMaking Sulfuric Acid is a three step process. It is used in many important reactions, so you should automate its production ASAP.\n\nTo automate it, you will need three LV ChTMIcal Reactors. We would recommend building a dedicated setup somewhere with a single LV Generator to power all three machines. You can then spaghetti your pipes to handle input and output ...or simply use AE2.\n\n- Step 1: React Sulfur with Oxygen to form Sulfur Dioxide.\n- Step 2: React Sulfur Dioxide with more Oxygen to form Sulfur Trioxide.\n- Step 3: React Sulfur Trioxide with Water to form Sulfuric Acid.\n\nLore: GregTech 5's ChTMIcal Reactor only had one Fluid slot. To circumvent that, they would do cell chTMIstry. The way you would automate Sulfuric Acid was by having one cell travel from machine to machine and then loop back to its starting position. A somewhat fun and interesting automation challenge, but also a chore!"
+      "desc": "TMI might look a little overwhelming here, so we'll go through the best path for Sulfuric Acid here.\n\nMaking Sulfuric Acid is a three step process. It is used in many important reactions, so you should automate its production ASAP.\n\nTo automate it, you will need three LV Chemical Reactors. We would recommend building a dedicated setup somewhere with a single LV Generator to power all three machines. You can then spaghetti your pipes to handle input and output ...or simply use AE2.\n\n- Step 1: React Sulfur with Oxygen to form Sulfur Dioxide.\n- Step 2: React Sulfur Dioxide with more Oxygen to form Sulfur Trioxide.\n- Step 3: React Sulfur Trioxide with Water to form Sulfuric Acid.\n\nLore: GregTech 5's Chemical Reactor only had one Fluid slot. To circumvent that, they would do cell chemistry. The way you would automate Sulfuric Acid was by having one cell travel from machine to machine and then loop back to its starting position. A somewhat fun and interesting automation challenge, but also a chore!"
     },
     {
       "id": "64CACABB48635904",
@@ -7363,7 +7363,7 @@
         }
       ],
       "subtitle": "You'll need a lot of this!",
-      "desc": "Obtain Hydrochloric Acid by mixing Hydrogen and Chlorine.\n\nThis acid is also obtained as waste from a lot of reactions involving Chlorine. Depending on your setups, you may never need to produce it directly.\n\nNote: We have a $medicine command on our Discord:\n\n\"Do not attempt this in real life - it is not only illegal, but also stupidly dangerous\".\n\nThis applies to toying with chTMIcals. Please don't do it.\n\nSide note - we can guarantee you have a sample of this with you right now! It's in your stomach as a part of gastric acid."
+      "desc": "Obtain Hydrochloric Acid by mixing Hydrogen and Chlorine.\n\nThis acid is also obtained as waste from a lot of reactions involving Chlorine. Depending on your setups, you may never need to produce it directly.\n\nNote: We have a $medicine command on our Discord:\n\n\"Do not attempt this in real life - it is not only illegal, but also stupidly dangerous\".\n\nThis applies to toying with chemicals. Please don't do it.\n\nSide note - we can guarantee you have a sample of this with you right now! It's in your stomach as a part of gastric acid."
     },
     {
       "id": "079442C113D54856",
@@ -7621,7 +7621,7 @@
         }
       ],
       "subtitle": "Turn up the Lights in here, baby",
-      "desc": "Distillating Oil will give you Fuel that you will need to desulfurize.\n\nHydrogen Sulfide is perfectly recycled in an Electrolyzer.\n\nTo automate this process, simply place your ChTMIcal Reactor and your Electrolyzer next to each other. Be sure to use your Screwdriver to enable input from the output side.\n\nLight Fuel is a good Power option, but there's something even greater... check the Quest to the left."
+      "desc": "Distillating Oil will give you Fuel that you will need to desulfurize.\n\nHydrogen Sulfide is perfectly recycled in an Electrolyzer.\n\nTo automate this process, simply place your Chemical Reactor and your Electrolyzer next to each other. Be sure to use your Screwdriver to enable input from the output side.\n\nLight Fuel is a good Power option, but there's something even greater... check the Quest to the left."
     },
     {
       "id": "45769156F4253C86",
@@ -7872,7 +7872,7 @@
         }
       ],
       "subtitle": "Getting industrial",
-      "desc": "Welcome to your first (of many) forays into Hydrocarbons! You may already know a few of them, like Petrol, Plastic, Alcohol... well, in GregTech, you'll mass-produce many of these things, and more! This topic can be confusing at times, so you'll want to read carefully in order to avoid getting lost in the details. Now...\n\nHere in MV, there are two main goals of working with Hydrocarbons - Power and Plastics. The interesting part is how you'll accomplish this. There are two main paths you can take: PetrochTMIcals and BiochTMIcals. Both have their pros and cons - PetrochTMIcals typically provide higher yields and energy-efficiency, while BiochTMIcals are fully renewable. Your source of Power and Plastics is entirely up to you.\n\nReady to dive in? The PetrochTMIcal route(s) are to the left of this quest - you've got three options here. For those with green thumbs, the BiochTMIcal routes are diagonally right. Best of luck!"
+      "desc": "Welcome to your first (of many) forays into Hydrocarbons! You may already know a few of them, like Petrol, Plastic, Alcohol... well, in GregTech, you'll mass-produce many of these things, and more! This topic can be confusing at times, so you'll want to read carefully in order to avoid getting lost in the details. Now...\n\nHere in MV, there are two main goals of working with Hydrocarbons - Power and Plastics. The interesting part is how you'll accomplish this. There are two main paths you can take: Petrochemicals and Biochemicals. Both have their pros and cons - Petrochemicals typically provide higher yields and energy-efficiency, while Biochemicals are fully renewable. Your source of Power and Plastics is entirely up to you.\n\nReady to dive in? The Petrochemical route(s) are to the left of this quest - you've got three options here. For those with green thumbs, the Biochemical routes are diagonally right. Best of luck!"
     },
     {
       "id": "5898743D8D6C2690",
@@ -7891,7 +7891,7 @@
         }
       ],
       "subtitle": "Waiter! Why is there Sulfur in my soup?",
-      "desc": "If you've tried to distill an Oil into Light Fuel, Heavy Fuel, etc., you might've realised that you can't. Instead, you've gotten this sulfurized version of it. How dreadful!\n\nTo fix this, we'll need to desulfurize it. Combine whatever you'd like to desulfurize with Hydrogen Gas in a ChTMIcal Reactor to produce the pure product, along with a byproduct of Hydrogen Sulfide. What now?\n\n\nLuckily, Hydrogen Sulfide is perfectly recycled in an Electrolyzer.\n\nTo automate this process, simply place your ChTMIcal Reactor and your Electrolyzer next to each other. Be sure to enable input from the output side. We've graciously provided a Fluid Filter so that your desulfurized prize doesn't go into your Electrolyzer too - remember to set it to filter both input/extract so that the right fluids can flow both ways!\n\n\nBut now, how do we get our refined goodies out of our ChTMIcal Reactor? This is where the Electric Pump comes in - use it on a different face of the ChTMIcal Reactor and extract your prize!\n\nTip: You only need two buckets of Hydrogen Gas. The easiest way of obtaining it is by electrolyzing water. You don't need to mass-produce Hydrogen (yet), don't worry!"
+      "desc": "If you've tried to distill an Oil into Light Fuel, Heavy Fuel, etc., you might've realised that you can't. Instead, you've gotten this sulfurized version of it. How dreadful!\n\nTo fix this, we'll need to desulfurize it. Combine whatever you'd like to desulfurize with Hydrogen Gas in a Chemical Reactor to produce the pure product, along with a byproduct of Hydrogen Sulfide. What now?\n\n\nLuckily, Hydrogen Sulfide is perfectly recycled in an Electrolyzer.\n\nTo automate this process, simply place your Chemical Reactor and your Electrolyzer next to each other. Be sure to enable input from the output side. We've graciously provided a Fluid Filter so that your desulfurized prize doesn't go into your Electrolyzer too - remember to set it to filter both input/extract so that the right fluids can flow both ways!\n\n\nBut now, how do we get our refined goodies out of our Chemical Reactor? This is where the Electric Pump comes in - use it on a different face of the Chemical Reactor and extract your prize!\n\nTip: You only need two buckets of Hydrogen Gas. The easiest way of obtaining it is by electrolyzing water. You don't need to mass-produce Hydrogen (yet), don't worry!"
     },
     {
       "id": "035CF39E6CC98B77",
@@ -7928,7 +7928,7 @@
           "count": 1
         }
       ],
-      "desc": "This is the main way of getting Power via the BiochTMIcal route. Put Logs in the Pyrolyse Oven for Wood Tar. The Charcoal you obtain can then be processed in Extractors for even more Wood Tar!\n\nCheck out the Distillation quest to see what you can do with this wondrous substance."
+      "desc": "This is the main way of getting Power via the Biochemical route. Put Logs in the Pyrolyse Oven for Wood Tar. The Charcoal you obtain can then be processed in Extractors for even more Wood Tar!\n\nCheck out the Distillation quest to see what you can do with this wondrous substance."
     },
     {
       "id": "2D01E80DE837F6A6",
@@ -7989,7 +7989,7 @@
     },
     {
       "id": "124B32A0583A636A",
-      "icon": "gtceu:hv_chTMIcal_bath",
+      "icon": "gtceu:hv_chemical_bath",
       "title": "High Voltage Bathing",
       "deps": [
         "16A6AE5C770DB83A"
@@ -7998,13 +7998,13 @@
         {
           "type": "item",
           "items": [
-            "gtceu:hv_chTMIcal_bath"
+            "gtceu:hv_chemical_bath"
           ],
           "count": 1
         }
       ],
       "subtitle": "Please don't bathe with electronics...",
-      "desc": "The HV ChTMIcal Bath is used to dye Lenses using ChTMIcal Dye. This will let you engrave more types of Wafers!\n\nThis is also required for Eyes of Ender."
+      "desc": "The HV Chemical Bath is used to dye Lenses using Chemical Dye. This will let you engrave more types of Wafers!\n\nThis is also required for Eyes of Ender."
     },
     {
       "id": "1BB40CCF17D00719",
@@ -8052,7 +8052,7 @@
         }
       ],
       "subtitle": "Huge News for Maintenance Haters",
-      "desc": "You now have access to two new Maintenance Hatches. Both hatches do not require Maintenance when first placed in a Multiblock. We're going to ask for both here.\n\nThe Automatic Maintenance Hatch is pretty simple - it eliminates the need for Maintenance, forever.\n\nThe Configurable Maintenance Hatch is more interesting. You can configure it to cut off 10% duration on recipes, at the cost of making Maintenance happen three times as fast. That's 16 real hours of activity.\n\nRTMInder: You can put Tape in the maintenance Hatch to automatically fix problems.\n\nLore: The Automatic Maintenance Hatch texture and mechanic comes from TecTech, an addon mod originally made for GregTech: New Horizons. \n\nYou'll see more from TecTech if you stick with us all the way to the late game."
+      "desc": "You now have access to two new Maintenance Hatches. Both hatches do not require Maintenance when first placed in a Multiblock. We're going to ask for both here.\n\nThe Automatic Maintenance Hatch is pretty simple - it eliminates the need for Maintenance, forever.\n\nThe Configurable Maintenance Hatch is more interesting. You can configure it to cut off 10% duration on recipes, at the cost of making Maintenance happen three times as fast. That's 16 real hours of activity.\n\nReminder: You can put Tape in the maintenance Hatch to automatically fix problems.\n\nLore: The Automatic Maintenance Hatch texture and mechanic comes from TecTech, an addon mod originally made for GregTech: New Horizons. \n\nYou'll see more from TecTech if you stick with us all the way to the late game."
     },
     {
       "id": "029CF0D9E5097F87",
@@ -8100,7 +8100,7 @@
         {
           "type": "item",
           "items": [
-            "gtceu:hv_TMItter"
+            "gtceu:hv_emitter"
           ],
           "count": 1
         },
@@ -8113,7 +8113,7 @@
         }
       ],
       "subtitle": "Wouldn't you agree? Fun!",
-      "desc": "Just like MV, you'll need to make higher-tier components.\n\nThe painful Flawless Gems have been replaced with slightly-more-painful Eyes of Ender. Also notice that the Motors require 2x Silver Cables.\n\nHulls and Machines use Gold Cables.\n\nTips to make life less painful:\n\n- Consider using Electrotine decomposition and Ore Processing for Electrum.\n- Consider using the ChTMIcal Bath with Mercury for Gold from a wide variety of ores."
+      "desc": "Just like MV, you'll need to make higher-tier components.\n\nThe painful Flawless Gems have been replaced with slightly-more-painful Eyes of Ender. Also notice that the Motors require 2x Silver Cables.\n\nHulls and Machines use Gold Cables.\n\nTips to make life less painful:\n\n- Consider using Electrotine decomposition and Ore Processing for Electrum.\n- Consider using the Chemical Bath with Mercury for Gold from a wide variety of ores."
     },
     {
       "id": "16B735F9C391D260",
@@ -8252,12 +8252,12 @@
         }
       ],
       "subtitle": "Noticing a pattern here?",
-      "desc": "The Low Power Integrated Circuit requires an HV Cutting Machine inside your Cleanroom.\n\nHV Energy Hatches will be nice additions so you can run your Multiblocks (mainly your Electric Blast Furnace and Large ChTMIcal Reactor) directly off a HV line.\n\nYou'll need to upgrade your EBF with 2 Energy Hatches to obtain Nichrome coils - fun!"
+      "desc": "The Low Power Integrated Circuit requires an HV Cutting Machine inside your Cleanroom.\n\nHV Energy Hatches will be nice additions so you can run your Multiblocks (mainly your Electric Blast Furnace and Large Chemical Reactor) directly off a HV line.\n\nYou'll need to upgrade your EBF with 2 Energy Hatches to obtain Nichrome coils - fun!"
     },
     {
       "id": "390E59F05132FCB8",
-      "icon": "gtceu:hv_chTMIcal_reactor",
-      "title": "High Voltage ChTMIstry",
+      "icon": "gtceu:hv_chemical_reactor",
+      "title": "High Voltage Chemistry",
       "deps": [
         "26394C1290D70AB6",
         "16A6AE5C770DB83A"
@@ -8266,13 +8266,13 @@
         {
           "type": "item",
           "items": [
-            "gtceu:hv_chTMIcal_reactor"
+            "gtceu:hv_chemical_reactor"
           ],
           "count": 1
         }
       ],
-      "subtitle": "ChTMIstry-heads rejoice!",
-      "desc": "The HV ChTMIcal Reactor unlocks a ton of new recipes. Ah, who doesn't love the ever-growing demand on more advanced ChTMIstry?\n\nNote: We've actually unlocked a ton of new content by reaching HV. However, not every processing line or item is crucial right now. It'd make the HV chapter far too dense if we included everything!\n\nYou could still check out the EV Chapter if you want to push yourself."
+      "subtitle": "Chemistry-heads rejoice!",
+      "desc": "The HV Chemical Reactor unlocks a ton of new recipes. Ah, who doesn't love the ever-growing demand on more advanced Chemistry?\n\nNote: We've actually unlocked a ton of new content by reaching HV. However, not every processing line or item is crucial right now. It'd make the HV chapter far too dense if we included everything!\n\nYou could still check out the EV Chapter if you want to push yourself."
     },
     {
       "id": "59DFC4DA7D29C315",
@@ -8319,7 +8319,7 @@
         }
       ],
       "subtitle": "Nope, still not Titanium",
-      "desc": "To get your grubby hands on some Titanium, Rutile must first be reduced to Titanium Tetrachloride in an HV ChTMIcal Reactor, then reduced again in an EBF with Magnesium to finally arrive at Titanium.\n\nThe Carbon, Chlorine, Oxygen, and Magnesium used in the process can be perfectly recovered from the byproduct Carbon Monoxide and Magnesium Chloride with no loss. If you set up a system to recover them, the only material that you'll need to provide for Titanium is Rutile!\n\nTitanium Tetrachloride also acts as a catalyst in the production of plastics. A touch of TiCl₄ in the polymerisation process can increase the polymer yield to 133%. Naturally, this is completely optional."
+      "desc": "To get your grubby hands on some Titanium, Rutile must first be reduced to Titanium Tetrachloride in an HV Chemical Reactor, then reduced again in an EBF with Magnesium to finally arrive at Titanium.\n\nThe Carbon, Chlorine, Oxygen, and Magnesium used in the process can be perfectly recovered from the byproduct Carbon Monoxide and Magnesium Chloride with no loss. If you set up a system to recover them, the only material that you'll need to provide for Titanium is Rutile!\n\nTitanium Tetrachloride also acts as a catalyst in the production of plastics. A touch of TiCl₄ in the polymerisation process can increase the polymer yield to 133%. Naturally, this is completely optional."
     },
     {
       "id": "45F9AAE4ABE32033",
@@ -8397,7 +8397,7 @@
         }
       ],
       "subtitle": "Can we get much smarter? Apparently so",
-      "desc": "This is a guide on how to automatically route all your Hot Ingots to your Vacuum Freezer while keeping everything automated perfectly fine.\n\nYou already know the drill from the ChTMIcal Bath, so let's get right to the chase.\n\nInstall an Item Tag Filter Cover on the Input Bus of your Vacuum Freezer, open it and set to whitelist hot_ingots. The slot is to test items to make sure you configured the Filter properly in case you forgot. Drag ingots from TMI!\n\nFrom here, you now have the option to route either with Item Pipes or AE2.\n\nWith Item Pipes, connect the output of your EBF(s) to the input of your Vacuum Freezer and the output dump (Chest, Crate, or ME Interface).\nYou can also have a Restrictive Pipe in front of the output dump to ensure the Vacuum Freezer will be prioritized.\n\nWith AE2, place a ME Storage Bus on top of your Cover and set to very high priority. Any hot ingots entering your ME system will automatically be moved into the Vacuum Freezer.\n\nNote: If you wish to know more tags for future automation setups, they will display if you press Shift when hovering over an item. For instance, an item tagged with #forge:plates/copper would be filtered as plates/copper.\n\nOther Note: The Item Tag Filter partially supports regex. Hover over the info icon for more information."
+      "desc": "This is a guide on how to automatically route all your Hot Ingots to your Vacuum Freezer while keeping everything automated perfectly fine.\n\nYou already know the drill from the Chemical Bath, so let's get right to the chase.\n\nInstall an Item Tag Filter Cover on the Input Bus of your Vacuum Freezer, open it and set to whitelist hot_ingots. The slot is to test items to make sure you configured the Filter properly in case you forgot. Drag ingots from emi!\n\nFrom here, you now have the option to route either with Item Pipes or AE2.\n\nWith Item Pipes, connect the output of your EBF(s) to the input of your Vacuum Freezer and the output dump (Chest, Crate, or ME Interface).\nYou can also have a Restrictive Pipe in front of the output dump to ensure the Vacuum Freezer will be prioritized.\n\nWith AE2, place a ME Storage Bus on top of your Cover and set to very high priority. Any hot ingots entering your ME system will automatically be moved into the Vacuum Freezer.\n\nNote: If you wish to know more tags for future automation setups, they will display if you press Shift when hovering over an item. For instance, an item tagged with #forge:plates/copper would be filtered as plates/copper.\n\nOther Note: The Item Tag Filter partially supports regex. Hover over the info icon for more information."
     },
     {
       "id": "6958029B5514D4EC",
@@ -8550,7 +8550,7 @@
         }
       ],
       "subtitle": "Fluids just got easier",
-      "desc": "This prospector boasts a higher range than its LV counterpart.\n\nSneak right-clicking with the Prospector in your hand will change its mode to Fluid Prospection. This will instead display the base yield of Fluid veins, along with how full they are.\n\nRTMInder: The yield of a Fluid Drilling Rig is directly proportional to the \"fullness\" of the vein. When low enough, the output will default to a yield that can be defined in the CEu config.\n\nTip: When the fullness drops below 30% (alright, rough estimate), you should consider moving to another vein for the sake of power-to-yield efficiency. Aiming for the Advanced Fluid Drilling Rig in EV may interest you, as not only does it significantly boost the output, but it also reduces the rate at which it drains the vein!\n\nCaution: Due to a bug, the Prospector display may be offset by one chunk, so avoid placing your Rig in the corners of a fluid vein, or you may end up pumping the wrong fluid!"
+      "desc": "This prospector boasts a higher range than its LV counterpart.\n\nSneak right-clicking with the Prospector in your hand will change its mode to Fluid Prospection. This will instead display the base yield of Fluid veins, along with how full they are.\n\nReminder: The yield of a Fluid Drilling Rig is directly proportional to the \"fullness\" of the vein. When low enough, the output will default to a yield that can be defined in the CEu config.\n\nTip: When the fullness drops below 30% (alright, rough estimate), you should consider moving to another vein for the sake of power-to-yield efficiency. Aiming for the Advanced Fluid Drilling Rig in EV may interest you, as not only does it significantly boost the output, but it also reduces the rate at which it drains the vein!\n\nCaution: Due to a bug, the Prospector display may be offset by one chunk, so avoid placing your Rig in the corners of a fluid vein, or you may end up pumping the wrong fluid!"
     },
     {
       "id": "42FB276AB16258D9",
@@ -8602,7 +8602,7 @@
         }
       ],
       "subtitle": "A.K.A - Teflon",
-      "desc": "Polytetrafluoroethylene (PTFE) is a Carbon-Fluorine polymer. Similarly to PVC, PTFE can be used to increase the yield of Plastic Circuit Boards and other crafts. Presently, it is used to make the walls of Large ChTMIcal Reactors.\n\nChlorine is required in the process, which is fully recycled if you electrolyze the Hydrochloric Acid waste.\n\nFluorine will also be used in the Uranium and Naquadah refinement processes.\n\nTip: From this point onwards, you should be solidifying Polymers as Bar (Ingot) form, as they can easily be shaped to whichever form you will need using the Extruder."
+      "desc": "Polytetrafluoroethylene (PTFE) is a Carbon-Fluorine polymer. Similarly to PVC, PTFE can be used to increase the yield of Plastic Circuit Boards and other crafts. Presently, it is used to make the walls of Large Chemical Reactors.\n\nChlorine is required in the process, which is fully recycled if you electrolyze the Hydrochloric Acid waste.\n\nFluorine will also be used in the Uranium and Naquadah refinement processes.\n\nTip: From this point onwards, you should be solidifying Polymers as Bar (Ingot) form, as they can easily be shaped to whichever form you will need using the Extruder."
     },
     {
       "id": "56E7A3A0CC690C8A",
@@ -8625,8 +8625,8 @@
     },
     {
       "id": "528CE69DA4358B2E",
-      "icon": "gtceu:large_chTMIcal_reactor",
-      "title": "Large ChTMIcal Reactor",
+      "icon": "gtceu:large_chemical_reactor",
+      "title": "Large Chemical Reactor",
       "deps": [
         "7CC79617A4965F25"
       ],
@@ -8634,7 +8634,7 @@
         {
           "type": "item",
           "items": [
-            "gtceu:large_chTMIcal_reactor"
+            "gtceu:large_chemical_reactor"
           ],
           "count": 1
         },
@@ -8654,7 +8654,7 @@
         }
       ],
       "subtitle": "The Magic Box to end all Magic Boxes",
-      "desc": "The Large ChTMIcal Reactor (LCR) is a multiblock ChTMIcal Reactor with more input/output slots. Its Teflon casings allow it to process extra recipes.\n\nThe LCR can perform some exclusive reactions which allow you to combine multiple normal ChTMIcal Reactor steps into a single step. Examples below:\n\n- Nitrogen Dioxide (for Nitric Acid and Dinitrogen Tetroxide)\n- Sulfuric Acid\n- Phenol\n- Epichlorohydrin (you need it for Epoxy!)\n- Epoxy\n\nThere are also LCR exclusive recipes. For example, Radon can only be made in the LCR right now.\n\nAll Overclocks in the LCR are 100% efficient (known as Perfect overclocks); each overclock will quadruple the speed, as opposed to doubling it.\n\nThe LCR has yet another advantage. You can use 2 Energy Hatches to allow it to run recipes of the next tier, similar to the Electric Blast Furnace.\n\nTip: Given the amount of LCRs you may end up using, why not try utilising wallsharing to its full potential?\n\nYou could share one 2A (standard) Energy Hatch between 2 LCRs.\n\nYou might want to share Input/Output Hatches, but make sure each LCR is running the correct recipe.\n\nKeep in mind Maintenance hatches cannot wallshare."
+      "desc": "The Large Chemical Reactor (LCR) is a multiblock Chemical Reactor with more input/output slots. Its Teflon casings allow it to process extra recipes.\n\nThe LCR can perform some exclusive reactions which allow you to combine multiple normal Chemical Reactor steps into a single step. Examples below:\n\n- Nitrogen Dioxide (for Nitric Acid and Dinitrogen Tetroxide)\n- Sulfuric Acid\n- Phenol\n- Epichlorohydrin (you need it for Epoxy!)\n- Epoxy\n\nThere are also LCR exclusive recipes. For example, Radon can only be made in the LCR right now.\n\nAll Overclocks in the LCR are 100% efficient (known as Perfect overclocks); each overclock will quadruple the speed, as opposed to doubling it.\n\nThe LCR has yet another advantage. You can use 2 Energy Hatches to allow it to run recipes of the next tier, similar to the Electric Blast Furnace.\n\nTip: Given the amount of LCRs you may end up using, why not try utilising wallsharing to its full potential?\n\nYou could share one 2A (standard) Energy Hatch between 2 LCRs.\n\nYou might want to share Input/Output Hatches, but make sure each LCR is running the correct recipe.\n\nKeep in mind Maintenance hatches cannot wallshare."
     },
     {
       "id": "2B7B214EDE0B45A2",
@@ -8683,7 +8683,7 @@
         }
       ],
       "subtitle": "An explosive discovery",
-      "desc": "TNT (Trinitrotoluene, to be pedantic) can't be prepared with the usual \"Gunpowder and Sand\" routine anymore. Instead, you'll have to produce Gelled Toluene and react it with Sulfuric Acid to make TNT.\n\nUsing the HV ChTMIcal Reactor recipe will double the yield of Gelled Toluene at the cost of requiring additional inputs.\n\nWe don't have any easy tips to give you for Toluene. We regret to inform you that making TNT is going to be tricky no matter which route you take.\n\nThat being said, don't miss out on the direct Heavy Fuel to Toluene recipe in the single block Distillery.\n\nToluene can also optionally be used in EV to make Gasoline.\n\nTNT is used in the Implosion Compressor to make Gems. It also blows stuff (and your friends) up. \n\nITNT can also be used in the Implosion Compressor at a better rate but require Nitration Mixture to make. It also ignites when punched so be careful when it is placed.\n\nGet either TNT or ITNT to complete this quest.\n\nTechnically, Dynamite or Powerbarrels could also be used... but Dynamite is a pain to obtain, whereas Powerbarrels are weaker."
+      "desc": "TNT (Trinitrotoluene, to be pedantic) can't be prepared with the usual \"Gunpowder and Sand\" routine anymore. Instead, you'll have to produce Gelled Toluene and react it with Sulfuric Acid to make TNT.\n\nUsing the HV Chemical Reactor recipe will double the yield of Gelled Toluene at the cost of requiring additional inputs.\n\nWe don't have any easy tips to give you for Toluene. We regret to inform you that making TNT is going to be tricky no matter which route you take.\n\nThat being said, don't miss out on the direct Heavy Fuel to Toluene recipe in the single block Distillery.\n\nToluene can also optionally be used in EV to make Gasoline.\n\nTNT is used in the Implosion Compressor to make Gems. It also blows stuff (and your friends) up. \n\nITNT can also be used in the Implosion Compressor at a better rate but require Nitration Mixture to make. It also ignites when punched so be careful when it is placed.\n\nGet either TNT or ITNT to complete this quest.\n\nTechnically, Dynamite or Powerbarrels could also be used... but Dynamite is a pain to obtain, whereas Powerbarrels are weaker."
     },
     {
       "id": "16E3465CF94E2BDD",
@@ -8702,7 +8702,7 @@
         }
       ],
       "subtitle": "Took a while to get some of this, right?",
-      "desc": "If you've killed a Blaze before, you may have noticed it dropped Sulfur Dust instead of a Blaze Rod.\n\nIn order to get Blaze Powder, you must instead combine Carbon Dust and Sulfur Dust in a HV ChTMIcal Reactor."
+      "desc": "If you've killed a Blaze before, you may have noticed it dropped Sulfur Dust instead of a Blaze Rod.\n\nIn order to get Blaze Powder, you must instead combine Carbon Dust and Sulfur Dust in a HV Chemical Reactor."
     },
     {
       "id": "4024C831C77101CA",
@@ -8755,7 +8755,7 @@
         }
       ],
       "subtitle": "That's dope, bro!",
-      "desc": "Doping is the process of intentionally introducing impurities into sTMIconductors to alter their properties.\n\nSilicon can be doped with small amounts of Phosphorus to make a better Silicon Boule.\n\nPhosphorus-doped Silicon Boules typically yield 8 times more wafers than their non-doped counterparts. However, they are not strictly needed until EV, where they'll be used in more complex wafers.\n\nNote: All processing of Phosphorus Boules and Wafers will require a Cleanroom."
+      "desc": "Doping is the process of intentionally introducing impurities into semiconductors to alter their properties.\n\nSilicon can be doped with small amounts of Phosphorus to make a better Silicon Boule.\n\nPhosphorus-doped Silicon Boules typically yield 8 times more wafers than their non-doped counterparts. However, they are not strictly needed until EV, where they'll be used in more complex wafers.\n\nNote: All processing of Phosphorus Boules and Wafers will require a Cleanroom."
     },
     {
       "id": "1137D2BA7E03D685",
@@ -8794,7 +8794,7 @@
         }
       ],
       "subtitle": "This won't eat your skin",
-      "desc": "Nitric Acid's fumes are extremely toxic! It's also a very potent oxidizer.\n\nNitric Acid is used in:\n\n- Cetane-Boosted Diesel, a better Diesel fuel that you'll get to soon.\n- Nitrobenzene, a better Gas fuel that we're not far off making.\n- The optional gem slurry chains.\n- The Platinum Group Sludge chain in IV.\n- Polybenzimidazole (try saying that ten times fast!) in IV.\n\nThere are two main ways to make Nitric Acid - the good way and the bad ways!\n\nTherefore, we'll point you towards the best method:\n\nGet a Large ChTMIcal Reactor and use it to make Nitrogen Dioxide. From there, react it in a regular ChTMIcal Reactor with more Oxygen and Water and you got yourself some Nitric Acid!\n\nThis requires a lot of Oxygen. Refer to its own Quest in LV for the most efficient ways to obtain in large amount. Notice that this is Hydrogen free!"
+      "desc": "Nitric Acid's fumes are extremely toxic! It's also a very potent oxidizer.\n\nNitric Acid is used in:\n\n- Cetane-Boosted Diesel, a better Diesel fuel that you'll get to soon.\n- Nitrobenzene, a better Gas fuel that we're not far off making.\n- The optional gem slurry chains.\n- The Platinum Group Sludge chain in IV.\n- Polybenzimidazole (try saying that ten times fast!) in IV.\n\nThere are two main ways to make Nitric Acid - the good way and the bad ways!\n\nTherefore, we'll point you towards the best method:\n\nGet a Large Chemical Reactor and use it to make Nitrogen Dioxide. From there, react it in a regular Chemical Reactor with more Oxygen and Water and you got yourself some Nitric Acid!\n\nThis requires a lot of Oxygen. Refer to its own Quest in LV for the most efficient ways to obtain in large amount. Notice that this is Hydrogen free!"
     },
     {
       "id": "04F6E968CEEC3D49",
@@ -8891,7 +8891,7 @@
         }
       ],
       "subtitle": "Shredding your Ores with byproducts",
-      "desc": "The HV Macerator finally unlocks more of the slots shown in TMI. With this, the first three slots are now available. This allows you to receive the unique ore Byproduct from macerating Thermal Centrifuged Ore.\n\nMacerating Ores costs 32 EU/t with two overclocks, which makes this machine able to fit in LV lines - very, very convenient.\n\nDespite the signicant improvements this machine provides, it still isn't completely worth it to set up advanced processing for every single ore. Energy and time are still things to consider, so only process the ores that produce Byproducts you care for.\n\nLore: In GregTech 5u, the HV Macerator only gave two slots. Urgh... we weren't planning on using that Stone Dust, anyway..."
+      "desc": "The HV Macerator finally unlocks more of the slots shown in emi. With this, the first three slots are now available. This allows you to receive the unique ore Byproduct from macerating Thermal Centrifuged Ore.\n\nMacerating Ores costs 32 EU/t with two overclocks, which makes this machine able to fit in LV lines - very, very convenient.\n\nDespite the signicant improvements this machine provides, it still isn't completely worth it to set up advanced processing for every single ore. Energy and time are still things to consider, so only process the ores that produce Byproducts you care for.\n\nLore: In GregTech 5u, the HV Macerator only gave two slots. Urgh... we weren't planning on using that Stone Dust, anyway..."
     },
     {
       "id": "4343746E706264E6",
@@ -8911,7 +8911,7 @@
         }
       ],
       "subtitle": "The Nectar of the Gods",
-      "desc": "Ammonia is optional in HV.\n\nYou may use it in the production of:\n\n- Nitric Acid, although we don't recommend this.\n\n- Rocket Fuel, required for Nether Stars in IV.\n\n- Polybenzimidazole (now THAT'S a tongue twister!) in IV.\n\nThe \"least painful\" recipe should be the one in the HV ChTMIcal Reactor. Make sure your Hydrogen production (mostly from Water electrolysis) is enough to support the demand.\n\nYou could also obtain Ammonia as a waste product from Platinum Group Sludge processing."
+      "desc": "Ammonia is optional in HV.\n\nYou may use it in the production of:\n\n- Nitric Acid, although we don't recommend this.\n\n- Rocket Fuel, required for Nether Stars in IV.\n\n- Polybenzimidazole (now THAT'S a tongue twister!) in IV.\n\nThe \"least painful\" recipe should be the one in the HV Chemical Reactor. Make sure your Hydrogen production (mostly from Water electrolysis) is enough to support the demand.\n\nYou could also obtain Ammonia as a waste product from Platinum Group Sludge processing."
     },
     {
       "id": "22D83509D938F039",
@@ -9097,7 +9097,7 @@
         }
       ],
       "subtitle": "\"Extreme\" is an apt descriptor",
-      "desc": "At the cost of 4x the drilling Power, the Advanced Fluid Drilling Rig gains 16x the output in Fluid.\n\nThe depletion of veins is also halved. This means you will get a total of 32x as much Oil (or whatever fluid) from a bedrock fluid vein until depletion!\n\nEven when depleted, you can still use this and be firmly power positive.\n\nOne single Advanced Fluid Drilling Rig should be enough to supply Power for a base up to LuV... and possibly beyond!\n\nAs a rTMInder, since this last appeared in MV:\n\n- Light Oil can be used for LPG and Methane to run in Large Gas Turbines.\n- Oil can be used for Diesel and Cetane-Boosted Diesel to run in Large Combustion Engines.\n- Heavy Oil can be used for Nitrobenzene to run in Large Gas Turbines."
+      "desc": "At the cost of 4x the drilling Power, the Advanced Fluid Drilling Rig gains 16x the output in Fluid.\n\nThe depletion of veins is also halved. This means you will get a total of 32x as much Oil (or whatever fluid) from a bedrock fluid vein until depletion!\n\nEven when depleted, you can still use this and be firmly power positive.\n\nOne single Advanced Fluid Drilling Rig should be enough to supply Power for a base up to LuV... and possibly beyond!\n\nAs a reminder, since this last appeared in MV:\n\n- Light Oil can be used for LPG and Methane to run in Large Gas Turbines.\n- Oil can be used for Diesel and Cetane-Boosted Diesel to run in Large Combustion Engines.\n- Heavy Oil can be used for Nitrobenzene to run in Large Gas Turbines."
     },
     {
       "id": "3398FC108D9DCB46",
@@ -9125,7 +9125,7 @@
         }
       ],
       "subtitle": "Diamond and Pearl",
-      "desc": "How do you get Platinum?\n\n- As a byproduct of Nickel Ore processing, either with a ChTMIcal Bath, or a HV Macerator\n- From Sheldonite veins in the End\n- From Platinum Group Sludge, a complicated chain granting all Platinum Group metals. Highly unrecommended until IV, but eventually required.\n\nPlatinum is needed in small amounts for SMD Diodes, and for a plethora of recipes starting in EV.\n\nLore: Mekanism's primary material was planned to be Platinum. However, GregoriusT didn't agree - the fact that such a rare material could be found all over the world wasn't quite to his tastes. The Mekanism devs thus opted to make the primary material Osmium."
+      "desc": "How do you get Platinum?\n\n- As a byproduct of Nickel Ore processing, either with a Chemical Bath, or a HV Macerator\n- From Sheldonite veins in the End\n- From Platinum Group Sludge, a complicated chain granting all Platinum Group metals. Highly unrecommended until IV, but eventually required.\n\nPlatinum is needed in small amounts for SMD Diodes, and for a plethora of recipes starting in EV.\n\nLore: Mekanism's primary material was planned to be Platinum. However, GregoriusT didn't agree - the fact that such a rare material could be found all over the world wasn't quite to his tastes. The Mekanism devs thus opted to make the primary material Osmium."
     },
     {
       "id": "16E7CAC7BC8BFD8E",
@@ -9214,7 +9214,7 @@
         }
       ],
       "subtitle": "All in one!",
-      "desc": "This quest will cover the Tungsten Chain. Tungsten is obtained from either Tungstate or Scheelite, which are part of the same vein in the End.\n\nJust like the Rutile chain, you will only need to input one item type, and everything else will be looped perfectly!\n\nYou will need:\n\n- One ChTMIcal Bath, to make Tungstic Acid.\n- One Electrolyzer, to electrolyze both Bath outputs.\n- One ChTMIcal Reactor, to loop Hydrogen and Chlorine back into Hydrochloric Acid.\n\nYou will be granted either Calcium or Lithium as a byproduct - it's on the house!\n\nLore: In GTCE, Tungstate or Scheelite took 40sec and 4,000mB of Hydrogen @ 1920 EU/t to electrolyze into 1 Tungsten Dust. Even if it was simpler, it was much more expensive!"
+      "desc": "This quest will cover the Tungsten Chain. Tungsten is obtained from either Tungstate or Scheelite, which are part of the same vein in the End.\n\nJust like the Rutile chain, you will only need to input one item type, and everything else will be looped perfectly!\n\nYou will need:\n\n- One Chemical Bath, to make Tungstic Acid.\n- One Electrolyzer, to electrolyze both Bath outputs.\n- One Chemical Reactor, to loop Hydrogen and Chlorine back into Hydrochloric Acid.\n\nYou will be granted either Calcium or Lithium as a byproduct - it's on the house!\n\nLore: In GTCE, Tungstate or Scheelite took 40sec and 4,000mB of Hydrogen @ 1920 EU/t to electrolyze into 1 Tungsten Dust. Even if it was simpler, it was much more expensive!"
     },
     {
       "id": "478B0D55369C0F7F",
@@ -9429,7 +9429,7 @@
         {
           "type": "item",
           "items": [
-            "gtceu:ev_TMItter"
+            "gtceu:ev_emitter"
           ],
           "count": 1
         },
@@ -9442,7 +9442,7 @@
         }
       ],
       "subtitle": "Wait, no, don't leave!",
-      "desc": "A lot of Kanthal will be required for the EV Motors. This may feel painful when you're on the edge of EV, but it won't be a problem later - trust us.\n\nNeodymium is the metal used for Magnetic Rods.\n\nAluminium Cables require PVC to be insulated.\n\nLastly, you will need Radon for the Quantum Eyes in the TMItter recipe."
+      "desc": "A lot of Kanthal will be required for the EV Motors. This may feel painful when you're on the edge of EV, but it won't be a problem later - trust us.\n\nNeodymium is the metal used for Magnetic Rods.\n\nAluminium Cables require PVC to be insulated.\n\nLastly, you will need Radon for the Quantum Eyes in the emitter recipe."
     },
     {
       "id": "681F1423A36FD4FF",
@@ -9488,8 +9488,8 @@
     },
     {
       "id": "7D15EEE81B1A3100",
-      "icon": "gtceu:ev_chTMIcal_reactor",
-      "title": "Extreme ChTMIcal Reactions",
+      "icon": "gtceu:ev_chemical_reactor",
+      "title": "Extreme Chemical Reactions",
       "deps": [
         "4AFD3073C731A1E4",
         "7FA0ACB7F161F378"
@@ -9498,13 +9498,13 @@
         {
           "type": "item",
           "items": [
-            "gtceu:ev_chTMIcal_reactor"
+            "gtceu:ev_chemical_reactor"
           ],
           "count": 1
         }
       ],
-      "subtitle": "ChTMIstry gets even harder",
-      "desc": "Note that in theory, the EV ChTMIcal Reactor is skippable by using the Large ChTMIcal Reactor instead, but we're evil enough to force you to make this.\n\nIt's still useful due to its compact size!\n\nHonestly, if making one of these is a huge problem material-wise, take a look at your infrastructure."
+      "subtitle": "Chemistry gets even harder",
+      "desc": "Note that in theory, the EV Chemical Reactor is skippable by using the Large Chemical Reactor instead, but we're evil enough to force you to make this.\n\nIt's still useful due to its compact size!\n\nHonestly, if making one of these is a huge problem material-wise, take a look at your infrastructure."
     },
     {
       "id": "63A87C9303D54487",
@@ -9577,7 +9577,7 @@
         }
       ],
       "subtitle": "Quite the gold cost...",
-      "desc": "Now that you have Epoxy, you can make Advanced Circuit Boards! The next Circuit tier is oh so close, so keep pushing.\n\nTips:\n\n- Consider using Electrotine decomposition and Ore Processing for Electrum.\n- Consider using the ChTMIcal Bath with Mercury for Gold, from a wide variety of ores."
+      "desc": "Now that you have Epoxy, you can make Advanced Circuit Boards! The next Circuit tier is oh so close, so keep pushing.\n\nTips:\n\n- Consider using Electrotine decomposition and Ore Processing for Electrum.\n- Consider using the Chemical Bath with Mercury for Gold, from a wide variety of ores."
     },
     {
       "id": "6781213726919716",
@@ -9851,7 +9851,7 @@
         }
       ],
       "subtitle": "Prime circuit board material",
-      "desc": "Epoxy is the foundation for all future Circuit Boards in the game. Get ready to make a lot of this stuff.\n\nNote: This questline is quite complicated, so tackle everything else before trying to make Epoxy. You'll need all the help you can get!\n\nThere are several ways to obtain the ingredients for Epoxy.\n\nWe'll ignore recipes related to Glycerol, as they're never worth it unless modpack devs tweak things around. Hint hint, if you're making your own pack!\n\nTry and use Large ChTMIcal Reactors to shortcut recipes.\n\nChlorine is only partially recycled, so you'll need a constant supply. Feeding it manually should be sufficient at first.\n\nRecipes involving Sodium Hydroxide could be looped by electrolyzing the Salt Water co-product.\n\nDoing this will probably require you to make some Quadruple Pipes, Pump Covers, Fluid Filters... or route everything using AE2.\n\nIn general, closed loop setups are nice to prevent overproduction or overconsumption, but go for whatever's more fun for you."
+      "desc": "Epoxy is the foundation for all future Circuit Boards in the game. Get ready to make a lot of this stuff.\n\nNote: This questline is quite complicated, so tackle everything else before trying to make Epoxy. You'll need all the help you can get!\n\nThere are several ways to obtain the ingredients for Epoxy.\n\nWe'll ignore recipes related to Glycerol, as they're never worth it unless modpack devs tweak things around. Hint hint, if you're making your own pack!\n\nTry and use Large Chemical Reactors to shortcut recipes.\n\nChlorine is only partially recycled, so you'll need a constant supply. Feeding it manually should be sufficient at first.\n\nRecipes involving Sodium Hydroxide could be looped by electrolyzing the Salt Water co-product.\n\nDoing this will probably require you to make some Quadruple Pipes, Pump Covers, Fluid Filters... or route everything using AE2.\n\nIn general, closed loop setups are nice to prevent overproduction or overconsumption, but go for whatever's more fun for you."
     },
     {
       "id": "1F571B9E1555DA04",
@@ -9889,7 +9889,7 @@
         }
       ],
       "subtitle": "But that's just how I Phenol",
-      "desc": "Obtain Phenol from:\n\n1 - Wood Tar distillation.\n\n2 - Reacting Benzene with Chlorine and Sodium Hydroxide This should be performed in an LCR, and the Chlorine is perfectly looped.\n\n3 - Shortcutting the above recipe by ignoring the Sodium Hydroxide. This is net negative on Chlorine.\n\n4 - Reacting Benzene, Propene and Oxygen using a small amount of Phosphoric Acid - normally a catalyst, but consumed here in small quantities. This is called the Cumene process.\n\nIf you're having trouble deciding between the options presented, here's the appeal of each route:\n\n1 - Great if you're willing to set up a Pyrolyse Oven + Distillation Tower combo.\n\n2 - This one's our preference! You can use the Salt to make more Salt Water, then electrolyze to create a loop.\n\n3 - Very appealing if you have an infinite supply of Chlorine. You could achieve this by setting up a Fluid Drilling Rig on a Salt Water vein.\n\n4 - ...Phosphoric Acid is a pain to produce. You'd be mad to consider this.\n\nLore: The Benzene + Oxygen recipe was added in GTCE with the intent of fixing missing chTMIcal recipes, as the Large ChTMIcal Reactor didn't exist. Now that CEu provides more realistic options, we may remove the recipe in future."
+      "desc": "Obtain Phenol from:\n\n1 - Wood Tar distillation.\n\n2 - Reacting Benzene with Chlorine and Sodium Hydroxide This should be performed in an LCR, and the Chlorine is perfectly looped.\n\n3 - Shortcutting the above recipe by ignoring the Sodium Hydroxide. This is net negative on Chlorine.\n\n4 - Reacting Benzene, Propene and Oxygen using a small amount of Phosphoric Acid - normally a catalyst, but consumed here in small quantities. This is called the Cumene process.\n\nIf you're having trouble deciding between the options presented, here's the appeal of each route:\n\n1 - Great if you're willing to set up a Pyrolyse Oven + Distillation Tower combo.\n\n2 - This one's our preference! You can use the Salt to make more Salt Water, then electrolyze to create a loop.\n\n3 - Very appealing if you have an infinite supply of Chlorine. You could achieve this by setting up a Fluid Drilling Rig on a Salt Water vein.\n\n4 - ...Phosphoric Acid is a pain to produce. You'd be mad to consider this.\n\nLore: The Benzene + Oxygen recipe was added in GTCE with the intent of fixing missing chemical recipes, as the Large Chemical Reactor didn't exist. Now that CEu provides more realistic options, we may remove the recipe in future."
     },
     {
       "id": "40018C0546454CD9",
@@ -9907,7 +9907,7 @@
           "count": 1
         }
       ],
-      "desc": "While distilling Wood Vinegar gives Acetone, the yield is low and might not meet your needs.\n\nYou might want to use the direct LCR recipe from Acetic Acid to obtain Acetone.\n\nIf you want to be fancy, you can also use the good old Acetic Acid -> Dissolved Calcium Acetate -> Acetone loop, which does not require a LCR, but still recycles the Calcium compound perfectly.\n\nWe've been talking about Acetic Acid, but we're yet to tell you how to obtain it. Wouldn't that be great?\n\nAcetic Acid can be synthesized in the ChTMIcal Reactor. Our favorite recipe is from Ethylene."
+      "desc": "While distilling Wood Vinegar gives Acetone, the yield is low and might not meet your needs.\n\nYou might want to use the direct LCR recipe from Acetic Acid to obtain Acetone.\n\nIf you want to be fancy, you can also use the good old Acetic Acid -> Dissolved Calcium Acetate -> Acetone loop, which does not require a LCR, but still recycles the Calcium compound perfectly.\n\nWe've been talking about Acetic Acid, but we're yet to tell you how to obtain it. Wouldn't that be great?\n\nAcetic Acid can be synthesized in the Chemical Reactor. Our favorite recipe is from Ethylene."
     },
     {
       "id": "1A4AD56965407DC5",
@@ -10010,7 +10010,7 @@
         }
       ],
       "subtitle": "Time for a real oil refinery!",
-      "desc": "The Distillation Tower is a multiblock that will help you extract the most out of fluids. In Distilleries, you had to pick only one product to output. DTs output all of it at once!\n\nNote the special placement rules: Energy, Items, and Fluid Inputs can only be placed on the bottom layer. Maintenance can be placed anywhere. Fluid Outputs can only be placed starting on the second vertical layer, and only allow one per layer as well.\n\nThe DT can form at any height from 3 to 13 blocks, allowing 2 to 12 Fluid Outputs. Fluid will always output on the layer corresponding to the recipe in TMI.\n\nThe DT has one more special rule. You can deliberately build it too short, and it will void whichever Fluid should have been output at the top layers that were removed. This can be useful in some very niche situations.\n\nIt is a good idea to use Super Tanks as the output for every layer.\n\nNote: Using the Distillation Tower for Oil -> Fuel -> Diesel is not worth it! You will spend more energy overclocking the Multiblock than what you would get back from the products. It would be better to wait until you can make the Large Distillery (IV) for large scale Diesel production. \n\nHowever, the DT is very valuable when extracting Cracked Fuels and Pyrolyse products."
+      "desc": "The Distillation Tower is a multiblock that will help you extract the most out of fluids. In Distilleries, you had to pick only one product to output. DTs output all of it at once!\n\nNote the special placement rules: Energy, Items, and Fluid Inputs can only be placed on the bottom layer. Maintenance can be placed anywhere. Fluid Outputs can only be placed starting on the second vertical layer, and only allow one per layer as well.\n\nThe DT can form at any height from 3 to 13 blocks, allowing 2 to 12 Fluid Outputs. Fluid will always output on the layer corresponding to the recipe in emi.\n\nThe DT has one more special rule. You can deliberately build it too short, and it will void whichever Fluid should have been output at the top layers that were removed. This can be useful in some very niche situations.\n\nIt is a good idea to use Super Tanks as the output for every layer.\n\nNote: Using the Distillation Tower for Oil -> Fuel -> Diesel is not worth it! You will spend more energy overclocking the Multiblock than what you would get back from the products. It would be better to wait until you can make the Large Distillery (IV) for large scale Diesel production. \n\nHowever, the DT is very valuable when extracting Cracked Fuels and Pyrolyse products."
     },
     {
       "id": "1030A9F4AAC685ED",
@@ -10183,7 +10183,7 @@
         }
       ],
       "subtitle": "You Crack Me Up",
-      "desc": "The Cracker is a multiblock built with the sole purpose of cracking fluids. It comes with all the recipes of ChTMIcal Reactor Cracking, but it is lossless.\n\nThis is a great way to save a lot of Fuel in the long term!\n\nHigher Coil tiers provide a small energy discount - up to 70% with the best Coils available."
+      "desc": "The Cracker is a multiblock built with the sole purpose of cracking fluids. It comes with all the recipes of Chemical Reactor Cracking, but it is lossless.\n\nThis is a great way to save a lot of Fuel in the long term!\n\nHigher Coil tiers provide a small energy discount - up to 70% with the best Coils available."
     },
     {
       "id": "5979B0E13A1EDC9C",
@@ -10247,7 +10247,7 @@
         }
       ],
       "subtitle": "One-To-Many, Many-To-One",
-      "desc": "Need to handle multiple fluid inputs and outputs? Look no further - these Fluid Hatches can handle more than one fluid at once!\n\nThese cannot be used in a Distillation Tower, but may be particularly useful in Large ChTMIcal Reactors."
+      "desc": "Need to handle multiple fluid inputs and outputs? Look no further - these Fluid Hatches can handle more than one fluid at once!\n\nThese cannot be used in a Distillation Tower, but may be particularly useful in Large Chemical Reactors."
     },
     {
       "id": "57D4E09A9CAB150C",
@@ -10661,7 +10661,7 @@
         }
       ],
       "subtitle": "Superconductor Supreme",
-      "desc": "Getting Indium requires a lot of Sulfuric Acid, and two different ores: Galena and Sphalerite.\n\nSulfuric Acid can be produced in large scale in the Large ChTMIcal Reactor, or obtained as a waste from the Platinum Group Sludge process.\n\nIn LuV, the mandatory Naquadah chain will grant Indium too, which means this setup will have a limited life.\n\nLore: This is another small chain inherited from GregTech 5. However, this used to yield one tiny Dust instead, which was... interesting."
+      "desc": "Getting Indium requires a lot of Sulfuric Acid, and two different ores: Galena and Sphalerite.\n\nSulfuric Acid can be produced in large scale in the Large Chemical Reactor, or obtained as a waste from the Platinum Group Sludge process.\n\nIn LuV, the mandatory Naquadah chain will grant Indium too, which means this setup will have a limited life.\n\nLore: This is another small chain inherited from GregTech 5. However, this used to yield one tiny Dust instead, which was... interesting."
     },
     {
       "id": "0425179329ED1B72",
@@ -10682,7 +10682,7 @@
           "count": 1
         }
       ],
-      "desc": "The HPIC unlocks IV Energy Hatches and Dynamos... You know the drill!\n\nMaking an IV ChTMIcal Reactor is optional. You can craft this with a Large ChTMIcal Reactor if you wish.\n\nIf you wish to automate your LCR with patterns, circle back to the P2P Tunnel Quest for more information."
+      "desc": "The HPIC unlocks IV Energy Hatches and Dynamos... You know the drill!\n\nMaking an IV Chemical Reactor is optional. You can craft this with a Large Chemical Reactor if you wish.\n\nIf you wish to automate your LCR with patterns, circle back to the P2P Tunnel Quest for more information."
     },
     {
       "id": "01AB252C72B565FE",
@@ -10730,7 +10730,7 @@
         {
           "type": "item",
           "items": [
-            "gtceu:iv_TMItter"
+            "gtceu:iv_emitter"
           ],
           "count": 1
         },
@@ -10743,7 +10743,7 @@
         }
       ],
       "subtitle": "...and if you disagree, you'll see the light soon enough",
-      "desc": "IV Components - fortunately for you - aren't a massive step up in terms of complexity.\n\nHowever, the amount of Tungsten required in crafting these is huge.\n\nTMItters and Sensors are in their own league, as they require Nether Stars and Iridium, both of which have their own dedicated Quests."
+      "desc": "IV Components - fortunately for you - aren't a massive step up in terms of complexity.\n\nHowever, the amount of Tungsten required in crafting these is huge.\n\nemitters and Sensors are in their own league, as they require Nether Stars and Iridium, both of which have their own dedicated Quests."
     },
     {
       "id": "05003665368F5A57",
@@ -10877,7 +10877,7 @@
         }
       ],
       "subtitle": "Jump Up, Superstar",
-      "desc": "Nether Stars are used for high tier Sensors, TMItters and Field Generators.\n\nYou can also use them for Beacons if you desire the permanent potion effects. Finally, a vanilla multiblock!\n\nWe've added a recipe for Nether Star Dust in this pack. (Yes - without any tweaks, GTCEu expects you to farm Withers ad nauseam.)\n\nOn the topic of the Nether Air which is required in the recipe: take a look at Liquid Nether Air distillation at your own leisure. It's quite rewarding.\n\nDid you know the vanilla Nether Star texture isn't centred? :)"
+      "desc": "Nether Stars are used for high tier Sensors, emitters and Field Generators.\n\nYou can also use them for Beacons if you desire the permanent potion effects. Finally, a vanilla multiblock!\n\nWe've added a recipe for Nether Star Dust in this pack. (Yes - without any tweaks, GTCEu expects you to farm Withers ad nauseam.)\n\nOn the topic of the Nether Air which is required in the recipe: take a look at Liquid Nether Air distillation at your own leisure. It's quite rewarding.\n\nDid you know the vanilla Nether Star texture isn't centred? :)"
     },
     {
       "id": "216E5A3574AC08BF",
@@ -10911,7 +10911,7 @@
           "count": 1
         }
       ],
-      "desc": "This part of the chain starts by obtaining some Rarest Metal Mixture.\n\nYou'll need at least an IV Large ChTMIcal Reactor, but the average power draw isn't too bad.\n\nChlorine is fully looped, and Hydrogen is slightly negative (unless you put Acidic Osmium Solution in the Distillation Tower and electrolyze the water back... on second thoughts, don't do that).\n\nIridium is required to progress through IV, so get your PGS line automated ASAP!"
+      "desc": "This part of the chain starts by obtaining some Rarest Metal Mixture.\n\nYou'll need at least an IV Large Chemical Reactor, but the average power draw isn't too bad.\n\nChlorine is fully looped, and Hydrogen is slightly negative (unless you put Acidic Osmium Solution in the Distillation Tower and electrolyze the water back... on second thoughts, don't do that).\n\nIridium is required to progress through IV, so get your PGS line automated ASAP!"
     },
     {
       "id": "4F6E351C5F676618",
@@ -11027,7 +11027,7 @@
           "count": 1
         }
       ],
-      "desc": "The next Board for the Quantum Circuit line.\n\nTips: For efficient and fast board production, you should use two Large ChTMIcal Reactors, both supplied with HV power or higher (make them both share the same Energy Hatch):\n\n- One LCR should be dedicated to Iron III Chloride. The Hydrogen is loopable, so reproduce Hydrochloric Acid locally - that way, you'd only need to passively input Iron Dusts and Chlorine.\n\n- One LCR should be making both the coated Boards and the empty Circuit Boards to make future crafting requests with AE2 extremely easy. Keeping an Input Hatch full of Sulfuric Acid shouldn't be a problem, either."
+      "desc": "The next Board for the Quantum Circuit line.\n\nTips: For efficient and fast board production, you should use two Large Chemical Reactors, both supplied with HV power or higher (make them both share the same Energy Hatch):\n\n- One LCR should be dedicated to Iron III Chloride. The Hydrogen is loopable, so reproduce Hydrochloric Acid locally - that way, you'd only need to passively input Iron Dusts and Chlorine.\n\n- One LCR should be making both the coated Boards and the empty Circuit Boards to make future crafting requests with AE2 extremely easy. Keeping an Input Hatch full of Sulfuric Acid shouldn't be a problem, either."
     },
     {
       "id": "49C1D61741AA288E",
@@ -11067,7 +11067,7 @@
         }
       ],
       "subtitle": "Honey, where are my Microverse Projectors?",
-      "desc": "Rocket Fuel mostly exists for compatibility with other mods. You'll love it if you're making your own pack.\n\nAs an actual fuel for GTCEu generators? Terrible!\n\nIn this modpack, Rocket Fuel is required to obtain Nether Stars.\n\nAutomating it may be a big hit to your resources, but you can safely batch craft using an overclocked Large ChTMIcal Reactor."
+      "desc": "Rocket Fuel mostly exists for compatibility with other mods. You'll love it if you're making your own pack.\n\nAs an actual fuel for GTCEu generators? Terrible!\n\nIn this modpack, Rocket Fuel is required to obtain Nether Stars.\n\nAutomating it may be a big hit to your resources, but you can safely batch craft using an overclocked Large Chemical Reactor."
     },
     {
       "id": "0338C9219DC2F819",
@@ -11086,7 +11086,7 @@
         }
       ],
       "subtitle": "The biggest upgrade you've ever seen",
-      "desc": "The next board material.\n\nIt's as easy as using some Epoxy in the ChTMIcal Bath.\n\nAnyone in favor of this getting reworked?"
+      "desc": "The next board material.\n\nIt's as easy as using some Epoxy in the Chemical Bath.\n\nAnyone in favor of this getting reworked?"
     },
     {
       "id": "145F71A817C5996E",
@@ -11487,7 +11487,7 @@
         }
       ],
       "subtitle": "Do not touch the acid",
-      "desc": "Refining Naquadah into further products will be your next automation challenge. The primary outputs of this line are Enriched Naquadah, Naquadria, and Trinium. \n\nThis processing line - affectionately known as the \"Naqline\" - also produces many useful byproducts, such as Titanium and Indium.\n\nEnriched Naquadah currently isn't used for much, but will be integral to power generation in the future.\n\nNaquadria is a lategame material that you'll want to stockpile for your UV components.\n\nTrinium is the material you'll be wanting most right now. You'll use a lot of it to build your first Fusion Reactor, is used for the next set of Coils, and sees heavy usage in most ZPM recipes.\n\nNote: This processing chain presents more of a challenge than any chTMIstry you've dealt with so far.\n\nAs usual, outputs in later steps can be sent back into previous processes... with the caveat that they lose a small amount of fluid with each loop.\n\nThis can be challenging to automate. Good luck!\n\nLore: Many GregTech iterations have Naquadah processing. \n\nThe first was likely Impact, with its own original Naquadah fuel process. \n\nGregicality Legacy was hot on its heels with processes for making the Naquadah material (and variants) as well as Fuel. \n\nAfter that, GTNH added their own Naquadah processes for the material and fuel. \n\nLastly, GTCEu added the process you're about to set up!"
+      "desc": "Refining Naquadah into further products will be your next automation challenge. The primary outputs of this line are Enriched Naquadah, Naquadria, and Trinium. \n\nThis processing line - affectionately known as the \"Naqline\" - also produces many useful byproducts, such as Titanium and Indium.\n\nEnriched Naquadah currently isn't used for much, but will be integral to power generation in the future.\n\nNaquadria is a lategame material that you'll want to stockpile for your UV components.\n\nTrinium is the material you'll be wanting most right now. You'll use a lot of it to build your first Fusion Reactor, is used for the next set of Coils, and sees heavy usage in most ZPM recipes.\n\nNote: This processing chain presents more of a challenge than any chemistry you've dealt with so far.\n\nAs usual, outputs in later steps can be sent back into previous processes... with the caveat that they lose a small amount of fluid with each loop.\n\nThis can be challenging to automate. Good luck!\n\nLore: Many GregTech iterations have Naquadah processing. \n\nThe first was likely Impact, with its own original Naquadah fuel process. \n\nGregicality Legacy was hot on its heels with processes for making the Naquadah material (and variants) as well as Fuel. \n\nAfter that, GTNH added their own Naquadah processes for the material and fuel. \n\nLastly, GTCEu added the process you're about to set up!"
     },
     {
       "id": "0DC999F79A685194",
@@ -11557,7 +11557,7 @@
         }
       ],
       "subtitle": "Stellar power",
-      "desc": "First things first - build the version of the structure that uses Fusion Glass in TMI. It's far cheaper right now.\n\nTo save on Fusion Casings, fit Input/Output Hatches wherever you can (as displayed in the structure).\n\nThe Fusion Reactor will pick a free Output Hatch from the many that are available. In order to \"force\" the Reactor to use a particular Output Hatch, you can always lock all of the hatches to an irrelevant fluid (we usually use Water).\n\nThis time, we'll try something new: we're gonna explain the Lore at the same time as the mechanics.\n\nEnjoy the ride!\n\nLore: GregTech 5's Fusion Reactor stores EU you feed it in its internal buffer. The maximum capacity is determined by the amount of Energy Hatches in the structure.\n\nRecipes can only start if the \"EU to start\" is stored internally, which will be consumed. With this stored energy, the reactor can keep running recipes until it goes idle. At this point it will need to be topped up on EU to start again.\n\nShadow of Greg's Fusion Reactor (which is now GTCEu's Fusion Reactor) comes with an added mechanic called Heat.\n\nWhen the reactor is running, the EU to start is converted to Heat. That Heat is preserved until the Reactor goes idle, at which point it will slowly go down.\n\nNext time a recipe is found, it will use all possible Heat and deduct it from the EU to start, allowing you to save Energy for short pauses.\n\nThe Fusion Reactor I can only run recipes up to a required EU of 160 MEU to start. It will also overclock up to LuV at best, even if you upgrade to ZPM Hatches, so don't stress over attempting this."
+      "desc": "First things first - build the version of the structure that uses Fusion Glass in emi. It's far cheaper right now.\n\nTo save on Fusion Casings, fit Input/Output Hatches wherever you can (as displayed in the structure).\n\nThe Fusion Reactor will pick a free Output Hatch from the many that are available. In order to \"force\" the Reactor to use a particular Output Hatch, you can always lock all of the hatches to an irrelevant fluid (we usually use Water).\n\nThis time, we'll try something new: we're gonna explain the Lore at the same time as the mechanics.\n\nEnjoy the ride!\n\nLore: GregTech 5's Fusion Reactor stores EU you feed it in its internal buffer. The maximum capacity is determined by the amount of Energy Hatches in the structure.\n\nRecipes can only start if the \"EU to start\" is stored internally, which will be consumed. With this stored energy, the reactor can keep running recipes until it goes idle. At this point it will need to be topped up on EU to start again.\n\nShadow of Greg's Fusion Reactor (which is now GTCEu's Fusion Reactor) comes with an added mechanic called Heat.\n\nWhen the reactor is running, the EU to start is converted to Heat. That Heat is preserved until the Reactor goes idle, at which point it will slowly go down.\n\nNext time a recipe is found, it will use all possible Heat and deduct it from the EU to start, allowing you to save Energy for short pauses.\n\nThe Fusion Reactor I can only run recipes up to a required EU of 160 MEU to start. It will also overclock up to LuV at best, even if you upgrade to ZPM Hatches, so don't stress over attempting this."
     },
     {
       "id": "7A74F692F14F0FF8",
@@ -11845,7 +11845,7 @@
         {
           "type": "item",
           "items": [
-            "gtceu:luv_TMItter"
+            "gtceu:luv_emitter"
           ],
           "count": 1
         },
@@ -12053,7 +12053,7 @@
         {
           "type": "item",
           "items": [
-            "gtceu:zpm_TMItter"
+            "gtceu:zpm_emitter"
           ],
           "count": 1
         }
@@ -12165,7 +12165,7 @@
         }
       ],
       "subtitle": "When engraving it once isn't enough",
-      "desc": "The Crystal SoC is used to make cheaper Crystal Circuits. Enjoy the discount!\n\nCrystal SoCs require ZPM TMItters, which means you need a Data Orb for their research.\n\nIn the future, these may become more difficult to make.\n\nLore: In GT5u, the texture for this item was red, and did not have the special design on it. There was a \"raw\" version with the design, but it was used for other unrelated things. Who knows why?"
+      "desc": "The Crystal SoC is used to make cheaper Crystal Circuits. Enjoy the discount!\n\nCrystal SoCs require ZPM emitters, which means you need a Data Orb for their research.\n\nIn the future, these may become more difficult to make.\n\nLore: In GT5u, the texture for this item was red, and did not have the special design on it. There was a \"raw\" version with the design, but it was used for other unrelated things. Who knows why?"
     },
     {
       "id": "72740001958E929A",
@@ -12325,7 +12325,7 @@
         }
       ],
       "subtitle": "That's no Quantum Computer...",
-      "desc": "The High Performance Computation Array, also known as the HPCA, is the multiblock used to create Computation, measured in CWU/t (Compute-Work Units per tick).\n\nThe HPCA is a modular multiblock with many unique components you've likely not seen before. There are 9 slots available for different components, and there are some example layouts in the TMI previews, so reviewing these may help if you feel confused.\n\nThere are two main types of components:\n\n- Computation Components: These generate CWU/t and require EU/t and cooling.\n- Cooling Components: These provide a certain amount of cooling, and require EU/t.\n\nCurrently Available Components:\n\n- Empty: Fills a slot but otherwise does nothing.\n- Heat Sink: Requires no power but provides 1 cooling.\n- Active Cooler: Requires power, PCB Coolant, but provides 2 cooling.\n- Computation: Creates 4 CWU/t, but requires a lot of power and cooling.\n\nThe HPCA draws some power to idle. Its power and cooling requirements will sit between the idle upkeep power and a maximum value depending on how much computation is being used.\n\nIf the HPCA is not given enough cooling, Computation components can be damaged if it is allowed to run above 100C (the idle temperature is 20C). Only computation components can be damaged - all other blocks will be unharmed!\n\nThe HPCA can only have 1 Computation Data Transmission Hatch. You can connect it to the Reception Hatch of the Research Station with Optical Fiber Cable to transmit the computation.\n\nBasic CWU/t Requirements for ZPM Tier:\n\n- 4 CWU/t for ZPM Sensors, TMItters, and Field Generators\n- 8 CWU/t for ZPM Enegy Hatches\n- 16 CWU/t for UV Circuits and beyond.\n\nDon't feel forced to go for 16 CWU/t immediately. There's lots to do in between these milestones.\n\nLore: This mechanic is loosely inspired by TecTech's Quantum Computer, which is similar but has some much more annoying mechanics like the Uncertainty Resolver."
+      "desc": "The High Performance Computation Array, also known as the HPCA, is the multiblock used to create Computation, measured in CWU/t (Compute-Work Units per tick).\n\nThe HPCA is a modular multiblock with many unique components you've likely not seen before. There are 9 slots available for different components, and there are some example layouts in the TMI previews, so reviewing these may help if you feel confused.\n\nThere are two main types of components:\n\n- Computation Components: These generate CWU/t and require EU/t and cooling.\n- Cooling Components: These provide a certain amount of cooling, and require EU/t.\n\nCurrently Available Components:\n\n- Empty: Fills a slot but otherwise does nothing.\n- Heat Sink: Requires no power but provides 1 cooling.\n- Active Cooler: Requires power, PCB Coolant, but provides 2 cooling.\n- Computation: Creates 4 CWU/t, but requires a lot of power and cooling.\n\nThe HPCA draws some power to idle. Its power and cooling requirements will sit between the idle upkeep power and a maximum value depending on how much computation is being used.\n\nIf the HPCA is not given enough cooling, Computation components can be damaged if it is allowed to run above 100C (the idle temperature is 20C). Only computation components can be damaged - all other blocks will be unharmed!\n\nThe HPCA can only have 1 Computation Data Transmission Hatch. You can connect it to the Reception Hatch of the Research Station with Optical Fiber Cable to transmit the computation.\n\nBasic CWU/t Requirements for ZPM Tier:\n\n- 4 CWU/t for ZPM Sensors, emitters, and Field Generators\n- 8 CWU/t for ZPM Enegy Hatches\n- 16 CWU/t for UV Circuits and beyond.\n\nDon't feel forced to go for 16 CWU/t immediately. There's lots to do in between these milestones.\n\nLore: This mechanic is loosely inspired by TecTech's Quantum Computer, which is similar but has some much more annoying mechanics like the Uncertainty Resolver."
     },
     {
       "id": "33A1FF5C31EAF716",
@@ -12536,7 +12536,7 @@
         }
       ],
       "subtitle": "Fusion just got more expensive...",
-      "desc": "Build the structure displayed with Fusion Glass in TMI.\n\nTo save on Fusion Casings, fit Input + Output Hatches wherever you can (as displayed in the structure).\n\nThe Fusion Reactor Mk2 is even more expensive than the Mk1! The key difference is that it has a higher Energy To Start than the Mk1, allowing you to run new recipes.\n\nIt can also overclock lower voltage recipes, such as those in the Mk1 reactor. See the Mk1's quest for how these mechanics work."
+      "desc": "Build the structure displayed with Fusion Glass in emi.\n\nTo save on Fusion Casings, fit Input + Output Hatches wherever you can (as displayed in the structure).\n\nThe Fusion Reactor Mk2 is even more expensive than the Mk1! The key difference is that it has a higher Energy To Start than the Mk1, allowing you to run new recipes.\n\nIt can also overclock lower voltage recipes, such as those in the Mk1 reactor. See the Mk1's quest for how these mechanics work."
     },
     {
       "id": "35F13B6D60361904",
@@ -12808,7 +12808,7 @@
         }
       ],
       "subtitle": "Prepare your Fusion Reactors!",
-      "desc": "UV Components are a tad harder than ZPM. \n\nThey use lots of Tritanium and Naquadria, so make sure your have enough Fusion Reactors, and a fast enough Naquadah Plant.\n\nThey also need a lot more Computation, which means Advanced HPCA Components are now required!\n\nComputation Needs for early UV:\n\n- 32 CWU/t: Basic UV Components and the Network Switch\n- 48 CWU/t: UV Sensor, TMItter, and Field Generator"
+      "desc": "UV Components are a tad harder than ZPM. \n\nThey use lots of Tritanium and Naquadria, so make sure your have enough Fusion Reactors, and a fast enough Naquadah Plant.\n\nThey also need a lot more Computation, which means Advanced HPCA Components are now required!\n\nComputation Needs for early UV:\n\n- 32 CWU/t: Basic UV Components and the Network Switch\n- 48 CWU/t: UV Sensor, emitter, and Field Generator"
     },
     {
       "id": "2F2F82D9DE3C798C",
@@ -12934,7 +12934,7 @@
         }
       ],
       "subtitle": "Unfortunately, doesn't make you float",
-      "desc": "The Gravi Star is the final upgraded Nether Star in GTCEu. It's needed for UV Sensors, TMItters, and Field Generators."
+      "desc": "The Gravi Star is the final upgraded Nether Star in GTCEu. It's needed for UV Sensors, emitters, and Field Generators."
     },
     {
       "id": "023FF9633765A0EB",
@@ -12955,7 +12955,7 @@
         }
       ],
       "subtitle": "The most expensive form of Fusion",
-      "desc": "Build the structure displayed with Fusion Glass in TMI.\n\nTo save on Fusion Casings, fit Input + Output Hatches wherever you can (as displayed in the structure).\n\nThe Fusion Reactor Mk3 is even more expensive than the Mk2! The key difference is that it has a higher Energy To Start than the Mk2, allowing you to run new recipes.\n\nIt can also overclock lower voltage recipes, such as those in the Mk1 or Mk2 reactor. See the Mk1's quest for how these mechanics work."
+      "desc": "Build the structure displayed with Fusion Glass in emi.\n\nTo save on Fusion Casings, fit Input + Output Hatches wherever you can (as displayed in the structure).\n\nThe Fusion Reactor Mk3 is even more expensive than the Mk2! The key difference is that it has a higher Energy To Start than the Mk2, allowing you to run new recipes.\n\nIt can also overclock lower voltage recipes, such as those in the Mk1 or Mk2 reactor. See the Mk1's quest for how these mechanics work."
     },
     {
       "id": "616DB394EB7D81D6",
@@ -13008,7 +13008,7 @@
         }
       ],
       "subtitle": "https://store.steampowered.com/",
-      "desc": "You might already be familiar with EU as the Energy Unit for Electric machines - but what about Steam?\n\nSteam machines will run using a proportional amount of steam at a 1:1 ratio of EU to Steam as listed in your recipe viewer of choice.\n\nRegular Steam Machines are twice as slow to complete recipes as is listed in TMI. To bring your machines up to speed, you may want to pursue High Pressure Steam machinery.\n\nHigh Pressure Steam Machines are the same speed as indicated by TMI, but with adjusted steam consumption. You will unlock them once you obtain Steel."
+      "desc": "You might already be familiar with EU as the Energy Unit for Electric machines - but what about Steam?\n\nSteam machines will run using a proportional amount of steam at a 1:1 ratio of EU to Steam as listed in your recipe viewer of choice.\n\nRegular Steam Machines are twice as slow to complete recipes as is listed in emi. To bring your machines up to speed, you may want to pursue High Pressure Steam machinery.\n\nHigh Pressure Steam Machines are the same speed as indicated by emi, but with adjusted steam consumption. You will unlock them once you obtain Steel."
     },
     {
       "id": "61FED75EFA6555EC",
@@ -13079,7 +13079,7 @@
         }
       ],
       "subtitle": "Multiblock University",
-      "desc": "There are two really important factors to know when building Multiblocks.\n\nCheck TMI, and remember to keep things versatile.\n\nRule number one - check TMI!\n\nThis one was probably obvious, but TMI is so much more than just a cute picture of how the Multiblock looks when built! Use your mouse to rotate the preview, and hover over the blocks used to view any extra information.\n\nThe TMI page also contains an ingredient list of required blocks. You can also right-click a block in the preview to get a display of all blocks that work in that specific position.\n\nRule number two - multiblocks are versatile!\n\nThere is no \"definite\" way to form the Multiblock. Most of the time, you have complete freedom over the tier of Buses/Hatches used - and you also have the ability to choose where you want your inputs/outputs.\n\nTaking the EBF as an example, any tier of Energy/Bus/Hatch can be used, and they can be placed anywhere in place of a casing. Fluid Hatches are also optional, though you probably want them if you need to handle recipes involving fluid."
+      "desc": "There are two really important factors to know when building Multiblocks.\n\nCheck emi, and remember to keep things versatile.\n\nRule number one - check emi!\n\nThis one was probably obvious, but TMI is so much more than just a cute picture of how the Multiblock looks when built! Use your mouse to rotate the preview, and hover over the blocks used to view any extra information.\n\nThe TMI page also contains an ingredient list of required blocks. You can also right-click a block in the preview to get a display of all blocks that work in that specific position.\n\nRule number two - multiblocks are versatile!\n\nThere is no \"definite\" way to form the Multiblock. Most of the time, you have complete freedom over the tier of Buses/Hatches used - and you also have the ability to choose where you want your inputs/outputs.\n\nTaking the EBF as an example, any tier of Energy/Bus/Hatch can be used, and they can be placed anywhere in place of a casing. Fluid Hatches are also optional, though you probably want them if you need to handle recipes involving fluid."
     },
     {
       "id": "331F2C12C652D268",
@@ -13201,7 +13201,7 @@
           "type": "checkmark"
         }
       ],
-      "desc": "First off, be sure to check the tooltip - there's a lot of information in there!\n\nDon't forget the Maintenance Hatch. If the structure refuses to form, rotate or replace the Controller, it can be a bit finicky. Don't worry - it doesn't have to be cube-shaped.\n\nThe Controller always has to be in the center. The rest of the top layer has to be Filter Casings.\n\nAll edges have to be Plascrete, and the sides can be Cleanroom Glass.\n\nPlacing Generators or Mufflers inside is not allowed. They're too dirty, so the Cleanroom will unform.\n\nUpon assembly, the Cleanroom starts contaminated. While contamined, contained machines will not be able to operate.\n\nThe Cleanroom will drain 30 EU/t and slowly increase the cleanliness until its cleanliness is at 100%.\n\nOnce Clean, recipes can run. At that point it will only draw 4EU/t. Keep it powered at all times or it will get dirty again!\n\nThe bigger the Cleanroom, the longer it takes to become Clean.\n\nNote: When the time comes, Multiblocks must also be put into Cleanrooms in order to run cleanroom recipes!\n\nNeed to transfer EU? Try using Hulls or Diodes.\n\nItem and Fluid transfer can be done using Passthrough Hatches.\n\nMachine Hulls can also \"double\" as ME Cables to extend your ME Network inside your Cleanroom.\n\nIf you used any Door(s) in the structure, they can remain open. Not very realistic, but convenient!\n\nConfigs: If you dislike the Cleanroom mechanics, it can be toggled off in the config file with \"B:enableCleanroom\". Multiblocks can be made to ignore cleanroom requirements with \"B:cleanMultiblocks\". We encourage you to try it out before deciding.\n\nIn the real world, a Cleanroom is a well-isolated room which maintains a very low concentration of dust and airborne particles. They're normally used for scientific research, and in real-life sTMIconductor manufacturing. Clean rooms are specifically designed to keep out as many airborne particulates as can be. \n\nClean rooms are also sometimes used with the purpose of preventing materials from escaping! This is often the primary aim in fields such as pharmaceutics, nuclear work, and hazardous biology.\n\nThe more you know!"
+      "desc": "First off, be sure to check the tooltip - there's a lot of information in there!\n\nDon't forget the Maintenance Hatch. If the structure refuses to form, rotate or replace the Controller, it can be a bit finicky. Don't worry - it doesn't have to be cube-shaped.\n\nThe Controller always has to be in the center. The rest of the top layer has to be Filter Casings.\n\nAll edges have to be Plascrete, and the sides can be Cleanroom Glass.\n\nPlacing Generators or Mufflers inside is not allowed. They're too dirty, so the Cleanroom will unform.\n\nUpon assembly, the Cleanroom starts contaminated. While contamined, contained machines will not be able to operate.\n\nThe Cleanroom will drain 30 EU/t and slowly increase the cleanliness until its cleanliness is at 100%.\n\nOnce Clean, recipes can run. At that point it will only draw 4EU/t. Keep it powered at all times or it will get dirty again!\n\nThe bigger the Cleanroom, the longer it takes to become Clean.\n\nNote: When the time comes, Multiblocks must also be put into Cleanrooms in order to run cleanroom recipes!\n\nNeed to transfer EU? Try using Hulls or Diodes.\n\nItem and Fluid transfer can be done using Passthrough Hatches.\n\nMachine Hulls can also \"double\" as ME Cables to extend your ME Network inside your Cleanroom.\n\nIf you used any Door(s) in the structure, they can remain open. Not very realistic, but convenient!\n\nConfigs: If you dislike the Cleanroom mechanics, it can be toggled off in the config file with \"B:enableCleanroom\". Multiblocks can be made to ignore cleanroom requirements with \"B:cleanMultiblocks\". We encourage you to try it out before deciding.\n\nIn the real world, a Cleanroom is a well-isolated room which maintains a very low concentration of dust and airborne particles. They're normally used for scientific research, and in real-life semiconductor manufacturing. Clean rooms are specifically designed to keep out as many airborne particulates as can be. \n\nClean rooms are also sometimes used with the purpose of preventing materials from escaping! This is often the primary aim in fields such as pharmaceutics, nuclear work, and hazardous biology.\n\nThe more you know!"
     },
     {
       "id": "2C70E297DBE3BDF2",
@@ -13312,7 +13312,7 @@
         }
       ],
       "subtitle": "Extracting an ore's full potential... at last!",
-      "desc": "A shopping list for anyone looking to automate Ore Processing on a large scale:\n\n- One or more IV Macerators.\n- The Large Centrifuge. Set it to work as a Thermal Centrifuge, and you're off to the races.\n- One or more MV Electrolyzers - you could possibly make the large version if there's enough demand.\n- A Multi Smelter.\n- A Packager of any tier for those pesky Small/Tiny Dusts (think Rare Earth!)\n- Inventories acting as a large buffer, such as Tungstensteel Crates.\n- ME Storage Buses, or a lot of Item Pipes + Filter covers, or Item Tag Filters.\n\nWhat you may also want to add:\n\n- A few LV Ore Washers for quick washing purposes.\n- Alternately, a Large Ore Washer, accompanied with a set of Distilleries for Distilled Water.\n- A second Large Centrifuge... this time set to Centrifuge mode for impure/purified dusts.\n- ChTMIcal Baths for the special Byproducts that require Mercury or Sodium Persulfate to obtain.\n- Sifters of any tier for gem ores.\n- Electromagnetic Separators.\n\nIf the Large Machines aren't your thing, you could always try using tons of LV machinery, and route with some clever piping.\n\nOverclocking is not energy efficient, which is why it is generally better to go for low-tier machines in passive setups. One could also argue they are cheaper.\n\nIn previous versions of GregTech, you could just use Processing Arrays, as they could condense many low-tier machines down into a single speedy multiblock. Players desiring similar processing speeds nowadays should really look to the GCYM machinery - it's quick, easy to upgrade when you tier up (Energy Hatches are usually cheaper than 16 low-tier machines!), and c'mon now... they just look really cool.\n\n\"Should I go for the optional byproducts?\"\n\nYes.\n\nHowever, the \"routes\" you take your ores through processing is up to you. Want to macerate twice because you prefer the other byproducts? Go ahead!\n\nNote that Thermal Centrifuging is usually a good idea, as doing so unlocks a unique Byproduct from the maceration step.\n\nChalcopyrite, Chalcocite, Bornite, Tetrahedrite, Pentlandite and Sheldonite ores should all be turned into their Purified Crushed variants and sent to your Platinum Group Metal chain.\n\nPurified Crushed Galena/Sphalerite should be reserved for Indium until you set up the Naquadah line. At that point, you'll have more Indium than you'll ever need.\n\nGallium, Chrome, Niobium, Rare Earths, and Glowstone are all Byproducts you might want to prioritise. \n\nIf you think we're missing any pertinent products, hit us up on Discord, and we'll be sure to add your favourites to this list.\n\nAs you've probably realised, Applied Energistics 2 will be very, very helpful when automating all of this.\n\nME Storage Buses are very powerful for routing items when they enter your ME network. They also have a huge whitelist or blacklist configuration. Attach them to some Tungstensteel Crates to buffer intermediate items, or use a dedicated AE2 subnet.\n\nTo combine Small Dusts into full Dusts, you'll want a Storage Bus on high priority paired with an Item Tag filter set to dusts/small. Note that Small Dusts may be used for Boules, and a few Tiny Dusts are needed for the PBI chain, so you can blacklist them from the filter if you desire.\n\nFor ores that you want to process quickly but don't care for the Byproducts as the full \"route\" would take too long in the machines, prioritize filtering them for quick washing.\n\nThe typically \"best\" path is: Macerator -> Ore Washing -> Thermal Centrifuge -> Macerator. If you deviate from it for various reasons, you're gonna have to set filters manually. Gasp!"
+      "desc": "A shopping list for anyone looking to automate Ore Processing on a large scale:\n\n- One or more IV Macerators.\n- The Large Centrifuge. Set it to work as a Thermal Centrifuge, and you're off to the races.\n- One or more MV Electrolyzers - you could possibly make the large version if there's enough demand.\n- A Multi Smelter.\n- A Packager of any tier for those pesky Small/Tiny Dusts (think Rare Earth!)\n- Inventories acting as a large buffer, such as Tungstensteel Crates.\n- ME Storage Buses, or a lot of Item Pipes + Filter covers, or Item Tag Filters.\n\nWhat you may also want to add:\n\n- A few LV Ore Washers for quick washing purposes.\n- Alternately, a Large Ore Washer, accompanied with a set of Distilleries for Distilled Water.\n- A second Large Centrifuge... this time set to Centrifuge mode for impure/purified dusts.\n- Chemical Baths for the special Byproducts that require Mercury or Sodium Persulfate to obtain.\n- Sifters of any tier for gem ores.\n- Electromagnetic Separators.\n\nIf the Large Machines aren't your thing, you could always try using tons of LV machinery, and route with some clever piping.\n\nOverclocking is not energy efficient, which is why it is generally better to go for low-tier machines in passive setups. One could also argue they are cheaper.\n\nIn previous versions of GregTech, you could just use Processing Arrays, as they could condense many low-tier machines down into a single speedy multiblock. Players desiring similar processing speeds nowadays should really look to the GCYM machinery - it's quick, easy to upgrade when you tier up (Energy Hatches are usually cheaper than 16 low-tier machines!), and c'mon now... they just look really cool.\n\n\"Should I go for the optional byproducts?\"\n\nYes.\n\nHowever, the \"routes\" you take your ores through processing is up to you. Want to macerate twice because you prefer the other byproducts? Go ahead!\n\nNote that Thermal Centrifuging is usually a good idea, as doing so unlocks a unique Byproduct from the maceration step.\n\nChalcopyrite, Chalcocite, Bornite, Tetrahedrite, Pentlandite and Sheldonite ores should all be turned into their Purified Crushed variants and sent to your Platinum Group Metal chain.\n\nPurified Crushed Galena/Sphalerite should be reserved for Indium until you set up the Naquadah line. At that point, you'll have more Indium than you'll ever need.\n\nGallium, Chrome, Niobium, Rare Earths, and Glowstone are all Byproducts you might want to prioritise. \n\nIf you think we're missing any pertinent products, hit us up on Discord, and we'll be sure to add your favourites to this list.\n\nAs you've probably realised, Applied Energistics 2 will be very, very helpful when automating all of this.\n\nME Storage Buses are very powerful for routing items when they enter your ME network. They also have a huge whitelist or blacklist configuration. Attach them to some Tungstensteel Crates to buffer intermediate items, or use a dedicated AE2 subnet.\n\nTo combine Small Dusts into full Dusts, you'll want a Storage Bus on high priority paired with an Item Tag filter set to dusts/small. Note that Small Dusts may be used for Boules, and a few Tiny Dusts are needed for the PBI chain, so you can blacklist them from the filter if you desire.\n\nFor ores that you want to process quickly but don't care for the Byproducts as the full \"route\" would take too long in the machines, prioritize filtering them for quick washing.\n\nThe typically \"best\" path is: Macerator -> Ore Washing -> Thermal Centrifuge -> Macerator. If you deviate from it for various reasons, you're gonna have to set filters manually. Gasp!"
     },
     {
       "id": "57EC19AF87A32930",
@@ -13342,7 +13342,7 @@
         }
       ],
       "subtitle": "Very conscious of you!",
-      "desc": "You may be wondering how to obtain large quantities of common resources used in GregTech. This might be old news to seasoned players, but it's actually possible to set up passive processes to make various materials and chTMIcals fully renewable.\n\nWe've added this chapter to lead you towards some setups that you might desire. Obviously, there's no need to do all of these, but who doesn't love \"free\" resources.\n\nA footnote: There's no way we could document all of the renewable routes in GregTech. This quest page merely serves as a primer to lead newer players through their options. Not every option listed in this quest book is optimal, so we urge you to experiment!"
+      "desc": "You may be wondering how to obtain large quantities of common resources used in GregTech. This might be old news to seasoned players, but it's actually possible to set up passive processes to make various materials and chemicals fully renewable.\n\nWe've added this chapter to lead you towards some setups that you might desire. Obviously, there's no need to do all of these, but who doesn't love \"free\" resources.\n\nA footnote: There's no way we could document all of the renewable routes in GregTech. This quest page merely serves as a primer to lead newer players through their options. Not every option listed in this quest book is optimal, so we urge you to experiment!"
     },
     {
       "id": "55D8E30978CBBC0D",
@@ -13538,7 +13538,7 @@
         }
       ],
       "subtitle": "Asbestos, Saltpeter... (No Create)",
-      "desc": "Andesite Dust will get you some delicious Asbestos Dust, and some Saltpeter Dust to boot.\n\nAsbestos is a slow source of Magnesium, and Saltpeter has a variety of uses in chTMIstry."
+      "desc": "Andesite Dust will get you some delicious Asbestos Dust, and some Saltpeter Dust to boot.\n\nAsbestos is a slow source of Magnesium, and Saltpeter has a variety of uses in chemistry."
     },
     {
       "id": "71972471AFB97BB2",
@@ -15081,7 +15081,7 @@
         }
       ],
       "subtitle": "The \"distinguished\" version of water",
-      "desc": "Nothing special here. Any ores that you don't wash in novelty chTMIcals simply need to be washed in water with an Ore Washer. You should use Distilled Water, as it cuts the recipe time down by 50%. Set up a couple of Distilleries on-site and buffer into an appropriately-sized Super Tank.\n\nIf you don't care about the byproducts in this section, you can wash the ores in regular water without a configured circuit to process 25x faster, but without byproducts."
+      "desc": "Nothing special here. Any ores that you don't wash in novelty chemicals simply need to be washed in water with an Ore Washer. You should use Distilled Water, as it cuts the recipe time down by 50%. Set up a couple of Distilleries on-site and buffer into an appropriately-sized Super Tank.\n\nIf you don't care about the byproducts in this section, you can wash the ores in regular water without a configured circuit to process 25x faster, but without byproducts."
     },
     {
       "id": "5AB202F6C0B34BF3",
@@ -15097,7 +15097,7 @@
         }
       ],
       "subtitle": "Sulfium Persodate",
-      "desc": "Sodium Persulfate isn't as simple to obtain as Mercury, but you'll probably find yourself making some when crafting Circuit Boards. Set up a ChTMIcal Reactor/Electrolyser combo with a Level TMItter attached if you want to keep some in stock, and then you can wash any Crushed Ore with a ChTMIcal Bath.\n\nYou'll want to use Sodium Persulfate when processing:\n\n- Tin Ore\n- Aluminium Ore\n- Cobalt Ore\n- Cobaltite Ore\n- Bauxite Ore\n- Tetrahedrite Ore\n- Pentlandite Ore\n- Sphalerite Ore\n- Stibnite Ore\n- Yellow Limonite Ore\n- Malachite Ore\n- Iron Ore\n\nEnjoy your byproducts!"
+      "desc": "Sodium Persulfate isn't as simple to obtain as Mercury, but you'll probably find yourself making some when crafting Circuit Boards. Set up a Chemical Reactor/Electrolyser combo with a Level emitter attached if you want to keep some in stock, and then you can wash any Crushed Ore with a Chemical Bath.\n\nYou'll want to use Sodium Persulfate when processing:\n\n- Tin Ore\n- Aluminium Ore\n- Cobalt Ore\n- Cobaltite Ore\n- Bauxite Ore\n- Tetrahedrite Ore\n- Pentlandite Ore\n- Sphalerite Ore\n- Stibnite Ore\n- Yellow Limonite Ore\n- Malachite Ore\n- Iron Ore\n\nEnjoy your byproducts!"
     },
     {
       "id": "2E0777FBD0476D75",
@@ -15112,7 +15112,7 @@
         }
       ],
       "subtitle": "Bathing with Venus",
-      "desc": "Washing ores with Mercury where applicable instead of Distilled Water grants unique byproducts that may be difficult to obtain in other circumstances. It's usually worth doing this, as Mercury is readily available from centrifuging Redstone or Cinnabar (and in fact, Mercury is the only real usage of Cinnabar!).\n\nSimply wash any Crushed Ore with a ChTMIcal Bath.\n\nHere is a non-exhaustive list of ores you likely want to wash in Mercury:\n\n- Galena Ore\n- Tungstate Ore\n- Silver Ore\n- Bornite Ore\n- Magnetite Ore\n- Copper Ore\n- Gold Ore\n- Nickel Ore\n- Platinum Ore\n- Chalcopyrite Ore\n- Sheldonite Ore\n\nThese alternate \"washing routes\" will increase your Gold, Silver, and Platinum Group yields significantly!"
+      "desc": "Washing ores with Mercury where applicable instead of Distilled Water grants unique byproducts that may be difficult to obtain in other circumstances. It's usually worth doing this, as Mercury is readily available from centrifuging Redstone or Cinnabar (and in fact, Mercury is the only real usage of Cinnabar!).\n\nSimply wash any Crushed Ore with a Chemical Bath.\n\nHere is a non-exhaustive list of ores you likely want to wash in Mercury:\n\n- Galena Ore\n- Tungstate Ore\n- Silver Ore\n- Bornite Ore\n- Magnetite Ore\n- Copper Ore\n- Gold Ore\n- Nickel Ore\n- Platinum Ore\n- Chalcopyrite Ore\n- Sheldonite Ore\n\nThese alternate \"washing routes\" will increase your Gold, Silver, and Platinum Group yields significantly!"
     },
     {
       "id": "3C36AA80FE51DA45",
@@ -15192,7 +15192,7 @@
         }
       ],
       "subtitle": "We don't need THIS much Cobaltite, right?",
-      "desc": "Some dusts in GregTech have little use other than to be processed in an Electrolyser for some nice bonus chTMIcal outputs. You can either set a manual filter for the desired items in a Storage Bus, or provide the most vital dusts via ME Interface, for example."
+      "desc": "Some dusts in GregTech have little use other than to be processed in an Electrolyser for some nice bonus chemical outputs. You can either set a manual filter for the desired items in a Storage Bus, or provide the most vital dusts via ME Interface, for example."
     },
     {
       "id": "433BE663989445B9",
@@ -15238,7 +15238,7 @@
         }
       ],
       "subtitle": "Getting your first Indium has never been so fun.",
-      "desc": "As mentioned in the main sections of this quest book, this Indium setup has a limited lifetime, so don't stress over optimising every last detail.\n\nSimply mix Purified Galena and Sphalerite together with some Sulfuric Acid to obtain Indium Concentrate, then combine with Aluminium Dust in a ChTMIcal Reactor for your prize!"
+      "desc": "As mentioned in the main sections of this quest book, this Indium setup has a limited lifetime, so don't stress over optimising every last detail.\n\nSimply mix Purified Galena and Sphalerite together with some Sulfuric Acid to obtain Indium Concentrate, then combine with Aluminium Dust in a Chemical Reactor for your prize!"
     },
     {
       "id": "427E6091713399FE",
