@@ -40052,3 +40052,8 @@ acid_etched_inert_casing: {
 		'''
 	DisplayName: Acid-Etched Inert Casing
 }
+
+wood_coating: {
+	Tooltip: ""
+	DisplayName: Wood Coating
+}

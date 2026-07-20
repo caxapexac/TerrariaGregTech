@@ -17,7 +17,7 @@ namespace GregTechCEuTerraria.TerrariaCompat.Recipes;
 // JSON shape goes through the same GTRecipeSerializer + IngredientResolver as the bundle
 public static class CompatRecipes
 {
-	public static readonly System.Collections.Generic.HashSet<string> OverriddenIds = new();
+	public static readonly System.Collections.Generic.HashSet<string> OverriddenIds = new() { "shaped/primitive_pump","shaped/pump_hatch", "shaped/pump_deck", "assembler/assemble_treated_wood_frame", "shaped/frame_treated_wood", "chemical_bath/treated_planks", "lathe/treated_wood_sticks", "shaped/large_treated_wooden_pipe", "shaped/treated_wood_stick" , "shaped/normal_treated_wooden_pipe", "shaped/small_treated_wooden_pipe", "assembler/large_treated_wood_pipe", "assembler/normal_treated_wood_pipe", "assembler/small_treated_wood_pipe", "shaped_fluid_container/treated_wood_planks" };
 
 	// compat_{ulv,lv}_{input,output}_{hatch,bus} - make ULV/LV hatches/buses in hand.
 	private const string HatchesAndBuses = """
@@ -770,12 +770,97 @@ public static class CompatRecipes
 	    "outputs": { "item": [ { "content": { "item": "terraria:Hellstone" } } ] } }
 	]
 	""";
+	private const string CreosoteCoating = """
+	[
+	  { "id": "crafting_shapeless/gel_wood_coating", "type": "minecraft:crafting_shapeless",
+	    "inputs":  { "item": [
+	      { "content": { "type": "gtceu:sized", "count": 4, "ingredient": { "item": "terraria:Gel" } } },
+		  { "content": { "type": "gtceu:sized", "count": 1, "ingredient": { "item": "gtceu:coal_dust" } } }
+	    ] },
+	    "outputs": { "item": [ { "content":{ "type": "gtceu:sized", "count": 4,
+	      "ingredient": { "item": "gtceu:wood_coating" } } } ] } },
+
+	  { "id": "fluid_solidifier/compat_creosote_wood_coating", "type": "gtceu:fluid_solidifier", "duration": 300,
+	    "inputs": {
+	      "fluid": [ { "content": { "amount": 1000, "value": { "fluid": "gtceu:creosote" } } } ]
+	    },
+	    "tickInputs": { "eu": [ { "content": 8 } ] },
+	    "outputs": { "item": [ { "content":{ "type": "gtceu:sized", "count": 8,
+	      "ingredient": { "item": "gtceu:wood_coating" } } } ] } },
+	{ "id": "crafting_shapeless/wood_coating_treated_wood_frame", "type": "minecraft:crafting_shapeless",
+	    "inputs":  { "item": [
+	      { "content": { "type": "gtceu:sized", "count": 4, "ingredient": { "item": "gtceu:wood_coating" } } },
+		  { "content": { "type": "gtceu:sized", "count": 1, "ingredient": { "item": "gtceu:wood_frame" } } }
+	    ] },
+	    "outputs": { "item": [ { "content":{ "type": "gtceu:sized", "count": 1,
+	      "ingredient": { "item": "gtceu:treated_wood_frame" } } } ] } },
+	{ "id": "crafting_shapeless/wood_coating_treated_wood_small_fluid_pipe", "type": "minecraft:crafting_shapeless",
+	    "inputs":  { "item": [
+	      { "content": { "type": "gtceu:sized", "count": 1, "ingredient": { "item": "gtceu:wood_coating" } } },
+		  { "content": { "type": "gtceu:sized", "count": 1, "ingredient": { "item": "gtceu:wood_small_fluid_pipe" } } }
+	    ] },
+	    "outputs": { "item": [ { "content":{ "type": "gtceu:sized", "count": 1,
+	      "ingredient": { "item": "gtceu:treated_wood_small_fluid_pipe" } } } ] } },
+	{ "id": "crafting_shapeless/wood_coating_treated_wood_normal_fluid_pipe", "type": "minecraft:crafting_shapeless",
+	    "inputs":  { "item": [
+	      { "content": { "type": "gtceu:sized", "count": 3, "ingredient": { "item": "gtceu:wood_coating" } } },
+		  { "content": { "type": "gtceu:sized", "count": 1, "ingredient": { "item": "gtceu:wood_normal_fluid_pipe" } } }
+	    ] },
+	    "outputs": { "item": [ { "content":{ "type": "gtceu:sized", "count": 1,
+	      "ingredient": { "item": "gtceu:treated_wood_normal_fluid_pipe" } } } ] } },
+		  { "id": "crafting_shapeless/wood_coating_treated_wood_large_fluid_pipe", "type": "minecraft:crafting_shapeless",
+	    "inputs":  { "item": [
+	      { "content": { "type": "gtceu:sized", "count": 6, "ingredient": { "item": "gtceu:wood_coating" } } },
+		  { "content": { "type": "gtceu:sized", "count": 1, "ingredient": { "item": "gtceu:wood_large_fluid_pipe" } } }
+	    ] },
+	    "outputs": { "item": [ { "content":{ "type": "gtceu:sized", "count": 1,
+	      "ingredient": { "item": "gtceu:treated_wood_large_fluid_pipe" } } } ] } },
+	{ "id": "crafting_shapeless/wood_coating_pump_deck", "type": "minecraft:crafting_shapeless",
+	    "inputs":  { "item": [
+	      { "content": { "type": "gtceu:sized", "count": 2, "ingredient": { "item": "gtceu:iron_screw" } } },
+		  { "content": { "type": "gtceu:sized", "count": 1, "ingredient": { "item": "gtceu:wood_plate" } } },
+		  { "content": { "type": "gtceu:sized", "count": 1, "ingredient": { "item": "terraria:StoneSlab" } } },
+		  { "content": { "type": "gtceu:sized", "count": 1, "ingredient": { "item": "gtceu:wood_coating" } } },
+		  { "content": { "tag": "gtceu:tools/crafting_screwdrivers" } },
+		  { "content": { "tag": "gtceu:tools/crafting_hammers" } }
+	    ] },
+	    "outputs": { "item": [ { "content":{ "type": "gtceu:sized", "count": 2,
+	      "ingredient": { "item": "gtceu:pump_deck" } } } ] } },
+	{ "id": "crafting_shapeless/wood_coating_primitive_pump", "type": "minecraft:crafting_shapeless",
+	    "inputs":  { "item": [
+	      { "content": { "type": "gtceu:sized", "count": 1, "ingredient": { "item": "gtceu:iron_ring" } } },
+		  { "content": { "type": "gtceu:sized", "count": 1, "ingredient": { "item": "gtceu:wood_normal_fluid_pipe" } } },
+		  { "content": { "type": "gtceu:sized", "count": 1, "ingredient": { "item": "gtceu:iron_screw" } } },
+		  { "content": { "type": "gtceu:sized", "count": 1, "ingredient": { "item": "gtceu:iron_rotor" } } },
+		  { "content": { "type": "gtceu:sized", "count": 1, "ingredient": { "item": "gtceu:wood_plate" } } },
+	      { "content": { "type": "gtceu:sized", "count": 1, "ingredient": { "item": "gtceu:wood_coating" } } },
+	      { "content": { "type": "gtceu:sized", "count": 1, "ingredient": { "item": "terraria:StoneSlab" } } },
+	      { "content": { "type": "gtceu:sized", "count": 1, "ingredient": { "item": "gtceu:wood_large_fluid_pipe" } } },
+		  { "content": { "tag": "gtceu:tools/crafting_screwdrivers" } }
+	    ] },
+	    "outputs": { "item": [ { "content":{ "type": "gtceu:sized", "count": 1,
+	      "ingredient": { "item": "gtceu:primitive_pump" } } } ] } },
+	{ "id": "crafting_shapeless/wood_coating_pump_hatch", "type": "minecraft:crafting_shapeless",
+	    "inputs":  { "item": [
+	      { "content": { "type": "gtceu:sized", "count": 1, "ingredient": { "item": "gtceu:iron_screw" } } },
+		  { "content": { "type": "gtceu:sized", "count": 2, "ingredient": { "item": "gtceu:iron_ring" } } },
+	      { "content": { "type": "gtceu:sized", "count": 2, "ingredient": { "item": "gtceu:wood_plate" } } },
+	      { "content": { "type": "gtceu:sized", "count": 2, "ingredient": { "item": "gtceu:wood_coating" } } },
+	      { "content": { "type": "gtceu:sized", "count": 1, "ingredient": { "item": "terraria:StoneSlab" } } },
+	      { "content": { "type": "gtceu:sized", "count": 1, "ingredient": { "item": "gtceu:wood_large_fluid_pipe" } } },
+		  { "content": { "tag": "gtceu:tools/crafting_screwdrivers" } }
+	    ] },
+	    "outputs": { "item": [ { "content":{ "type": "gtceu:sized", "count": 1,
+	      "ingredient": { "item": "gtceu:pump_hatch" } } } ] } }
+	]
+	""";
 
 	private static readonly string[] JsonGroups =
 	{
 		HatchesAndBuses, Bootstrap, Misc, SimplePipes, Casings, Clay,
 		TerrariaIntermediates, TerraPrisma, RedstoneGem, Coins, LegacyConversions,
 		Ae2FluixCables, Ae2Machines, Money, Damascus, Hellforge, HellstoneOre,
+		CreosoteCoating
 	};
 
 	public sealed record RecipePatch(string BaseId, string NewId, string MergeJson)
