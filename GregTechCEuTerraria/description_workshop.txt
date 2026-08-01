@@ -1,0 +1,42 @@
+A full port of GregTech Modern (GTCEu). Up stands from "Unofficially ported"
+We want to greg everywhere
+
+> Note: This is an unofficial port. Do not request support in original mod
+
+Adds:
+- ~8700 new items
+- ~32000 recipes
+- 70 singleblock machines, 15 voltage tiers
+- 55 multiblocks
+- Wire, item, fluid, laser, optical and long-distance pipe networks
+- Cover system
+- Gregtech ore generation and compatibility with terraria ores
+- Various recipe changes for proper integration into terraria progression
+- JEI-like recipe browser
+- Questbook (ported from GTCEu Community Edition, not polished yet)
+- Applied Energistics 2 (autocrafting and terminals)
+- Full multiplayer compatibility
+- Magic Storage compatibility with item pipes and ae2 cables
+
+(Recipe Browser and AE2 will become separate mods eventually)
+
+Discord: https://discord.gg/sqs4G7u6eX
+There's still bugs, please report if you found any
+
+Credits: GregTech Modern team
+Source: https://github.com/GregTechCEu/GregTech-Modern
+License: LGPL-3.0-or-later
+
+Credits: GregTech Modern Community Pack (questbook content)
+Source: https://github.com/GregTechCEu/GregTech-Modern-Community-Pack
+License: LGPL-2.1
+
+Credits: Applied Energistics 2 (internal storage and autocrafting logic port)
+Source: https://github.com/AppliedEnergistics/Applied-Energistics-2
+License: LGPL-3.0-only
+
+Credits: EBF-chan sprite by Qiuqiu, used with their permission
+
+Credits: Armor sprites, upgrade cards by Flareguy, used with their permission
+
+AI Usage: Claude was used to speed up the porting process, of course. Theres no fun in manually rewriting stuff line by line, and the existing AST-based java->c# porters are too dumb for such a complex thing. So be aware there still will be stupid unexpected game breaking bugs, play at your own caution
