@@ -13,11 +13,6 @@ using RLStatus = GregTechCEuTerraria.Api.Machine.Feature.RecipeLogicStatus;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Machine.Multiblock.Electric.Research;
 
-// Port of HPCAMachine (+ HPCAGridHandler). 3x3 grid of components (computation
-// / cooler / bridge / empty). Per-tick: consume EU for allocated CWU/t, heat
-// proportional to use, cooled by heat-sinks / active-coolers (active drain
-// pcb_coolant from bound IN fluid hatches). Temp >=1000 -> random damage.
-// IsRecipeLogicAvailable=false (driven by OnTick, RecipeType=DUMMY).
 public class HPCAMachine : WorkableElectricMultiblockMachine, IOpticalComputationProvider, IControllable,
 	Multiblock.IPowerDiagnostics
 {
@@ -31,12 +26,10 @@ public class HPCAMachine : WorkableElectricMultiblockMachine, IOpticalComputatio
 
 	private readonly HPCAGridHandler _hpcaHandler;
 	private readonly List<NotifiableFluidTank> _coolantTanks = new();
-	// Maintenance subsystem dormant - penalty = 0 today.
 	private Api.Machine.Feature.Multiblock.IMaintenanceMachine? _maintenance;
 	private bool   _hasNotEnoughEnergy;
 	private double _temperature = IDLE_TEMPERATURE;
 
-	// Position-seeded RNG so adjacent HPCAs don't share damage rolls.
 	private Random? _rng;
 	private Random Rng => _rng ??= new Random(unchecked(Position.X * 73856093 ^ Position.Y * 19349663));
 
@@ -50,13 +43,6 @@ public class HPCAMachine : WorkableElectricMultiblockMachine, IOpticalComputatio
 	public double Temperature => _temperature;
 	public HPCAGridHandler Handler => _hpcaHandler;
 
-	// Port of upstream `isActive` set by updateActive(). MUST be a real field,
-	// NOT Recipe.IsActive(): recipe logic is dormant here (would return 0 forever
-	// for GetMaxCWUt/RequestCWUt -> Research Station deadlock).
-	private bool _isActive;
-	public override bool IsActive => _isActive;
-
-	// "Providing computation" - a powered HPCA with no consumer is genuinely idle.
 	public override bool DisplayActive => DisplayCachedCWUt > 0;
 
 	public override void OnStructureFormed()
@@ -70,8 +56,6 @@ public class HPCAMachine : WorkableElectricMultiblockMachine, IOpticalComputatio
 		{
 			if (part is HPCAComponentPartMachine comp)
 			{
-				// Force bind - one-shot gather; if a grid part hasn't bound yet
-				// its trait is null and silently skipped until next form.
 				comp.BindDefinition();
 				if (comp.ComponentTrait is { } t)
 					components.Add(t);
@@ -85,8 +69,6 @@ public class HPCAMachine : WorkableElectricMultiblockMachine, IOpticalComputatio
 		UpdateDisplaySnapshot();
 	}
 
-	// Snapshot of grid-handler state for MP clients (controller ticks server-only).
-	// Upstream marks the handler @SyncToClient; we ride the scalars via SaveData.
 	private int  _syncMaxCWUt, _syncCachedCWUt, _syncCoolDemand, _syncCoolAvail, _syncComp, _syncCool;
 	private long _syncCachedEUt, _syncMaxEUt;
 	private bool _syncHasBridge;
@@ -122,13 +104,12 @@ public class HPCAMachine : WorkableElectricMultiblockMachine, IOpticalComputatio
 		var ec = _energyContainer ?? GetEnergyContainer();
 		_syncStored   = ec?.EnergyStored ?? 0;
 		_syncCapacity = ec?.EnergyCapacity ?? 0;
-		// Capability (stable), not throughput - see ResearchPowerDiagnostics.
 		_syncMaxInput = (ec?.InputVoltage ?? 0) * (ec?.InputAmperage ?? 0);
 	}
 
-	public override void SaveData(TagCompound tag)
+	protected override void SaveMachineData(TagCompound tag)
 	{
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		tag["hpca_temp"]      = _temperature;
 		tag["hpca_maxCwu"]    = _syncMaxCWUt;
 		tag["hpca_cwu"]       = _syncCachedCWUt;
@@ -143,7 +124,6 @@ public class HPCAMachine : WorkableElectricMultiblockMachine, IOpticalComputatio
 		tag["hpca_stored"]    = _syncStored;
 		tag["hpca_cap"]       = _syncCapacity;
 		tag["hpca_maxin"]     = _syncMaxInput;
-		tag["hpca_active"]    = _isActive;
 	}
 
 	public override void LoadData(TagCompound tag)
@@ -163,7 +143,6 @@ public class HPCAMachine : WorkableElectricMultiblockMachine, IOpticalComputatio
 		if (tag.ContainsKey("hpca_stored"))    _syncStored     = tag.GetLong("hpca_stored");
 		if (tag.ContainsKey("hpca_cap"))       _syncCapacity   = tag.GetLong("hpca_cap");
 		if (tag.ContainsKey("hpca_maxin"))     _syncMaxInput   = tag.GetLong("hpca_maxin");
-		if (tag.ContainsKey("hpca_active"))    _isActive       = tag.GetBool("hpca_active");
 	}
 
 	public override void OnStructureInvalid()
@@ -173,8 +152,6 @@ public class HPCAMachine : WorkableElectricMultiblockMachine, IOpticalComputatio
 		_coolantTanks.Clear();
 		_hpcaHandler.OnStructureInvalidate();
 	}
-
-	// === IOpticalComputationProvider =======================================
 
 	public int RequestCWUt(int cwut, bool simulate, ICollection<IOpticalComputationProvider> seen)
 	{
@@ -189,7 +166,6 @@ public class HPCAMachine : WorkableElectricMultiblockMachine, IOpticalComputatio
 	{
 		seen.Add(this);
 		if (!(IsActive && IsWorkingEnabledFlag())) return 0;
-		// Server: live handler; client: handler ungathered, read synced mirror.
 		return _hpcaHandler.ComponentCount > 0 ? _hpcaHandler.GetMaxCWUt() : _syncMaxCWUt;
 	}
 
@@ -198,7 +174,6 @@ public class HPCAMachine : WorkableElectricMultiblockMachine, IOpticalComputatio
 	public bool CanBridge(ICollection<IOpticalComputationProvider> seen)
 	{
 		seen.Add(this);
-		// don't show a problem if the structure is not yet formed
 		if (!IsFormed) return true;
 		return _hpcaHandler.ComponentCount > 0 ? _hpcaHandler.HasHPCABridge() : _syncHasBridge;
 	}
@@ -209,8 +184,6 @@ public class HPCAMachine : WorkableElectricMultiblockMachine, IOpticalComputatio
 
 	private bool IsWorkingEnabledFlag() => GetRecipeLogic().IsWorkingEnabled();
 
-	// === Tick ==============================================================
-
 	protected override void OnTick()
 	{
 		base.OnTick();
@@ -219,13 +192,11 @@ public class HPCAMachine : WorkableElectricMultiblockMachine, IOpticalComputatio
 		Tick();
 	}
 
-	// Verbatim HPCAMachine.tick().
 	private void Tick()
 	{
 		if (IsWorkingEnabledFlag()) ConsumeEnergy();
 		if (IsActive)
 		{
-			// Force-cool at half-way to damage threshold.
 			double midpoint = (DAMAGE_TEMPERATURE - IDLE_TEMPERATURE) / 2;
 			double temperatureChange = _hpcaHandler.CalculateTemperatureChange(_coolantTanks, _temperature >= midpoint) / 2.0;
 			if (_temperature + temperatureChange <= IDLE_TEMPERATURE)
@@ -248,18 +219,15 @@ public class HPCAMachine : WorkableElectricMultiblockMachine, IOpticalComputatio
 
 	private void UpdateActive(bool active)
 	{
-		_isActive = active;
 		foreach (var part in GetParts())
 			if (part is HPCAComponentPartMachine comp)
 				comp.ComponentTrait?.SetActive(active);
 	}
 
-	// Verbatim HPCAMachine.consumeEnergy().
 	private void ConsumeEnergy()
 	{
 		if (_energyContainer is null) _energyContainer = GetEnergyContainer();
 		long energyToConsume = _hpcaHandler.GetCurrentEUt();
-		// +10% per maintenance problem - verbatim upstream.
 		if (_maintenance != null)
 			energyToConsume += _maintenance.GetNumMaintenanceProblems() * energyToConsume / 10;
 		var logic = GetRecipeLogic();
@@ -289,7 +257,6 @@ public class HPCAMachine : WorkableElectricMultiblockMachine, IOpticalComputatio
 		}
 	}
 
-	// Verbatim port of HPCAMachine.HPCAGridHandler.
 	public sealed class HPCAGridHandler
 	{
 		private readonly HPCAMachine _controller;
@@ -305,8 +272,6 @@ public class HPCAMachine : WorkableElectricMultiblockMachine, IOpticalComputatio
 
 		public int  AllocatedCWUt => _allocatedCWUt;
 
-		// Census accessors (diagnostics): how many components the controller
-		// gathered, and how many of each provider kind.
 		public int ComponentCount           => _components.Count;
 		public int ComputationProviderCount => _computationProviders.Count;
 		public int CoolantProviderCount     => _coolantProviders.Count;
@@ -343,7 +308,6 @@ public class HPCAMachine : WorkableElectricMultiblockMachine, IOpticalComputatio
 			if (_allocatedCWUt != 0) _allocatedCWUt = 0;
 		}
 
-		// Verbatim calculateTemperatureChange.
 		public double CalculateTemperatureChange(List<NotifiableFluidTank> coolantTanks, bool forceCoolWithActive)
 		{
 			int maxCWUt = Math.Max(1, GetMaxCWUt());
@@ -397,7 +361,6 @@ public class HPCAMachine : WorkableElectricMultiblockMachine, IOpticalComputatio
 			return temperatureChange;
 		}
 
-		// Drain up to `amount` mB of pcb_coolant from bound input tanks.
 		private static int DrainCoolant(List<NotifiableFluidTank> tanks, int amount)
 		{
 			if (amount <= 0) return 0;
@@ -417,7 +380,6 @@ public class HPCAMachine : WorkableElectricMultiblockMachine, IOpticalComputatio
 			return drained;
 		}
 
-		// Verbatim attemptDamageHPCA - 1/200 random damageable component.
 		public void AttemptDamageHPCA(Random rng)
 		{
 			if (rng.Next(200) == 0)

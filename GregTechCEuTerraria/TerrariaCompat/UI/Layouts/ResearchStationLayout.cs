@@ -34,9 +34,10 @@ public static class ResearchStationLayout
 		var recipeLogic = machine.Recipe;
 
 		if (!machine.IsFormed)
-			lines.Add(RecipeStatusText.StatusLineForMulti(machine, recipeLogic));
+			RecipeStatusText.AppendUnformedStatus(machine, recipeLogic, lines);
 
-		Api.Machine.Multiblock.MultiblockDisplayText.Create(lines, machine.IsFormed)
+		Api.Machine.Multiblock.MultiblockDisplayText.Create(lines, machine.IsFormed,
+				showIncompleteStructureWarning: false)
 			.SetWorkingStatus(recipeLogic.IsWorkingEnabled(), machine.DisplayActive)
 			.SetWorkingStatusKeys(
 				"gtceu.multiblock.idling",

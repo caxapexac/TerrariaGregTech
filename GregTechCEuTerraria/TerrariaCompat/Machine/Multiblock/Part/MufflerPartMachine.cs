@@ -9,12 +9,6 @@ using Terraria.ModLoader.IO;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Machine.Multiblock.Part;
 
-// Port of MufflerPartMachine. Listens for AfterWorking, rolls per-item chance
-// to drop recovery items (slag/ash) into its (tier+1)^2 inventory at max(1, tier*10)%.
-//
-// Environmental hazard subsystem dropped (whole hazard pipeline unported).
-// isFrontFaceFree veto dropped (no facing). tryBreakSnow N/A. Particles ported
-// via Terraria Dust - vent straight up since we have no facing.
 public class MufflerPartMachine : TieredPartMachine
 {
 	protected override string Label => "Muffler Hatch";
@@ -67,7 +61,6 @@ public class MufflerPartMachine : TieredPartMachine
 		Inventory = new CustomItemStackHandler(size);
 	}
 
-	// Per-item independent roll; spillover dropped (upstream discards too).
 	public void RecoverItemsTable(params Item[] recoveryItems)
 	{
 		if (Inventory == null) return;
@@ -83,8 +76,6 @@ public class MufflerPartMachine : TieredPartMachine
 	private bool CalculateChance() =>
 		RecoveryChance >= 100 || RecoveryChance >= Rng.Next(100);
 
-	// Mirrors Forge ItemHandlerHelper.insertItemStacked: merge into matching
-	// stacks first, then empty slots; spillover dropped.
 	private static void InsertStacked(CustomItemStackHandler handler, Item stack)
 	{
 		if (stack == null || stack.IsAir) return;
@@ -107,7 +98,6 @@ public class MufflerPartMachine : TieredPartMachine
 
 	public override bool AfterWorking(IWorkableMultiController controller)
 	{
-		// Hazard emission would go here - see header.
 		var factory = controller.Self().Definition?.RecoveryItemsFactory;
 		if (factory != null)
 		{
@@ -118,7 +108,6 @@ public class MufflerPartMachine : TieredPartMachine
 		return true;
 	}
 
-	// 2D adapt: vent straight up. Per-frame 3-puff burst gives a billowing look.
 	public override void OnClientFrame()
 	{
 		if (!IsFormed()) return;
@@ -134,7 +123,6 @@ public class MufflerPartMachine : TieredPartMachine
 		}
 		if (!working) return;
 
-		// Top edge of the 2x2 footprint; 2-3 puffs/frame, noGravity carries far.
 		int puffs = 2 + Main.rand.Next(2);
 		for (int i = 0; i < puffs; i++)
 		{
@@ -155,9 +143,9 @@ public class MufflerPartMachine : TieredPartMachine
 		}
 	}
 
-	public override void SaveData(TagCompound tag)
+	protected override void SaveMachineData(TagCompound tag)
 	{
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		if (Inventory != null)
 			tag["inventory"] = Inventory.SerializeNBT();
 	}

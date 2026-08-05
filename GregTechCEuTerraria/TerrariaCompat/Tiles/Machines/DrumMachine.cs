@@ -88,7 +88,7 @@ public sealed class DrumMachine : MetaMachine, IFluidHandler, IControllable
 				tag.ContainsKey("fluidNbt") ? tag.GetCompound("fluidNbt") : null));
 	}
 
-	public override void SaveData(TagCompound tag) { EnsureTraits(); base.SaveData(tag); }
+	protected override void SaveMachineData(TagCompound tag) { EnsureTraits(); base.SaveMachineData(tag); }
 	public override void LoadData(TagCompound tag)
 	{
 		EnsureTraits();

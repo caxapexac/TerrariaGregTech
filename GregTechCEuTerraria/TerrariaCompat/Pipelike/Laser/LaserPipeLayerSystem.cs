@@ -61,6 +61,12 @@ public sealed class LaserPipeLayerSystem : ModSystem
 
 	public override void SaveWorldData(TagCompound tag)
 	{
+		lock (Api.SaveTickGate.Lock)
+			WriteWorldData(tag);
+	}
+
+	private void WriteWorldData(TagCompound tag)
+	{
 		if (Pipes.Count == 0) return;
 		var xs = new List<int>(Pipes.Count);
 		var ys = new List<int>(Pipes.Count);

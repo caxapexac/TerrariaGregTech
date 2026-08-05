@@ -172,14 +172,6 @@ public class NetworkStorage : Api.Storage.MEStorage
 		return extracted;
 	}
 
-	public System.Collections.Generic.IEnumerable<(int priority, Api.Storage.MEStorage inv, long sim)> DebugProbe(
-		AEKey what, long amount, IActionSource src)
-	{
-		foreach (var kv in _priorityInventory)
-			foreach (var inv in kv.Value)
-				yield return (kv.Key, inv, inv.Insert(what, amount, Actionable.SIMULATE, src));
-	}
-
 	public void GetAvailableStacks(KeyCounter @out)
 	{
 		if (_mountsInUse)

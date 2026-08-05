@@ -3,15 +3,6 @@ using GregTechCEuTerraria.Api.Block;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Machine.Multiblock;
 
-// Verbatim port of CoilWorkableElectricMultiblockMachine.
-// WorkableElectricMultiblockMachine + coil-tier readout. On form, reads
-// "CoilType" from the match context (populated by Predicates.HeatingCoils)
-// for GTRecipeModifiers.ebfOverclock to consume. Falls through to
-// CUPRONICKEL when HeatingCoils stub doesn't match.
-//
-// Concrete (was abstract) - standard coil multis (multi_smelter,
-// pyrolyse_oven, cracker, alloy_blast_smelter, mega_blast_furnace) share
-// this entity via MachineFamily.MultiblockCoilStandard.
 public class CoilWorkableElectricMultiblockMachine : WorkableElectricMultiblockMachine
 {
 	public ICoilType CoilType { get; private set; } = DefaultCoilType.CUPRONICKEL;
@@ -28,12 +19,9 @@ public class CoilWorkableElectricMultiblockMachine : WorkableElectricMultiblockM
 
 	public int GetCoilTier() => CoilType.Tier;
 
-	// SaveData required so CoilType rides MachineStateSyncPacket to MP clients
-	// (display-driving field). Stored as lowercase name; CoilType.GetByName
-	// re-binds on load.
-	public override void SaveData(Terraria.ModLoader.IO.TagCompound tag)
+	protected override void SaveMachineData(Terraria.ModLoader.IO.TagCompound tag)
 	{
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		tag["coilName"] = CoilType.Name;
 	}
 

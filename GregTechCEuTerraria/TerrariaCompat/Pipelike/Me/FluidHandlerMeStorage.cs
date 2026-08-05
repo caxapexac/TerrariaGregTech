@@ -37,24 +37,6 @@ public sealed class FluidHandlerMeStorage : MEStorage
 
 	public string GetDescription() => "External Fluid Tank";
 
-	public string DebugDetail(AEKey what)
-	{
-		var sb = new System.Text.StringBuilder();
-		sb.Append($"access={_access} allowIns={_access.IsAllowInsertion()}");
-		sb.Append($" partition={( _partition == null ? "null" : _partition(what).ToString())}");
-		var h = _resolver();
-		if (h is null) { sb.Append(" resolver=NULL"); return sb.ToString(); }
-		sb.Append($" handler={h.GetType().Name} tanks={h.TankCount}");
-		for (int t = 0; t < h.TankCount; t++)
-		{
-			var st = h.GetTank(t);
-			sb.Append($" [{t}]={(st.IsEmpty ? "empty" : (st.Type?.Id ?? "?") + "x" + st.Amount)}/{h.GetCapacity(t)}");
-		}
-		if (what is AEFluidKey fk)
-			sb.Append($" fillSim={h.Fill(fk.ToStack((int)System.Math.Min(24000, int.MaxValue)), true)}");
-		return sb.ToString();
-	}
-
 	public bool IsPreferredStorageFor(AEKey what, IActionSource source)
 	{
 		if (_partitionListed != null && _partitionListed(what)) return true;

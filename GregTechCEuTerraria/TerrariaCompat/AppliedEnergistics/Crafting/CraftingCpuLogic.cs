@@ -287,26 +287,6 @@ public sealed class CraftingCpuLogic
 		}
 		_inventory.List.RemoveZeros();
 
-		if (!_inventory.List.IsEmpty() && Main.GameUpdateCount % 120 == 0
-			&& storage is global::GregTechCEuTerraria.AppliedEnergistics.Me.Storage.NetworkStorage nsDbg)
-		{
-			foreach (var e in _inventory.List)
-			{
-				var sbDbg = new System.Text.StringBuilder(
-					$"[MeCraft] stuck {e.Key.GetDisplayName()} x{e.Value}");
-				int mounts = 0;
-				foreach (var (pr, inv, sim) in nsDbg.DebugProbe(e.Key, e.Value, _host.Src))
-				{
-					mounts++;
-					sbDbg.Append($"\n  p{pr} {inv.GetDescription()} sim={sim}");
-					if (inv is Pipelike.Me.FluidHandlerMeStorage f)
-						sbDbg.Append("  {" + f.DebugDetail(e.Key) + "}");
-				}
-				sbDbg.Append($"\n  total mounts={mounts}  netSim={storage.Insert(e.Key, e.Value, Actionable.SIMULATE, _host.Src)}");
-				Terraria.ModLoader.ModContent.GetInstance<GregTechCEuTerraria>()?.Logger.Warn(sbDbg.ToString());
-			}
-		}
-
 		_host.MarkDirty();
 	}
 

@@ -19,7 +19,7 @@ public abstract class MeTerminalMachine : MetaMachine, IMeNetworkConnected
 
 	public override bool SupportsCovers => false;
 
-	public MeNetwork? Network => MeNetworkSystem.NetAdjacentTo(this);
+	public MeNetwork? Network => MeNetworkSystem.NetOf(this);
 
 	protected virtual HashSet<AEKey> ResolveCraftables(MeNetwork? net) =>
 		net?.GetCraftables() ?? new HashSet<AEKey>();

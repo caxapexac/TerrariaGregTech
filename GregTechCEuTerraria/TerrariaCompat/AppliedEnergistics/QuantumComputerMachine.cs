@@ -18,6 +18,7 @@ public sealed class QuantumComputerMachine : MetaMachine, IMeStorageDevice, ICra
 	private readonly CraftingCpuLogic _logic;
 	private readonly CpuSink _sink;
 	private GenericStack? _displayOutput;
+	private bool _syncHasJob;
 
 	public QuantumComputerMachine()
 	{
@@ -34,12 +35,12 @@ public sealed class QuantumComputerMachine : MetaMachine, IMeStorageDevice, ICra
 	public MEStorage GetMeStorage() => _sink;
 	public int StoragePriority => int.MaxValue;
 
-	public override bool IsActive => Logic.HasJob;
+	public override bool IsActive => IsClient ? _syncHasJob : Logic.HasJob;
 
 	public bool IsOnline => Network != null;
 	public long AvailableStorage => Bytes;
 	public int CoProcessors => 63;
-	public MeNetwork? Network => MeNetworkSystem.NetAdjacentTo(this);
+	public MeNetwork? Network => MeNetworkSystem.NetOf(this);
 	public IActionSource Src => IActionSource.Empty();
 	public void UpdateOutput(GenericStack? what) => _displayOutput = what;
 	public void MarkDirty() { }
@@ -65,12 +66,14 @@ public sealed class QuantumComputerMachine : MetaMachine, IMeStorageDevice, ICra
 		_logic.TickCraftingLogic();
 	}
 
-	public override void SaveData(TagCompound tag)
+	protected override void SaveMachineData(TagCompound tag)
 	{
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		var cpu = new TagCompound();
 		_logic.WriteToNBT(cpu);
 		tag["cpu"] = cpu;
+		if (IsServer) _syncHasJob = _logic.HasJob;
+		tag["hasJob"] = _syncHasJob;
 		if (_displayOutput != null) tag["disp"] = GenericStack.WriteTag(_displayOutput);
 	}
 
@@ -78,7 +81,14 @@ public sealed class QuantumComputerMachine : MetaMachine, IMeStorageDevice, ICra
 	{
 		base.LoadData(tag);
 		if (tag.ContainsKey("cpu")) _logic.ReadFromNBT(tag.GetCompound("cpu"));
+		if (tag.ContainsKey("hasJob")) _syncHasJob = tag.GetBool("hasJob");
 		_displayOutput = tag.ContainsKey("disp") ? GenericStack.ReadTag(tag.GetCompound("disp")) : null;
+	}
+
+	public override void SaveDataForSync(TagCompound tag)
+	{
+		base.SaveDataForSync(tag);
+		tag.Remove("cpu");
 	}
 
 	public override void AppendTooltip(List<string> lines)

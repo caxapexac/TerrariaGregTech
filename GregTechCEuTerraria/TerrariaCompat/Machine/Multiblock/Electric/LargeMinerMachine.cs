@@ -176,9 +176,9 @@ public class LargeMinerMachine : WorkableElectricMultiblockMachine
 		}
 	}
 
-	public override void SaveData(Terraria.ModLoader.IO.TagCompound tag)
+	protected override void SaveMachineData(Terraria.ModLoader.IO.TagCompound tag)
 	{
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		tag["lm_lastOre"] = _lastOreId;
 	}
 

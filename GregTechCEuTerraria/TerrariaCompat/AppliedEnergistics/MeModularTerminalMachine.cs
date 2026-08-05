@@ -94,9 +94,9 @@ public sealed class MeModularTerminalMachine : MeTerminalMachine, IMePatternAcce
 		}
 	}
 
-	public override void SaveData(TagCompound tag)
+	protected override void SaveMachineData(TagCompound tag)
 	{
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		for (int i = 0; i < UpgradeSlots; i++)
 			if (!_upgrades[i].IsAir) tag[$"up{i}"] = ItemIO.Save(_upgrades[i]);
 		_encoding.Save(tag);

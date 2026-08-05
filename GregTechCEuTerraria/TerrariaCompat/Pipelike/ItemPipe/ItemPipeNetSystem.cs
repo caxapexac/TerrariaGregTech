@@ -36,6 +36,12 @@ public sealed class ItemPipeNetSystem : ModSystem
 
 	public override void PostUpdateWorld()
 	{
+		lock (Api.SaveTickGate.Lock)
+			TickItemPipeNet();
+	}
+
+	private void TickItemPipeNet()
+	{
 		using (Profiler.Profiler.Time("tick", "item_pipe_net"))
 		{
 		MaybeRebuild();

@@ -7,10 +7,6 @@ using Terraria.ModLoader.IO;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Machine.Multiblock.Part;
 
-// Port of OpticalComputationHatchMachine. Wraps a NotifiableComputationContainer
-// (transmitter or receiver). Implements IOpticalComputationProvider/Hatch on
-// the part (not the trait) so WorldCapability resolves it as an optical-pipe
-// endpoint.
 public class OpticalComputationHatchMachine : MultiblockPartMachine, IOpticalComputationHatch
 {
 	protected override string Label => "Optical Computation Hatch";
@@ -18,10 +14,10 @@ public class OpticalComputationHatchMachine : MultiblockPartMachine, IOpticalCom
 	public bool Transmitter { get; protected set; }
 	public NotifiableComputationContainer? ComputationContainer { get; protected set; }
 
+	private int _syncAvailableCwu;
+
 	public OpticalComputationHatchMachine() : base() { }
 
-	// CRITICAL: add THE MACHINE to seen (the net resolves us via WorldCapability;
-	// container's seen tracks container objects, missing the cycle otherwise).
 	public bool IsTransmitter() => Transmitter;
 
 	public int RequestCWUt(int cwut, bool simulate, ICollection<IOpticalComputationProvider> seen)
@@ -67,12 +63,8 @@ public class OpticalComputationHatchMachine : MultiblockPartMachine, IOpticalCom
 
 	public bool CanShared() => false;
 
-	// The hatch's own GetMaxCWUt with a fresh seen set - the interface entry
-	// adds the hatch to seen first and on some topologies short-circuits to 0.
 	public int GetAvailableCwu() => ComputationContainer?.GetMaxCWUt() ?? 0;
 
-	// RequestCWUt honors source power state - returns 0 for an underpowered HPCA
-	// even when capacity is non-zero (this is what recipe-match uses).
 	public int GetAllocatableCwu() => ComputationContainer?.RequestCWUt(int.MaxValue, simulate: true) ?? 0;
 
 	public override void AppendTooltip(System.Collections.Generic.List<string> lines)
@@ -81,9 +73,7 @@ public class OpticalComputationHatchMachine : MultiblockPartMachine, IOpticalCom
 		lines.Add(Transmitter
 			? "[c/55AAFF:Computation Transmitter] - sends CWU/t to the optical network"
 			: "[c/FFAA55:Computation Receiver] - pulls CWU/t from an HPCA into this multi");
-		// What this hatch can currently move (resolved through the controller /
-		// optical net). 0 = nothing connected / no HPCA supplying yet.
-		int max = ComputationContainer?.GetMaxCWUt() ?? 0;
+		int max = IsClient ? _syncAvailableCwu : ComputationContainer?.GetMaxCWUt() ?? 0;
 		lines.Add($"[c/55FFFF:Available: {max} CWU/t]");
 		if (max == 0)
 			lines.Add(Transmitter ? DiagnoseTransmitter()
@@ -92,8 +82,6 @@ public class OpticalComputationHatchMachine : MultiblockPartMachine, IOpticalCom
 			AppendUnderpoweredSourceWarning(lines);
 	}
 
-	// An underpowered source flickers IsActive off a draining buffer, so
-	// GetMaxCWUt bounces between capacity and 0. Display warning only.
 	private void AppendUnderpoweredSourceWarning(System.Collections.Generic.List<string> lines)
 	{
 		foreach (var controller in GetControllers())
@@ -107,7 +95,6 @@ public class OpticalComputationHatchMachine : MultiblockPartMachine, IOpticalCom
 		}
 	}
 
-	// Walks to the bound controller to disambiguate the 0-CWU reason.
 	private string DiagnoseTransmitter()
 	{
 		Multiblock.Electric.Research.HPCAMachine? hpca = null;
@@ -125,7 +112,6 @@ public class OpticalComputationHatchMachine : MultiblockPartMachine, IOpticalCom
 			return "[c/FFAA44:Bound multiblock provides no computation]";
 		if (!hpca.IsFormed)
 			return "[c/FFAA44:HPCA structure incomplete - fill ALL nine grid slots (use Empty Components for unused slots)]";
-		// Server-synced; live Handler empty on MP clients.
 		if (hpca.DisplayMaxCWUt == 0)
 			return "[c/FFAA44:HPCA grid has no Computation Components - add at least one]";
 		if (!hpca.IsActive)
@@ -133,17 +119,25 @@ public class OpticalComputationHatchMachine : MultiblockPartMachine, IOpticalCom
 		return "[c/FFAA44:HPCA is present but not providing - check power / working state]";
 	}
 
-	public override void SaveData(TagCompound tag)
+	protected override void SaveMachineData(TagCompound tag)
 	{
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		tag["transmitter"] = Transmitter;
+	}
+
+	public override void SaveDataForSync(TagCompound tag)
+	{
+		if (IsServer) _syncAvailableCwu = GetAvailableCwu();
+		base.SaveDataForSync(tag);
+		tag["availCwu"] = _syncAvailableCwu;
 	}
 
 	public override void LoadData(TagCompound tag)
 	{
 		base.LoadData(tag);
 		Transmitter = tag.GetBool("transmitter");
+		if (tag.ContainsKey("availCwu")) _syncAvailableCwu = tag.GetInt("availCwu");
 		EnsureContainer();
-		Traits.Load(tag);   // late-registration re-load; ItemBus pattern.
+		Traits.Load(tag);
 	}
 }

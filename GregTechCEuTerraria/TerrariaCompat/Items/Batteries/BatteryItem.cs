@@ -72,15 +72,11 @@ public sealed class BatteryItem : ModItem, IElectricItem, ITextureWarmUp
 		set => _storedEu = System.Math.Clamp(value, 0, _maxEu);
 	}
 
-	// IElectricItem - verbatim port of api.item.capability.ElectricItem. Methods
-	// intentionally NOT clamped via StoredEu setter - upstream clamps via
-	// Math.min(amount, canReceive); bookkeeping matches line-for-line.
-
 	public bool CanProvideChargeExternally() => _dischargeable;
 	public bool Chargeable() => _chargeable;
 	public long GetTransferLimit() => TransferLimit;
 	public long GetMaxCharge() => _maxEu;
-	public long GetCharge() => _storedEu;
+	public long GetCharge() => System.Math.Min(_storedEu, _maxEu);
 	public int  GetTier() => (int)_tier;
 
 	public long Charge(long amount, int chargerTier, bool ignoreTransferLimit, bool simulate)
@@ -89,7 +85,7 @@ public sealed class BatteryItem : ModItem, IElectricItem, ITextureWarmUp
 		int tier = (int)_tier;
 		if ((_chargeable || amount == long.MaxValue) && (chargerTier >= tier) && amount > 0L)
 		{
-			long canReceive = _maxEu - _storedEu;
+			long canReceive = GetMaxCharge() - GetCharge();
 			if (!ignoreTransferLimit)
 				amount = System.Math.Min(amount, TransferLimit);
 			long charged = System.Math.Min(amount, canReceive);
@@ -108,7 +104,7 @@ public sealed class BatteryItem : ModItem, IElectricItem, ITextureWarmUp
 		{
 			if (!ignoreTransferLimit)
 				amount = System.Math.Min(amount, TransferLimit);
-			long charge = _storedEu;
+			long charge = GetCharge();
 			long discharged = System.Math.Min(amount, charge);
 			if (!simulate)
 				_storedEu = charge - discharged;

@@ -1,4 +1,5 @@
 #nullable enable
+using System.Collections.Generic;
 using System.IO;
 using GregTechCEuTerraria.TerrariaCompat.Net;
 using GregTechCEuTerraria.TerrariaCompat.Pipelike.Cable;
@@ -25,17 +26,50 @@ public static class PipeIntersection
 
 	public static void UninstallHook() => Api.Pipenet.PipePassthrough.IsCrossover = static (_, _) => false;
 
-	private static int _recheckTicks;
+	private static readonly List<(int x, int y, bool placed)> _pendingRelinks = new();
 
-	public static void RequestRecheck() => _recheckTicks = 4;
+	private static void QueueRelink(int x, int y, bool placed)
+	{
+		_pendingRelinks.RemoveAll(e => e.x == x && e.y == y);
+		_pendingRelinks.Add((x, y, placed));
+	}
+
+	public static void ClearPending() => _pendingRelinks.Clear();
 
 	public static void TickRecheck()
 	{
-		if (_recheckTicks <= 0) return;
-		_recheckTicks--;
+		if (_pendingRelinks.Count == 0) return;
+		bool applied = false;
+		int kept = 0;
+		for (int i = 0; i < _pendingRelinks.Count; i++)
+		{
+			var (rx, ry, placed) = _pendingRelinks[i];
+			if (BlocksPipeAt(rx, ry) != placed)
+			{
+				_pendingRelinks[kept++] = _pendingRelinks[i];
+				continue;
+			}
+			if (placed)
+			{
+				Laser.LaserConn.LinkAcross(Laser.LaserPipeLayerSystem.Pipes, rx, ry);
+				Optical.OpticalConn.LinkAcross(Optical.OpticalPipeLayerSystem.Pipes, rx, ry);
+			}
+			else
+			{
+				Laser.LaserConn.UnlinkAcross(Laser.LaserPipeLayerSystem.Pipes, rx, ry);
+				Optical.OpticalConn.UnlinkAcross(Optical.OpticalPipeLayerSystem.Pipes, rx, ry);
+			}
+			applied = true;
+		}
+		_pendingRelinks.RemoveRange(kept, _pendingRelinks.Count - kept);
+		if (!applied) return;
 		CableLayerSystem.Cables.MarkDirty();
 		ItemPipeLayerSystem.Pipes.MarkDirty();
 		FluidPipeLayerSystem.Pipes.MarkDirty();
+		Me.MeCableLayerSystem.Cables.MarkDirty();
+		LongDistance.LongDistancePipeLayerSystem.Pipes.MarkDirty();
+		Laser.LaserPipeLayerSystem.Pipes.MarkDirty();
+		Optical.OpticalPipeLayerSystem.Pipes.MarkDirty();
 	}
 
 	public static void OnPlaced(int x, int y, Player placer)
@@ -43,22 +77,28 @@ public static class PipeIntersection
 		if (CableLayerHandle.Instance.Has(x, y))     CableLayerHandle.Instance.CutAt(x, y, placer);
 		if (ItemPipeLayerHandle.Instance.Has(x, y))  ItemPipeLayerHandle.Instance.CutAt(x, y, placer);
 		if (FluidPipeLayerHandle.Instance.Has(x, y)) FluidPipeLayerHandle.Instance.CutAt(x, y, placer);
-		RequestRecheck();
-		SendChange(x, y);
+		if (Me.MeCableLayerHandle.Instance.Has(x, y)) Me.MeCableLayerHandle.Instance.CutAt(x, y, placer);
+		if (LongDistance.LongDistancePipeLayerHandle.Item.Has(x, y))
+			LongDistance.LongDistancePipeLayerHandle.Item.CutAt(x, y, placer);
+		if (Laser.LaserPipeLayerHandle.Instance.Has(x, y))     Laser.LaserPipeLayerHandle.Instance.CutAt(x, y, placer);
+		if (Optical.OpticalPipeLayerHandle.Instance.Has(x, y)) Optical.OpticalPipeLayerHandle.Instance.CutAt(x, y, placer);
+		QueueRelink(x, y, placed: true);
+		SendChange(x, y, placed: true);
 	}
 
 	public static void OnRemoved(int x, int y)
 	{
-		RequestRecheck();
-		SendChange(x, y);
+		QueueRelink(x, y, placed: false);
+		SendChange(x, y, placed: false);
 	}
 
-	private static void SendChange(int x, int y)
+	private static void SendChange(int x, int y, bool placed)
 	{
 		if (Main.netMode == NetmodeID.SinglePlayer) return;
 		var p = NetRouter.NewPacket(PacketType.CrossoverChange);
 		p.Write((short)x);
 		p.Write((short)y);
+		p.Write(placed);
 		p.Send();
 	}
 
@@ -66,12 +106,14 @@ public static class PipeIntersection
 	{
 		int x = r.ReadInt16();
 		int y = r.ReadInt16();
-		RequestRecheck();
+		bool placed = r.ReadBoolean();
+		QueueRelink(x, y, placed);
 		if (Main.netMode == NetmodeID.Server)
 		{
 			var p = NetRouter.NewPacket(PacketType.CrossoverChange);
 			p.Write((short)x);
 			p.Write((short)y);
+			p.Write(placed);
 			p.Send(ignoreClient: whoAmI);
 		}
 	}

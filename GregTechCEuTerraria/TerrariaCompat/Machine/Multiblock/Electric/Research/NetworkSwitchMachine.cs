@@ -8,17 +8,12 @@ using GregTechCEuTerraria.TerrariaCompat.Machine.Multiblock.Part;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Machine.Multiblock.Electric.Research;
 
-// Port of NetworkSwitchMachine. Computation router - aggregates CWU/t from
-// reception hatches, serves to transmitter hatches, allows HPCA chaining
-// (CanBridge=true). Extends DataBankMachine; EU upkeep per hatch = VA[IV].
 public class NetworkSwitchMachine : DataBankMachine, IOpticalComputationProvider
 {
-	// Upstream VA[IV] = 7680 (V x 15/16), NOT V[IV] = 8192.
 	public static readonly long NS_EUT_PER_HATCH = VoltageTiers.VA((int)VoltageTier.IV);
 
 	private MultipleComputationHandler? _computationHandler;
 
-	// Handler is server-only (gathered in OnStructureForm); MP clients read this.
 	private int _syncMaxComputation;
 
 	public NetworkSwitchMachine() : base() { }
@@ -82,15 +77,14 @@ public class NetworkSwitchMachine : DataBankMachine, IOpticalComputationProvider
 		_syncMaxComputation = _computationHandler?.GetMaxCWUtForDisplay() ?? 0;
 	}
 
-	// Combined max CWU/t across bridging providers; client reads synced mirror.
 	public int MaxComputationForDisplay =>
 		(_computationHandler?.ProviderCount ?? 0) > 0
 			? (_computationHandler?.GetMaxCWUtForDisplay() ?? 0)
 			: _syncMaxComputation;
 
-	public override void SaveData(Terraria.ModLoader.IO.TagCompound tag)
+	protected override void SaveMachineData(Terraria.ModLoader.IO.TagCompound tag)
 	{
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		tag["ns_maxComp"] = _syncMaxComputation;
 	}
 
@@ -99,8 +93,6 @@ public class NetworkSwitchMachine : DataBankMachine, IOpticalComputationProvider
 		base.LoadData(tag);
 		if (tag.ContainsKey("ns_maxComp")) _syncMaxComputation = tag.GetInt("ns_maxComp");
 	}
-
-	// === IOpticalComputationProvider (delegate to handler) =================
 
 	public int RequestCWUt(int cwut, bool simulate, ICollection<IOpticalComputationProvider> seen)
 	{
@@ -116,14 +108,12 @@ public class NetworkSwitchMachine : DataBankMachine, IOpticalComputationProvider
 	{
 		seen.Add(this);
 		if (!IsFormed) return 0;
-		// Client: handler ungathered -> read synced mirror.
 		if ((_computationHandler?.ProviderCount ?? 0) == 0) return _syncMaxComputation;
 		return _computationHandler?.GetMaxCWUt(seen) ?? 0;
 	}
 
 	public int GetMaxCWUt() => GetMaxCWUt(NewSeen());
 
-	// Allows chaining Network Switches.
 	public bool CanBridge(ICollection<IOpticalComputationProvider> seen)
 	{
 		seen.Add(this);
@@ -134,7 +124,6 @@ public class NetworkSwitchMachine : DataBankMachine, IOpticalComputationProvider
 
 	private static ICollection<IOpticalComputationProvider> NewSeen() => new HashSet<IOpticalComputationProvider>();
 
-	// Verbatim port of MultipleComputationHandler.
 	public sealed class MultipleComputationHandler : NotifiableComputationContainer
 	{
 		private readonly NetworkSwitchMachine _owner;
@@ -142,7 +131,6 @@ public class NetworkSwitchMachine : DataBankMachine, IOpticalComputationProvider
 		private readonly HashSet<IOpticalComputationHatch> _transmitters = new();
 		public int EUt { get; private set; }
 
-		// >0 only server-side (gathered in OnStructureForm).
 		public int ProviderCount => _providers.Count;
 
 		private bool _tickSaturated;
@@ -175,7 +163,6 @@ public class NetworkSwitchMachine : DataBankMachine, IOpticalComputationProvider
 			seen.Add(this);
 			if (cwut == 0) return 0;
 
-			// Saturation cache per tick.
 			long timer = _owner.GetOffsetTimer();
 			if (_timerCWUt == timer)
 			{

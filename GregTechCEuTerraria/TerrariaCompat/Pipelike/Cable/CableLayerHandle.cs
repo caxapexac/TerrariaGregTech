@@ -18,7 +18,7 @@ public sealed class CableLayerHandle : IGridLayerHandle
 
 	public bool TryPlace(CableCell cell, int x, int y, Player placer)
 	{
-		if (Pipelike.PipeIntersection.BlocksPipeAt(x, y)) return false;
+		if (!CableLayerSystem.Cables.CanPlaceAt(x, y)) return false;
 		var existing = CableLayerSystem.Cables.CellAt(x, y);
 		if (existing.HasValue && existing.Value.Equals(cell)) return false;
 		if (existing.HasValue) RefundCableAt(placer, existing.Value);
@@ -41,7 +41,7 @@ public sealed class CableLayerHandle : IGridLayerHandle
 
 	public bool TryPlaceRefundSingles(CableCell cell, int x, int y, Player placer)
 	{
-		if (Pipelike.PipeIntersection.BlocksPipeAt(x, y)) return false;
+		if (!CableLayerSystem.Cables.CanPlaceAt(x, y)) return false;
 		var existing = CableLayerSystem.Cables.CellAt(x, y);
 		if (existing.HasValue && existing.Value.Equals(cell)) return false;
 		if (existing.HasValue) RefundAsSingles(placer, existing.Value);

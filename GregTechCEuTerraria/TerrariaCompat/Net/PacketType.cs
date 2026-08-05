@@ -20,7 +20,7 @@ public enum PacketType : byte
 	ActiveRecipeTypeSet,   // C->S  cycle a multi's active recipe type
 	BoilerThrottleSet,     // C->S  Large Boiler throttle +/-5%
 	DistinctSet,           // C->S  IDistinctPart bus distinctness
-	JunkToggle,            // C->S  fisher junk-enabled flag
+	FisherFilterSet,       // C->S  fisher loot-exclusion flag (junk / fish / crate)
 	BlockBreakerModeSet,   // C->S  block breaker mine-down / cut-trees mode
 	BlockBreakerReplantSet,// C->S  block breaker cut-trees replant flag
 	MachineFilter,         // C->S  machine filter edit
@@ -42,6 +42,7 @@ public enum PacketType : byte
 	// Machine placement, state sync
 	MachinePlaced,         // C->S  placed a machine (create entity)
 	MachineStateSync,      // S->C  full machine state snapshot
+	MachineStateRequest,   // C->S  chunk-load state request (batched positions)
 	MachineEnergySync,     // S->C  compact energy-stored sync
 	CursorUpdate,          // S->C  authoritative cursor after a SlotAction
 	EnderChannelSync,      // S->C  virtual ender channel contents
@@ -115,4 +116,6 @@ public enum PacketType : byte
 
 	// Transport
 	Fragment,              // C<->S one chunk of LargePacket
+
+	MeCraftPlanAbandon,    // C->S  confirm window closed -> cancel the in-flight plan calculation
 }

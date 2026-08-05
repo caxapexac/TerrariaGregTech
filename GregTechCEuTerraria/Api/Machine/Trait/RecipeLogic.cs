@@ -717,6 +717,23 @@ public class RecipeLogic : MachineTrait, IWorkable
 			_lastRecipe = GTRecipeNbt.Load(tag.Get<TagCompound>("lastRecipeBlob")) ?? _lastRecipe;
 		if (tag.ContainsKey("lastOriginRecipeBlob"))
 			_lastOriginRecipe = GTRecipeNbt.Load(tag.Get<TagCompound>("lastOriginRecipeBlob")) ?? _lastOriginRecipe;
+
+		if (_lastRecipe != null && IsMissingCapability(_lastRecipe))
+		{
+			_lastRecipe = null;
+			_lastOriginRecipe = null;
+		}
+	}
+
+	private bool IsMissingCapability(GTRecipe restored)
+	{
+		var pristine = GetRLMachine().GetRecipeType()?.GetRecipeById(restored.Id);
+		if (pristine is null) return false;
+		foreach (var cap in pristine.Inputs.Keys)      if (!restored.Inputs.ContainsKey(cap))      return true;
+		foreach (var cap in pristine.Outputs.Keys)     if (!restored.Outputs.ContainsKey(cap))     return true;
+		foreach (var cap in pristine.TickInputs.Keys)  if (!restored.TickInputs.ContainsKey(cap))  return true;
+		foreach (var cap in pristine.TickOutputs.Keys) if (!restored.TickOutputs.ContainsKey(cap)) return true;
+		return false;
 	}
 
 	public override void OnClientTick()

@@ -11,7 +11,6 @@ using GregTechCEuTerraria.Api.Recipe.Ingredient;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader.IO;
-// Alias reads like upstream Java (IO.IN / IO.OUT).
 using RecipeIO = GregTechCEuTerraria.Api.Capability.Recipe.IO;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Machine.Steam;
@@ -367,10 +366,10 @@ public abstract class SteamWorkableMachine : SteamMachine, IRecipeLogicMachine
 		MachineLoopVoiceArbiter.ClearWant(this);
 	}
 
-	public override void SaveData(TagCompound tag)
+	protected override void SaveMachineData(TagCompound tag)
 	{
 		EnsureSteamTraits();
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		tag["activeEut"] = _activeEut;
 		if (_lastRecipeId is not null) tag["recipe"] = _lastRecipeId;
 	}

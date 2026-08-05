@@ -204,9 +204,9 @@ public class WorkableElectricMultiblockMachine : WorkableMultiblockMachine,
 		return _cachedModifier;
 	}
 
-	public override void SaveData(Terraria.ModLoader.IO.TagCompound tag)
+	protected override void SaveMachineData(Terraria.ModLoader.IO.TagCompound tag)
 	{
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		tag["wemm_tier"] = MultiTier;
 		tag["wemm_des"]  = DisplayEnergyStored;
 		tag["wemm_dec"]  = DisplayEnergyCapacity;

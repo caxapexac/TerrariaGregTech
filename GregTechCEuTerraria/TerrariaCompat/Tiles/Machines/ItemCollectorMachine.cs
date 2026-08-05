@@ -231,10 +231,10 @@ public sealed class ItemCollectorMachine : TieredEnergyMachine, IFilterableMachi
 		return false;
 	}
 
-	public override void SaveData(TagCompound tag)
+	protected override void SaveMachineData(TagCompound tag)
 	{
 		EnsureTraits();
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		tag["range"]            = Range;
 		tag["active"]           = _active;
 		tag["isWorkingEnabled"] = _isWorkingEnabled;

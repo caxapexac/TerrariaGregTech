@@ -5,13 +5,6 @@ using Terraria.ModLoader.IO;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Machine.Multiblock.Part.Hpca;
 
-// Port of HPCAComponentPartMachine (Empty/Computation/Cooler/Bridge collapsed
-// into one definition-driven family entity, keyed by HpcaKind). Trait stat
-// tables verbatim createHPCATrait. VA[tier] = V x 15/16 via VoltageTiers.VA
-// (NOT V - VA[EV]=1920 vs V[EV]=2048).
-// DEVIATION: upstream's modifyDrops swaps a
-// damaged component for a plain casing (anti-exploit); we always drop the
-// component, accepting the minor re-place-to-reset exploit.
 public class HPCAComponentPartMachine : MultiblockPartMachine
 {
 	protected override string Label => "HPCA Component";
@@ -36,7 +29,6 @@ public class HPCAComponentPartMachine : MultiblockPartMachine
 
 	protected override void OnTick()
 	{
-		// Tooltip / IsActive need ComponentTrait built before the controller forms.
 		BindDefinition();
 		base.OnTick();
 	}
@@ -101,9 +93,9 @@ public class HPCAComponentPartMachine : MultiblockPartMachine
 			                      : "[c/AAAAAA:Can overheat if cooling is insufficient]");
 	}
 
-	public override void SaveData(TagCompound tag)
+	protected override void SaveMachineData(TagCompound tag)
 	{
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		tag["hpca_kind"] = (byte)Kind;
 	}
 

@@ -177,9 +177,9 @@ public sealed class CleanroomMachine : WorkableElectricMultiblockMachine, IContr
 	bool IControllable.IsWorkingEnabled() => true;
 	void IControllable.SetWorkingEnabled(bool ignored) { }
 
-	public override void SaveData(TagCompound tag)
+	protected override void SaveMachineData(TagCompound tag)
 	{
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		tag["cleanAmount"] = _cleanAmount;
 		if (_cleanroomType != null) tag["cleanroomType"] = _cleanroomType.Name;
 		if (FormedTileWidth > 0 && FormedTileHeight > 0)

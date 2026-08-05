@@ -77,13 +77,15 @@ public static class GTRecipeNbt
 	private static string CapKey(object cap) =>
 		ReferenceEquals(cap, ItemRecipeCapability.CAP)  ? "item"  :
 		ReferenceEquals(cap, FluidRecipeCapability.CAP) ? "fluid" :
-		ReferenceEquals(cap, EURecipeCapability.CAP)    ? "eu"    : "?";
+		ReferenceEquals(cap, EURecipeCapability.CAP)    ? "eu"    :
+		ReferenceEquals(cap, CWURecipeCapability.CAP)   ? "cwu"   : "?";
 
 	private static object? CapFromKey(string key) => key switch
 	{
 		"item"  => ItemRecipeCapability.CAP,
 		"fluid" => FluidRecipeCapability.CAP,
 		"eu"    => EURecipeCapability.CAP,
+		"cwu"   => CWURecipeCapability.CAP,
 		_       => null,
 	};
 
@@ -146,6 +148,7 @@ public static class GTRecipeNbt
 		"item"  => SaveIngredient((IngredientBase)payload),
 		"fluid" => SaveFluidIngredient((FluidIngredient)payload),
 		"eu"    => SaveEnergy((EnergyStack)payload),
+		"cwu"   => SaveCwu((int)payload),
 		_       => new TagCompound(),
 	};
 
@@ -154,8 +157,13 @@ public static class GTRecipeNbt
 		"item"  => LoadIngredient(tag),
 		"fluid" => LoadFluidIngredient(tag),
 		"eu"    => LoadEnergy(tag),
+		"cwu"   => LoadCwu(tag),
 		_       => throw new InvalidOperationException($"Unknown content cap key '{capKey}'"),
 	};
+
+	private static TagCompound SaveCwu(int cwu) => new() { ["cwu"] = cwu };
+
+	private static int LoadCwu(TagCompound tag) => tag.GetInt("cwu");
 
 	private static TagCompound SaveEnergy(EnergyStack e) =>
 		new() { ["voltage"] = e.Voltage, ["amperage"] = e.Amperage };

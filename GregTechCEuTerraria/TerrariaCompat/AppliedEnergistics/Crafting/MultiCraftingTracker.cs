@@ -3,6 +3,7 @@
 
 #nullable enable
 using System.Collections.Generic;
+using GregTechCEuTerraria.AppliedEnergistics.Api.Networking.Security;
 using GregTechCEuTerraria.AppliedEnergistics.Api.Stacks;
 using GregTechCEuTerraria.TerrariaCompat.Pipelike.Me;
 using Terraria.ModLoader.IO;
@@ -14,24 +15,46 @@ public sealed class MultiCraftingTracker
 	private readonly int _size;
 	private readonly IMeCraftingRequester _owner;
 	private readonly CraftingLink?[] _links;
+	private readonly CraftingJob?[] _jobs;
 
 	public MultiCraftingTracker(IMeCraftingRequester owner, int size)
 	{
 		_owner = owner;
 		_size = size;
 		_links = new CraftingLink?[size];
+		_jobs = new CraftingJob?[size];
 	}
 
-	public bool HandleCrafting(int x, AEKey what, long amount, MeNetwork? net)
+	public bool HandleCrafting(int x, AEKey what, long amount, MeNetwork? net, IActionSource mySrc)
 	{
+		var craftingJob = GetJob(x);
 		if (GetLink(x) != null) return false;
 		if (net == null) return false;
 
-		var result = MeCraftingService.Request(net, what, amount, _owner);
-		if (result.IsSuccess && result.Link != null)
+		if (craftingJob != null)
 		{
-			SetLink(x, result.Link);
-			return true;
+			CraftingPlan? job = null;
+			if (craftingJob.IsDone)
+				job = craftingJob.Get();
+
+			if (job != null)
+			{
+				var result = MeCraftingService.Submit(net, job, _owner, null, mySrc);
+
+				SetJob(x, null);
+
+				if (result.IsSuccess && result.Link != null)
+				{
+					SetLink(x, result.Link);
+
+					return true;
+				}
+			}
+		}
+		else if (GetLink(x) == null)
+		{
+			SetJob(x, MeCraftingService.BeginCraftingCalculation(
+				net, what, amount, CalculationStrategy.CraftLess, mySrc));
 		}
 		return false;
 	}
@@ -57,7 +80,26 @@ public sealed class MultiCraftingTracker
 		return -1;
 	}
 
-	public bool IsBusy(int slot) => GetLink(slot) != null;
+	public void Cancel()
+	{
+		for (int x = 0; x < _links.Length; x++)
+		{
+			_links[x]?.Cancel();
+			_links[x] = null;
+		}
+
+		for (int x = 0; x < _jobs.Length; x++)
+		{
+			_jobs[x]?.Cancel();
+			_jobs[x] = null;
+		}
+	}
+
+	public bool IsBusy(int slot) => GetLink(slot) != null || GetJob(slot) != null;
+
+	private CraftingJob? GetJob(int slot) => _jobs[slot];
+
+	private void SetJob(int slot, CraftingJob? job) => _jobs[slot] = job;
 
 	private CraftingLink? GetLink(int slot) => _links[slot];
 

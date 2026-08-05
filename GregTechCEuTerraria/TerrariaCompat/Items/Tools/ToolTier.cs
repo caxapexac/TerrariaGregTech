@@ -112,8 +112,4 @@ public static class ToolTier
 		return AnchorFor(For(m)).UseTime;
 	}
 
-	public const float AnchorBlend = 1.0f;
-
-	public static int Blend(int upstream, int anchor) =>
-		(int)Math.Round(upstream * (1f - AnchorBlend) + anchor * AnchorBlend);
 }

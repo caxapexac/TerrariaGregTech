@@ -7,8 +7,6 @@ using GregTechCEuTerraria.Api.Machine.Trait;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Machine.Steam;
 
-// 1:1 port of SteamMachine. Extends MetaMachine directly (no EU).
-// IsHighPressure = upstream's ITieredMachine flag (LP=0/HP=1).
 public abstract class SteamMachine : MetaMachine, IFluidHandler
 {
 	public bool IsHighPressure => Definition?.IsHighPressure ?? false;
@@ -22,10 +20,8 @@ public abstract class SteamMachine : MetaMachine, IFluidHandler
 	public int SteamTier => IsHighPressure ? 1 : 0;
 
 	protected SteamMachine() : base() { }
-	// Legacy ctor preserved for boiler subclasses pending deletion.
 	protected SteamMachine(bool isHighPressure) : base() { }
 
-	// Upstream 16 * FluidType.BUCKET_VOLUME.
 	protected virtual int SteamTankCapacity => 16_000;
 
 	protected virtual void EnsureSteamTraits()
@@ -39,7 +35,6 @@ public abstract class SteamMachine : MetaMachine, IFluidHandler
 		Traits.RegisterPersistent("SteamTank", _steamTank);
 	}
 
-	// Boiler subclass overrides for the IO.IN water tank.
 	protected virtual NotifiableFluidTank CreateSteamTank() =>
 		new(1, SteamTankCapacity, Api.Capability.Recipe.IO.OUT);
 
@@ -49,8 +44,6 @@ public abstract class SteamMachine : MetaMachine, IFluidHandler
 
 	public virtual int GetCapacity(int tank) => SteamTankCapacity;
 
-	// IO-direction-keyed so producer (boiler, OUT) and consumer (IN) subclasses
-	// both work without per-class overrides.
 	public virtual bool IsFluidValid(int tank, FluidStack fluid)
 	{
 		EnsureSteamTraits();
@@ -79,14 +72,12 @@ public abstract class SteamMachine : MetaMachine, IFluidHandler
 		return _steamTank!.Drain(fluid, simulate);
 	}
 
-	// SteamBoilerMachine overrides to route water vs steam by index.
 	public virtual IFluidHandler GetTankAccess(int tank)
 	{
 		EnsureSteamTraits();
 		return _steamTank!.Storages[0];
 	}
 
-	// Producer (OUT) = drain-only; consumer (IN) = fill-only.
 	public virtual (bool AllowFill, bool AllowDrain) GetTankClickCaps(int tank)
 	{
 		EnsureSteamTraits();
@@ -95,10 +86,10 @@ public abstract class SteamMachine : MetaMachine, IFluidHandler
 			: (false, true);
 	}
 
-	public override void SaveData(Terraria.ModLoader.IO.TagCompound tag)
+	protected override void SaveMachineData(Terraria.ModLoader.IO.TagCompound tag)
 	{
 		EnsureSteamTraits();
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 	}
 
 	public override void LoadData(Terraria.ModLoader.IO.TagCompound tag)

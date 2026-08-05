@@ -81,6 +81,16 @@ public static class RecipeStatusText
 		return StatusLine(rl, workingVerb);
 	}
 
+	public static void AppendUnformedStatus(
+		Multiblock.MultiblockControllerMachine controller,
+		RecipeLogic? rl,
+		List<string> lines)
+	{
+		lines.Add(StatusLineForMulti(controller, rl));
+		if (Api.Machine.Multiblock.MultiblockDisplayText.UnformedHint is { } hint)
+			lines.Add(hint);
+	}
+
 	public static void AppendFailureDetail(RecipeLogic? rl, List<string> lines)
 	{
 		if (rl is null || rl.GetStatus() != RecipeLogicStatus.IDLE) return;

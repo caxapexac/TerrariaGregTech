@@ -31,6 +31,10 @@ public class LaserHatchPartMachine : TieredIOPartMachine, ILaserContainer
 	long IEnergyContainer.InputVoltage   => Buffer?.InputVoltage   ?? 0L;
 	long IEnergyContainer.InputAmperage  => Buffer?.InputAmperage  ?? 0L;
 
+	public override bool HasSyncEnergy    => Buffer != null;
+	public override long SyncEnergyStored => Buffer?.EnergyStored ?? 0;
+	public override void ApplySyncEnergy(long energy) => Buffer?.SetStoredFromSync(energy);
+
 	public LaserHatchPartMachine() : base() { }
 
 	protected override void OnDefinitionBound()
@@ -193,9 +197,9 @@ public class LaserHatchPartMachine : TieredIOPartMachine, ILaserContainer
 		}
 	}
 
-	public override void SaveData(TagCompound tag)
+	protected override void SaveMachineData(TagCompound tag)
 	{
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		tag["amperage"] = Amperage;
 	}
 

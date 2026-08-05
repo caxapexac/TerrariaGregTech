@@ -6,10 +6,6 @@ using Terraria.ModLoader.IO;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Cover.Ender;
 
-// Port of api.misc.virtualregistry.VirtualEnderRegistry. Upstream's
-// SavedData -> tML ModSystem (same world-scoped server-side persistence).
-// Owner UUID dropped - PRIVATE channels need unported MachineOwner, so every
-// channel is public (single type -> name -> entry map).
 public class VirtualEnderRegistry : ModSystem
 {
 	private readonly Dictionary<EnderEntryType, Dictionary<string, VirtualEntry>> _entries = new();
@@ -19,7 +15,8 @@ public class VirtualEnderRegistry : ModSystem
 	private Dictionary<string, VirtualEntry> MapFor(EnderEntryType type)
 	{
 		if (!_entries.TryGetValue(type, out var map))
-			_entries[type] = map = new Dictionary<string, VirtualEntry>();
+			lock (Api.SaveTickGate.Lock)
+				_entries[type] = map = new Dictionary<string, VirtualEntry>();
 		return map;
 	}
 
@@ -40,20 +37,26 @@ public class VirtualEnderRegistry : ModSystem
 	{
 		var map = MapFor(type);
 		if (!map.TryGetValue(name, out var e))
-			map[name] = e = CreateInstance(type);
+			lock (Api.SaveTickGate.Lock)
+				map[name] = e = CreateInstance(type);
 		return e;
 	}
 
-	// Verbatim deleteEntryIf - channel survives while any cover or stored
-	// payload still references it (predicate is always CanRemove).
 	public void DeleteEntryIf(EnderEntryType type, string name, Predicate<VirtualEntry> shouldDelete)
 	{
 		var entry = GetEntry(type, name);
 		if (entry != null && shouldDelete(entry))
-			MapFor(type).Remove(name);
+			lock (Api.SaveTickGate.Lock)
+				MapFor(type).Remove(name);
 	}
 
 	public override void SaveWorldData(TagCompound tag)
+	{
+		lock (Api.SaveTickGate.Lock)
+			WriteWorldData(tag);
+	}
+
+	private void WriteWorldData(TagCompound tag)
 	{
 		foreach (var (type, map) in _entries)
 		{
@@ -87,6 +90,5 @@ public class VirtualEnderRegistry : ModSystem
 		}
 	}
 
-	// Verbatim release() - fresh world doesn't inherit previous ender state.
 	public override void OnWorldUnload() => _entries.Clear();
 }

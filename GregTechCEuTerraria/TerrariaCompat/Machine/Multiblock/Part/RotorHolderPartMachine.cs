@@ -15,12 +15,6 @@ using Terraria.ModLoader.IO;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Machine.Multiblock.Part;
 
-// Port of RotorHolderPartMachine. Tiered part for large turbines - holds one
-// rotor, ramps speed while the controller is OnWorking. The turbine reads
-// GetTotalEfficiency / GetTotalPower to scale recipe output.
-//
-// isFrontFaceFree, TURBINE damage (player hurt), per-tick durability damage
-// DROPPED (no facing, no rotor-tile to click, items don't wear out in Terraria).
 public class RotorHolderPartMachine : TieredPartMachine
 {
 	public const int SPEED_INCREMENT = 1;
@@ -33,7 +27,6 @@ public class RotorHolderPartMachine : TieredPartMachine
 	public int RotorSpeed          { get; protected set; }
 	public Material? RotorMaterial { get; protected set; }
 
-	// Exposed handler - adjacent automation can swap the rotor.
 	public override Api.Capability.IItemHandler? ExposedItemHandler => Inventory;
 
 	private TickableSubscription? _rotorSpeedSubs;
@@ -49,7 +42,6 @@ public class RotorHolderPartMachine : TieredPartMachine
 		UpdateRotorSubscription();
 	}
 
-	// Idempotent - re-runs after LoadData restores Tier (ItemBus pattern).
 	protected override void OnDefinitionBound()
 	{
 		base.OnDefinitionBound();
@@ -80,12 +72,10 @@ public class RotorHolderPartMachine : TieredPartMachine
 		_rotorSpeedSubs = null;
 	}
 
-	// One turbine per holder (upstream parity).
 	public bool CanShared() => false;
 
 	public bool HasRotor() => Inventory != null && !Inventory.GetSlot(0).IsAir;
 
-	// Inventory.HandlerIO=NONE excludes it from recipe routing; uses dedicated RotorSlot.
 	public override Item[]? GetSlotGroup(TerrariaCompat.Machine.SlotGroup group)
 	{
 		if (group == TerrariaCompat.Machine.SlotGroup.RotorSlot && Inventory != null)
@@ -93,8 +83,6 @@ public class RotorHolderPartMachine : TieredPartMachine
 		return base.GetSlotGroup(group);
 	}
 
-	// SlotAction ref-mutates Storage.Stacks; fire OnContentsChanged to drive
-	// OnRotorInventoryChanged (re-classify material + state-sync).
 	public override void NotifySlotGroupChanged(TerrariaCompat.Machine.SlotGroup group)
 	{
 		if (group == TerrariaCompat.Machine.SlotGroup.RotorSlot)
@@ -126,7 +114,6 @@ public class RotorHolderPartMachine : TieredPartMachine
 
 	private void UpdateRotorSpeedTick()
 	{
-		// First controller's OnWorking ramp keeps speed up - don't decay here.
 		foreach (var c in GetControllers())
 		{
 			if (c is IWorkableMultiController wmc && wmc.GetRecipeLogic().IsWorking())
@@ -138,7 +125,6 @@ public class RotorHolderPartMachine : TieredPartMachine
 		UpdateRotorSubscription();
 	}
 
-	// Called per-tick by the controller's RecipeLogic for each bound part.
 	public override bool OnWorking(IWorkableMultiController controller)
 	{
 		if (RotorSpeed < MaxRotorHolderSpeed)
@@ -146,9 +132,6 @@ public class RotorHolderPartMachine : TieredPartMachine
 			SetRotorSpeed(RotorSpeed + SPEED_INCREMENT);
 			UpdateRotorSubscription();
 		}
-		// OnWorking runs on RecipeLogic's 20 Hz gate; MC-tick-aligned timer
-		// (GetOffsetTimer() % FromMcTicks(20) is unreachable for ~2/3 of
-		// positions there - see MetaMachine.GetMcOffsetTimer).
 		if (GetMcOffsetTimer() % 20 == 0)
 		{
 			int numMaintenance = 0;
@@ -206,9 +189,9 @@ public class RotorHolderPartMachine : TieredPartMachine
 
 	public bool IsRotorSpinning() => RotorSpeed > 0;
 
-	public override void SaveData(TagCompound tag)
+	protected override void SaveMachineData(TagCompound tag)
 	{
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		tag["rotorSpeed"] = RotorSpeed;
 		tag["rotorMaterial"] = RotorMaterial?.Id ?? "";
 	}
@@ -221,14 +204,11 @@ public class RotorHolderPartMachine : TieredPartMachine
 		var matId           = tag.GetString("rotorMaterial");
 		RotorMaterial       = string.IsNullOrEmpty(matId) ? null : MaterialRegistry.Get(matId);
 		EnsureInventory();
-		// Re-load trait state after late registration - see ItemBus pattern.
 		Traits.Load(tag);
 		UpdateRotorSubscription();
 	}
 }
 
-// Port of TurbineRotorBehaviour.getRotor{Efficiency,Power}. Durability + damage
-// not modelled - Terraria items don't wear out; the holder still ramps speed.
 internal static class RotorStats
 {
 	public static int Efficiency(Item stack) =>

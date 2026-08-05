@@ -8,24 +8,16 @@ namespace GregTechCEuTerraria.TerrariaCompat.AppliedEnergistics.Crafting;
 
 public static class MeCraftingService
 {
-	public static CraftingPlan? Plan(MeNetwork? net, AEKey? what, long amount)
+	public static CraftingJob? BeginCraftingCalculation(MeNetwork? net, AEKey? what, long amount,
+		CalculationStrategy strategy, IActionSource src)
 	{
 		if (net is null || what is null || amount <= 0) return null;
-		return new CraftingCalculation(net, new GenericStack(what, amount),
-			CalculationStrategy.ReportMissingItems, IActionSource.Empty()).Run();
-	}
-
-	public static CraftingSubmitResult Request(MeNetwork? net, AEKey what, long amount,
-		IMeCraftingRequester? requester = null, int? playerId = null)
-	{
-		if (net is null) return CraftingSubmitResult.NoCpuFound;
-		var plan = Plan(net, what, amount);
-		if (plan is null || plan.Simulation) return CraftingSubmitResult.IncompletePlan;
-		return Submit(net, plan, requester, playerId);
+		var job = new CraftingCalculation(net, new GenericStack(what, amount), strategy, src);
+		return new CraftingJob(job);
 	}
 
 	public static CraftingSubmitResult Submit(MeNetwork net, CraftingPlan plan,
-		IMeCraftingRequester? requester, int? playerId)
+		IMeCraftingRequester? requester, int? playerId, IActionSource src)
 	{
 		if (plan.Simulation) return CraftingSubmitResult.IncompletePlan;
 
@@ -48,7 +40,7 @@ public static class MeCraftingService
 			return CraftingSubmitResult.NoCpuFound;
 		}
 
-		return chosen.Logic.TrySubmitJob(plan, IActionSource.Empty(), requester, playerId);
+		return chosen.Logic.TrySubmitJob(plan, src, requester, playerId);
 	}
 
 	public static string? UnfulfillableReason(MeNetwork net, MePattern p)

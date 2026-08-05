@@ -199,7 +199,18 @@ public sealed class MeBusSettingsState : UIModalWindow
 			onLeft: () => CycleScheduling(side),
 			tooltip: "Export list traversal order",
 			width: w, height: 16)
-		{ Left = StyleDimension.FromPixels(x), Top = StyleDimension.FromPixels(y) });
+		{ Left = StyleDimension.FromPixels(x), Top = StyleDimension.FromPixels(y),
+		  IsVisible = () => FilledFilterCount(side) > 1 });
+	}
+
+	private int FilledFilterCount(IODirection side)
+	{
+		var f = MeBusLayerSystem.Buses.Get(CellX, CellY, side)?.Filter;
+		if (f is null) return 0;
+		int n = 0;
+		foreach (var k in f)
+			if (k != null) n++;
+		return n;
 	}
 
 	private MeBusSchedulingMode SchedulingAt(IODirection side) =>

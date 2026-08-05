@@ -5,6 +5,7 @@ using Terraria.DataStructures;
 using Terraria.ModLoader;
 using GregTechCEuTerraria.Api.Capability;
 using GregTechCEuTerraria.Api.Fluids;
+using GregTechCEuTerraria.Api.Pipenet;
 using GregTechCEuTerraria.AppliedEnergistics.Api.Config;
 using GregTechCEuTerraria.AppliedEnergistics.Api.Networking.Security;
 using GregTechCEuTerraria.AppliedEnergistics.Api.Stacks;
@@ -41,26 +42,20 @@ public sealed class MeNetworkSystem : ModSystem
 	public static MeNetwork? NetAt(int x, int y) =>
 		_byCell.TryGetValue((x, y), out var n) ? n : null;
 
-	public static MeNetwork? NetAdjacentTo(MetaMachine machine)
+	public static MeNetwork? NetOf(MetaMachine machine)
 	{
 		foreach (var (cx, cy) in machine.Cells())
 		{
 			var own = NetAt(cx, cy);
 			if (own != null) return own;
 		}
-		foreach (var (cx, cy) in machine.Cells())
-			foreach (var (dx, dy) in _dirs)
-			{
-				var net = NetAt(cx + dx, cy + dy);
-				if (net != null) return net;
-			}
 		return null;
 	}
 
 	public static Terraria.Item PushItemIntoNet(MetaMachine machine, Terraria.Item item, bool simulate)
 	{
 		if (item is null || item.IsAir) return new Terraria.Item();
-		var net = NetAdjacentTo(machine);
+		var net = NetOf(machine);
 		if (net is null) return item.Clone();
 		var key = AEItemKey.Of(item);
 		if (key is null) return item.Clone();
@@ -76,7 +71,7 @@ public sealed class MeNetworkSystem : ModSystem
 	public static int FillFluidIntoNet(MetaMachine machine, FluidStack stack, bool simulate)
 	{
 		if (stack.IsEmpty) return 0;
-		var net = NetAdjacentTo(machine);
+		var net = NetOf(machine);
 		if (net is null) return 0;
 		var key = AEFluidKey.Of(stack);
 		if (key is null) return 0;
@@ -86,13 +81,22 @@ public sealed class MeNetworkSystem : ModSystem
 
 	public static void MarkEndpointsDirty() => _endpointsDirty = true;
 
+	public static void RequestCraftingUpdate(MetaMachine machine) =>
+		NetOf(machine)?.InvalidateCraftingCache();
+
 	public override void ClearWorld()
 	{
 		_networks.Clear();
 		_byCell.Clear();
+		_lastEntityCount = -1;
 	}
 
-	public override void PostUpdateWorld() => MaybeRebuild();
+	public override void PostUpdateWorld()
+	{
+		MaybeRebuild();
+		foreach (var net in _networks)
+			net.InvalidateCache();
+	}
 
 	public override void PostUpdateEverything() => MaybeRebuild();
 
@@ -156,8 +160,8 @@ public sealed class MeNetworkSystem : ModSystem
 			int id = cableId[kv.Key];
 			foreach (var (dx, dy) in _dirs)
 			{
-				var n = (x + dx, y + dy);
-				if (cableId.TryGetValue(n, out var nid) && cables.Connects(x, y, n.Item1, n.Item2))
+				var n = PipePassthrough.EffectiveNeighbor(x, y, dx, dy);
+				if (cableId.TryGetValue(n, out var nid) && cables.Connects(x, y, n.x, n.y))
 					Union(id, nid);
 			}
 		}
@@ -170,7 +174,9 @@ public sealed class MeNetworkSystem : ModSystem
 					if (cellToMachine.TryGetValue(n, out var omi) && omi != mi
 						&& !blocked && !BlocksNetworkOn(machines[omi], dir.Opposite()))
 						Union(MUnit(mi), MUnit(omi));
-					if (cableId.TryGetValue(n, out var cid) && !blocked) Union(MUnit(mi), cid);
+					if (cableId.TryGetValue(n, out var cid) && !blocked
+						&& MeBusLayerSystem.Buses.Get(n.Item1, n.Item2, dir.Opposite()) is null)
+						Union(MUnit(mi), cid);
 				}
 
 		var rootCableCells = new Dictionary<int, Dictionary<(int x, int y), MeCableCell>>();

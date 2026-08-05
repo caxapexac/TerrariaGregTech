@@ -224,9 +224,9 @@ public abstract class SteamBoilerMachine : SteamWorkableMachine
 		return SteamTank.Drain(fluid, simulate);
 	}
 
-	public override void SaveData(TagCompound tag)
+	protected override void SaveMachineData(TagCompound tag)
 	{
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		tag["currentTemperature"]    = CurrentTemperature;
 		tag["timeBeforeCoolingDown"] = TimeBeforeCoolingDown;
 		tag["hasNoWater"]            = HasNoWater;

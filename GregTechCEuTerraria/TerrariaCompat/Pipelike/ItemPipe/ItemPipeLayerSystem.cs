@@ -23,7 +23,8 @@ public sealed class ItemPipeLayerSystem : ModSystem
 	{
 		if (_sides.TryGetValue((x, y), out var c)) return c;
 		c = new PipeCoverable(PipeKind.Item, x, y);
-		_sides[(x, y)] = c;
+		lock (Api.SaveTickGate.Lock)
+			_sides[(x, y)] = c;
 		return c;
 	}
 
@@ -44,7 +45,8 @@ public sealed class ItemPipeLayerSystem : ModSystem
 	public static void DropSides(int x, int y)
 	{
 		if (_sides.TryGetValue((x, y), out var c)) ((ICoverable)c).OnCoversUnload();
-		_sides.Remove((x, y));
+		lock (Api.SaveTickGate.Lock)
+			_sides.Remove((x, y));
 	}
 
 	public override void Load()
@@ -90,6 +92,12 @@ public sealed class ItemPipeLayerSystem : ModSystem
 	}
 
 	public override void SaveWorldData(TagCompound tag)
+	{
+		lock (Api.SaveTickGate.Lock)
+			WriteWorldData(tag);
+	}
+
+	private void WriteWorldData(TagCompound tag)
 	{
 		if (Pipes.Count == 0) return;
 		var xs    = new List<int>   (Pipes.Count);

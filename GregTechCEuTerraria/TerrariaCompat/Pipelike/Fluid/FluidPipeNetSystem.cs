@@ -25,6 +25,12 @@ public sealed class FluidPipeNetSystem : ModSystem
 
 	public override void PostUpdateWorld()
 	{
+		lock (Api.SaveTickGate.Lock)
+			TickFluidPipeNet();
+	}
+
+	private void TickFluidPipeNet()
+	{
 		using (Profiler.Profiler.Time("tick", "fluid_pipe_net"))
 		{
 		MaybeRebuild();

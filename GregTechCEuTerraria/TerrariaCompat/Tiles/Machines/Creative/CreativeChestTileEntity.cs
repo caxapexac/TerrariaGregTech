@@ -71,9 +71,9 @@ public sealed class CreativeChestTileEntity : SuperChestTileEntity
 
 	public override bool IsItemValid(int slot, Item item) => true;
 
-	public override void SaveData(TagCompound tag)
+	protected override void SaveMachineData(TagCompound tag)
 	{
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		tag["itemsPerCycle"] = _itemsPerCycle;
 		tag["ticksPerCycle"] = _ticksPerCycle;
 	}

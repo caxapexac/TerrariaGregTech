@@ -41,10 +41,10 @@ public class MultiblockTankMachine : MultiblockControllerMachine,
 		Traits.RegisterPersistent("Tank", _tank);
 	}
 
-	public override void SaveData(Terraria.ModLoader.IO.TagCompound tag)
+	protected override void SaveMachineData(Terraria.ModLoader.IO.TagCompound tag)
 	{
 		EnsureTankTrait();
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 	}
 
 	public override void LoadData(Terraria.ModLoader.IO.TagCompound tag)

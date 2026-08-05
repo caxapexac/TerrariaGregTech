@@ -210,9 +210,9 @@ public class PowerSubstationMachine : WorkableMultiblockMachine
 		return $"{s / (86400L * 365)} yr";
 	}
 
-	public override void SaveData(TagCompound tag)
+	protected override void SaveMachineData(TagCompound tag)
 	{
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		tag["pss_inPerSec"]   = _inputPerSec;
 		tag["pss_outPerSec"]  = _outputPerSec;
 		tag["pss_passive"]    = _passiveDrain;

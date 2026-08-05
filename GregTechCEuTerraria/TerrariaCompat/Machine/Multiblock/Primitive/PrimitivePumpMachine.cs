@@ -95,9 +95,9 @@ public class PrimitivePumpMachine : MultiblockControllerMachine
 
 	private bool IsRainingHere() => Main.raining && Position.Y <= Main.UnderworldLayer;
 
-	public override void SaveData(Terraria.ModLoader.IO.TagCompound tag)
+	protected override void SaveMachineData(Terraria.ModLoader.IO.TagCompound tag)
 	{
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		tag["pp_biomeMod"] = _biomeModifier;
 		tag["pp_hatchMod"] = _hatchModifier;
 	}

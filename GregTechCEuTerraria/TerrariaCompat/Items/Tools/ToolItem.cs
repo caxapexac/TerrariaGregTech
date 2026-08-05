@@ -30,7 +30,6 @@ public sealed class ToolItem : ModItem, IElectricItem
 	private readonly int _pick, _axe, _hammer, _damage, _useTime;
 	private readonly int _harvestLevel;
 	private readonly int _tier;
-	private readonly float _toolSpeed, _attackDamage;
 
 	private readonly long _maxCharge;
 	private readonly long _euPerUse;
@@ -49,30 +48,19 @@ public sealed class ToolItem : ModItem, IElectricItem
 		var def = type.Definition;
 		var tp = material.Tool!;
 
-		_toolSpeed = def.EfficiencyMultiplier * tp.HarvestSpeed + def.BaseEfficiency;
-		_attackDamage = def.BaseDamage == ToolDefinition.NoAttackSentinel
-			? 0f
-			: tp.AttackDamage + def.BaseDamage;
 		_harvestLevel = tp.HarvestLevel + def.BaseQuality;
 
 		bool isHammer = ReferenceEquals(type, GTToolType.HARD_HAMMER);
 		bool isPick = !isHammer && (type.ToolClassNames.Contains("pickaxe") || type.Name.Contains("drill"));
 		bool isAxe = type.ToolClassNames.Contains("axe") || type.Name.Contains("chainsaw");
 
-		int upPick    = isPick   ? Math.Min(250, 28 + _harvestLevel * 20) : 0;
-		int upAxe     = isAxe    ? Math.Max(5, 7 + _harvestLevel * 4)     : 0;
-		int upHammer  = isHammer ? 35 + _harvestLevel * 20                : 0;
-		int upDamage  = Math.Max(1, (int)Math.Round(2 + _attackDamage));
-		if (IsCrowbar) upDamage = 12 + _harvestLevel * 3;
-		int upUseTime = Math.Clamp((int)Math.Round(19 - _toolSpeed * 0.6f), 9, 18);
-
 		int tier = ToolTier.For(material);
 		_tier = tier;
 		var anchor = ToolTier.AnchorFor(tier);
-		_pick    = isPick   ? ToolTier.Blend(upPick,    anchor.Pick)    : 0;
-		_axe     = isAxe    ? ToolTier.Blend(upAxe,     anchor.Axe)     : 0;
-		_hammer  = isHammer ? ToolTier.Blend(upHammer,  anchor.Hammer)  : 0;
-		_damage  = Math.Max(1, ToolTier.Blend(upDamage, anchor.Damage));
+		_pick    = isPick   ? anchor.Pick   : 0;
+		_axe     = isAxe    ? anchor.Axe    : 0;
+		_hammer  = isHammer ? anchor.Hammer : 0;
+		_damage  = Math.Max(1, anchor.Damage);
 		_useTime = Math.Max(2, ToolTier.SpeedUseTime(material));
 
 		string n = type.Name;
@@ -88,8 +76,7 @@ public sealed class ToolItem : ModItem, IElectricItem
 		}
 		else if (n == "mortar")
 		{
-			int pickaxePick = ToolTier.Blend(Math.Min(250, 28 + _harvestLevel * 20), anchor.Pick);
-			_pick = Math.Max(1, (int)Math.Round(pickaxePick * 0.75));
+			_pick = Math.Max(1, (int)Math.Round(anchor.Pick * 0.75));
 		}
 		else if (n == "screwdriver" || n == "file")
 		{
@@ -133,7 +120,7 @@ public sealed class ToolItem : ModItem, IElectricItem
 	public bool Chargeable() => IsElectric;
 	public long GetTransferLimit() => IsElectric ? VoltageTiers.Voltage((VoltageTier)_type!.ElectricTier) : 0;
 	public long GetMaxCharge() => _maxCharge;
-	public long GetCharge() => _storedEu;
+	public long GetCharge() => Math.Min(_storedEu, _maxCharge);
 	public int GetTier() => _type?.ElectricTier ?? 0;
 
 	public long Charge(long amount, int chargerTier, bool ignoreTransferLimit, bool simulate)
@@ -142,7 +129,7 @@ public sealed class ToolItem : ModItem, IElectricItem
 		int tier = _type!.ElectricTier;
 		if (chargerTier >= tier && amount > 0L)
 		{
-			long canReceive = _maxCharge - _storedEu;
+			long canReceive = GetMaxCharge() - GetCharge();
 			if (!ignoreTransferLimit) amount = Math.Min(amount, GetTransferLimit());
 			long charged = Math.Min(amount, canReceive);
 			if (!simulate) _storedEu += charged;

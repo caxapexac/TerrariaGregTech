@@ -17,8 +17,6 @@ namespace GregTechCEuTerraria.TerrariaCompat.Recipes;
 // JSON shape goes through the same GTRecipeSerializer + IngredientResolver as the bundle
 public static class CompatRecipes
 {
-	public static readonly System.Collections.Generic.HashSet<string> OverriddenIds = new();
-
 	// compat_{ulv,lv}_{input,output}_{hatch,bus} - make ULV/LV hatches/buses in hand.
 	private const string HatchesAndBuses = """
 	[
@@ -135,7 +133,14 @@ public static class CompatRecipes
 	        "ingredient": { "tag": "minecraft:sand" } } }
 	    ] },
 	    "outputs": { "item": [ { "content": { "type": "gtceu:sized", "count": 2,
-	      "ingredient": { "item": "gtceu:compressed_coke_clay" } } } ] } }
+	      "ingredient": { "item": "gtceu:compressed_coke_clay" } } } ] } },
+
+	  { "id": "crafting_shapeless/compat_neon_sign", "type": "minecraft:crafting_shapeless",
+	    "inputs":  { "item": [
+	      { "content": { "item": "terraria:Sign" } },
+	      { "content": { "type": "gtceu:sized", "count": 1, "ingredient": { "tag": "gtceu:circuits/lv" } } }
+	    ] },
+	    "outputs": { "item": [ { "content": { "item": "GregTechCEuTerraria/neon_sign" } } ] } }
 	]
 	""";
 
@@ -759,6 +764,16 @@ public static class CompatRecipes
 	]
 	""";
 
+	private const string CompressedEnergySubstance = """
+	[
+	  { "id": "compressor/compat_compressed_energy_substance", "type": "gtceu:compressor", "duration": 400,
+	    "inputs":  { "item": [ { "content": { "type": "gtceu:sized", "count": 16,
+	      "ingredient": { "item": "gtceu:energy_cluster" } } } ] },
+	    "tickInputs": { "eu": [ { "content": 491520 } ] },
+	    "outputs": { "item": [ { "content": { "item": "GregTechCEuTerraria/compressed_energy_substance" } } ] } }
+	]
+	""";
+
 	private const string HellstoneOre = """
 	[
 	  { "id": "arc_furnace/compat_hellstone_ore", "type": "gtceu:arc_furnace", "duration": 100,
@@ -776,6 +791,7 @@ public static class CompatRecipes
 		HatchesAndBuses, Bootstrap, Misc, SimplePipes, Casings, Clay,
 		TerrariaIntermediates, TerraPrisma, RedstoneGem, Coins, LegacyConversions,
 		Ae2FluixCables, Ae2Machines, Money, Damascus, Hellforge, HellstoneOre,
+		CompressedEnergySubstance,
 	};
 
 	public sealed record RecipePatch(string BaseId, string NewId, string MergeJson)
@@ -894,10 +910,42 @@ public static class CompatRecipes
 			  "outputs": { "item":  [ { "content": { "item": "terraria:ChumBucket" } } ] } }
 			"""),
 
+		Override("assembly_line/ultimate_battery", """
+			{ "inputs": { "item": [
+			  { "content": { "type": "gtceu:sized", "count": 16, "ingredient": { "tag": "forge:double_plates/darmstadtium" } } },
+			  { "content": { "type": "gtceu:sized", "count": 4, "ingredient": { "tag": "gtceu:circuits/uhv" } } },
+			  { "content": { "type": "gtceu:sized", "count": 1, "ingredient": { "item": "GregTechCEuTerraria/compressed_energy_substance" } } },
+			  { "content": { "type": "gtceu:sized", "count": 4, "ingredient": { "item": "gtceu:uv_field_generator" } } },
+			  { "content": { "type": "gtceu:sized", "count": 64, "ingredient": { "item": "gtceu:uhpic_wafer" } } },
+			  { "content": { "type": "gtceu:sized", "count": 64, "ingredient": { "item": "gtceu:uhpic_wafer" } } },
+			  { "content": { "type": "gtceu:sized", "count": 64, "ingredient": { "item": "gtceu:advanced_smd_diode" } } },
+			  { "content": { "type": "gtceu:sized", "count": 64, "ingredient": { "item": "gtceu:advanced_smd_capacitor" } } },
+			  { "content": { "type": "gtceu:sized", "count": 64, "ingredient": { "item": "gtceu:advanced_smd_resistor" } } },
+			  { "content": { "type": "gtceu:sized", "count": 64, "ingredient": { "item": "gtceu:advanced_smd_transistor" } } },
+			  { "content": { "type": "gtceu:sized", "count": 64, "ingredient": { "item": "gtceu:advanced_smd_inductor" } } },
+			  { "content": { "type": "gtceu:sized", "count": 64, "ingredient": { "item": "gtceu:enriched_naquadah_trinium_europium_duranide_single_wire" } } },
+			  { "content": { "type": "gtceu:sized", "count": 64, "ingredient": { "tag": "forge:bolts/neutronium" } } }
+			] } }
+			"""),
+
 		// Ultimate Manual Crafting Station
 		Derive("electric_blast_furnace/aluminium_from_ruby_dust",
 			"electric_blast_furnace/compat_ultimate_manual_station",
 			"""{ "inputs": { "item": [ { "content": { "item": "GregTechCEuTerraria/manual_hammer" } }, { "content": { "item": "GregTechCEuTerraria/manual_mallet" } }, { "content": { "item": "GregTechCEuTerraria/manual_knife" } }, { "content": { "item": "GregTechCEuTerraria/manual_file" } }, { "content": { "item": "GregTechCEuTerraria/manual_saw" } }, { "content": { "item": "GregTechCEuTerraria/manual_wrench" } }, { "content": { "item": "GregTechCEuTerraria/manual_screwdriver" } }, { "content": { "item": "GregTechCEuTerraria/manual_wire_cutter" } }, { "content": { "item": "GregTechCEuTerraria/manual_mortar" } }, { "content": { "item": "GregTechCEuTerraria/manual_crowbar" } }, { "content": { "item": "gtceu:nether_star" } } ] }, "outputs": { "item": [ { "content": { "item": "GregTechCEuTerraria/ultimate_manual" } } ] } }"""),
+
+		Override("shaped/mega_blast_furnace", """
+			{ "key": {
+			  "F": { "item": "gtceu:luv_field_generator" },
+			  "W": { "item": "gtceu:indium_tin_barium_titanium_cuprate_quadruple_wire" }
+			} }
+			"""),
+
+		Override("shaped/mega_vacuum_freezer", """
+			{ "key": {
+			  "F": { "item": "gtceu:luv_field_generator" },
+			  "W": { "item": "gtceu:indium_tin_barium_titanium_cuprate_quadruple_wire" }
+			} }
+			"""),
 	};
 
 	// Per-tier crafting recipes for our custom-block machines

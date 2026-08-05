@@ -19,6 +19,7 @@ public sealed class CasingTile : ModTile, ITextureWarmUp
 	private readonly string? _texture;
 	private readonly string? _activeTexture;
 	private readonly string? _displayName;
+	private Vector3 _glow;
 
 	public CasingTile() { }
 	public CasingTile(string id, string texture, string displayName, string? activeTexture = null)
@@ -45,7 +46,8 @@ public sealed class CasingTile : ModTile, ITextureWarmUp
 		Main.tileNoAttach[Type]       = false;
 		Main.tileLavaDeath[Type]      = false;
 		Main.tileBlockLight[Type]     = false;
-		Main.tileLighted[Type]        = true;
+		_glow = _id is null ? Vector3.Zero : MultiActiveLight.For(_id);
+		Main.tileLighted[Type]        = _glow != Vector3.Zero;
 		TileObjectData.newTile.CopyFrom(TileObjectData.Style2x2);
 		TileObjectData.newTile.LavaDeath    = false;
 		TileObjectData.newTile.Origin       = new Point16(1, 1);
@@ -65,8 +67,7 @@ public sealed class CasingTile : ModTile, ITextureWarmUp
 
 	public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
 	{
-		if (_id is null) return;
-		var col = MultiActiveLight.For(_id);
+		var col = _glow;
 		if (col.X == 0f && col.Y == 0f && col.Z == 0f) return;
 
 		Tile tile = Main.tile[i, j];

@@ -35,9 +35,9 @@ public sealed class AssemblyLineMachine : WorkableElectricMultiblockMachine
 		return dx != 0 ? dx : pa.Value.Y.CompareTo(pb.Value.Y);
 	};
 
-	public override void SaveData(Terraria.ModLoader.IO.TagCompound tag)
+	protected override void SaveMachineData(Terraria.ModLoader.IO.TagCompound tag)
 	{
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		tag["allowCircuitSlots"] = _allowCircuitSlots;
 	}
 

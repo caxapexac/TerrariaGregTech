@@ -59,6 +59,13 @@ public sealed class PatternProviderMachine : MetaMachine, IMePatternProvider, IM
 		return item.IsAir || (item.ModItem is EncodedPatternItem e && e.Pattern != null);
 	}
 
+	public override void NotifySlotGroupChanged(SlotGroup group)
+	{
+		base.NotifySlotGroupChanged(group);
+		if (group == SlotGroup.InventoryInput)
+			MeNetworkSystem.RequestCraftingUpdate(this);
+	}
+
 	private MeNetworkPushHandler? _pushHandler;
 	private MeNetworkPushHandler PushHandler => _pushHandler ??= new MeNetworkPushHandler(this);
 	public override IItemHandler? GetItemHandlerCap(IODirection side, bool useCoverCapability = true) => PushHandler;
@@ -361,7 +368,7 @@ public sealed class PatternProviderMachine : MetaMachine, IMePatternProvider, IM
 		if (!IsServer) return;
 		if (_sendList.Count > 0) SendStacksOut();
 		if (_jobs.Count == 0) return;
-		var net = MeNetworkSystem.NetAdjacentTo(this);
+		var net = MeNetworkSystem.NetOf(this);
 		var storage = net?.GetStorage();
 		var src = IActionSource.Empty();
 		for (int i = _jobs.Count - 1; i >= 0; i--)
@@ -486,9 +493,9 @@ public sealed class PatternProviderMachine : MetaMachine, IMePatternProvider, IM
 		return false;
 	}
 
-	public override void SaveData(TagCompound tag)
+	protected override void SaveMachineData(TagCompound tag)
 	{
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		if (!string.IsNullOrEmpty(CustomName)) tag["name"] = CustomName;
 		if (Blocking) tag["blk"] = true;
 		if (PushDirection != IODirection.None) tag["pushdir"] = (int)PushDirection;
@@ -574,7 +581,7 @@ public sealed class PatternProviderMachine : MetaMachine, IMePatternProvider, IM
 	public override void AppendTooltip(List<string> lines)
 	{
 		base.AppendTooltip(lines);
-		var net = MeNetworkSystem.NetAdjacentTo(this);
+		var net = MeNetworkSystem.NetOf(this);
 		lines.Add(net == null ? "[c/FF8888:Not connected]" : "ME Network: connected");
 		int count = 0;
 		foreach (var it in _patterns) if (!it.IsAir) count++;

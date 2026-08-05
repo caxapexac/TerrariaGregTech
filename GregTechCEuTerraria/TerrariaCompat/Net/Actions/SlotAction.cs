@@ -91,7 +91,8 @@ public sealed class SlotAction : IMachineAction
 
 	private void ApplyDeposit(Item[] slots, MetaMachine entity, int byWhoAmI)
 	{
-		bool depositOk = !_cursor.IsAir && (_group == SlotGroup.InventoryOutput
+		bool depositOk = !_cursor.IsAir && !entity.IsSlotBlocked(_group, _index)
+			&& (_group == SlotGroup.InventoryOutput
 			? entity.AcceptsOutputDeposit(_index, _cursor)
 			: entity.IsItemValidForSlot(_group, _index, _cursor));
 		if (depositOk)
@@ -122,7 +123,7 @@ public sealed class SlotAction : IMachineAction
 	{
 		ref Item slot = ref slots[_index];
 		var taken = new Item();
-		if (!slot.IsAir)
+		if (!slot.IsAir && !entity.IsSlotBlocked(_group, _index))
 		{
 			int take = _amount == 1 ? (slot.stack + 1) / 2 : slot.stack;
 			taken = slot.Clone();
@@ -137,7 +138,7 @@ public sealed class SlotAction : IMachineAction
 	private void ApplyShiftOut(Item[] slots, MetaMachine entity, int byWhoAmI)
 	{
 		ref Item slot = ref slots[_index];
-		if (slot.IsAir) return;
+		if (slot.IsAir || entity.IsSlotBlocked(_group, _index)) return;
 		int take = System.Math.Min(_amount, slot.stack);
 		if (take <= 0) return;
 		var detached = slot.Clone();
@@ -151,10 +152,11 @@ public sealed class SlotAction : IMachineAction
 	private void ApplyShiftIn(MetaMachine entity, int byWhoAmI)
 	{
 		var (slots, group) = ResolveShiftInSlots(entity);
-		if (slots is not null && entity.IsItemValidForSlot(group, 0, _cursor))
+		if (slots is not null)
 		{
-			DepositInto(slots, _cursor, entity.GetSlotLimitFor(group, 0));
-			entity.NotifySlotGroupChanged(group);
+			int before = _cursor.stack;
+			DepositInto(entity, group, slots, _cursor);
+			if (_cursor.stack != before) entity.NotifySlotGroupChanged(group);
 		}
 		WriteBackCursor(byWhoAmI, _cursor, CursorUpdatePacket.Delivery.PlayerInventory);
 	}
@@ -185,13 +187,15 @@ public sealed class SlotAction : IMachineAction
 		return (int)System.Math.Min(cap, item.stack);
 	}
 
-	public static void DepositInto(Item[] slots, Item item, int slotLimit = int.MaxValue)
+	public static void DepositInto(MetaMachine entity, SlotGroup group, Item[] slots, Item item)
 	{
-		int limit = System.Math.Min(item.maxStack, slotLimit);
 		for (int i = 0; i < slots.Length && item.stack > 0; i++)
 		{
 			ref Item s = ref slots[i];
-			if (s.IsAir || s.type != item.type || s.stack >= limit || !CanStack(s, item)) continue;
+			if (s.IsAir || s.type != item.type || !CanStack(s, item)) continue;
+			if (entity.IsSlotBlocked(group, i) || !entity.IsItemValidForSlot(group, i, item)) continue;
+			int limit = System.Math.Min(item.maxStack, entity.GetSlotLimitFor(group, i));
+			if (s.stack >= limit) continue;
 			int moved = System.Math.Min(limit - s.stack, item.stack);
 			s.stack += moved;
 			item.stack -= moved;
@@ -200,6 +204,8 @@ public sealed class SlotAction : IMachineAction
 		{
 			ref Item s = ref slots[i];
 			if (!s.IsAir) continue;
+			if (entity.IsSlotBlocked(group, i) || !entity.IsItemValidForSlot(group, i, item)) continue;
+			int limit = System.Math.Min(item.maxStack, entity.GetSlotLimitFor(group, i));
 			var placed = item.Clone();
 			placed.stack = System.Math.Min(limit, item.stack);
 			item.stack -= placed.stack;

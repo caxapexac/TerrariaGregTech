@@ -76,7 +76,15 @@ public sealed class MeInterfaceMachine : MetaMachine, IMeInventoryExposer, IMeCr
 
 	public void ApplySetPriority(int value) => Priority = value;
 
-	public void ApplyToggleCraftMissing() => CraftMissing = !CraftMissing;
+	public void ApplyToggleCraftMissing()
+	{
+		CraftMissing = !CraftMissing;
+
+		if (!CraftMissing)
+			_craftingTracker.Cancel();
+
+		UpdatePlan();
+	}
 
 	public void ApplyPickup(int slot, Terraria.Item cursor, int whoAmI)
 	{
@@ -139,16 +147,6 @@ public sealed class MeInterfaceMachine : MetaMachine, IMeInventoryExposer, IMeCr
 				var own = MeNetworkSystem.NetAt(cx, cy);
 				if (own != null) return own;
 			}
-			foreach (var (cx, cy) in Cells())
-				foreach (var (side, dx, dy) in IODirectionExtensions.Cardinal4)
-				{
-					int nx = cx + dx, ny = cy + dy;
-					var net = MeNetworkSystem.NetAt(nx, ny);
-					if (net is null) continue;
-					var back = MeBusLayerSystem.Buses.Get(nx, ny, side.Opposite());
-					if (back is { Kind: MeBusKind.Storage }) continue;
-					return net;
-				}
 			return null;
 		}
 	}
@@ -184,14 +182,23 @@ public sealed class MeInterfaceMachine : MetaMachine, IMeInventoryExposer, IMeCr
 		_cooldown = 1;
 	}
 
+	private void Sleep()
+	{
+		_rateMc = RateMax;
+		_cooldown = RateMax;
+	}
+
 	private void UpdatePlan()
 	{
 		bool hadWork = HasWorkToDo();
 		for (int x = 0; x < _config.Size(); x++)
 			UpdatePlan(x);
 		bool hasWork = HasWorkToDo();
-		if (hadWork != hasWork && hasWork)
-			Wake();
+		if (hadWork != hasWork)
+		{
+			if (hasWork) Wake();
+			else Sleep();
+		}
 	}
 
 	private void UpdatePlan(int slot)
@@ -289,7 +296,7 @@ public sealed class MeInterfaceMachine : MetaMachine, IMeInventoryExposer, IMeCr
 	private bool HandleCrafting(int slot, AEKey what, long amount)
 	{
 		if (!CraftMissing || what == null) return false;
-		return _craftingTracker.HandleCrafting(slot, what, amount, HomeNetwork);
+		return _craftingTracker.HandleCrafting(slot, what, amount, HomeNetwork, IActionSource.Empty());
 	}
 
 	private void OnConfigRowChanged() => ReadConfig();
@@ -311,9 +318,9 @@ public sealed class MeInterfaceMachine : MetaMachine, IMeInventoryExposer, IMeCr
 		_cooldown = _rateMc;
 	}
 
-	public override void SaveData(TagCompound tag)
+	protected override void SaveMachineData(TagCompound tag)
 	{
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		var ct = new TagCompound();
 		_craftingTracker.WriteToNBT(ct);
 		tag["craftTracker"] = ct;

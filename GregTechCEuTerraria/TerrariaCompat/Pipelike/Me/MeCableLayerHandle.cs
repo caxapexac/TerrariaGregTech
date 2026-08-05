@@ -18,6 +18,7 @@ public sealed class MeCableLayerHandle : IGridLayerHandle
 
 	public bool TryPlace(MeCableCell cell, int x, int y, Player placer)
 	{
+		if (!MeCableLayerSystem.Cables.CanPlaceAt(x, y)) return false;
 		var existing = MeCableLayerSystem.Cables.CellAt(x, y);
 		if (existing.HasValue && existing.Value.Equals(cell)) return false;
 		if (existing.HasValue) Refund(placer, existing.Value);

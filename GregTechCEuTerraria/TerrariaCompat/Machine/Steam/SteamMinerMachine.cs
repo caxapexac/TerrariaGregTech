@@ -237,10 +237,10 @@ public sealed class SteamMinerMachine : SteamMachine, IControllable, IItemHandle
 		return false;
 	}
 
-	public override void SaveData(TagCompound tag)
+	protected override void SaveMachineData(TagCompound tag)
 	{
 		EnsureMinerTraits();
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		tag["progress"]         = _progress;
 		tag["active"]           = _active;
 		tag["isWorkingEnabled"] = _isWorkingEnabled;

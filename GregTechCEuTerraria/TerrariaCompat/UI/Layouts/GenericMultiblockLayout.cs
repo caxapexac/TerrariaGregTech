@@ -56,7 +56,7 @@ public static class GenericMultiblockLayout
 		}
 
 		if (!machine.IsFormed)
-			lines.Add(RecipeStatusText.StatusLineForMulti(machine, recipeLogic));
+			RecipeStatusText.AppendUnformedStatus(machine, recipeLogic, lines);
 
 		var activeRecipe = recipeLogic.GetLastRecipe();
 		if (activeRecipe == null && machine.LastRecipeId is { } rid)
@@ -64,7 +64,8 @@ public static class GenericMultiblockLayout
 		bool hideDuration = activeRecipe != null &&
 			global::GregTechCEuTerraria.Api.Recipe.RecipeDataUtil.GetBool(activeRecipe.Data, "hide_duration");
 
-		var b = MultiblockDisplayText.Create(lines, machine.IsFormed)
+		var b = MultiblockDisplayText.Create(lines, machine.IsFormed,
+				showIncompleteStructureWarning: false)
 			.SetWorkingStatus(recipeLogic.IsWorkingEnabled(), machine.DisplayActive)
 			.AddEnergyUsageLine(machine.GetDisplayEnergyContainer())
 			.AddEnergyTierLine(machine.MultiTier)

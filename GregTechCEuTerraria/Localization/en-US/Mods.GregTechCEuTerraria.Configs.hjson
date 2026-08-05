@@ -6,6 +6,11 @@ GTConfig: {
 		Tooltip: If enabled, vanilla bosses drop tier-appropriate GregTech raw ores, dusts, and circuit components.
 	}
 
+	MultiblocksNeedCleanroom: {
+		Label: Multiblocks need cleanroom
+		Tooltip: If disabled, multiblocks ignore all cleanroom requirements. Does nothing while Enable Cleanroom is off
+	}
+
 	NetworkSyncPeriod: {
 		Label: Network Sync Period
 		Tooltip: ""
@@ -51,11 +56,6 @@ GTConfig: {
 		Label: Debug Mobs
 	}
 
-	CleanMultiblocks: {
-		Tooltip: ""
-		Label: Clean Multiblocks
-	}
-
 	EnableCleanroom: {
 		Tooltip: ""
 		Label: Enable Cleanroom
@@ -64,6 +64,11 @@ GTConfig: {
 	AllowShimmerDupes: {
 		Tooltip: ""
 		Label: Allow Shimmer Dupes
+	}
+
+	CraftingCalculationTimePerTick: {
+		Label: Crafting Calculation Time Per Tick
+		Tooltip: ""
 	}
 }
 

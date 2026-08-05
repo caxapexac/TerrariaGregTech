@@ -19,10 +19,12 @@ public static class PipeNeighborProbe
 		return result;
 	}
 
-	public static SideNeighbourKind ProbeAt(int x, int y, CoverSide side, PipeKind layer)
-		=> layer == PipeKind.Fluid
-			? ResolveFluid(x, y, side).kind
-			: ResolveItem (x, y, side).kind;
+	public static SideNeighbourKind ProbeAt(int x, int y, CoverSide side, PipeKind layer) => layer switch
+	{
+		PipeKind.Fluid => ResolveFluid(x, y, side).kind,
+		PipeKind.Item  => ResolveItem (x, y, side).kind,
+		_              => UnsupportedLayer(layer, nameof(ProbeAt), SideNeighbourKind.None),
+	};
 
 	public static (SideNeighbourKind kind, IFluidHandler? handler) ResolveFluid(
 		int x, int y, CoverSide side)
@@ -66,10 +68,19 @@ public static class PipeNeighborProbe
 		return leaf != null ? (SideNeighbourKind.Inventory, leaf) : (SideNeighbourKind.None, null);
 	}
 
-	public static bool IsConnectedPipe(int x1, int y1, int x2, int y2, PipeKind layer)
-		=> layer == PipeKind.Fluid
-			? FluidPipeLayerSystem.Pipes.Connects(x1, y1, x2, y2)
-			: ItemPipeLayerSystem.Pipes.Connects(x1, y1, x2, y2);
+	public static bool IsConnectedPipe(int x1, int y1, int x2, int y2, PipeKind layer) => layer switch
+	{
+		PipeKind.Fluid => FluidPipeLayerSystem.Pipes.Connects(x1, y1, x2, y2),
+		PipeKind.Item  => ItemPipeLayerSystem .Pipes.Connects(x1, y1, x2, y2),
+		_              => UnsupportedLayer(layer, nameof(IsConnectedPipe), false),
+	};
+
+	private static T UnsupportedLayer<T>(PipeKind layer, string caller, T fallback)
+	{
+		Terraria.ModLoader.ModContent.GetInstance<GregTechCEuTerraria>()?.Logger
+			.Warn($"PipeNeighborProbe.{caller}: unsupported layer {layer} - only Item and Fluid are probeable.");
+		return fallback;
+	}
 
 	public static bool[] ProbeItem(int x, int y)  => ProbeBool(x, y, PipeKind.Item);
 	public static bool[] ProbeFluid(int x, int y) => ProbeBool(x, y, PipeKind.Fluid);

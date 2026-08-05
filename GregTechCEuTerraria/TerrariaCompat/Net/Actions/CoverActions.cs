@@ -12,35 +12,17 @@ using Terraria.ID;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Net.Actions;
 
-// Cover-action dispatcher. Parallel to MachineActions but routes cover-
-// targeted actions (CoverAction, CoverConfigAction, CoverFilterAction)
-// against any ICoverable holder - MetaMachine OR PipeCoverable - so the
-// same action class drives machine-side covers AND pipe-side covers.
-//
-// Wire layout written by Send (after NewPacket has stamped PacketType):
-//
-//     byte target_kind  (0 = machine, 1 = pipe)
-//     if machine: Point16 entityPosition
-//     if pipe:    byte layer + short x + short y
-//     ...action payload (action.Write)...
-//
-// HandleIncoming reads the same layout, resolves the ICoverable, applies.
 public static class CoverActions
 {
 	public static void Send(ICoverAction action, ICoverable target)
 	{
-		// Server side (incl. SP): apply in-process.
 		if (Main.netMode != NetmodeID.MultiplayerClient)
 		{
 			action.Apply(target, Main.myPlayer);
-			// On a real MP server, push fresh state to all clients so every
-			// view of the target reflects the change without waiting for the
-			// next throttled tick.
 			if (Main.netMode == NetmodeID.Server) BroadcastPostApply(target);
 			return;
 		}
 
-		// MP client: ship to server.
 		var p = NetRouter.NewPacket(action.Type);
 		WriteTarget(p, target);
 		action.Write(p);
@@ -66,10 +48,6 @@ public static class CoverActions
 			return;
 		}
 
-		// Viewer-set authority check - only for machine targets. Pipe targets
-		// don't track viewers per-cell today; that lands with the per-pipe
-		// settings UI's view-begin packet. Until then, pipe-target actions
-		// trust the caller (same posture as cable layer mutations).
 		if (target is MetaMachine machine)
 		{
 			if (!machine.HasViewer(whoAmI))
@@ -84,7 +62,6 @@ public static class CoverActions
 		BroadcastPostApply(target);
 	}
 
-	// Per-target-kind state broadcast after a successful apply.
 	private static void BroadcastPostApply(ICoverable target)
 	{
 		switch (target)
@@ -94,9 +71,6 @@ public static class CoverActions
 				break;
 			case PipeCoverable pipe:
 				PipeCoverSyncPacket.Broadcast(pipe.Layer, pipe.X, pipe.Y);
-				// If the cell now has zero covers (last one was removed),
-				// drop the server-side PipeCoverable too so the dict stays
-				// sparse. The broadcast already told clients to do the same.
 				if (!((ICoverable)pipe).HasAnyCover())
 				{
 					if (pipe.Layer == PipeKind.Fluid) FluidPipeLayerSystem.DropSides(pipe.X, pipe.Y);
@@ -106,7 +80,6 @@ public static class CoverActions
 		}
 	}
 
-	// -- Wire helpers -----------------------------------------------------
 	private static void WriteTarget(BinaryWriter w, ICoverable target)
 	{
 		switch (target)
@@ -144,9 +117,6 @@ public static class CoverActions
 			int x = r.ReadInt16();
 			int y = r.ReadInt16();
 			desc = $"pipe[{layer}]@({x},{y})";
-			// Pipe cell must exist at this coord. The PipeCoverable itself
-			// is lazily-created via EnsureSides - a cover Place needs an
-			// instance even if no covers were attached before.
 			bool cellExists = layer == PipeKind.Fluid
 				? FluidPipeLayerSystem.Pipes.Has(x, y)
 				: ItemPipeLayerSystem .Pipes.Has(x, y);

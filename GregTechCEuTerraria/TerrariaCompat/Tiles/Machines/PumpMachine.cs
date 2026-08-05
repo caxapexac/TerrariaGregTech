@@ -15,17 +15,6 @@ using Terraria.ModLoader.IO;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Tiles.Machines;
 
-// Adapted port of com.gregtechceu.gtceu.common.machine.electric.PumpMachine.
-// Upstream drains a tier-scaled 3D box of source-fluid blocks into its tank.
-//
-// DEVIATIONS (Terraria-adapted): no facing - flat WxD band below;
-// pickup gate mirrors vanilla bucket-fill (Player.cs:45724-45815):
-// target.liquid > 0 && sum(3x3 matching) > 100, then drain + top up to 255
-// units (= 1000 mB) from 3x3 neighbours; two tanks (Water + Lava - the
-// FluidRegistry liquids that exist in-world; honey/shimmer skipped); per-tank
-// cap 16k*tier mB; persistent _scanCursor sweeps the band.
-//
-// Energy: receiver, capacity V[tier]*64, per-tick draw V[tier-1].
 public sealed class PumpMachine : TieredEnergyMachine, IControllable, IFluidHandler
 {
 	public PumpMachine() { }
@@ -45,7 +34,6 @@ public sealed class PumpMachine : TieredEnergyMachine, IControllable, IFluidHand
 		}
 	}
 
-	// Width = 16*tier; Depth = world-height fraction per tier (fluid-pocket bands).
 	public int Width => 16 * (int)Tier;
 	public int Depth
 	{
@@ -63,9 +51,8 @@ public sealed class PumpMachine : TieredEnergyMachine, IControllable, IFluidHand
 			return (int)(h * frac);
 		}
 	}
-	public int TankCapacity => 16_000 * (int)Tier; // 16 buckets x tier in mB
+	public int TankCapacity => 16_000 * (int)Tier;
 
-	// Ticks per pump action - tier-keyed constant.
 	private int TicksPerPump
 	{
 		get
@@ -77,8 +64,6 @@ public sealed class PumpMachine : TieredEnergyMachine, IControllable, IFluidHand
 
 	protected override bool HasChargerSlot => true;
 
-	// Two type-validated CustomFluidTanks (cross-fill impossible; each renders
-	// as its own column).
 	private const int WaterTankIndex = 0;
 	private const int LavaTankIndex  = 1;
 
@@ -104,7 +89,6 @@ public sealed class PumpMachine : TieredEnergyMachine, IControllable, IFluidHand
 		Traits.Attach(_tanks);
 		Traits.RegisterPersistent("Tanks", _tanks);
 
-		// AutoOutputTrait.ofFluids - handler-ref form.
 		_autoOutput = AutoOutputTrait.OfFluids(_tanks);
 		Traits.Attach(_autoOutput);
 		Traits.RegisterPersistent("AutoOutput", _autoOutput);
@@ -121,14 +105,12 @@ public sealed class PumpMachine : TieredEnergyMachine, IControllable, IFluidHand
 
 	public override bool SupportsAutoOutputFluids => true;
 
-	// The machine IS the IFluidHandler; calls route into the trait's tank N.
 	int IFluidHandler.TankCount => Tanks.Storages.Length;
 	FluidStack IFluidHandler.GetTank(int tank) => Tanks.Storages[tank].Fluid;
 	int IFluidHandler.GetCapacity(int tank) => Tanks.Storages[tank].Capacity;
 	bool IFluidHandler.IsFluidValid(int tank, FluidStack fluid) => Tanks.Storages[tank].IsFluidValid(fluid);
 	int IFluidHandler.Fill(FluidStack resource, bool simulate)
 	{
-		// Walk both tanks; each Validator gates the type match.
 		int filled = 0;
 		var copy = resource;
 		for (int i = 0; i < Tanks.Storages.Length && copy.Amount > 0; i++)
@@ -157,8 +139,6 @@ public sealed class PumpMachine : TieredEnergyMachine, IControllable, IFluidHand
 		}
 		return FluidStack.Empty;
 	}
-	// Player bucket-click path - hand back the raw per-tank storage so a click
-	// on tank N drains tank N (not whichever non-empty tank the walker picks).
 	IFluidHandler IFluidHandler.GetTankAccess(int tank)
 		=> tank >= 0 && tank < Tanks.Storages.Length ? Tanks.Storages[tank] : this;
 
@@ -172,7 +152,7 @@ public sealed class PumpMachine : TieredEnergyMachine, IControllable, IFluidHand
 	private int _progress;
 	private int _targetX;
 	private int _targetY;
-	private int _targetLiquidType; // LiquidID - 0=water, 1=lava
+	private int _targetLiquidType;
 	private bool _hasTarget;
 	private int _scanCursor;
 	private int _lastDepth;
@@ -223,11 +203,9 @@ public sealed class PumpMachine : TieredEnergyMachine, IControllable, IFluidHand
 		if (_targetX < 0 || _targetX >= Main.maxTilesX || _targetY < 0 || _targetY >= Main.maxTilesY)
 			return false;
 		var t = Main.tile[_targetX, _targetY];
-		// Re-check the bucket-fill gate each tick (neighbours change - drained, lava cools).
 		return t.LiquidAmount > 0 && t.LiquidType == _targetLiquidType && BucketFillGate(_targetX, _targetY);
 	}
 
-	// Vanilla bucket-fill gate - sum(3x3 matching) > 100 (Player.cs:45728-45741).
 	private static bool BucketFillGate(int x, int y)
 	{
 		int type = Main.tile[x, y].LiquidType;
@@ -244,7 +222,6 @@ public sealed class PumpMachine : TieredEnergyMachine, IControllable, IFluidHand
 		return sum > 100;
 	}
 
-	// Scan the WxD band for the next pumpable tile (cursor sweeps columns, shallow-first).
 	private bool FindTarget(out int outX, out int outY, out int outLiquidType)
 	{
 		int leftX  = Position.X + Size.Width / 2 - Width / 2;
@@ -279,9 +256,6 @@ public sealed class PumpMachine : TieredEnergyMachine, IControllable, IFluidHand
 		return false;
 	}
 
-	// Pump action - mirrors vanilla bucket fill (Player.cs:45767-45814): drain
-	// the target, pull matching liquid from 3x3 neighbours up to 255, deposit
-	// (collected * 1000 / 255) mB into the matching tank.
 	private void PumpTarget()
 	{
 		if (_targetX < 0 || _targetX >= Main.maxTilesX || _targetY < 0 || _targetY >= Main.maxTilesY) return;
@@ -290,11 +264,9 @@ public sealed class PumpMachine : TieredEnergyMachine, IControllable, IFluidHand
 
 		int liquidType = t.LiquidType;
 		int collected = t.LiquidAmount;
-		// tML Tile is a struct-pointer wrapper - assigning to a local writes
-		// through to the tile data (idiomatic per ExampleMod).
 		var target = Main.tile[_targetX, _targetY];
 		target.LiquidAmount = 0;
-		target.LiquidType   = LiquidID.Water; // type is meaningless when empty
+		target.LiquidType   = LiquidID.Water;
 		WorldGen.SquareTileFrame(_targetX, _targetY, resetFrame: false);
 		SyncLiquidChange(_targetX, _targetY);
 
@@ -315,14 +287,13 @@ public sealed class PumpMachine : TieredEnergyMachine, IControllable, IFluidHand
 					var neighbour = Main.tile[k, l];
 					neighbour.LiquidAmount = (byte)(n.LiquidAmount - take);
 					if (neighbour.LiquidAmount == 0)
-						neighbour.LiquidType = LiquidID.Water; // type meaningless when empty
+						neighbour.LiquidType = LiquidID.Water;
 					WorldGen.SquareTileFrame(k, l, resetFrame: false);
 					SyncLiquidChange(k, l);
 				}
 			}
 		}
 
-		// 255 liquid units = 1000 mB (one bucket).
 		int mB = collected * 1000 / 255;
 		var stack = new FluidStack(
 			liquidType == LiquidID.Water ? FluidRegistry.Water : FluidRegistry.Lava,
@@ -333,8 +304,6 @@ public sealed class PumpMachine : TieredEnergyMachine, IControllable, IFluidHand
 		_lastDepth = _targetY - (Position.Y + Size.Height) + 1;
 	}
 
-	// Server broadcasts via NetMessage.sendWater; SP runs Liquid.AddWater to
-	// wake the simulator so the band refills from above.
 	private static void SyncLiquidChange(int x, int y)
 	{
 		if (Main.netMode == NetmodeID.Server)
@@ -354,10 +323,10 @@ public sealed class PumpMachine : TieredEnergyMachine, IControllable, IFluidHand
 		return false;
 	}
 
-	public override void SaveData(TagCompound tag)
+	protected override void SaveMachineData(TagCompound tag)
 	{
 		EnsureTraits();
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		tag["progress"]         = _progress;
 		tag["active"]           = _active;
 		tag["isWorkingEnabled"] = _isWorkingEnabled;

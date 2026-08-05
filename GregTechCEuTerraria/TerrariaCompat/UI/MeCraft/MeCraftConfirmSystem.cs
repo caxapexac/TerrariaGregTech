@@ -59,6 +59,7 @@ public sealed class MeCraftConfirmSystem : ModalUISystem
 	protected override void OnClose()
 	{
 		_window?.Unbind();
+		MeCraftPackets.Abandon();
 		SoundEngine.PlaySound(SoundID.MenuClose);
 	}
 }

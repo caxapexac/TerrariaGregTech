@@ -137,9 +137,9 @@ public abstract class MultiblockPartMachine : MetaMachine, IMultiPart, IItemHand
 
 	public virtual bool ReplacePartModelWhenFormed() => IsFormed();
 
-	public override void SaveData(TagCompound tag)
+	protected override void SaveMachineData(TagCompound tag)
 	{
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		if (_controllerPositions.Count == 0) return;
 		var xs = new int[_controllerPositions.Count];
 		var ys = new int[_controllerPositions.Count];

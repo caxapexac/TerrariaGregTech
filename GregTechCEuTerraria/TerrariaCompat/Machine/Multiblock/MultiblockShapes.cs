@@ -1100,19 +1100,51 @@ public static class MultiblockShapes
 	// .where('#', any())
 	public static readonly string[] MegaBlastFurnace =
 	{
-		"XXXXXBMBXXXXX",
-		"XCCCCCCCCCCCX",
-		"XCCCCCCCCCCCX",
-		"XCCCCCCCCCCCX",
-		"XCCCCCCCCCCCX",
-		"XCCCCCCCCCCCX",
-		"XCCCCCCCCCCCX",
-		"XCCCCCCCCCCCX",
-		"XCCCCCCCCCCCX",
-		"XCCCCCCCCCCCX",
-		"XCCCCCCCCCCCX",
-		"XFFFFFFFFFFFX",
-		"XXXXXBSBXXXXX",
+		"#########IVVVMVVI##########",
+		"########IHVV###VVHI########",
+		"#######IHH#######HHI#######",
+		"#######IH#########HI#######",
+		"#######VV#T#####T#VV#######",
+		"#######VV#TT###TT#VV#######",
+		"#######VV#NTT#TTN#VV#######",
+		"#######IHNNNTPTNNNHI#######",
+		"#######IHN#NTPTN#NHI#######",
+		"#######IHH#NTPTN#HHI#######",
+		"######SIIH#NTPTN#HIIS######",
+		"######SSIHNNTPTNNHISS######",
+		"#####SSIIHNTTPTTNHIISS#####",
+		"#####SIIHHNTTPTTNHHIIS#####",
+		"#####SIIHNNTTPTTNNHIIS#####",
+		"#####SIIHNTTTPTTTNHIIS#####",
+		"####SSSHHTTTTPTTTTHHSSS####",
+		"####SIIHTTTT###TTTTHIIS####",
+		"####SIIHTTT#####TTTHIIS####",
+		"####SIIHTT#######TTHIIS####",
+		"####SIIHTT#######TTHIIS####",
+		"###SSSIHTT#######TTHISSS###",
+		"###SIIHHTTT#####TTTHHIIS###",
+		"###SIIHHTTPP###PPTTHHIIS###",
+		"###SIIHHNPPTTTTTPPNHHIIS###",
+		"##SSSIHHNPTTTTTTTPNHHISSS##",
+		"##SIIIHHNPPTTTTTPPNHHIIIS##",
+		"##SIIHHHN#PP###PP#NHHHIIS##",
+		"#SSSIHHNNN#PP#PP#NNNHHISSS#",
+		"#SIIIHHN#NN#PPP#NN#NHHIIIS#",
+		"#SIIIHEEFFFFFPFFFFFEEHIIIS#",
+		"HHHHHHEEOOOOOPOOOOOEEHHHHHH",
+		"HHHHHHEEFFFFFRFFFFFEEHHHHHH",
+
+		//T = Trinium Coil
+		//I = Invar Cs.
+		//H = HTSC
+		//N = Naq Frm. Box
+		//P = Tung. Pipe Cs.
+		//S = TungSt Frm. Box
+		//F = TungSt Firebox
+		//E = Ext. Air Int.
+		//R = Rot. Hearth Furnace
+		//M = Muffler Hatch
+		//V = Heat Vent
 	};
 
 	// =========================================================================
@@ -1137,12 +1169,31 @@ public static class MultiblockShapes
 	// .where('#', any())
 	public static readonly string[] MegaVacuumFreezer =
 	{
-		"XXXXXXX#KKK",
-		"XAAAAAX#KPK",
-		"XAAAAAX#KPK",
-		"XAAAAAX#KPK",
-		"XPPSPPPPPPK",
-		"XXXXXXX#KKK",
+		"XSSSSSSSVVVVSFFFCCCFFFSVVVVSSSSSSSX",
+		"SSGGGGGSSVVSSFFFEEEFFFSSVVSSGGGGGSS",
+		"SGGXXXGGSVVSFFXXXXXXXFFSVVSGGXXXGGS",
+		"SGXXXXXGSVVSFFXXXXXXXFFSVVSGXXXXXGS",
+		"SGXXXXXGSVVCEEXXXXXXXEECVVSGXXXXXGS",
+		"EEXXXXXSSVVCEEXXXXXXXEECVVSSXXXXXEE",
+		"EEXXXXXSSVVFFFXXXXXXXFFFVVSSXXXXXEE",
+		"SPPXXXPPPPPPPPXXXXXXXPPPPPPPPXXXPPS",
+		"STPPPPPTSEEFFPXXXXXXXPFFEESTPPPPPTS",
+		"SSXTTTXSSEEFFPPPPPPPPPFFEESSXTTTXSS",
+		"ASSSSSSSAXXTFTTTTTTTTTFTXXASSSSSSSA",
+		"AXAAAAAXAXXTFFFFEBEFFFFTXXAXAAAAAXA",
+		"AXAXAXAXAXXTFFFFCCCFFFFTXXAXAXAXAXA",
+
+		//X = Air
+		//B = Bulk Blast Chiller
+		//F = Frost Prf. Cs.
+		//E = Ext. Air Intake
+		//P = TungSt. Pipe Cs.
+		//T = TungSt. Frame Box
+		//A = Aluminium Frame Box
+		//C = Filter Cs.
+		//S = Clean Stn. St. Cs.
+		//V = Heat Vent
+		//G = Temp. Glass
 	};
 
 	// =========================================================================

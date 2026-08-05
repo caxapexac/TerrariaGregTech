@@ -37,7 +37,7 @@ public static class ResearchProviderLayout
 		var recipeLogic = machine.Recipe;
 
 		if (!machine.IsFormed)
-			lines.Add(RecipeStatusText.StatusLineForMulti(machine, recipeLogic));
+			RecipeStatusText.AppendUnformedStatus(machine, recipeLogic, lines);
 
 		machine.Definition?.AdditionalDisplay?.Invoke(machine, lines);
 
@@ -45,7 +45,8 @@ public static class ResearchProviderLayout
 			? hpca.DisplayCachedCWUt > 0
 			: machine.DisplayActive && recipeLogic.IsWorkingEnabled();
 
-		MultiblockDisplayText.Create(lines, machine.IsFormed)
+		MultiblockDisplayText.Create(lines, machine.IsFormed,
+				showIncompleteStructureWarning: false)
 			.SetWorkingStatus(true, providing)
 			.SetWorkingStatusKeys(
 				"gtceu.multiblock.idling",

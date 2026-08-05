@@ -284,27 +284,6 @@ public static class RecipeRowRenderer
 		return c.IsReverse ? "Not: " + s : s;
 	}
 
-	public static int HitTest(Rectangle bounds, GTRecipe recipe, Point mouse)
-	{
-		int x = bounds.X + 4;
-		int cy = bounds.Y + 2;
-
-		foreach (var c in AllInputs(recipe))
-		{
-			var r = new Rectangle(x, cy, CellSize, CellSize);
-			if (r.Contains(mouse)) return ResolveItemType(c);
-			x += CellSize + CellPad;
-		}
-		x += ArrowSize + 6 + 2;
-		foreach (var c in AllOutputs(recipe))
-		{
-			var r = new Rectangle(x, cy, CellSize, CellSize);
-			if (r.Contains(mouse)) return ResolveItemType(c);
-			x += CellSize + CellPad;
-		}
-		return 0;
-	}
-
 	private static int ResolveItemType(RecipeContent content) => ItemTypeOf((Ingredient)content.Payload);
 
 	public static int ItemTypeOf(Ingredient ing) => Inner(ing) switch
@@ -698,16 +677,6 @@ public static class RecipeRowRenderer
 		return null;
 	}
 
-	public static HashSet<int> ItemTypesInRecipe(GTRecipe recipe)
-	{
-		var set = new HashSet<int>();
-		foreach (var c in recipe.GetInputContents(ItemRecipeCapability.CAP))
-			AddItemTypes(c, set);
-		foreach (var c in recipe.GetOutputContents(ItemRecipeCapability.CAP))
-			AddItemTypes(c, set);
-		return set;
-	}
-
 	public static HashSet<int> InputItemTypesInRecipe(GTRecipe recipe)
 	{
 		var set = new HashSet<int>();
@@ -740,14 +709,6 @@ public static class RecipeRowRenderer
 		}
 		int t = ResolveItemType(c);
 		if (t > 0) sink.Add(t);
-	}
-
-	public static HashSet<string> FluidIdsInRecipe(GTRecipe recipe)
-	{
-		var set = new HashSet<string>();
-		foreach (var c in recipe.GetInputContents(FluidRecipeCapability.CAP)) AddFluidIds(c, set);
-		foreach (var c in recipe.GetOutputContents(FluidRecipeCapability.CAP)) AddFluidIds(c, set);
-		return set;
 	}
 
 	public static HashSet<string> InputFluidIdsInRecipe(GTRecipe recipe)

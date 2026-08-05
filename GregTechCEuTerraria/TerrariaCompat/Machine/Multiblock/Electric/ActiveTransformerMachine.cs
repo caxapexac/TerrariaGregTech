@@ -176,9 +176,9 @@ public class ActiveTransformerMachine : WorkableElectricMultiblockMachine
 		lines.Add("[c/FF5555:Warning: breaking while running will explode]");
 	}
 
-	public override void SaveData(TagCompound tag)
+	protected override void SaveMachineData(TagCompound tag)
 	{
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		tag["at_inV"]    = _dispInputV;
 		tag["at_inA"]    = _dispInputA;
 		tag["at_inPS"]   = _dispInputPerSec;

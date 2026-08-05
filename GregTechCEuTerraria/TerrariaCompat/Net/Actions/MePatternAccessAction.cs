@@ -78,6 +78,8 @@ public sealed class MePatternAccessAction : IMachineAction
 			case Kind.CreativeDuplicate:  CreativeDuplicate(slots, byWhoAmI); break;
 		}
 
+		provider.NotifySlotGroupChanged(SlotGroup.InventoryInput);
+
 		if (Main.netMode == NetmodeID.Server)
 			MachineStateSyncPacket.Broadcast(provider);
 	}

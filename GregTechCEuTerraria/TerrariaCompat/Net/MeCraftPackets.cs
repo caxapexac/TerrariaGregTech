@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using GregTechCEuTerraria.AppliedEnergistics.Api.Networking.Security;
 using GregTechCEuTerraria.AppliedEnergistics.Api.Stacks;
+using GregTechCEuTerraria.AppliedEnergistics.Core;
 using GregTechCEuTerraria.TerrariaCompat.AppliedEnergistics;
 using GregTechCEuTerraria.TerrariaCompat.AppliedEnergistics.Crafting;
 using GregTechCEuTerraria.TerrariaCompat.Pipelike.Me;
@@ -82,13 +83,137 @@ public static class MeCraftPackets
 		if (what != null) DoBegin(pos, what, amount, whoAmI);
 	}
 
+	private sealed class PendingPlan
+	{
+		public Point16 TermPos;
+		public AEKey What = null!;
+		public long Amount;
+		public CraftingJob Job = null!;
+	}
+
+	private sealed class ReadyPlan
+	{
+		public Point16 TermPos;
+		public AEKey What = null!;
+		public long Amount;
+		public CraftingPlan Plan = null!;
+	}
+
+	private static readonly Dictionary<int, PendingPlan> _pending = new();
+	private static readonly Dictionary<int, ReadyPlan> _ready = new();
+
+	private static bool StillConnected(int player)
+	{
+		if (Main.netMode != NetmodeID.Server) return true;
+		return player >= 0 && player < Main.maxPlayers && Main.player[player].active;
+	}
+
+	private static IActionSource SourceOf(int whoAmI) =>
+		whoAmI >= 0 && whoAmI < Main.maxPlayers && Main.player[whoAmI].active
+			? IActionSource.OfPlayer(Main.player[whoAmI])
+			: IActionSource.Empty();
+
+	public static void ClearPlans()
+	{
+		foreach (var p in _pending.Values) p.Job.Cancel();
+		_pending.Clear();
+		_ready.Clear();
+	}
+
+	public static void PollPendingPlans()
+	{
+		if (_pending.Count == 0) return;
+
+		List<int>? finished = null;
+		foreach (var (player, pending) in _pending)
+		{
+			if (!StillConnected(player))
+			{
+				pending.Job.Cancel();
+				(finished ??= new List<int>()).Add(player);
+				_ready.Remove(player);
+				continue;
+			}
+
+			if (!pending.Job.IsDone) continue;
+			(finished ??= new List<int>()).Add(player);
+
+			var plan = pending.Job.Get();
+			if (plan == null)
+			{
+				if (!pending.Job.IsCanceled && pending.Job.Error is { } error)
+				{
+					Notify(player, "Error: " + error.Message);
+					AELog.Warn(error, "Failed to start crafting job.");
+				}
+				continue;
+			}
+
+			_ready[player] = new ReadyPlan
+			{
+				TermPos = pending.TermPos,
+				What = pending.What,
+				Amount = pending.Amount,
+				Plan = plan,
+			};
+			SendPlanResult(pending.TermPos, pending.What, pending.Amount, plan, player);
+		}
+
+		if (finished != null)
+			foreach (int player in finished)
+				_pending.Remove(player);
+	}
+
 	private static void DoBegin(Point16 termPos, AEKey what, long amount, int whoAmI)
 	{
 		var net = NetAt(termPos);
 		if (net == null) return;
-		var plan = MeCraftingService.Plan(net, what, amount);
-		if (plan == null) return;
-		var summary = CraftingPlanSummary.FromPlan(plan, net.GetStorage(), IActionSource.Empty());
+
+		if (_pending.TryGetValue(whoAmI, out var existing))
+			existing.Job.Cancel();
+		_ready.Remove(whoAmI);
+
+		var job = MeCraftingService.BeginCraftingCalculation(
+			net, what, amount, CalculationStrategy.ReportMissingItems, SourceOf(whoAmI));
+		if (job == null) return;
+
+		_pending[whoAmI] = new PendingPlan
+		{
+			TermPos = termPos,
+			What = what,
+			Amount = amount,
+			Job = job,
+		};
+	}
+
+	public static void Abandon()
+	{
+		if (Main.gameMenu) return;
+		if (Main.netMode == NetmodeID.SinglePlayer) { DoAbandon(Main.myPlayer); return; }
+		NetRouter.NewPacket(PacketType.MeCraftPlanAbandon).Send();
+	}
+
+	public static void HandleAbandon(int whoAmI)
+	{
+		if (Main.netMode != NetmodeID.Server) return;
+		DoAbandon(whoAmI);
+	}
+
+	private static void DoAbandon(int whoAmI)
+	{
+		if (_pending.TryGetValue(whoAmI, out var pending))
+		{
+			pending.Job.Cancel();
+			_pending.Remove(whoAmI);
+		}
+		_ready.Remove(whoAmI);
+	}
+
+	private static void SendPlanResult(Point16 termPos, AEKey what, long amount, CraftingPlan plan, int whoAmI)
+	{
+		var net = NetAt(termPos);
+		if (net == null) return;
+		var summary = CraftingPlanSummary.FromPlan(plan, net.GetStorage(), SourceOf(whoAmI));
 		var cpus = GatherCpus(net);
 		var invalid = MeCraftingService.CollectUnfulfillableByOutput(net, plan);
 
@@ -158,19 +283,25 @@ public static class MeCraftPackets
 	{
 		var net = NetAt(termPos);
 		if (net == null) { Notify(whoAmI, "Not connected to an ME network"); return; }
-		var plan = MeCraftingService.Plan(net, what, amount);
-		if (plan == null || plan.Simulation) { Notify(whoAmI, "Missing items - cannot craft"); return; }
+
+		if (!_ready.TryGetValue(whoAmI, out var ready)) return;
+		_ready.Remove(whoAmI);
+
+		var plan = ready.Plan;
+		if (plan.Simulation) { Notify(whoAmI, "Missing items - cannot craft"); return; }
 		var invalid = MeCraftingService.CollectUnfulfillableByOutput(net, plan);
 		if (invalid.Count > 0) { Notify(whoAmI, "Cannot craft - " + invalid[0].reason); return; }
+
+		var src = SourceOf(whoAmI);
 
 		CraftingSubmitResult result;
 		if (automatic)
 		{
-			result = MeCraftingService.Submit(net, plan, null, whoAmI);
+			result = MeCraftingService.Submit(net, plan, null, whoAmI, src);
 		}
 		else if (TileEntity.ByPosition.TryGetValue(cpuPos, out var te) && te is QuantumComputerMachine cpu)
 		{
-			result = cpu.Logic.TrySubmitJob(plan, IActionSource.Empty(), null, whoAmI);
+			result = cpu.Logic.TrySubmitJob(plan, src, null, whoAmI);
 		}
 		else
 		{

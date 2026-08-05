@@ -415,8 +415,11 @@ public class ImplosionPress : ModNPC, IDebuggableBoss
 
 	private void ReturnToReposition()
 	{
-		_anchorAngle += Main.rand.NextFloat(-1.0f, 1.0f);
-		_anchorAngle = MathHelper.Clamp(_anchorAngle, -MathHelper.Pi + 0.4f, -0.4f);
+		if (Main.netMode != NetmodeID.MultiplayerClient)
+		{
+			_anchorAngle += Main.rand.NextFloat(-1.0f, 1.0f);
+			_anchorAngle = MathHelper.Clamp(_anchorAngle, -MathHelper.Pi + 0.4f, -0.4f);
+		}
 		NPC.ai[0] = S_Reposition;
 		NPC.ai[1] = 0f;
 		NPC.netUpdate = true;
@@ -530,7 +533,7 @@ public class ImplosionPress : ModNPC, IDebuggableBoss
 		NPC.ai[1]++;
 		int t = (int)NPC.ai[1];
 
-		if (t == 0)
+		if (t == 1)
 		{
 			_preSlamAnchor = NPC.Center;
 		}

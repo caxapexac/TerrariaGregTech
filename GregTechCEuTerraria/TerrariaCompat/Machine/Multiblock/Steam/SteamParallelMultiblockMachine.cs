@@ -69,9 +69,9 @@ public sealed class SteamParallelMultiblockMachine : WorkableMultiblockMachine
 			RefreshSteamSnapshot();
 	}
 
-	public override void SaveData(Terraria.ModLoader.IO.TagCompound tag)
+	protected override void SaveMachineData(Terraria.ModLoader.IO.TagCompound tag)
 	{
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		tag["spm_steam"] = SteamStored;
 		tag["spm_cap"]   = SteamCapacity;
 	}

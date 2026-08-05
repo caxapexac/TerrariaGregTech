@@ -394,11 +394,10 @@ public abstract class PipeNet<TData> where TData : notnull
 		return compound;
 	}
 
-	// -- Helpers --------------------------------------------------------
 	private static (int x, int y) Offset((int x, int y) pos, CoverSide side)
 	{
 		var (dx, dy) = CoverSides.Offset(side);
-		return (pos.x + dx, pos.y + dy);
+		return PipePassthrough.EffectiveNeighbor(pos.x, pos.y, dx, dy);
 	}
 
 	private static (int cx, int cy) ToChunkPos((int x, int y) pos) => (pos.x >> 4, pos.y >> 4);

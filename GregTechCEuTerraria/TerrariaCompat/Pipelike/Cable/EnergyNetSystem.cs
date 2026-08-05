@@ -49,18 +49,6 @@ public sealed class EnergyNetSystem : ModSystem
 		return net.SmoothedLoad;
 	}
 
-	public static void RegisterEndpoint(int x, int y, IEnergyContainer container)
-	{
-		_endpoints[(x, y)] = container;
-		_endpointsDirty = true;
-	}
-
-	public static void UnregisterEndpoint(int x, int y)
-	{
-		if (_endpoints.Remove((x, y)))
-			_endpointsDirty = true;
-	}
-
 	public static void MarkEndpointsDirty() => _endpointsDirty = true;
 
 	public override void OnWorldLoad()
@@ -146,6 +134,12 @@ public sealed class EnergyNetSystem : ModSystem
 	}
 
 	public override void PostUpdateWorld()
+	{
+		lock (Api.SaveTickGate.Lock)
+			TickEnergyNet();
+	}
+
+	private void TickEnergyNet()
 	{
 		using var _energyNetScope = Profiler.Profiler.TimeAlloc("tick", "energy_net_total");
 		MaybeRebuild();
@@ -247,6 +241,8 @@ public sealed class EnergyNetSystem : ModSystem
 		_byCell.Clear();
 		_endpoints.Clear();
 		_clientStats.Clear();
+		_clientLoad.Clear();
+		_lastEntityCount = -1;
 	}
 
 	private static void Rebuild()

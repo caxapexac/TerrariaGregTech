@@ -73,7 +73,7 @@ public sealed class NeonSignUIState : UIModalWindow
 		int taY = 22;
 		int taH = 52;
 		panel.Append(new UITextArea(() => _text, t => { _text = t; Push(); },
-			maxLength: 200, placeholder: "type sign text", commitOnEscape: true)
+			maxLength: NeonSignEntity.MaxTextLength, placeholder: "type sign text", commitOnEscape: true)
 		{
 			Left   = StyleDimension.FromPixels(Pad * Scale),
 			Top    = StyleDimension.FromPixels(taY * Scale),

@@ -9,8 +9,6 @@ using Terraria.ID;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Net;
 
-// Set the 3-state simple-mode (Off / Insert / Extract) on a simple pipe.
-// Server resolves the cover chain + broadcasts via PipeCoverSyncPacket.
 public static class SimplePipeSideSetPacket
 {
 	public static void Send(PipeKind layer, int x, int y, CoverSide side, SimpleSideMode mode)
@@ -39,9 +37,15 @@ public static class SimplePipeSideSetPacket
 		var layer = (PipeKind)r.ReadByte();
 		int x = r.ReadInt16();
 		int y = r.ReadInt16();
-		var side = (CoverSide)r.ReadByte();
-		var mode = (SimpleSideMode)r.ReadByte();
-		ApplyServer(layer, x, y, side, mode);
+		byte sideRaw = r.ReadByte();
+		byte modeRaw = r.ReadByte();
+		if (sideRaw >= CoverSides.Count || modeRaw > (byte)SimpleSideMode.Extract)
+		{
+			NetHelpers.LogBadPacket("simple-pipe-side",
+				$"out-of-range side={sideRaw} mode={modeRaw} from player {whoAmI}");
+			return;
+		}
+		ApplyServer(layer, x, y, (CoverSide)sideRaw, (SimpleSideMode)modeRaw);
 	}
 
 	private static void ApplyServer(PipeKind layer, int x, int y, CoverSide side, SimpleSideMode mode)

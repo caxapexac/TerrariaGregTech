@@ -7,19 +7,24 @@ using GregTechCEuTerraria.Api.Machine.Trait;
 using GregTechCEuTerraria.Common.Energy;
 using GregTechCEuTerraria.Common.Machine.Trait;
 using GregTechCEuTerraria.TerrariaCompat.Machine;
+using GregTechCEuTerraria.TerrariaCompat.Recipes;
 using Terraria;
 using Terraria.ID;
-using Terraria.ModLoader;
-using Terraria.ModLoader.IO;  // TagCompound
+using Terraria.ModLoader.IO;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Tiles.Machines;
 
-// port of com.gregtechceu.gtceu.common.machine.electric.FisherMachine.
-//
-// adaptations:
-//   - Loot: FishingLootRoller
-//   - Bait: gtceu:string or any Terraria Item.bait > 0
-//   - Water check: 2 tiles below
+[Flags]
+public enum FisherFilter
+{
+	None  = 0,
+	Junk  = 1,
+	Fish  = 2,
+	Crate = 4,
+	All   = Junk | Fish | Crate,
+}
+
+
 public sealed class FisherMachine : TieredEnergyMachine, IWorkable, IControllable, IItemHandler
 {
 	public FisherMachine() { }
@@ -63,7 +68,7 @@ public sealed class FisherMachine : TieredEnergyMachine, IWorkable, IControllabl
 		get
 		{
 			if (_stringItemType < 0)
-				_stringItemType = ModLoader.GetMod("GregTechCEuTerraria").TryFind<ModItem>("string", out var s) ? s.Type : 0;
+				_stringItemType = VanillaItemMap.TryGet("minecraft:string", out int t) ? t : 0;
 			return _stringItemType;
 		}
 	}
@@ -127,11 +132,31 @@ public sealed class FisherMachine : TieredEnergyMachine, IWorkable, IControllabl
 	public bool IsWorkingEnabled() => _isWorkingEnabled;
 	public void SetWorkingEnabled(bool enabled) => _isWorkingEnabled = enabled;
 
-	private bool _junkEnabled = true;
-	public bool JunkEnabled
+	private FisherFilter _filters = FisherFilter.None;
+
+	public FisherFilter Filters
 	{
-		get => _junkEnabled;
-		set => _junkEnabled = value;
+		get => _filters;
+		set => _filters = value & FisherFilter.All;
+	}
+
+	public bool IsFiltered(FisherFilter filter) => (_filters & filter) != 0;
+
+	public void SetFiltered(FisherFilter filter, bool filtered) =>
+		_filters = filtered ? _filters | filter : _filters & ~filter;
+
+	private bool AllFiltered => (_filters & FisherFilter.All) == FisherFilter.All;
+
+	public int BaitPerCatch
+	{
+		get
+		{
+			int cost = 1;
+			if (IsFiltered(FisherFilter.Junk))  cost++;
+			if (IsFiltered(FisherFilter.Fish))  cost++;
+			if (IsFiltered(FisherFilter.Crate)) cost++;
+			return cost;
+		}
 	}
 
 	private int _progress;
@@ -154,7 +179,8 @@ public sealed class FisherMachine : TieredEnergyMachine, IWorkable, IControllabl
 
 		bool canFish = DrainEnergy(simulate: true)
 		            && !BaitHandler.Storage.GetStackInSlot(0).IsAir
-		            && _isWorkingEnabled;
+		            && _isWorkingEnabled
+		            && !AllFiltered;
 		if (!canFish)
 		{
 			if (_active || _progress != 0)
@@ -212,14 +238,14 @@ public sealed class FisherMachine : TieredEnergyMachine, IWorkable, IControllabl
 		int waterCenterX = Position.X + 1;
 		int waterY       = Position.Y + Size.Height;
 
-		var rolled = FishingLootRoller.Roll(Tier, waterCenterX, waterY, _junkEnabled);
-		bool useBait = false;
-		if (!rolled.IsAir)
+		var rolled = FishingLootRoller.Roll(Tier, waterCenterX, waterY, _filters, out bool discarded);
+		bool useBait = discarded;
+		if (!discarded && !rolled.IsAir)
 			useBait = TryFillCache(rolled);
 
 		if (useBait)
 		{
-			int consume = _junkEnabled ? 1 : 2;
+			int consume = BaitPerCatch;
 			var slot = BaitHandler.Storage.GetStackInSlot(0);
 			if (!slot.IsAir)
 			{
@@ -253,15 +279,15 @@ public sealed class FisherMachine : TieredEnergyMachine, IWorkable, IControllabl
 		return false;
 	}
 
-	public override void SaveData(TagCompound tag)
+	protected override void SaveMachineData(TagCompound tag)
 	{
 		EnsureTraits();
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		tag["progress"]          = _progress;
 		tag["active"]            = _active;
 		tag["hasWater"]          = _hasWater;
 		tag["isWorkingEnabled"]  = _isWorkingEnabled;
-		tag["junkEnabled"]       = _junkEnabled;
+		tag["lootFilters"]       = (byte)_filters;
 	}
 
 	public override void LoadData(TagCompound tag)
@@ -272,7 +298,13 @@ public sealed class FisherMachine : TieredEnergyMachine, IWorkable, IControllabl
 		_active           = tag.GetBool("active");
 		_hasWater         = tag.GetBool("hasWater");
 		_isWorkingEnabled = !tag.ContainsKey("isWorkingEnabled") || tag.GetBool("isWorkingEnabled");
-		_junkEnabled      = !tag.ContainsKey("junkEnabled") || tag.GetBool("junkEnabled");
+
+		if (tag.ContainsKey("lootFilters"))
+			_filters = (FisherFilter)tag.GetByte("lootFilters") & FisherFilter.All;
+		else if (tag.ContainsKey("junkEnabled") && !tag.GetBool("junkEnabled"))
+			_filters = FisherFilter.Junk;
+		else
+			_filters = FisherFilter.None;
 	}
 
 	public override void AppendTooltip(List<string> lines)
@@ -283,14 +315,25 @@ public sealed class FisherMachine : TieredEnergyMachine, IWorkable, IControllabl
 		lines.Add($"Draw: {EnergyPerTick:N0} EU/t");
 		lines.Add($"Fishing Power: {FishingLootRoller.FishingPower(Tier)}");
 		lines.Add($"Luck: +{FishingLootRoller.SyntheticLuck(Tier):0.00}");
+		lines.Add($"Bait: {BaitPerCatch} per catch");
+		if (_filters != FisherFilter.None)
+		{
+			var filtered = new List<string>();
+			if (IsFiltered(FisherFilter.Junk))  filtered.Add("junk");
+			if (IsFiltered(FisherFilter.Fish))  filtered.Add("fish");
+			if (IsFiltered(FisherFilter.Crate)) filtered.Add("treasures");
+			lines.Add($"Filtered out: {string.Join(", ", filtered)}");
+		}
 		if (_active)
 			lines.Add($"Progress: {_progress} / {MaxProgress}");
 		else if (!_isWorkingEnabled)
 			lines.Add("Disabled");
+		else if (AllFiltered)
+			lines.Add("Idle: every category filtered out");
 		else if (!_hasWater)
 			lines.Add("Idle: no water below");
 		else if (BaitHandler.Storage.GetStackInSlot(0).IsAir)
-			lines.Add("Idle: no bait (string / worm / etc.)");
+			lines.Add("Idle: no bait (silk / worm / etc.)");
 		else if (!DrainEnergy(simulate: true))
 			lines.Add("Idle: not enough power");
 	}

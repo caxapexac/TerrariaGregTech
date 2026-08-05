@@ -6,10 +6,6 @@ using Terraria.ModLoader;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Pipelike.Laser;
 
-// Laser-pipe place/cut/refund cycle. Singleton, parallel to
-// ItemPipeLayerHandle. The cell payload is empty (single NORMAL variant
-// upstream), so no per-place customisation - just gate + set + broadcast
-// + refund.
 public sealed class LaserPipeLayerHandle : IGridLayerHandle
 {
 	public static readonly LaserPipeLayerHandle Instance = new();
@@ -19,13 +15,10 @@ public sealed class LaserPipeLayerHandle : IGridLayerHandle
 
 	public bool TryPlace(int x, int y, Player placer)
 	{
+		if (!LaserPipeLayerSystem.Pipes.CanPlaceAt(x, y)) return false;
 		if (LaserPipeLayerSystem.Pipes.Has(x, y)) return false;
-		// Straight-only reciprocal connections (no turns/crosses).
 		LaserConn.ConnectOnPlace(LaserPipeLayerSystem.Pipes, x, y);
 		LaserPipeNetSystem.OnPipeAdded(x, y);
-		// MP authority: client mutates locally + ships placement; server applies
-		// + echoes to other clients via PipePackets.HandlePlaced. Mirrors the
-		// item / fluid pipe place path verbatim.
 		PipePackets.SendPlacedLaser(x, y);
 		return true;
 	}

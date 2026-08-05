@@ -30,8 +30,7 @@ public static class MachineViewPacket
 		}
 		machine.AddViewer(whoAmI);
 		if (machine is AppliedEnergistics.MeTerminalMachine term) term.ResetViewerSync(whoAmI);
-		MachineStateSyncPacket.SendTo(machine, whoAmI);
-		MachineEnergySyncPacket.SendTo(machine, whoAmI);
+		MachineStateSyncPacket.SendFullStateTo(machine, whoAmI);
 		EnderChannelSyncPacket.SendChannelsTo(machine, whoAmI);
 	}
 

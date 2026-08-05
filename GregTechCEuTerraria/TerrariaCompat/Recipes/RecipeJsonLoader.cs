@@ -71,8 +71,6 @@ public static class RecipeJsonLoader
 
 			if (patchBaseIds.Contains(id)) capturedBase[id] = el.GetRawText();
 
-			if (CompatRecipes.OverriddenIds.Contains(id)) { skipped++; continue; }
-
 			if (overrideIds.Contains(id)) { skipped++; continue; }
 
 			GTRecipe recipe;

@@ -7,8 +7,6 @@ using Terraria.ModLoader.IO;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Machine.Multiblock.Part;
 
-// Port of EnergyHatchPartMachine. Emitter/receiver wrapping NEC; capacity
-// 64xV[tier]xamp (emit) / 16xV[tier]xamp (recv).
 public class EnergyHatchPartMachine : TieredIOPartMachine, IEnergyContainer
 {
 	protected override string Label => "Energy Hatch";
@@ -29,7 +27,6 @@ public class EnergyHatchPartMachine : TieredIOPartMachine, IEnergyContainer
 	public long EnergyCapacityRuntime => EnergyContainer?.EnergyCapacity ?? 0;
 	long IEnergyContainer.EnergyCapacity => EnergyCapacityRuntime;
 
-	// Compact per-field sync (was ~14 KB/s blob-resend before split).
 	public override bool HasSyncEnergy => EnergyContainer != null;
 	public override long SyncEnergyStored => EnergyContainer?.EnergyStored ?? 0;
 	public override void ApplySyncEnergy(long energy) => EnergyContainer?.SetStoredFromSync(energy);
@@ -39,7 +36,6 @@ public class EnergyHatchPartMachine : TieredIOPartMachine, IEnergyContainer
 	long IEnergyContainer.OutputAmperage => EnergyContainer?.OutputAmperage ?? 0;
 	long IEnergyContainer.OutputVoltage  => EnergyContainer?.OutputVoltage  ?? 0;
 
-	// Face stays None - multi reaches via EnergyContainerList.
 	public long GetPushAmperage() => EnergyContainer?.GetPushAmperage() ?? 0;
 	public void OnEnergyPushedToNetwork(long amps, long voltage)
 		=> EnergyContainer?.OnEnergyPushedToNetwork(amps, voltage);
@@ -51,7 +47,6 @@ public class EnergyHatchPartMachine : TieredIOPartMachine, IEnergyContainer
 		Tier      = tier;
 		Io        = io;
 		Amperage  = amperage;
-		// No SideInput/Output gates today - multi pulls via EnergyContainerList.
 		EnsureEnergyContainer();
 	}
 
@@ -70,11 +65,9 @@ public class EnergyHatchPartMachine : TieredIOPartMachine, IEnergyContainer
 		EnergyContainer = Io == IO.OUT
 			? NotifiableEnergyContainer.EmitterContainer (GetHatchEnergyCapacity(Tier, Amperage), voltage, Amperage)
 			: NotifiableEnergyContainer.ReceiverContainer(GetHatchEnergyCapacityReceiver(Tier, Amperage), voltage, Amperage);
-		// No FrontFacing gate (same-cell sideless wires).
 		Traits.Attach(EnergyContainer);
 		Traits.RegisterPersistent("EnergyContainer", EnergyContainer);
 
-		// Verbatim EnergyHatchPartMachine.java:33.
 		if (Traits.GetTrait(Common.Machine.Trait.EnvironmentalExplosionTrait.TYPE) is null)
 		{
 			int tierIndex = (int)Tier;
@@ -106,9 +99,9 @@ public class EnergyHatchPartMachine : TieredIOPartMachine, IEnergyContainer
 			lines.Add($"Stored: {EnergyContainer.EnergyStored:N0} / {EnergyContainer.EnergyCapacity:N0} EU");
 	}
 
-	public override void SaveData(TagCompound tag)
+	protected override void SaveMachineData(TagCompound tag)
 	{
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		tag["amperage"] = Amperage;
 	}
 

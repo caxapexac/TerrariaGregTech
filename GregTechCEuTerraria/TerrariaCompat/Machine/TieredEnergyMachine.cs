@@ -124,10 +124,10 @@ public abstract class TieredEnergyMachine : MetaMachine, IEnergyContainer
 		base.SystemTick();
 	}
 
-	public override void SaveData(TagCompound tag)
+	protected override void SaveMachineData(TagCompound tag)
 	{
 		EnsureEnergyContainer();
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		if (HasChargerSlot) tag["ChargerSlot"] = ItemIO.Save(_chargerInv[0]);
 	}
 

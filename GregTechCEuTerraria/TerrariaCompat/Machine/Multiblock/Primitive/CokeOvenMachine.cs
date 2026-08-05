@@ -41,10 +41,10 @@ public class CokeOvenMachine : WorkableMultiblockMachine,
 		Traits.RegisterPersistent("ExportFluids", _exportFluids);
 	}
 
-	public override void SaveData(Terraria.ModLoader.IO.TagCompound tag)
+	protected override void SaveMachineData(Terraria.ModLoader.IO.TagCompound tag)
 	{
 		EnsurePrimitiveTraits();
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 	}
 
 	public override void LoadData(Terraria.ModLoader.IO.TagCompound tag)

@@ -75,10 +75,10 @@ public sealed class CrateMachine : MetaMachine, IItemHandler
 		}
 	}
 
-	public override void SaveData(TagCompound tag)
+	protected override void SaveMachineData(TagCompound tag)
 	{
 		EnsureTraits();
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 	}
 
 	public override void LoadData(TagCompound tag)

@@ -290,40 +290,45 @@ public sealed class BlockBreakerMachine : TieredEnergyMachine, IControllable
 		return false;
 	}
 
-	private void BreakHighestTreeTile(int centerX, int baseY)
+	private static bool HasTrunkInRow(int centerX, int y)
 	{
-		int top = Math.Max(0, baseY - MaxTreeScanHeight);
-		int bestX = -1, bestY = int.MaxValue;
+		if (y < 0 || y >= Main.maxTilesY) return false;
 		for (int x = centerX - 1; x <= centerX + 1; x++)
 		{
 			if (x < 0 || x >= Main.maxTilesX) continue;
-			for (int y = top; y <= baseY; y++)
-			{
-				var t = Main.tile[x, y];
-				if (!t.HasTile || !IsTreeTrunk(t.TileType)) continue;
-				if (y < bestY) { bestY = y; bestX = x; }
-				break;
-			}
-		}
-		if (bestX >= 0)
-			KillTreeTileAt(bestX, bestY);
-	}
-
-	private static bool TreeHasTiles(int centerX, int baseY)
-	{
-		int top = Math.Max(0, baseY - MaxTreeScanHeight);
-		for (int x = centerX - 1; x <= centerX + 1; x++)
-		{
-			if (x < 0 || x >= Main.maxTilesX) continue;
-			for (int y = top; y <= baseY; y++)
-			{
-				if (y < 0 || y >= Main.maxTilesY) continue;
-				var t = Main.tile[x, y];
-				if (t.HasTile && IsTreeTrunk(t.TileType)) return true;
-			}
+			var t = Main.tile[x, y];
+			if (t.HasTile && IsTreeTrunk(t.TileType)) return true;
 		}
 		return false;
 	}
+
+	private static int TreeTopRow(int centerX, int baseY)
+	{
+		int limit = Math.Max(0, baseY - MaxTreeScanHeight);
+		int top = baseY + 1;
+		for (int y = baseY; y >= limit; y--)
+		{
+			if (!HasTrunkInRow(centerX, y)) break;
+			top = y;
+		}
+		return top;
+	}
+
+	private void BreakHighestTreeTile(int centerX, int baseY)
+	{
+		int top = TreeTopRow(centerX, baseY);
+		if (top > baseY) return;
+		for (int x = centerX - 1; x <= centerX + 1; x++)
+		{
+			if (x < 0 || x >= Main.maxTilesX) continue;
+			var t = Main.tile[x, top];
+			if (!t.HasTile || !IsTreeTrunk(t.TileType)) continue;
+			KillTreeTileAt(x, top);
+			return;
+		}
+	}
+
+	private static bool TreeHasTiles(int centerX, int baseY) => TreeTopRow(centerX, baseY) <= baseY;
 
 	private static void ReplantTreeAt(int centerX, int baseY)
 	{
@@ -353,10 +358,10 @@ public sealed class BlockBreakerMachine : TieredEnergyMachine, IControllable
 		return false;
 	}
 
-	public override void SaveData(TagCompound tag)
+	protected override void SaveMachineData(TagCompound tag)
 	{
 		EnsureTraits();
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		tag["progress"]         = _progress;
 		tag["active"]           = _active;
 		tag["isWorkingEnabled"] = _isWorkingEnabled;

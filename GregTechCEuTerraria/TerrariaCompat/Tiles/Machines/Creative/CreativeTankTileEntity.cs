@@ -71,9 +71,9 @@ public sealed class CreativeTankTileEntity : SuperTankTileEntity
 		return fluid.WithAmount(Math.Min(fluid.Amount, _mBPerCycle));
 	}
 
-	public override void SaveData(TagCompound tag)
+	protected override void SaveMachineData(TagCompound tag)
 	{
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		tag["mBPerCycle"]    = _mBPerCycle;
 		tag["ticksPerCycle"] = _ticksPerCycle;
 	}

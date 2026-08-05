@@ -16,6 +16,11 @@ public sealed class NeonSignEntity : ModTileEntity
 	public const sbyte MaxStep = 20;
 	public const sbyte DefaultStep = 5;
 
+	public const int MaxTextLength = 200;
+
+	private static string ClampText(string? text) =>
+		text is null ? "" : text.Length <= MaxTextLength ? text : text[..MaxTextLength];
+
 	public string Text = "";
 	public byte ColorIndex;
 	public sbyte SizeStep = DefaultStep;
@@ -33,7 +38,7 @@ public sealed class NeonSignEntity : ModTileEntity
 
 	public void ApplyEdit(string text, byte colorIndex, sbyte sizeStep)
 	{
-		Text = text ?? "";
+		Text = ClampText(text);
 		ColorIndex = (byte)Math.Clamp(colorIndex, 0, NeonSignPalette.Count - 1);
 		SizeStep = (sbyte)Math.Clamp(sizeStep, MinStep, MaxStep);
 	}
@@ -47,7 +52,7 @@ public sealed class NeonSignEntity : ModTileEntity
 
 	public override void LoadData(TagCompound tag)
 	{
-		Text = tag.GetString("text");
+		Text = ClampText(tag.GetString("text"));
 		ColorIndex = (byte)Math.Clamp(tag.GetInt("color"), 0, NeonSignPalette.Count - 1);
 		SizeStep = (sbyte)Math.Clamp(tag.GetInt("size"), MinStep, MaxStep);
 	}

@@ -348,7 +348,7 @@ public sealed class CraftStatusWindow : UIModalWindow
 		private void LocateCrafter(AEKey what)
 		{
 			var machine = WorldCapability.Get<MetaMachine>(_termPos.X, _termPos.Y);
-			var net = machine != null ? MeNetworkSystem.NetAdjacentTo(machine) : null;
+			var net = machine != null ? MeNetworkSystem.NetOf(machine) : null;
 			if (net is null) return;
 			foreach (var p in net.Providers)
 				foreach (var pat in p.Patterns)

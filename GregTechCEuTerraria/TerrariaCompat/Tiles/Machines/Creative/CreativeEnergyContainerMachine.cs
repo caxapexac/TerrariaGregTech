@@ -130,9 +130,9 @@ public sealed class CreativeEnergyContainerMachine : MetaMachine, IEnergyContain
 		_energyIOPerSec += amps * voltage;
 	}
 
-	public override void SaveData(TagCompound tag)
+	protected override void SaveMachineData(TagCompound tag)
 	{
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		tag["voltage"] = _voltage;
 		tag["amps"]    = _amps;
 		tag["active"]  = _active;

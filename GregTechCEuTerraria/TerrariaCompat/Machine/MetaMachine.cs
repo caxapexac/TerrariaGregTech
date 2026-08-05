@@ -164,7 +164,6 @@ public abstract class MetaMachine : ModTileEntity, ITickSubscription, ICoverable
 	public static bool IsClient       => Main.netMode == NetmodeID.MultiplayerClient;
 	public static bool IsMultiplayer  => Main.netMode != NetmodeID.SinglePlayer;
 
-	// Server-only - periodic state-sync only broadcasts to machines with viewers > 0
 	private readonly HashSet<int> _viewers = new();
 	public IEnumerable<int> Viewers => _viewers;
 	public int  ViewerCount          => _viewers.Count;
@@ -197,15 +196,20 @@ public abstract class MetaMachine : ModTileEntity, ITickSubscription, ICoverable
 
 	public override void NetSend(BinaryWriter writer)
 	{
-		var tag = new TagCompound();
-		SaveData(tag);
-		TagIO.Write(tag, writer);
+		writer.Write((byte)Tier);
+		writer.Write(_persistedMdefId ?? string.Empty);
 	}
 
 	public override void NetReceive(BinaryReader reader)
 	{
-		var tag = TagIO.Read(reader);
-		LoadData(tag);
+		_persistedTier = (Common.Energy.VoltageTier)reader.ReadByte();
+		string mdefId = reader.ReadString();
+		if (mdefId.Length > 0)
+		{
+			_persistedMdefId = mdefId;
+			BindDefinition();
+		}
+		Net.MachineStateRequestPacket.Enqueue(Position);
 	}
 
 	private readonly List<TickableSubscription> _serverTicks  = new();
@@ -266,7 +270,20 @@ public abstract class MetaMachine : ModTileEntity, ITickSubscription, ICoverable
 
 	public virtual Item[]? GetSlotGroup(SlotGroup group) => null;
 
-	public virtual bool IsItemValidForSlot(SlotGroup group, int index, Item item) => true;
+	public virtual bool IsItemValidForSlot(SlotGroup group, int index, Item item)
+	{
+		var slots = GetSlotGroup(group);
+		if (slots is null) return true;
+		foreach (var trait in Traits.AllTraits)
+		{
+			if (trait is Api.Machine.Trait.NotifiableItemStackHandler nish &&
+			    ReferenceEquals(nish.Storage.Stacks, slots))
+				return nish.IsItemValid(index, item);
+		}
+		return true;
+	}
+
+	public virtual bool IsSlotBlocked(SlotGroup group, int index) => false;
 
 	public virtual int GetSlotLimitFor(SlotGroup group, int index)
 	{
@@ -381,7 +398,11 @@ public abstract class MetaMachine : ModTileEntity, ITickSubscription, ICoverable
 
 	public virtual bool CanPlaceCoverOnSide(CoverDefinition definition, CoverSide side) => SupportsCovers;
 
-	public void NotifyBlockUpdate() { }
+	public void NotifyBlockUpdate()
+	{
+		var (w, h) = Size;
+		Pipelike.PipeNeighborWatcher.NotifyAroundBox(Position.X, Position.Y, w, h, this);
+	}
 
 	public bool IsRemote => IsClient;
 
@@ -410,7 +431,13 @@ public abstract class MetaMachine : ModTileEntity, ITickSubscription, ICoverable
 		return false;
 	}
 
-	public override void SaveData(TagCompound tag)
+	public sealed override void SaveData(TagCompound tag)
+	{
+		lock (Api.SaveTickGate.Lock)
+			SaveMachineData(tag);
+	}
+
+	protected virtual void SaveMachineData(TagCompound tag)
 	{
 		tag["mte_tier"] = (byte)Tier;
 		if (_persistedMdefId != null) tag["mdef"] = _persistedMdefId;

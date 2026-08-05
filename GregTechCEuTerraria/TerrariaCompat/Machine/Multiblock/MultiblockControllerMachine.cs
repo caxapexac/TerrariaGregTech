@@ -375,11 +375,8 @@ public abstract class MultiblockControllerMachine : MetaMachine
 
 		if (ok)
 		{
-			if (unformed)
-			{
-				SetFlipped(GetMultiblockState().NeededFlip);
-				OnStructureFormed();
-			}
+			SetFlipped(GetMultiblockState().NeededFlip);
+			OnStructureFormed();
 		}
 		else if (IsFormed)
 		{
@@ -404,9 +401,9 @@ public abstract class MultiblockControllerMachine : MetaMachine
 			_activeCells.Add(new Point16(cx, cy));
 	}
 
-	public override void SaveData(TagCompound tag)
+	protected override void SaveMachineData(TagCompound tag)
 	{
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		tag["mb_formed"]  = IsFormed;
 		tag["mb_flipped"] = IsFlipped;
 		if (_persistedUnformedReason is not null)

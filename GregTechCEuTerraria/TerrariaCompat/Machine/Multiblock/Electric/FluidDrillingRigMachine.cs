@@ -132,9 +132,9 @@ public class FluidDrillingRigMachine : WorkableElectricMultiblockMachine
 		}
 	}
 
-	public override void SaveData(Terraria.ModLoader.IO.TagCompound tag)
+	protected override void SaveMachineData(Terraria.ModLoader.IO.TagCompound tag)
 	{
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		tag["fdr_lastFluid"] = _lastFluidId;
 	}
 

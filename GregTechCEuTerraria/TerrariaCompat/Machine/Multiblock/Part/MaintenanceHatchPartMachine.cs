@@ -155,9 +155,9 @@ public class MaintenanceHatchPartMachine : TieredPartMachine, IMaintenanceMachin
 		}
 	}
 
-	public override void SaveData(TagCompound tag)
+	protected override void SaveMachineData(TagCompound tag)
 	{
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		tag["isConfigurable"]      = IsConfigurable;
 		tag["isTaped"]             = _isTaped;
 		tag["timeActive"]          = _timeActive;

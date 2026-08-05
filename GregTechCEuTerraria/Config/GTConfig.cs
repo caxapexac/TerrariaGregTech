@@ -33,7 +33,7 @@ public sealed class GTConfig : ModConfig
 
 	// cleanroom requirement for multis
 	[DefaultValue(true)]
-	public bool CleanMultiblocks { get; set; } = true;
+	public bool MultiblocksNeedCleanroom { get; set; } = true;
 
 	// Debug gizmos for bosses
 	[DefaultValue(false)]
@@ -55,6 +55,11 @@ public sealed class GTConfig : ModConfig
 
 	[DefaultValue(false)]
 	public bool CraftingSimulatedExtraction { get; set; } = false;
+
+	[Range(1, 100)]
+	[Increment(1)]
+	[DefaultValue(5)]
+	public int CraftingCalculationTimePerTick { get; set; } = 5;
 
 	[DefaultValue(true)]
 	public bool FreeMePatterns { get; set; } = true;

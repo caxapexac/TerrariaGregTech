@@ -41,7 +41,7 @@ public static class NetRouter
 			case PacketType.ActiveRecipeTypeSet: MachineActions.HandleIncoming<ActiveRecipeTypeSetAction>(reader, whoAmI); break;
 			case PacketType.BoilerThrottleSet: MachineActions.HandleIncoming<BoilerThrottleSetAction>(reader, whoAmI); break;
 			case PacketType.DistinctSet:      MachineActions.HandleIncoming<DistinctSetAction>(reader, whoAmI); break;
-			case PacketType.JunkToggle:       MachineActions.HandleIncoming<JunkToggleAction>(reader, whoAmI); break;
+			case PacketType.FisherFilterSet:  MachineActions.HandleIncoming<FisherFilterAction>(reader, whoAmI); break;
 			case PacketType.BlockBreakerModeSet: MachineActions.HandleIncoming<BlockBreakerModeSetAction>(reader, whoAmI); break;
 			case PacketType.BlockBreakerReplantSet: MachineActions.HandleIncoming<BlockBreakerReplantSetAction>(reader, whoAmI); break;
 			case PacketType.MachineFilter:    MachineActions.HandleIncoming<MachineFilterAction>(reader, whoAmI); break;
@@ -60,6 +60,7 @@ public static class NetRouter
 
 			case PacketType.MachinePlaced:    MachinePlacedPacket.Handle(reader, whoAmI); break;
 			case PacketType.MachineStateSync: MachineStateSyncPacket.HandleOnClient(reader); break;
+			case PacketType.MachineStateRequest: MachineStateRequestPacket.Handle(reader, whoAmI); break;
 			case PacketType.MachineEnergySync: MachineEnergySyncPacket.HandleOnClient(reader); break;
 			case PacketType.CursorUpdate:     CursorUpdatePacket.HandleOnClient(reader); break;
 			case PacketType.EnderChannelSync: EnderChannelSyncPacket.HandleOnClient(reader); break;
@@ -99,6 +100,7 @@ public static class NetRouter
 			case PacketType.MeCraftPlanBegin: MeCraftPackets.HandleBegin(reader, whoAmI); break;
 			case PacketType.MeCraftPlanResult: MeCraftPackets.HandleResult(reader); break;
 			case PacketType.MeCraftSubmit: MeCraftPackets.HandleSubmit(reader, whoAmI); break;
+			case PacketType.MeCraftPlanAbandon: MeCraftPackets.HandleAbandon(whoAmI); break;
 			case PacketType.MeCraftStatusRequest: MeCraftPackets.HandleStatusRequest(reader, whoAmI); break;
 			case PacketType.MeCraftStatusResult: MeCraftPackets.HandleStatusResult(reader); break;
 			case PacketType.MeCraftCancel: MeCraftPackets.HandleCancel(reader, whoAmI); break;

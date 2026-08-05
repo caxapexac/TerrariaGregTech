@@ -14,12 +14,10 @@ namespace GregTechCEuTerraria.TerrariaCompat.Pipelike.Cable;
 
 public sealed class EnergyNet
 {
-	// per-tile cable loss is divided by this factor, our cables are 1x1 tiles while machines are 2x2
 	public const long TileLossDivisor = 2;
 
 	public IReadOnlyDictionary<(int x, int y), CableCell> Cells { get; }
 	public VoltageTier EffectiveTier { get; }
-	public int EffectiveAmperage { get; }
 	public int MaxAmperage { get; }
 	public int MaxLossPerAmp { get; }
 
@@ -40,7 +38,6 @@ public sealed class EnergyNet
 	{
 		Cells = component.Cells;
 		EffectiveTier = component.EffectiveTier;
-		EffectiveAmperage = component.EffectiveAmperage;
 		MaxAmperage = component.MaxAmperage;
 		MaxLossPerAmp = component.MaxLossPerAmp;
 
@@ -66,7 +63,7 @@ public sealed class EnergyNet
 		if (SmoothedLoad < 0.0005f) SmoothedLoad = 0f;
 	}
 
-	public void SetSmoothedLoad(float v) => SmoothedLoad = v;   // client-applied from sync
+	public void SetSmoothedLoad(float v) => SmoothedLoad = v;
 
 	private System.Func<(int x, int y), IEnergyContainer?>? _endpointLookup;
 	internal void SetEndpointLookup(System.Func<(int x, int y), IEnergyContainer?> lookup) =>
@@ -116,7 +113,7 @@ public sealed class EnergyNet
 			foreach (var cablePos in path.Cables)
 			{
 				var cell = Cells.TryGetValue(cablePos, out var c) ? (CableCell?)c : null;
-				if (cell is null) { cableBroken = true; break; }   // melted last tick, pre-rebuild
+				if (cell is null) { cableBroken = true; break; }
 				long cableMaxV = VoltageTiers.Voltage(cell.Value.Voltage);
 				if (cableMaxV < voltage)
 				{

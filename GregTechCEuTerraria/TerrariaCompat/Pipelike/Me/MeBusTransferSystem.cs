@@ -41,6 +41,12 @@ public sealed class MeBusTransferSystem : ModSystem
 
 	public override void PostUpdateWorld()
 	{
+		lock (Api.SaveTickGate.Lock)
+			TickBusTransfers();
+	}
+
+	private void TickBusTransfers()
+	{
 		if (MeBusLayerSystem.Buses.All.Count == 0)
 		{
 			if (_ticks.Count > 0) _ticks.Clear();
@@ -145,6 +151,12 @@ public sealed class MeBusTransferSystem : ModSystem
 	}
 
 	public override void SaveWorldData(TagCompound tag)
+	{
+		lock (Api.SaveTickGate.Lock)
+			WriteWorldData(tag);
+	}
+
+	private void WriteWorldData(TagCompound tag)
 	{
 		if (_exportRequesters.Count == 0) return;
 		var list = new List<TagCompound>();
@@ -260,7 +272,7 @@ public sealed class MeBusTransferSystem : ModSystem
 		if (maxAmount < 1) return false;
 		long amount = to.Insert(key, maxAmount, Actionable.SIMULATE, src);
 		if (amount <= 0) return false;
-		requester.Tracker.HandleCrafting(slot, key, amount, net);
+		requester.Tracker.HandleCrafting(slot, key, amount, net, src);
 		ops -= (int)Math.Max(1, amount / keyType.GetAmountPerOperation());
 		return true;
 	}

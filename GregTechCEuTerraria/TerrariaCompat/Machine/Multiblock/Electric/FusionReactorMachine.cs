@@ -8,17 +8,10 @@ using Terraria.ModLoader.IO;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Machine.Multiblock.Electric;
 
-// Port of FusionReactorMachine. 3-tier (LuV/ZPM/UV). Capacitor trait
-// (NotifiableEnergyContainer) capacity = inputHatches x 2^(tier-LuV) x 10M EU.
-// UpdateHeat siphons from input hatches into capacitor; heat decays 10000/tick
-// idle. FUSION_OC pays `eu_to_start - heat` from capacitor on recipe accept;
-// OnWorking recovers heat lost during WAITING decay.
-// Ring-color SyncToClient dropped (no 3D ring in 2D).
 public class FusionReactorMachine : WorkableElectricMultiblockMachine
 {
 	private NotifiableEnergyContainer? _capacitor;
 
-	// Cached aggregate so the heat loop can siphon directly.
 	private Api.Misc.EnergyContainerList? _inputEnergyContainers;
 
 	private long _heat;
@@ -33,7 +26,6 @@ public class FusionReactorMachine : WorkableElectricMultiblockMachine
 
 	public FusionReactorMachine() : base() { }
 
-	// Capacity = 0 until OnStructureFormed reads the input-hatch count.
 	private NotifiableEnergyContainer EnsureCapacitor()
 	{
 		BindDefinition();
@@ -52,7 +44,6 @@ public class FusionReactorMachine : WorkableElectricMultiblockMachine
 			UpdateHeat();
 	}
 
-	// No-op - our loop is per-tick gated.
 	public void UpdatePreHeatSubscription() { }
 
 	private bool ShouldRunHeatLoop()
@@ -106,7 +97,6 @@ public class FusionReactorMachine : WorkableElectricMultiblockMachine
 		var recipe = Recipe.GetLastRecipe();
 		if (recipe is not null)
 		{
-			// Type-tolerant - GetLong throws on int-stored values.
 			long euToStart = Common.Recipe.GTRecipeModifiers.ReadDataLong(recipe.Data, "eu_to_start");
 			if (euToStart > 0)
 			{
@@ -125,10 +115,8 @@ public class FusionReactorMachine : WorkableElectricMultiblockMachine
 		return base.OnWorking();
 	}
 
-	// Verbatim updateHeat.
 	private void UpdateHeat()
 	{
-		// Decay only when genuinely idle / paused / waiting@0 (don't punish a near-complete recipe).
 		bool noProgress = Recipe.IsWaiting() && Recipe.GetProgress() == 0;
 		if (((Recipe.IsIdle()) || (!Recipe.IsWorkingEnabled()) || noProgress) && _heat > 0)
 		{
@@ -140,21 +128,17 @@ public class FusionReactorMachine : WorkableElectricMultiblockMachine
 		long leftStorage = cap.EnergyCapacity - cap.EnergyStored;
 		if (leftStorage > 0)
 		{
-			// EnergyContainerList exposes only ChangeEnergy; negate to recover RemoveEnergy.
 			long drained = -_inputEnergyContainers.ChangeEnergy(-leftStorage);
 			cap.AddEnergy(drained);
 		}
 		UpdatePreHeatSubscription();
 	}
 
-	// FUSION_OC reads getMaxVoltage directly.
 	public override long GetMaxVoltage() =>
 		System.Math.Min(VoltageTiers.V(GetTier()), base.GetMaxVoltage());
 
-	// Intrinsic design tier (generator-multi convention).
 	public override int GetTier() => (int)Tier;
 
-	// LuV: 10M/hatch ... UV: 40M/hatch. x16 hatches = 160M..640M.
 	public static long CalculateEnergyStorageFactor(int tier, int energyInputAmount) =>
 		(long)energyInputAmount * (long)System.Math.Pow(2, tier - (int)VoltageTier.LuV) * 10_000_000L;
 
@@ -163,21 +147,19 @@ public class FusionReactorMachine : WorkableElectricMultiblockMachine
 		base.AppendTooltip(lines);
 		if (!IsFormed) return;
 		var cap = _capacitor;
-		if (cap is null || cap.EnergyCapacity <= 0) return;
-		lines.Add($"Capacitor: {cap.EnergyStored:N0} / {cap.EnergyCapacity:N0} EU");
+		if (cap is not null && cap.EnergyCapacity > 0)
+			lines.Add($"Capacitor: {cap.EnergyStored:N0} / {cap.EnergyCapacity:N0} EU");
 		lines.Add($"Heat: {_heat:N0} EU");
 	}
 
-	public override void SaveData(TagCompound tag)
+	protected override void SaveMachineData(TagCompound tag)
 	{
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		tag["fusion_heat"] = _heat;
 	}
 
 	public override void LoadData(TagCompound tag)
 	{
-		// Ensure trait BEFORE base.LoadData runs Traits.Load - else accumulated
-		// startup EU is dropped on reload.
 		_capacitor ??= EnsureCapacitor();
 		base.LoadData(tag);
 		if (tag.ContainsKey("fusion_heat")) _heat = tag.GetLong("fusion_heat");

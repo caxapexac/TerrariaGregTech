@@ -17,10 +17,6 @@ using Terraria.ModLoader.IO;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Machine.Multiblock.Generator;
 
-// Port of LargeCombustionEngineMachine. combustion_generator recipes at tier
-// voltage. 1 mB lubricant/72t; oxygen -> x1.5 EU @ 2x voltage (or LO2 4 mB/t
-// -> x2.0 EXTREME). isIntakesObstructed dropped (no facing). D-cell OUTPUT_ENERGY
-// tier filter dropped (single-amp emitters self-cap).
 public sealed class LargeCombustionEngineMachine : WorkableElectricMultiblockMachine
 {
 	private bool _isOxygenBoosted;
@@ -34,12 +30,10 @@ public sealed class LargeCombustionEngineMachine : WorkableElectricMultiblockMac
 
 	public bool IsExtreme() => TierIdx > (int)VoltageTier.EV;
 
-	// Boost = V[tier+1]; output hatches must handle one tier higher.
 	public bool IsBoostAllowed() => GetMaxVoltage() >= VoltageTiers.V(TierIdx + 1);
 
 	public override bool RegressWhenWaiting() => false;
 
-	// Tier-driven, not hatch-driven.
 	public override long OverclockVoltage =>
 		_isOxygenBoosted ? VoltageTiers.V(TierIdx) * 2 : VoltageTiers.V(TierIdx);
 
@@ -47,7 +41,6 @@ public sealed class LargeCombustionEngineMachine : WorkableElectricMultiblockMac
 
 	private const string ReasonNoLubricant = "gtceu.recipe_modifier.no_lubricant";
 
-	// Upstream LUBRICANT_STACK / OXYGEN_STACK / LIQUID_OXYGEN_STACK.
 	private static GTRecipe? _lubricantRecipeCache;
 	private static GTRecipe? _oxygenRecipeCache;
 	private static GTRecipe? _liquidOxygenRecipeCache;
@@ -60,7 +53,6 @@ public sealed class LargeCombustionEngineMachine : WorkableElectricMultiblockMac
 
 	private GTRecipe GetBoostRecipe() => IsExtreme() ? GetLiquidOxygenRecipe() : GetOxygenRecipe();
 
-	// = GTRecipeBuilder.ofRaw().inputFluids(stack).buildRawRecipe().
 	private static GTRecipe BuildSyntheticInputFluidRecipe(string id, string fluidId, int amount)
 	{
 		var fluid = FluidRegistry.Get(fluidId)
@@ -96,7 +88,6 @@ public sealed class LargeCombustionEngineMachine : WorkableElectricMultiblockMac
 		if (machine is not LargeCombustionEngineMachine engineMachine) return ModifierFunction.NULL;
 
 		EnergyStack EUt = recipe.OutputEUt;
-		// Sans isIntakesObstructed. Cancel surfaces "Out of lubricant" vs upstream NULL.
 		if (!EUt.IsEmpty() && RecipeHelper.MatchRecipe(engineMachine, GetLubricantRecipe()).IsSuccess)
 		{
 			int maxParallel = (int)(engineMachine.OverclockVoltage / EUt.GetTotalEU());
@@ -150,9 +141,9 @@ public sealed class LargeCombustionEngineMachine : WorkableElectricMultiblockMac
 		return true;
 	}
 
-	public override void SaveData(TagCompound tag)
+	protected override void SaveMachineData(TagCompound tag)
 	{
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		tag["lce_boost"] = _isOxygenBoosted;
 		tag["lce_timer"] = _runningTimer;
 	}

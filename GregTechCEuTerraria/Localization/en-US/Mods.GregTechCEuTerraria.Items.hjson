@@ -40052,3 +40052,8 @@ acid_etched_inert_casing: {
 		'''
 	DisplayName: Acid-Etched Inert Casing
 }
+
+compressed_energy_substance: {
+	DisplayName: Compressed Energy Substance
+	Tooltip: 16 Energy Clusters pressed into one stackable unit
+}

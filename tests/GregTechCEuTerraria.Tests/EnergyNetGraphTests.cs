@@ -6,7 +6,6 @@ namespace GregTechCEuTerraria.Tests;
 
 public class EnergyNetGraphTests
 {
-	// Helper - wires of a single material/size with arbitrary loss for one test.
 	private static CableCell Cell(VoltageTier voltage, int amp = 1, int loss = 0, byte size = 1) =>
 		new("test_material", size, false, voltage, amp, loss);
 
@@ -25,7 +24,7 @@ public class EnergyNetGraphTests
 		Assert.Single(comps);
 		Assert.Single(comps[0].Cells);
 		Assert.Equal(VoltageTier.LV, comps[0].EffectiveTier);
-		Assert.Equal(2, comps[0].EffectiveAmperage);
+		Assert.Equal(2, comps[0].MaxAmperage);
 	}
 
 	[Fact]
@@ -73,10 +72,6 @@ public class EnergyNetGraphTests
 	[Fact]
 	public void MixedTierCablesSplitIntoPerTierComponents()
 	{
-		// Deliberate divergence from upstream: cables only link to a
-		// same-voltage-tier neighbour (CableLayer.Connects), so a row of
-		// mixed tiers does NOT merge into one weakest-link network - each
-		// run of equal-tier cables forms its own isolated component.
 		var l = new CableLayer();
 		l.Set(0, 0, Cell(VoltageTier.HV));
 		l.Set(1, 0, Cell(VoltageTier.HV));
@@ -87,17 +82,6 @@ public class EnergyNetGraphTests
 		Assert.Contains(comps, c => c.Cells.Count == 2 && c.EffectiveTier == VoltageTier.HV);
 		Assert.Contains(comps, c => c.Cells.Count == 1 && c.EffectiveTier == VoltageTier.LV);
 		Assert.Contains(comps, c => c.Cells.Count == 1 && c.EffectiveTier == VoltageTier.EV);
-	}
-
-	[Fact]
-	public void EffectiveAmperageIsMinOfMembers()
-	{
-		var l = new CableLayer();
-		l.Set(0, 0, Cell(VoltageTier.LV, amp: 4));
-		l.Set(1, 0, Cell(VoltageTier.LV, amp: 1));   // bottleneck
-		l.Set(2, 0, Cell(VoltageTier.LV, amp: 4));
-		var comps = EnergyNetGraph.Build(l);
-		Assert.Equal(1, comps[0].EffectiveAmperage);
 	}
 
 	[Fact]
@@ -113,14 +97,14 @@ public class EnergyNetGraphTests
 	}
 
 	[Fact]
-	public void WireSizeScalesEffectiveAmperage()
+	public void WireSizeScalesAmperage()
 	{
 		// hex iron (size 16, base 2 amp) = 32A; double iron (size 2, base 2) = 4A.
 		var l = new CableLayer();
 		l.Set(0, 0, Cell(VoltageTier.MV, amp: 2, size: 16));
-		l.Set(1, 0, Cell(VoltageTier.MV, amp: 2, size: 2));   // bottleneck
+		l.Set(1, 0, Cell(VoltageTier.MV, amp: 2, size: 2));
 		var comps = EnergyNetGraph.Build(l);
-		Assert.Equal(4, comps[0].EffectiveAmperage);
+		Assert.Equal(32, comps[0].MaxAmperage);
 	}
 
 	[Fact]
@@ -152,8 +136,3 @@ public class EnergyNetGraphTests
 		Assert.Equal(copperHV, comps[0].Cells[(1, 0)]);
 	}
 }
-
-// NOTE: EnergyNetworkTickTests was removed - its subject `EnergyNetwork`
-// (TerrariaCompat/Energy/Network/EnergyNetwork.cs) genuinely depends on tML
-// (Terraria.Audio, Microsoft.Xna.Framework, WorldGen, TieredEnergyMachine,
-// CableLayerSystem) and cannot be compiled into the pure-logic test project.

@@ -650,10 +650,10 @@ public class WorkableTieredMachine : TieredEnergyMachine, IItemHandler, IFluidHa
 		MachineLoopVoiceArbiter.ClearWant(this);
 	}
 
-	public override void SaveData(TagCompound tag)
+	protected override void SaveMachineData(TagCompound tag)
 	{
 		EnsureTraits();
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		tag["activeEut"] = _activeEut;
 		if (_lastRecipeId is not null) tag["recipe"] = _lastRecipeId;
 	}

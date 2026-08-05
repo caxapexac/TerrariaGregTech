@@ -18,6 +18,12 @@ public sealed class MeBusLayerSystem : ModSystem
 
 	public override void SaveWorldData(TagCompound tag)
 	{
+		lock (Api.SaveTickGate.Lock)
+			WriteWorldData(tag);
+	}
+
+	private void WriteWorldData(TagCompound tag)
+	{
 		if (Buses.All.Count == 0) return;
 		var list = new List<TagCompound>();
 		foreach (var kv in Buses.All)

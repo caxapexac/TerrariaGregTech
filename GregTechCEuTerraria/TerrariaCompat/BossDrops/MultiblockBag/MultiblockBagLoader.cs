@@ -5,15 +5,10 @@ using Terraria.ModLoader;
 
 namespace GregTechCEuTerraria.TerrariaCompat.BossDrops.MultiblockBag;
 
-// Registers one MultiblockBagItem per multi (every MachineDefinition with a
-// non-null PatternFactory). MUST run AFTER MachineDefinitions.RegisterAll +
-// TieredMachineFactory.RegisterAll so the controller items exist by the time
-// MultiblockBagContents.Resolve walks them.
 public static class MultiblockBagLoader
 {
 	public const string NamePrefix = "multiblock_bag_";
 
-	// multi id -> bag item type
 	private static readonly Dictionary<string, int> _byMultiId = new();
 	public static IReadOnlyDictionary<string, int> ByMultiId => _byMultiId;
 
@@ -26,6 +21,7 @@ public static class MultiblockBagLoader
 	{
 		_byMultiId.Clear();
 		int registered = 0;
+		var untiered = new List<string>();
 		foreach (var def in MachineRegistry.All)
 		{
 			if (def.PatternFactory is null) continue;
@@ -33,8 +29,12 @@ public static class MultiblockBagLoader
 			mod.AddContent(bag);
 			_byMultiId[def.Id] = bag.Type;
 			registered++;
+			if (!MultiblockBagTierMap.HasTier(def.Id)) untiered.Add(def.Id);
 		}
 		mod.Logger.Info($"MultiblockBagLoader: registered {registered} multiblock bags.");
+		if (untiered.Count > 0)
+			mod.Logger.Warn($"MultiblockBagLoader: {untiered.Count} multi(s) missing from MultiblockBagTierMap - " +
+				$"their bags will drop at the default tier {MultiblockBagTierMap.DefaultTier}: {string.Join(", ", untiered)}");
 	}
 
 	public static void Unload() => _byMultiId.Clear();

@@ -38,7 +38,7 @@ public static class CleanroomLayout
 		var recipeLogic = machine.Recipe;
 
 		if (!machine.IsFormed)
-			lines.Add(RecipeStatusText.StatusLineForMulti(machine, recipeLogic));
+			RecipeStatusText.AppendUnformedStatus(machine, recipeLogic, lines);
 
 		if (machine.IsFormed)
 		{
@@ -86,10 +86,6 @@ public static class CleanroomLayout
 			lines.Add(MultiblockDisplayText.Tr("gtceu.multiblock.dimensions.0"));
 			lines.Add(MultiblockDisplayText.Tr("gtceu.multiblock.dimensions.1.2d",
 				machine.FormedTileWidth / 2, machine.FormedTileHeight / 2));
-		}
-		else
-		{
-			lines.Add(MultiblockDisplayText.Tr("gtceu.multiblock.invalid_structure"));
 		}
 
 		return lines;

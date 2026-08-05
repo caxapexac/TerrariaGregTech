@@ -6,27 +6,12 @@ using Terraria.ID;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Capabilities.Handlers;
 
-// IItemHandler over a vanilla Terraria chest, addressed by chest index.
-//
-// This is the Terraria analogue of upstream's Forge ITEM_HANDLER capability on
-// a vanilla MC container - it lets a conveyor cover (and, later, item pipes)
-// move items in and out of an adjacent chest.
-//
-// Server-authority rule: while a player has the chest OPEN it is no longer
-// server-authoritative (the viewing client mutates the chest locally and the
-// game syncs slot-by-slot), so the handler FREEZES - Insert returns the stack
-// untouched and Extract returns empty while the chest is in use. The conveyor
-// simply transfers nothing that tick. Outside of that the handler is fully
-// consistent; every non-simulated mutation is broadcast with SyncChestItem so
-// MP clients stay in step.
 public sealed class VanillaChestItemHandler : IItemHandler
 {
 	private readonly int _chestIndex;
 
 	private VanillaChestItemHandler(int chestIndex) => _chestIndex = chestIndex;
 
-	// Resolve the chest occupying tile (x,y) - works for any cell of the 2x2
-	// chest footprint by walking back to the top-left via the tile frame.
 	public static IItemHandler? At(int x, int y)
 	{
 		if (x < 1 || y < 1 || x >= Main.maxTilesX - 1 || y >= Main.maxTilesY - 1) return null;
@@ -42,7 +27,6 @@ public sealed class VanillaChestItemHandler : IItemHandler
 	private Chest? TheChest =>
 		_chestIndex >= 0 && _chestIndex < Main.chest.Length ? Main.chest[_chestIndex] : null;
 
-	// While any player has this chest open it is not server-authoritative.
 	private bool Locked
 	{
 		get
@@ -83,7 +67,7 @@ public sealed class VanillaChestItemHandler : IItemHandler
 			return leftover;
 		}
 
-		if (existing.type != item.type) return item.Clone();
+		if (existing.type != item.type || !Terraria.ModLoader.ItemLoader.CanStack(existing, item)) return item.Clone();
 
 		int room = Math.Min(existing.maxStack, item.maxStack) - existing.stack;
 		if (room <= 0) return item.Clone();

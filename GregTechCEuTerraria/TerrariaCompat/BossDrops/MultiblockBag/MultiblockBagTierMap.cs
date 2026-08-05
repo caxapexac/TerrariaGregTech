@@ -92,7 +92,11 @@ public static class MultiblockBagTierMap
 
 		// === UV (8) - Pillars / EoL / Moon Lord ============================
 		["uv_fusion_reactor"]        = 8,
+		["active_transformer"]       = 8,
+		["power_substation"]         = 8,
 	};
+
+	public static bool HasTier(string multiId) => _tiers.ContainsKey(multiId);
 
 	public static int GetTier(string multiId) =>
 		_tiers.TryGetValue(multiId, out var t) ? t : DefaultTier;

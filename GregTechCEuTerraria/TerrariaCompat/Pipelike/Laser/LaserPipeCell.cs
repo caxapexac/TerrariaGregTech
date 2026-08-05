@@ -1,22 +1,15 @@
 #nullable enable
 using GregTechCEuTerraria.Api.Capability;
+using GregTechCEuTerraria.Api.Pipenet;
 using GregTechCEuTerraria.TerrariaCompat.Machine;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Pipelike.Laser;
 
-// One placed laser pipe. Carries the per-side open-connection bitmask so laser
-// pipes can only connect STRAIGHT (no turns, no crosses) - mirror of upstream
-// LaserPipeBlockEntity.setConnection, which rejects any connection off the
-// requested side's axis. The mask uses CoverSide ordinals (Up=0,Down=1,Left=2,
-// Right=3) so it feeds straight into Node.OpenConnections.
 public readonly record struct LaserPipeCell
 {
-	// Bitmask of connected sides (CoverSide ordinal bits). All set bits lie on
-	// a SINGLE axis (straight-only).
 	public byte Open { get; init; }
 }
 
-// Side <-> Node-bit helpers + the straight-only placement rule for laser pipes.
 public static class LaserConn
 {
 	public static int Bit(IODirection side) => side switch
@@ -36,16 +29,12 @@ public static class LaserConn
 		(IODirection.Right, 1, 0),
 	};
 
-	// Mirror of LaserPipeBlockEntity.setConnection: a laser pipe may only open
-	// connections on ONE axis. The first connectable pipe-neighbour picks the
-	// axis; a perpendicular neighbour is rejected (no turn/cross). Reciprocal,
-	// pipe-to-pipe only (endpoints found by the walker / drawn by the renderer).
 	public static void ConnectOnPlace(LaserPipeLayer pipes, int x, int y)
 	{
 		byte open = 0;
 		foreach (var (side, dx, dy) in Sides)
 		{
-			int nx = x + dx, ny = y + dy;
+			var (nx, ny) = PipePassthrough.EffectiveNeighbor(x, y, dx, dy);
 			var nc = pipes.CellAt(nx, ny);
 			if (nc is null) continue;                              // pipe-to-pipe only
 			int axis = Bit(side) | Bit(side.Opposite());
@@ -61,12 +50,54 @@ public static class LaserConn
 	{
 		foreach (var (side, dx, dy) in Sides)
 		{
-			int nx = x + dx, ny = y + dy;
+			var (nx, ny) = PipePassthrough.EffectiveNeighbor(x, y, dx, dy);
 			var nc = pipes.CellAt(nx, ny);
 			if (nc is null) continue;
 			byte cleared = (byte)(nc.Value.Open & ~Bit(side.Opposite()));
 			if (cleared != nc.Value.Open)
 				pipes.Set(nx, ny, nc.Value with { Open = cleared });
+		}
+	}
+
+	private static readonly (IODirection side, int dx, int dy)[] Axes =
+	{
+		(IODirection.Right, 1, 0),
+		(IODirection.Down,  0, 1),
+	};
+
+	public static void LinkAcross(LaserPipeLayer pipes, int x, int y)
+	{
+		foreach (var (side, dx, dy) in Axes)
+		{
+			var (nx, ny) = PipePassthrough.EffectiveNeighbor(x, y,  dx,  dy);
+			var (fx, fy) = PipePassthrough.EffectiveNeighbor(x, y, -dx, -dy);
+			var near = pipes.CellAt(nx, ny);
+			var far  = pipes.CellAt(fx, fy);
+			if (near is null || far is null) continue;
+			int axis = Bit(side) | Bit(side.Opposite());
+			if ((near.Value.Open & ~axis) != 0) continue;
+			if ((far.Value.Open  & ~axis) != 0) continue;
+			pipes.Set(nx, ny, near.Value with { Open = (byte)(near.Value.Open | Bit(side.Opposite())) });
+			pipes.Set(fx, fy, far.Value  with { Open = (byte)(far.Value.Open  | Bit(side)) });
+		}
+	}
+
+	public static void UnlinkAcross(LaserPipeLayer pipes, int x, int y)
+	{
+		foreach (var (side, dx, dy) in Axes)
+		{
+			var (nx, ny) = PipePassthrough.EffectiveNeighbor(x, y,  dx,  dy);
+			var (fx, fy) = PipePassthrough.EffectiveNeighbor(x, y, -dx, -dy);
+			if (pipes.CellAt(nx, ny) is { } near)
+			{
+				byte nc = (byte)(near.Open & ~Bit(side.Opposite()));
+				if (nc != near.Open) pipes.Set(nx, ny, near with { Open = nc });
+			}
+			if (pipes.CellAt(fx, fy) is { } far)
+			{
+				byte fc = (byte)(far.Open & ~Bit(side));
+				if (fc != far.Open) pipes.Set(fx, fy, far with { Open = fc });
+			}
 		}
 	}
 }

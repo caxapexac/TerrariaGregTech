@@ -32,12 +32,4 @@ public sealed class NeonSignItem : ModItem
 		tooltips.Add(new TooltipLine(Mod, "Neon", "Right-click to edit the glowing text"));
 		tooltips.Add(new TooltipLine(Mod, "NeonNote", "[c/A0A0A0:Pick a color and size; text renders in the world]"));
 	}
-
-	public override void AddRecipes()
-	{
-		var recipe = CreateRecipe().AddIngredient(ItemID.Sign, 1);
-		if (Mod.TryFind<ModItem>("basic_electronic_circuit", out var circuit))
-			recipe.AddIngredient(circuit.Type, 1);
-		recipe.DisableDecraft().Register();
-	}
 }

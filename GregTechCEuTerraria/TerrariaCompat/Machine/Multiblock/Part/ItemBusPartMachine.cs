@@ -211,9 +211,9 @@ public class ItemBusPartMachine : TieredIOPartMachine, IDistinctPart, IHasCircui
 		if (more > 0) lines.Add($"  + {more} more");
 	}
 
-	public override void SaveData(TagCompound tag)
+	protected override void SaveMachineData(TagCompound tag)
 	{
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		tag["isDistinct"]         = _isDistinct;
 		tag["circuitSlotEnabled"] = CircuitSlotEnabled;
 	}

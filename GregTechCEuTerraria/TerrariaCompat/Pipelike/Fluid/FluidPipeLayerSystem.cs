@@ -33,15 +33,19 @@ public sealed class FluidPipeLayerSystem : ModSystem
 	{
 		if (_sides.TryGetValue((x, y), out var c)) return c;
 		c = new PipeCoverable(PipeKind.Fluid, x, y);
-		_sides[(x, y)] = c;
+		lock (Api.SaveTickGate.Lock)
+			_sides[(x, y)] = c;
 		return c;
 	}
 
 	public static void DropSides(int x, int y)
 	{
 		if (_sides.TryGetValue((x, y), out var c)) ((ICoverable)c).OnCoversUnload();
-		_sides.Remove((x, y));
-		_states.Remove((x, y));
+		lock (Api.SaveTickGate.Lock)
+		{
+			_sides.Remove((x, y));
+			_states.Remove((x, y));
+		}
 	}
 
 	internal static IFluidHandler? ResolveRawTanks(PipeCoverable coverable, CoverSide side)
@@ -72,7 +76,8 @@ public sealed class FluidPipeLayerSystem : ModSystem
 			AcidProof           = c.AcidProof,
 		};
 		s = new FluidPipeState(x, y, props);
-		_states[(x, y)] = s;
+		lock (Api.SaveTickGate.Lock)
+			_states[(x, y)] = s;
 		return s;
 	}
 
@@ -122,6 +127,12 @@ public sealed class FluidPipeLayerSystem : ModSystem
 	}
 
 	public override void SaveWorldData(TagCompound tag)
+	{
+		lock (Api.SaveTickGate.Lock)
+			WriteWorldData(tag);
+	}
+
+	private void WriteWorldData(TagCompound tag)
 	{
 		if (Pipes.Count == 0)
 		{

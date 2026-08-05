@@ -12,13 +12,6 @@ using Terraria.ModLoader.IO;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Machine.Multiblock.Part;
 
-// Port of DataAccessHatchMachine. Holds data sticks for the controller (Assembly
-// Line / Data Bank); recipes gated by ResearchCondition only run if their stick
-// is loaded. Tier -> slots: HV=4, EV=9, LuV=16, else=1. Creative=0 slots, unlocks all.
-//
-// ResearchManager STUBBED until the research subsystem lands - RebuildData
-// always clears the set so this hatch contributes no unlocks today. Non-research
-// recipes pass through normally.
 public class DataAccessHatchMachine : TieredPartMachine, IDataAccessHatch
 {
 	protected override string Label => "Data Access Hatch";
@@ -27,18 +20,12 @@ public class DataAccessHatchMachine : TieredPartMachine, IDataAccessHatch
 
 	public NotifiableItemStackHandler? ImportItems { get; protected set; }
 
-	// Build-then-swap (volatile + reference assignment): defensive only - the
-	// actual server hang it was added for was the C# DIM-shadowing trap in
-	// ModifyRecipe (see that method). Don't chase HashSet theories.
 	private volatile HashSet<GTRecipe> _recipes = new();
 
-	// _recipes is server-only (upstream rebuildData early-returns on client + not
-	// @SaveField). This synced count drives the client-readable hover diagnostic.
 	protected int _syncResearchCount;
 
 	public override Api.Capability.IItemHandler? ExposedItemHandler => ImportItems;
 
-	// Expose the data-item inventory to the slot-widget / SlotAction path.
 	public override Item[]? GetSlotGroup(TerrariaCompat.Machine.SlotGroup group)
 	{
 		if (ImportItems == null) return base.GetSlotGroup(group);
@@ -71,7 +58,6 @@ public class DataAccessHatchMachine : TieredPartMachine, IDataAccessHatch
 		}
 		else
 		{
-			// Mirrors upstream's inner class (overrides onContentsChanged + insertItem).
 			ImportItems = new RebuildingInventory(this, GetInventorySize());
 		}
 		Traits.Attach(ImportItems);
@@ -126,15 +112,9 @@ public class DataAccessHatchMachine : TieredPartMachine, IDataAccessHatch
 		if (seen.Contains(this)) return 0;
 		seen.Add(this);
 		if (IsCreativeHatch) return int.MaxValue;
-		// Server-synced; _recipes is empty on clients.
 		return _syncResearchCount;
 	}
 
-	// MUST inline the DIM body - NEVER `((IDataAccessHatch)this).ModifyRecipe`.
-	// MultiblockPartMachine.ModifyRecipe shares the interface signature, so this
-	// class member SHADOWS the DIM (C# uses a DIM only when no class member
-	// implements it). An interface-cast call would self-recurse -> tail-call loop
-	// -> silent server hang. Same trap as OpticalDataHatchMachine.
 	public override GTRecipe? ModifyRecipe(GTRecipe recipe)
 	{
 		if (IsCreative()) return recipe;
@@ -148,7 +128,6 @@ public class DataAccessHatchMachine : TieredPartMachine, IDataAccessHatch
 		base.AddedToController(controller);
 	}
 
-	// Upstream canShared = isCreative.
 	public bool CanShared() => IsCreativeHatch;
 
 	private void RebuildData(bool isDataBank)
@@ -170,9 +149,9 @@ public class DataAccessHatchMachine : TieredPartMachine, IDataAccessHatch
 		_syncResearchCount = rebuilt.Count;
 	}
 
-	public override void SaveData(TagCompound tag)
+	protected override void SaveMachineData(TagCompound tag)
 	{
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		tag["isCreative"] = IsCreativeHatch;
 		tag["dahResearchCount"] = _syncResearchCount;
 	}
@@ -183,6 +162,6 @@ public class DataAccessHatchMachine : TieredPartMachine, IDataAccessHatch
 		IsCreativeHatch = tag.GetBool("isCreative");
 		if (tag.ContainsKey("dahResearchCount")) _syncResearchCount = tag.GetInt("dahResearchCount");
 		EnsureInventory();
-		Traits.Load(tag);   // late-registration re-load; recipe set rebuilds on AddedToController.
+		Traits.Load(tag);
 	}
 }

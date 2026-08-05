@@ -17,6 +17,8 @@ public static class QuestbookProgress
 	{
 		if (QuestbookWorldProgress.Completed.Contains(questId))
 			return;
+		if (QuestbookSystem.IsAutoCheck(questId))
+			return;
 
 		if (Main.netMode == NetmodeID.MultiplayerClient)
 			QuestbookPackets.SendCompleteRequest(questId);

@@ -617,6 +617,11 @@ _CONFIGS = {
             "Label":   "Simulation Speed",
             "Tooltip": "",
         },
+        "MultiblocksNeedCleanroom": {
+            "Label":   "Multiblocks need cleanroom",
+            "Tooltip": "If disabled, multiblocks ignore all cleanroom "
+                       "requirements. Does nothing while Enable Cleanroom is off",
+        },
         "NetworkSyncPeriod": {
             "Label":   "Network Sync Period",
             "Tooltip": "",

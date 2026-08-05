@@ -9,29 +9,21 @@ using RLStatus = GregTechCEuTerraria.Api.Machine.Feature.RecipeLogicStatus;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Machine.Multiblock.Electric.Research;
 
-// Port of DataBankMachine. Passive data provider - holds data-access /
-// optical-data hatches, pays per-hatch EU upkeep, no recipes.
-// DEVIATION: upstream's
-// `maintenance == null -> onStructureInvalid` requirement dropped (no multi
-// in this port forces a maintenance hatch). Penalty math kept verbatim.
 public class DataBankMachine : WorkableElectricMultiblockMachine, IDataBankController, IControllable,
 	Multiblock.IPowerDiagnostics
 {
-	// Upstream uses GTValues.VA[] (V x 15/16), NOT V[]. VA[EV]=1920, VA[LuV]=30720.
 	public static readonly long EUT_PER_HATCH         = VoltageTiers.VA((int)VoltageTier.EV);
 	public static readonly long EUT_PER_HATCH_CHAINED = VoltageTiers.VA((int)VoltageTier.LuV);
 
 	protected long _energyUsage;
 	public long EnergyUsage => _energyUsage;
 
-	// Server-synced for MP power diagnostic (controller ticks server-only).
 	protected long _syncUpkeep, _syncStored, _syncCapacity, _syncMaxInput;
 	long Multiblock.IPowerDiagnostics.PowerUpkeep   => _syncUpkeep;
 	long Multiblock.IPowerDiagnostics.PowerCapacity => _syncCapacity;
 	long Multiblock.IPowerDiagnostics.PowerStored   => _syncStored;
 	long Multiblock.IPowerDiagnostics.PowerMaxInput => _syncMaxInput;
 
-	// Opportunistic; +10%/problem penalty in Tick (0 while subsystem dormant).
 	protected IMaintenanceMachine? _maintenance;
 
 	public DataBankMachine() : base() { }
@@ -55,7 +47,6 @@ public class DataBankMachine : WorkableElectricMultiblockMachine, IDataBankContr
 		_maintenance = null;
 	}
 
-	// Receivers present -> chained (LuV) rate. Verbatim calculateEnergyUsage.
 	protected virtual long CalculateEnergyUsage()
 	{
 		int receivers = 0, transmitters = 0, regulars = 0;
@@ -111,7 +102,6 @@ public class DataBankMachine : WorkableElectricMultiblockMachine, IDataBankContr
 			logic.SetWaiting("insufficient_in");
 		}
 
-		// Capability (voltage x amperage), not throughput - see ResearchPowerDiagnostics.
 		_syncUpkeep   = energyToConsume;
 		_syncStored   = _energyContainer.EnergyStored;
 		_syncCapacity = _energyContainer.EnergyCapacity;
@@ -120,9 +110,9 @@ public class DataBankMachine : WorkableElectricMultiblockMachine, IDataBankContr
 
 	public virtual long GetEnergyUsage() => _energyUsage;
 
-	public override void SaveData(TagCompound tag)
+	protected override void SaveMachineData(TagCompound tag)
 	{
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		tag["db_upkeep"] = _syncUpkeep;
 		tag["db_stored"] = _syncStored;
 		tag["db_cap"]    = _syncCapacity;

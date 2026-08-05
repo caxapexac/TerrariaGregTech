@@ -140,9 +140,9 @@ public class BatteryBufferMachine : TieredEnergyMachine, IControllable
 			(EnergyContainer as EnergyBatteryTrait)?.RepayInternalStorageDebt();
 	}
 
-	public override void SaveData(TagCompound tag)
+	protected override void SaveMachineData(TagCompound tag)
 	{
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		tag["isWorkingEnabled"] = _isWorkingEnabled;
 		var inv = BatteryInv;
 		var list = new List<TagCompound>(inv.Length);

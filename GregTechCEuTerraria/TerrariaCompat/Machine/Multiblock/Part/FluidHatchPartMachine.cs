@@ -182,9 +182,9 @@ public class FluidHatchPartMachine : TieredIOPartMachine, IHasCircuitSlot
 		}
 	}
 
-	public override void SaveData(TagCompound tag)
+	protected override void SaveMachineData(TagCompound tag)
 	{
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		tag["initialCapacity"]    = InitialCapacity;
 		tag["slots"]              = Slots;
 		tag["circuitSlotEnabled"] = CircuitSlotEnabled;

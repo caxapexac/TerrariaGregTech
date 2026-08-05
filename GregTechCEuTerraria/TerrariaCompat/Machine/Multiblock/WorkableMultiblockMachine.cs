@@ -269,9 +269,9 @@ public abstract class WorkableMultiblockMachine : MultiblockControllerMachine, I
 		return types[idx];
 	}
 
-	public override void SaveData(Terraria.ModLoader.IO.TagCompound tag)
+	protected override void SaveMachineData(Terraria.ModLoader.IO.TagCompound tag)
 	{
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		tag["activeRecipeType"] = ActiveRecipeType;
 		if (LastRecipeId is not null) tag["lastRecipeId"] = LastRecipeId;
 	}

@@ -10,11 +10,6 @@ using Terraria.ModLoader.IO;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Machine.Multiblock.Part;
 
-// Port of OpticalDataHatchMachine. Transmitter side queries co-located data
-// hatches while its multi runs; receiver side asks an adjacent optical pipe
-// / data hatch. Upstream's PartAbility tag filter maps to type classification
-// (non-optical IDataAccessHatch + receiver optical -> dataAccesses; transmitter
-// optical -> transmitters).
 public class OpticalDataHatchMachine : MultiblockPartMachine, IOpticalDataAccessHatch
 {
 	protected override string Label => "Optical Data Hatch";
@@ -42,8 +37,6 @@ public class OpticalDataHatchMachine : MultiblockPartMachine, IOpticalDataAccess
 			? "[c/55AAFF:Data Transmitter] - serves this multi's research data to the optical network (e.g. a Data Bank -> Assembly Line)"
 			: "[c/FFAA55:Data Receiver] - pulls research data from a remote Data Bank over the optical network");
 
-		// Diagnostic chain trace (TerrariaCompat aid; remote multi out of sync
-		// range on a true MP client reads as 0).
 		if (!IsFormed())
 		{
 			lines.Add("[c/AAAAAA:Research link:] [c/FF5555:not part of a formed multi]");
@@ -65,8 +58,6 @@ public class OpticalDataHatchMachine : MultiblockPartMachine, IOpticalDataAccess
 		}
 	}
 
-	// Same gate as transmitter's IsRecipeAvailable. Data Bank only reports
-	// working when powered (verbatim upstream tick()).
 	public bool IsSourceMultiWorking()
 	{
 		foreach (var c in GetControllers())
@@ -74,7 +65,6 @@ public class OpticalDataHatchMachine : MultiblockPartMachine, IOpticalDataAccess
 		return false;
 	}
 
-	// Surfaces the first break in the wiring -> source chain (per perimeter side).
 	private void DescribeReceiverLink(System.Collections.Generic.List<string> lines)
 	{
 		bool anySource = false;
@@ -117,7 +107,6 @@ public class OpticalDataHatchMachine : MultiblockPartMachine, IOpticalDataAccess
 	private static string FmtResearchCount(int n) =>
 		n == int.MaxValue ? "all (creative)" : n == 0 ? "[c/FF5555:none]" : n.ToString();
 
-	// Mirrors IsRecipeAvailable's traversal but sums entries.
 	public int CountVisibleResearch(ICollection<IDataAccessHatch> seen)
 	{
 		if (seen.Contains(this)) return 0;
@@ -154,10 +143,6 @@ public class OpticalDataHatchMachine : MultiblockPartMachine, IOpticalDataAccess
 		return sum;
 	}
 
-	// MUST inline the DIM body - NEVER `((IDataAccessHatch)this).ModifyRecipe`.
-	// This override shadows the DIM (same signature on inherited virtual), so an
-	// interface-cast call resolves back to this method = infinite tail-call
-	// self-recursion -> silent server hang. Same trap as DataAccessHatchMachine.
 	public override GTRecipe? ModifyRecipe(GTRecipe recipe)
 	{
 		if (IsCreative()) return recipe;
@@ -178,7 +163,6 @@ public class OpticalDataHatchMachine : MultiblockPartMachine, IOpticalDataAccess
 				|| !workable.GetRecipeLogic().IsWorking())
 				return false;
 
-			// Type classification stands in for upstream's PartAbility tag filter.
 			var dataAccesses = new List<IDataAccessHatch>();
 			var transmitters = new List<IDataAccessHatch>();
 			foreach (var part in controller.GetParts())
@@ -198,9 +182,6 @@ public class OpticalDataHatchMachine : MultiblockPartMachine, IOpticalDataAccess
 				|| IsRecipeAvailableIn(transmitters, seen, recipe);
 		}
 
-		// Receiver: (a) optical pipe -> walk the net; (b) direct adjacent
-		// IDataAccessHatch (upstream looks for OpticalPipeBlockEntity only -
-		// we generalise so other adjacent multi parts satisfy the same role).
 		foreach (var (side, x, y) in WorldCapability.Perimeter(this))
 		{
 			if (TerrariaCompat.Pipelike.Optical.OpticalPipeLayerSystem.Pipes.Has(x, y))
@@ -233,9 +214,9 @@ public class OpticalDataHatchMachine : MultiblockPartMachine, IOpticalDataAccess
 		return false;
 	}
 
-	public override void SaveData(TagCompound tag)
+	protected override void SaveMachineData(TagCompound tag)
 	{
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		tag["transmitter"] = TransmitterFlag;
 	}
 

@@ -5,13 +5,10 @@ using GregTechCEuTerraria.TerrariaCompat.Machine;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Pipelike.Laser;
 
-// Laser pipes connect STRAIGHT only: two pipes are linked iff BOTH opened the
-// shared side (reciprocal open-mask set at placement by LaserConn.ConnectOnPlace,
-// which forbids any off-axis connection). Drives both the net topology (via
-// OnPipeAdded's open mask) and ConnectionMask (renderer) - so a laser cross /
-// turn no longer merges or renders as a "+".
 public sealed class LaserPipeLayer : GridLayer<LaserPipeCell>
 {
+	protected override bool SupportsCrossover => true;
+
 	public override bool Connects(int x1, int y1, int x2, int y2)
 	{
 		var a = CellAt(x1, y1);
@@ -26,10 +23,11 @@ public sealed class LaserPipeLayer : GridLayer<LaserPipeCell>
 
 	private static IODirection SideBetween(int x1, int y1, int x2, int y2)
 	{
-		if (x2 == x1 && y2 == y1 - 1) return IODirection.Up;
-		if (x2 == x1 && y2 == y1 + 1) return IODirection.Down;
-		if (x2 == x1 - 1 && y2 == y1) return IODirection.Left;
-		if (x2 == x1 + 1 && y2 == y1) return IODirection.Right;
+		foreach (var (side, dx, dy) in LaserConn.Sides)
+		{
+			var (nx, ny) = PipePassthrough.EffectiveNeighbor(x1, y1, dx, dy);
+			if (nx == x2 && ny == y2) return side;
+		}
 		return IODirection.None;
 	}
 }

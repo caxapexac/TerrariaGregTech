@@ -63,11 +63,17 @@ public static class ParallelLogic
 
 	private static int GetMaxByInput(IRecipeLogicMachine machine, GTRecipe recipe, int parallelLimit, bool skipEu)
 	{
-		if (InputsFitAt(machine, recipe, parallelLimit, skipEu)) return parallelLimit;
+		if (!skipEu)
+		{
+			parallelLimit = LimitByInputEUt(machine, recipe, parallelLimit);
+			if (parallelLimit <= 0) return 0;
+		}
+
+		if (InputsFitAt(machine, recipe, parallelLimit)) return parallelLimit;
 		int min = 0, max = parallelLimit, mid = parallelLimit;
 		while (min != max)
 		{
-			bool ok = InputsFitAt(machine, recipe, mid, skipEu);
+			bool ok = InputsFitAt(machine, recipe, mid);
 			var bin = AdjustMultiplier(ok, min, mid, max);
 			min = bin[0]; mid = bin[1]; max = bin[2];
 		}
@@ -76,26 +82,64 @@ public static class ParallelLogic
 
 	private static int LimitByOutputMerging(IRecipeLogicMachine machine, GTRecipe recipe, int parallelLimit, bool skipEu)
 	{
-		if (OutputsFitAt(machine, recipe, parallelLimit, skipEu)) return parallelLimit;
+		if (!skipEu)
+		{
+			parallelLimit = LimitByOutputEUt(machine, recipe, parallelLimit);
+			if (parallelLimit <= 0) return 0;
+		}
+
+		if (OutputsFitAt(machine, recipe, parallelLimit)) return parallelLimit;
 
 		int min = 0, max = parallelLimit, mid = parallelLimit;
 		while (min != max)
 		{
-			bool ok = OutputsFitAt(machine, recipe, mid, skipEu);
+			bool ok = OutputsFitAt(machine, recipe, mid);
 			var bin = AdjustMultiplier(ok, min, mid, max);
 			min = bin[0]; mid = bin[1]; max = bin[2];
 		}
 		return mid;
 	}
 
-	private static bool InputsFitAt(IRecipeLogicMachine machine, GTRecipe recipe, int n, bool skipEu)
+	private static int LimitByInputEUt(IRecipeLogicMachine machine, GTRecipe recipe, int limit)
+	{
+		long maxVoltage = long.MaxValue;
+		if (machine is IOverclockMachine overclockMachine)
+			maxVoltage = overclockMachine.OverclockVoltage;
+		else if (machine is ITieredMachine tieredMachine)
+			maxVoltage = tieredMachine.GetMaxVoltage();
+
+		long recipeEUt = recipe.InputEUt.GetTotalEU();
+		if (recipeEUt == 0) return limit;
+		return System.Math.Min(limit, System.Math.Abs(SaturatedCast(maxVoltage / recipeEUt)));
+	}
+
+	private static int LimitByOutputEUt(IRecipeLogicMachine machine, GTRecipe recipe, int limit)
+	{
+		if (machine.CanVoidRecipeOutputs(EURecipeCapability.CAP)) return limit;
+
+		long recipeEUt = recipe.OutputEUt.GetTotalEU();
+		if (recipeEUt == 0) return limit;
+
+		long maxVoltage = long.MaxValue;
+		if (machine is IOverclockMachine overclockMachine)
+			maxVoltage = overclockMachine.OverclockVoltage;
+		else if (machine is ITieredMachine tieredMachine)
+			maxVoltage = tieredMachine.GetMaxVoltage();
+
+		return System.Math.Min(limit, System.Math.Abs(SaturatedCast(maxVoltage / recipeEUt)));
+	}
+
+	private static int SaturatedCast(long value) =>
+		value > int.MaxValue ? int.MaxValue : value < int.MinValue ? int.MinValue : (int)value;
+
+	private static bool InputsFitAt(IRecipeLogicMachine machine, GTRecipe recipe, int n)
 	{
 		if (n <= 0) return false;
 		var copied = recipe.Copy(ContentModifier.Multiplier_(n), false);
-		return MatchRecipeInputs(machine, copied) && MatchTickRecipeInputs(machine, copied, skipEu);
+		return MatchRecipeInputs(machine, copied) && MatchTickRecipeInputs(machine, copied, skipEu: true);
 	}
 
-	private static bool OutputsFitAt(IRecipeLogicMachine machine, GTRecipe recipe, int n, bool skipEu)
+	private static bool OutputsFitAt(IRecipeLogicMachine machine, GTRecipe recipe, int n)
 	{
 		if (n <= 0) return false;
 		var copied = recipe.Copy(ContentModifier.Multiplier_(n), false);
@@ -117,15 +161,6 @@ public static class ParallelLogic
 		if (itemsTickOut.Count > 0 || fluidsTickOut.Count > 0)
 		{
 			if (!machine.HasOutputRoomContents(copied, itemsTickOut, fluidsTickOut).IsSuccess) return false;
-		}
-
-		if (!skipEu && !machine.CanVoidRecipeOutputs(EURecipeCapability.CAP))
-		{
-			long outEU = copied.OutputEUt.GetTotalEU();
-			if (outEU > 0)
-			{
-				_ = outEU;
-			}
 		}
 
 		return true;

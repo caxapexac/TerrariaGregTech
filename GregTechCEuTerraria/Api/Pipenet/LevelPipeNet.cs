@@ -156,15 +156,12 @@ public abstract class LevelPipeNet<TData, TNet> : ILevelPipeNet<TData>
 		Init();
 	}
 
-	// TNet IS-A PipeNet<TData>; this adapter keeps the upcasts in one place
-	// so the call sites read like the upstream Java without explicit casts.
 	private static PipeNet<TData>? AsBaseNet(TNet? n) => n;
 
-	// -- Helpers -------------------------------------------------------
 	private static (int x, int y) Offset((int x, int y) pos, CoverSide side)
 	{
 		var (dx, dy) = CoverSides.Offset(side);
-		return (pos.x + dx, pos.y + dy);
+		return PipePassthrough.EffectiveNeighbor(pos.x, pos.y, dx, dy);
 	}
 
 	private static (int cx, int cy) ToChunkPos((int x, int y) pos) => (pos.x >> 4, pos.y >> 4);

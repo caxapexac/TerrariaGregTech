@@ -26,13 +26,7 @@ public sealed class OreVeinCondition : RecipeCondition
 	{
 		if (Main.maxTilesY <= 0) return "";
 
-		int surface = (int)Main.worldSurface;
-		var dims = new WorldDimensions(
-			SurfaceLow: surface,
-			SurfaceHigh: surface,
-			RockLayer: (int)Main.rockLayer,
-			UnderworldLayer: Main.UnderworldLayer,
-			MaxY: Main.maxTilesY);
+		var dims = VeinWorldDimensions.Current();
 
 		var (yMin, yMax) = LayerDepthMapping.ForVein(Layer, HeightMin, HeightMax, dims);
 		int feetShallow = Feet(yMin), feetDeep = Feet(yMax);

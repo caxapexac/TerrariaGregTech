@@ -143,31 +143,6 @@ public sealed class QuestbookSystem : ModSystem
 
 	public static string TaskKey(string questId, int taskIndex) => questId + "#" + taskIndex;
 
-	public static bool UpdateTaskProgress(string questId, Player player, HashSet<string> satisfied)
-	{
-		if (!Resolved.TryGetValue(questId, out ResolvedQuest? r) || !r.AutoCheck)
-			return false;
-
-		bool all = true;
-		for (int i = 0; i < r.Tasks.Count; i++)
-		{
-			ResolvedTask task = r.Tasks[i];
-			if (!task.IsItem || task.AcceptTypes.Length == 0)
-				continue;
-
-			string key = TaskKey(questId, i);
-			if (satisfied.Contains(key))
-				continue;
-
-			if (IsItemTaskSatisfied(task, player))
-				satisfied.Add(key);
-			else
-				all = false;
-		}
-
-		return all;
-	}
-
 	internal static bool IsItemTaskSatisfied(ResolvedTask task, Player player)
 	{
 		int have = 0;

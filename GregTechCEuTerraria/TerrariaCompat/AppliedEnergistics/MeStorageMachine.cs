@@ -63,9 +63,9 @@ public sealed class MeStorageMachine : MetaMachine, IMeStorageDevice
 		if (tag.ContainsKey("store")) _store.Load(tag.GetCompound("store"));
 	}
 
-	public override void SaveData(TagCompound tag)
+	protected override void SaveMachineData(TagCompound tag)
 	{
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		tag["store"] = _store.Save();
 	}
 
@@ -78,7 +78,7 @@ public sealed class MeStorageMachine : MetaMachine, IMeStorageDevice
 	public override void AppendTooltip(List<string> lines)
 	{
 		base.AppendTooltip(lines);
-		var net = MeNetworkSystem.NetAdjacentTo(this);
+		var net = MeNetworkSystem.NetOf(this);
 		lines.Add(net == null ? "[c/FF8888:Not connected]" : "ME Network: connected");
 		lines.Add(_store.What == null
 			? $"Stored: empty  (cap {Capacity:N0})"

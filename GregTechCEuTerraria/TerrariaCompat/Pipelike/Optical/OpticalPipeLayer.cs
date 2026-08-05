@@ -5,13 +5,10 @@ using GregTechCEuTerraria.TerrariaCompat.Machine;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Pipelike.Optical;
 
-// Optical pipes form non-branching paths: two pipes are connected only when
-// BOTH have opened the shared side (reciprocal, <=2 per pipe - set at placement
-// by OpticalConn.ConnectOnPlace, mirroring upstream OpticalPipeBlockEntity.
-// setConnection's `getNumConnections() >= 2` reject). This drives ConnectionMask
-// (renderer); the net topology is driven by the same open-mask via OnPipeAdded.
 public sealed class OpticalPipeLayer : GridLayer<OpticalPipeCell>
 {
+	protected override bool SupportsCrossover => true;
+
 	public override bool Connects(int x1, int y1, int x2, int y2)
 	{
 		var a = CellAt(x1, y1);
@@ -26,10 +23,11 @@ public sealed class OpticalPipeLayer : GridLayer<OpticalPipeCell>
 
 	private static IODirection SideBetween(int x1, int y1, int x2, int y2)
 	{
-		if (x2 == x1 && y2 == y1 - 1) return IODirection.Up;
-		if (x2 == x1 && y2 == y1 + 1) return IODirection.Down;
-		if (x2 == x1 - 1 && y2 == y1) return IODirection.Left;
-		if (x2 == x1 + 1 && y2 == y1) return IODirection.Right;
+		foreach (var (side, dx, dy) in OpticalConn.Sides)
+		{
+			var (nx, ny) = PipePassthrough.EffectiveNeighbor(x1, y1, dx, dy);
+			if (nx == x2 && ny == y2) return side;
+		}
 		return IODirection.None;
 	}
 }

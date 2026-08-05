@@ -3,9 +3,6 @@ using System.Collections.Generic;
 
 namespace GregTechCEuTerraria.Api.Pipenet;
 
-// Sparse 2D map of placed cells on a "wire-style" layer parallel to the tile
-// grid. The layer does not occupy block space - cells can coexist with any
-// tile or with empty air
 public abstract class GridLayer<TCell> where TCell : struct
 {
 	private readonly Dictionary<(int x, int y), TCell> _cells = new();
@@ -17,8 +14,9 @@ public abstract class GridLayer<TCell> where TCell : struct
 	public void ClearDirty() => IsDirty = false;
 	public void MarkDirty() => IsDirty = true;
 
-	// Pipe Intersection enabled
 	protected virtual bool SupportsCrossover => false;
+
+	public bool CanPlaceAt(int x, int y) => !SupportsCrossover || !PipePassthrough.IsCrossover(x, y);
 
 	public bool Has(int x, int y) => _cells.ContainsKey((x, y));
 
@@ -29,13 +27,16 @@ public abstract class GridLayer<TCell> where TCell : struct
 	{
 		if (_cells.TryGetValue((x, y), out var existing) &&
 			EqualityComparer<TCell>.Default.Equals(existing, cell)) return;
-		_cells[(x, y)] = cell;
+		lock (SaveTickGate.Lock)
+			_cells[(x, y)] = cell;
 		IsDirty = true;
 	}
 
 	public bool Remove(int x, int y)
 	{
-		bool removed = _cells.Remove((x, y));
+		bool removed;
+		lock (SaveTickGate.Lock)
+			removed = _cells.Remove((x, y));
 		if (removed) IsDirty = true;
 		return removed;
 	}
@@ -43,15 +44,13 @@ public abstract class GridLayer<TCell> where TCell : struct
 	public void Clear()
 	{
 		if (_cells.Count == 0) return;
-		_cells.Clear();
+		lock (SaveTickGate.Lock)
+			_cells.Clear();
 		IsDirty = true;
 	}
 
 	public abstract bool Connects(int x1, int y1, int x2, int y2);
 
-	// N=1, S=2, W=4, E=8 - combined into a 0..15 frame index. A cell only
-	// draws an arm toward a neighbour it Connects to, so the visual matches
-	// the actual electrically/logically-separate networks.
 	public int ConnectionMask(int x, int y)
 	{
 		int mask = 0;

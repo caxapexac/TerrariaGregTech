@@ -140,9 +140,9 @@ public abstract class LongDistanceEndpointMachine : MetaMachine, ILDEndpoint
 			lines.Add("[c/FFAA44:No partner endpoint (need one far Input + one far Output)]");
 	}
 
-	public override void SaveData(TagCompound tag)
+	protected override void SaveMachineData(TagCompound tag)
 	{
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		tag["ldIo"] = (byte)_ioType;
 	}
 

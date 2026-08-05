@@ -7,8 +7,6 @@ using Terraria.ModLoader.IO;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Machine.Multiblock.Part;
 
-// Port of ParallelHatchPartMachine. Holds an integer "parallel count" for its
-// controller. Max scales by tier: 4 ^ (tier - EV) -> EV=1, IV=4, LuV=16, ...
 public class ParallelHatchPartMachine : TieredPartMachine
 {
 	public const int MIN_PARALLEL = 1;
@@ -52,9 +50,9 @@ public class ParallelHatchPartMachine : TieredPartMachine
 
 	public bool CanShared() => false;
 
-	public override void SaveData(TagCompound tag)
+	protected override void SaveMachineData(TagCompound tag)
 	{
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		tag["currentParallel"] = CurrentParallel;
 	}
 

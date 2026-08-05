@@ -10,16 +10,6 @@ using Terraria.ModLoader.IO;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Tiles.Machines;
 
-// Port of com.gregtechceu.gtceu.common.machine.storage.QuantumTankMachine.
-// Single-tank huge-capacity fluid storage - the fluid twin of SuperChest.
-// Upstream registers the class twice (super_tank low / quantum_tank high tiers);
-// we collapse both into one definition spanning all tiers. Storage: _stored
-// carries the fluid TYPE, _storedAmount (long) the real count, MaxAmount the cap.
-//
-// DEVIATIONS: FluidCache trait collapsed onto the machine (the
-// machine IS the IFluidHandler - fill/drain logic unchanged); getFluidHandlerCap
-// front-face null-out dropped (no facing - the output-side gate is
-// MetaMachine.GetFluidHandlerCap's ExtractOnly wrapper; Fill is ungated).
 public class SuperTankTileEntity : MetaMachine, IFluidHandler, IControllable
 {
 	public SuperTankTileEntity() { }
@@ -27,7 +17,6 @@ public class SuperTankTileEntity : MetaMachine, IFluidHandler, IControllable
 
 	protected override string Label => Definition?.Label ?? "Super Tank";
 
-	// upstream registerQuantumTanks: 4M * 2^(tier-1) mB (ULV 2M, doubling per tier).
 	internal static long MaxAmountForTier(VoltageTier tier)
 	{
 		int t = (int)tier;
@@ -44,8 +33,6 @@ public class SuperTankTileEntity : MetaMachine, IFluidHandler, IControllable
 		}
 	}
 
-	// _stored carries the fluid TYPE only (Amount is a marker = 1); _storedAmount
-	// (long) is the real count. protected for CreativeTank's source-type setter.
 	protected FluidStack _stored = FluidStack.Empty;
 	protected long       _storedAmount;
 	private FluidStack _lockedFluid = FluidStack.Empty;
@@ -55,11 +42,8 @@ public class SuperTankTileEntity : MetaMachine, IFluidHandler, IControllable
 	public long StoredAmount => _storedAmount;
 	public FluidType? StoredType => _stored.Type;
 
-	// Lock filter - upstream FluidCache.filter.
 	private bool Accepts(FluidStack fluid) => !IsLocked || _lockedFluid.SameTypeAs(fluid);
 
-	// IFluidHandler - verbatim port of QuantumTankMachine.FluidCache.
-	// virtual hooks for CreativeTank's infinite-source override.
 	public int TankCount => 1;
 
 	public virtual FluidStack GetTank(int tank) =>
@@ -71,8 +55,6 @@ public class SuperTankTileEntity : MetaMachine, IFluidHandler, IControllable
 
 	public virtual bool IsFluidValid(int tank, FluidStack fluid) => Accepts(fluid);
 
-	// upstream FluidCache.fill. When voiding, `free` is unbounded so the whole
-	// resource reports accepted while _storedAmount still clamps - overflow discarded.
 	public virtual int Fill(FluidStack resource, bool simulate)
 	{
 		if (resource.IsEmpty) return 0;
@@ -88,7 +70,6 @@ public class SuperTankTileEntity : MetaMachine, IFluidHandler, IControllable
 		return (int)Math.Min(canFill, int.MaxValue);
 	}
 
-	// upstream FluidCache.drain(int)
 	public virtual FluidStack Drain(int maxAmount, bool simulate)
 	{
 		if (_stored.IsEmpty || maxAmount <= 0) return FluidStack.Empty;
@@ -102,17 +83,12 @@ public class SuperTankTileEntity : MetaMachine, IFluidHandler, IControllable
 		return copy;
 	}
 
-	// upstream FluidCache.drain(FluidStack)
 	public virtual FluidStack Drain(FluidStack fluid, bool simulate)
 	{
 		if (fluid.IsEmpty || !fluid.SameTypeAs(_stored)) return FluidStack.Empty;
 		return Drain(fluid.Amount, simulate);
 	}
 
-	// GetTankAccess (player path) defaults to `=> this`; pipes go through
-	// MetaMachine.GetFluidHandlerCap.
-
-	// upstream AutoOutputTrait.ofFluids(cache)
 	private AutoOutputTrait? _autoOutput;
 	public override AutoOutputTrait? AutoOutput { get { EnsureAutoOutput(); return _autoOutput; } }
 
@@ -133,21 +109,17 @@ public class SuperTankTileEntity : MetaMachine, IFluidHandler, IControllable
 	public override bool SupportsAutoOutputItems  => false;
 	public override bool SupportsAutoOutputFluids => true;
 
-	// SuperTankLayout toggle + TankConfigSetAction bind here.
 	public bool IsAutoOutput
 	{
 		get => AutoOutput!.IsAutoOutputFluids;
 		set => AutoOutput!.SetAllowAutoOutputFluids(value);
 	}
 
-	// IControllable - a tank's "working enabled" IS its fluid auto-output toggle.
-	// Field-only read (see DrumMachine for the FastParallel rationale).
 	bool IControllable.IsWorkingEnabled() => _autoOutput?.IsAutoOutputFluids ?? false;
 	void IControllable.SetWorkingEnabled(bool enabled) => AutoOutput!.SetAllowAutoOutputFluids(enabled);
 
 	public override bool SupportsWorkingEnabledToggle => false;
 
-	// Upstream setLocked: snap the locked type to whatever's currently stored.
 	public void SetLocked(bool locked)
 	{
 		if (locked && !_stored.IsEmpty)
@@ -156,8 +128,6 @@ public class SuperTankTileEntity : MetaMachine, IFluidHandler, IControllable
 			_lockedFluid = FluidStack.Empty;
 	}
 
-	// Portable data across break -> re-place (upstream IDropSaveMachine) - only
-	// the stored fluid, not the toggles.
 	public override void WritePortableData(TagCompound tag)
 	{
 		if (_stored.IsEmpty || _storedAmount <= 0) return;
@@ -176,10 +146,10 @@ public class SuperTankTileEntity : MetaMachine, IFluidHandler, IControllable
 		}
 	}
 
-	public override void SaveData(TagCompound tag)
+	protected override void SaveMachineData(TagCompound tag)
 	{
 		EnsureAutoOutput();
-		base.SaveData(tag);   // Traits.Save -> AutoOutput trait
+		base.SaveMachineData(tag);
 		if (!_stored.IsEmpty)
 		{
 			tag["storedType"] = _stored.Type!.Id;

@@ -9,8 +9,6 @@ using Terraria.ID;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Net;
 
-// Per-side IO mode set on a pipe cell. Single mode-byte write - both view
-// covers live permanently on PipeCoverable, toggle never installs/destroys.
 public static class PipeSideModePacket
 {
 	public static void Send(PipeKind layer, int x, int y, CoverSide side, PipeSideMode mode)
@@ -39,9 +37,15 @@ public static class PipeSideModePacket
 		var layer = (PipeKind)r.ReadByte();
 		int x = r.ReadInt16();
 		int y = r.ReadInt16();
-		var side = (CoverSide)r.ReadByte();
-		var mode = (PipeSideMode)r.ReadByte();
-		ApplyServer(layer, x, y, side, mode);
+		byte sideRaw = r.ReadByte();
+		byte modeRaw = r.ReadByte();
+		if (sideRaw >= CoverSides.Count || modeRaw > (byte)PipeSideMode.Active)
+		{
+			NetHelpers.LogBadPacket("pipe-side-mode",
+				$"out-of-range side={sideRaw} mode={modeRaw} from player {whoAmI}");
+			return;
+		}
+		ApplyServer(layer, x, y, (CoverSide)sideRaw, (PipeSideMode)modeRaw);
 	}
 
 	private static void ApplyServer(PipeKind layer, int x, int y, CoverSide side, PipeSideMode mode)

@@ -2174,14 +2174,18 @@ public static class MachineDefinitions
 		var def = MachineRegistry.Get("mega_vacuum_freezer")!;
 		return new BlockPattern(MultiblockShapes.MegaVacuumFreezer, new Dictionary<char, TraceabilityPredicate>
 		{
-			['S'] = Predicates.Controller(def),
-			['X'] = Predicates.StandardWall("frostproof_machine_casing",
+			['B'] = Predicates.Controller(def),
+			['F'] = Predicates.StandardWall("frostproof_machine_casing",
 				new[] { GTRecipeTypes.VACUUM_RECIPES }, parallel: true),
 			['G'] = Predicates.Blocks("tempered_glass"),
-			['K'] = Predicates.Blocks("clean_machine_casing"),
+			['S'] = Predicates.Blocks("clean_machine_casing"),
+			['C'] = Predicates.Blocks("filter_casing"),
+			['E'] = Predicates.Blocks("extreme_engine_intake_casing"),
 			['P'] = Predicates.Blocks("tungstensteel_pipe_casing"),
+			['T'] = Predicates.Blocks("tungsten_steel_frame"),
+			['A'] = Predicates.Blocks("aluminium_frame"),
 			['V'] = Predicates.Blocks("heat_vent"),
-			['A'] = Predicates.Air(),
+			['X'] = Predicates.Air(),
 		});
 	}
 
@@ -2242,18 +2246,19 @@ public static class MachineDefinitions
 		var def = MachineRegistry.Get("mega_blast_furnace")!;
 		return new BlockPattern(MultiblockShapes.MegaBlastFurnace, new Dictionary<char, TraceabilityPredicate>
 		{
-			['S'] = Predicates.Controller(def),
-			['X'] = Predicates.StandardWall("high_temperature_smelting_casing",
+			['R'] = Predicates.Controller(def),
+			['H'] = Predicates.StandardWall("high_temperature_smelting_casing",
 				new[] { GTRecipeTypes.BLAST_RECIPES }, parallel: true),
-			['C'] = Predicates.HeatingCoils(),
+			['T'] = Predicates.HeatingCoils(),
 			['M'] = Predicates.Abilities(Api.Machine.Multiblock.PartAbility.MUFFLER),
-			['T'] = Predicates.Blocks("robust_machine_casing"),
-			['B'] = Predicates.Blocks("tungstensteel_firebox_casing"),
+			['I'] = Predicates.Blocks("heatproof_machine_casing"),
+			['N'] = Predicates.Blocks("naquadah_alloy_frame"),
+			['O'] = Predicates.Blocks("robust_machine_casing"),
+			['S'] = Predicates.Blocks("tungsten_steel_frame"),
+			['F'] = Predicates.Blocks("tungstensteel_firebox_casing"),
+			['E'] = Predicates.Blocks("extreme_engine_intake_casing"),
 			['P'] = Predicates.Blocks("tungstensteel_pipe_casing"),
-			['I'] = Predicates.Blocks("extreme_engine_intake_casing"),
 			['V'] = Predicates.Blocks("heat_vent"),
-			['F'] = Predicates.Blocks("naquadah_alloy_frame"),
-			['A'] = Predicates.Air(),
 		});
 	}
 

@@ -43,6 +43,12 @@ public sealed class MeCableLayerSystem : ModSystem
 
 	public override void SaveWorldData(TagCompound tag)
 	{
+		lock (Api.SaveTickGate.Lock)
+			WriteWorldData(tag);
+	}
+
+	private void WriteWorldData(TagCompound tag)
+	{
 		if (Cables.Count == 0) return;
 		var xs = new List<int>(Cables.Count);
 		var ys = new List<int>(Cables.Count);

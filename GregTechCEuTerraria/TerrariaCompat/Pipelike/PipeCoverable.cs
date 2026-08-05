@@ -71,6 +71,14 @@ public sealed class PipeCoverable : ICoverable
 
 	public void NotifyBlockUpdate()
 	{
+		InvalidateLocal();
+		PipeNeighborWatcher.NotifyAround(X, Y);
+	}
+
+	internal void InvalidateLocal()
+	{
+		InvalidateRender();
+		InvalidateNetRouteCache();
 	}
 
 	private readonly System.Collections.Generic.List<TickableSubscription> _serverTicks  = new();
@@ -113,7 +121,6 @@ public sealed class PipeCoverable : ICoverable
 		int i = (int)side;
 		var oldMode = _modes[i];
 		if (oldMode == mode) return;
-		InvalidateRender();
 
 		switch (mode)
 		{
@@ -123,7 +130,6 @@ public sealed class PipeCoverable : ICoverable
 
 		CopyFilterStateOnModeChange(side, oldMode, mode);
 		_modes[i] = mode;
-		InvalidateNetRouteCache();
 		GetCoverAtSide(side)?.OnNeighborChanged();
 		NotifyBlockUpdate();
 	}
@@ -265,7 +271,6 @@ public sealed class PipeCoverable : ICoverable
 
 	public void SetCoverAtSide(CoverBehavior? cover, CoverSide side)
 	{
-		InvalidateRender();
 		int i = (int)side;
 		switch (cover)
 		{
@@ -313,7 +318,6 @@ public sealed class PipeCoverable : ICoverable
 
 	internal void SetFilterType(CoverSide side, PipeFilterType type)
 	{
-		InvalidateRender();
 		int i = (int)side;
 		_filterTypes[i] = type;
 		switch (_modes[i])
@@ -425,7 +429,6 @@ public sealed class PipeCoverable : ICoverable
 
 	void ICoverable.LoadCovers(TagCompound tag)
 	{
-		InvalidateRender();
 		foreach (var side in CoverSides.All)
 		{
 			int i = (int)side;

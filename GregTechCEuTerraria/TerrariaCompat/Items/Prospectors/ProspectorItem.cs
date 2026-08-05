@@ -74,7 +74,7 @@ public sealed class ProspectorItem : ModItem, IElectricItem, ITextureWarmUp
 	public bool Chargeable() => true;
 	public long GetTransferLimit() => VoltageTiers.Voltage(_tier);
 	public long GetMaxCharge() => _maxEu;
-	public long GetCharge() => _storedEu;
+	public long GetCharge() => System.Math.Min(_storedEu, _maxEu);
 	public int  GetTier() => (int)_tier;
 
 	public long Charge(long amount, int chargerTier, bool ignoreTransferLimit, bool simulate)
@@ -83,7 +83,7 @@ public sealed class ProspectorItem : ModItem, IElectricItem, ITextureWarmUp
 		int tier = (int)_tier;
 		if (chargerTier >= tier && amount > 0L)
 		{
-			long canReceive = _maxEu - _storedEu;
+			long canReceive = GetMaxCharge() - GetCharge();
 			if (!ignoreTransferLimit)
 				amount = Math.Min(amount, GetTransferLimit());
 			long charged = Math.Min(amount, canReceive);
@@ -102,7 +102,7 @@ public sealed class ProspectorItem : ModItem, IElectricItem, ITextureWarmUp
 		{
 			if (!ignoreTransferLimit)
 				amount = Math.Min(amount, GetTransferLimit());
-			long charge = _storedEu;
+			long charge = GetCharge();
 			long discharged = Math.Min(amount, charge);
 			if (!simulate)
 				_storedEu = charge - discharged;

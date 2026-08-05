@@ -52,7 +52,7 @@ public sealed class GTArmorItem : ModItem, IElectricItem
 	public bool Chargeable() => true;
 	public long GetTransferLimit() => VoltageTiers.Voltage(_spec!.Tier);
 	public long GetMaxCharge() => _spec?.Capacity ?? 0;
-	public long GetCharge() => _storedEu;
+	public long GetCharge() => Math.Min(_storedEu, _spec?.Capacity ?? 0);
 	public int  GetTier() => (int)(_spec?.Tier ?? 0);
 
 	public long Charge(long amount, int chargerTier, bool ignoreTransferLimit, bool simulate)
@@ -61,7 +61,7 @@ public sealed class GTArmorItem : ModItem, IElectricItem
 		int tier = (int)_spec.Tier;
 		if (chargerTier >= tier && amount > 0L)
 		{
-			long canReceive = _spec.Capacity - _storedEu;
+			long canReceive = GetMaxCharge() - GetCharge();
 			if (!ignoreTransferLimit) amount = Math.Min(amount, GetTransferLimit());
 			long charged = Math.Min(amount, canReceive);
 			if (!simulate) _storedEu += charged;

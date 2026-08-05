@@ -132,6 +132,7 @@ public static class MeStationCraftPackets
 
 	public static void HandleResult(BinaryReader r)
 	{
+		if (Main.netMode != NetmodeID.MultiplayerClient) return;
 		var termPos = new Point16(r.ReadInt16(), r.ReadInt16());
 		bool success = r.ReadBoolean();
 		int outputType = r.ReadInt32();

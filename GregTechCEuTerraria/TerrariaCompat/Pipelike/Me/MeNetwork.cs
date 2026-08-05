@@ -52,6 +52,32 @@ public sealed class MeNetwork
 	internal void AddInterface() => _interfaceCount++;
 	public int InterfaceCount => _interfaceCount;
 
+	private Dictionary<AEKey, List<MePattern>>? _craftableItems;
+
+	private Dictionary<AEKey, List<MePattern>> CraftableItems
+	{
+		get
+		{
+			if (_craftableItems is null)
+			{
+				var map = new Dictionary<AEKey, List<MePattern>>();
+				foreach (var p in _providers)
+					foreach (var pat in p.Patterns)
+						foreach (var (w, _) in pat.Outputs)
+						{
+							if (w is null) continue;
+							if (!map.TryGetValue(w, out var patterns))
+								map[w] = patterns = new List<MePattern>();
+							if (!patterns.Contains(pat)) patterns.Add(pat);
+						}
+				_craftableItems = map;
+			}
+			return _craftableItems;
+		}
+	}
+
+	public void InvalidateCraftingCache() => _craftableItems = null;
+
 	public HashSet<AEKey> GetCraftables()
 	{
 		var set = new HashSet<AEKey>();
@@ -70,20 +96,8 @@ public sealed class MeNetwork
 		return false;
 	}
 
-	public IReadOnlyList<MePattern> GetCraftingFor(AEKey what)
-	{
-		var result = new List<MePattern>();
-		var seen = new HashSet<MePattern>();
-		foreach (var p in _providers)
-			foreach (var pat in p.Patterns)
-			{
-				bool produces = false;
-				foreach (var (w, _) in pat.Outputs)
-					if (what.Equals(w)) { produces = true; break; }
-				if (produces && seen.Add(pat)) result.Add(pat);
-			}
-		return result;
-	}
+	public IReadOnlyList<MePattern> GetCraftingFor(AEKey what) =>
+		CraftableItems.TryGetValue(what, out var patterns) ? patterns : System.Array.Empty<MePattern>();
 
 	public IReadOnlyList<IMePatternProvider> GetProviders(MePattern details)
 	{
@@ -121,5 +135,26 @@ public sealed class MeNetwork
 			_storage = ns;
 		}
 		return _storage;
+	}
+
+	private readonly KeyCounter _cachedAvailableStacks = new();
+	private bool _cachedStacksNeedUpdate = true;
+
+	public KeyCounter GetCachedInventory()
+	{
+		if (_cachedStacksNeedUpdate)
+			UpdateCachedStacks();
+		return _cachedAvailableStacks;
+	}
+
+	public void InvalidateCache() => _cachedStacksNeedUpdate = true;
+
+	private void UpdateCachedStacks()
+	{
+		_cachedStacksNeedUpdate = false;
+
+		_cachedAvailableStacks.Clear();
+		GetStorage().GetAvailableStacks(_cachedAvailableStacks);
+		_cachedAvailableStacks.RemoveEmptySubmaps();
 	}
 }

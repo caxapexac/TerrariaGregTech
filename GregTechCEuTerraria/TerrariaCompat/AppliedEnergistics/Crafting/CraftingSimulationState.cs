@@ -9,6 +9,7 @@ using GregTechCEuTerraria.AppliedEnergistics.Api.Networking.Security;
 using GregTechCEuTerraria.AppliedEnergistics.Api.Stacks;
 using GregTechCEuTerraria.AppliedEnergistics.Api.Storage;
 using GregTechCEuTerraria.Config;
+using GregTechCEuTerraria.TerrariaCompat.Pipelike.Me;
 
 namespace GregTechCEuTerraria.TerrariaCompat.AppliedEnergistics.Crafting;
 
@@ -149,15 +150,15 @@ public sealed class NetworkCraftingSimulationState : CraftingSimulationState
 {
 	private readonly KeyCounter _list = new();
 
-	public NetworkCraftingSimulationState(MEStorage storage, IActionSource? src)
+	public NetworkCraftingSimulationState(MeNetwork net, IActionSource? src)
 	{
 		if (src == null)
 			return;
 
-		foreach (var stack in storage.GetAvailableStacks())
+		foreach (var stack in net.GetCachedInventory())
 		{
 			long networkAmount = GTConfig.Instance.CraftingSimulatedExtraction
-				? storage.Extract(stack.Key, stack.Value, Actionable.SIMULATE, src)
+				? net.GetStorage().Extract(stack.Key, stack.Value, Actionable.SIMULATE, src)
 				: stack.Value;
 			if (networkAmount > 0)
 				_list.Add(stack.Key, networkAmount);

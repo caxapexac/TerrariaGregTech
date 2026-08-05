@@ -18,7 +18,7 @@ public static class MeStorageLayout
 
 			new DynamicLabelWidgetSpec(X: 12, Y: 42, Getter: () =>
 			{
-				var net = MeNetworkSystem.NetAdjacentTo(store);
+				var net = MeNetworkSystem.NetOf(store);
 				return net == null
 					? "[c/FF8888:Not connected]"
 					: $"{net.Cells.Count} cables, {net.MountedStorageCount} devices";

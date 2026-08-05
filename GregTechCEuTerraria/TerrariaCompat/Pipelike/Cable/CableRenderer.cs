@@ -163,9 +163,6 @@ public static class CableRenderer
 	public static Color JacketColor(Color c) =>
 		new Color((byte)(c.R * 0.35f), (byte)(c.G * 0.35f), (byte)(c.B * 0.35f), c.A);
 
-	public static Color DarkenForInsulation(Color c) =>
-		new Color(c.R / 2, c.G / 2, c.B / 2, c.A);
-
 	private static Color MaterialColor(string materialId)
 	{
 		if (!MaterialRegistry.All.TryGetValue(materialId, out var mat)) return Color.White;

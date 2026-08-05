@@ -31,7 +31,6 @@ public static class EnergyNetGraph
 		visited.Add(start);
 
 		VoltageTier minTier = VoltageTier.MAX;
-		int minAmperage = int.MaxValue;
 		int maxAmperage = 0;
 		int maxLossPerAmp = 0;
 		bool seenAny = false;
@@ -44,7 +43,6 @@ public static class EnergyNetGraph
 			cells[pos] = cell.Value;
 
 			if (!seenAny || (int)cell.Value.Voltage < (int)minTier) minTier = cell.Value.Voltage;
-			if (cell.Value.TotalAmperage < minAmperage)              minAmperage = cell.Value.TotalAmperage;
 			if (cell.Value.TotalAmperage > maxAmperage)              maxAmperage = cell.Value.TotalAmperage;
 			if (cell.Value.LossPerAmp > maxLossPerAmp)               maxLossPerAmp = cell.Value.LossPerAmp;
 			seenAny = true;
@@ -55,9 +53,7 @@ public static class EnergyNetGraph
 			Enqueue(layer, queue, visited, pos, pos.x + 1, pos.y);
 		}
 
-		if (!seenAny) minAmperage = 0;
-
-		return new NetworkComponent(cells, minTier, minAmperage, maxAmperage, maxLossPerAmp);
+		return new NetworkComponent(cells, minTier, maxAmperage, maxLossPerAmp);
 	}
 
 	private static void Enqueue(CableLayer layer, Queue<(int, int)> q, HashSet<(int, int)> visited,
@@ -75,6 +71,5 @@ public static class EnergyNetGraph
 public sealed record NetworkComponent(
 	IReadOnlyDictionary<(int x, int y), CableCell> Cells,
 	VoltageTier EffectiveTier,
-	int EffectiveAmperage,
 	int MaxAmperage,
 	int MaxLossPerAmp);

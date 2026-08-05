@@ -37,8 +37,11 @@ public sealed class QuestbookWorldProgress : ModSystem
 
 	public override void SaveWorldData(TagCompound tag)
 	{
-		if (Completed.Count > 0) tag["completed"] = Completed.ToList();
-		if (SatisfiedTasks.Count > 0) tag["tasks"] = SatisfiedTasks.ToList();
+		lock (Api.SaveTickGate.Lock)
+		{
+			if (Completed.Count > 0) tag["completed"] = Completed.ToList();
+			if (SatisfiedTasks.Count > 0) tag["tasks"] = SatisfiedTasks.ToList();
+		}
 	}
 
 	public override void LoadWorldData(TagCompound tag)
@@ -87,7 +90,8 @@ public sealed class QuestbookWorldProgress : ModSystem
 			int who = FindSatisfyingPlayer(task);
 			if (who >= 0)
 			{
-				SatisfiedTasks.Add(key);
+				lock (Api.SaveTickGate.Lock)
+					SatisfiedTasks.Add(key);
 				contributor = who;
 				changed = true;
 			}
@@ -124,7 +128,9 @@ public sealed class QuestbookWorldProgress : ModSystem
 			return;
 
 		string key = QuestbookSystem.TaskKey(questId, taskIndex);
-		bool added = SatisfiedTasks.Add(key);
+		bool added;
+		lock (Api.SaveTickGate.Lock)
+			added = SatisfiedTasks.Add(key);
 
 		if (TryAdvance(questId, out int autoContributor))
 			CompleteQuest(questId, contributor >= 0 ? contributor : autoContributor);
@@ -136,7 +142,10 @@ public sealed class QuestbookWorldProgress : ModSystem
 	{
 		if (!QuestbookSystem.QuestsById.ContainsKey(questId))
 			return;
-		if (!Completed.Add(questId))
+		bool newlyCompleted;
+		lock (Api.SaveTickGate.Lock)
+			newlyCompleted = Completed.Add(questId);
+		if (!newlyCompleted)
 			return;
 
 		Player? p = contributor >= 0 && contributor < Main.maxPlayers ? Main.player[contributor] : null;

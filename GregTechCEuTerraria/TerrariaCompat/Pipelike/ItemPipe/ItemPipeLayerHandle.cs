@@ -17,7 +17,7 @@ public sealed class ItemPipeLayerHandle : IGridLayerHandle
 
 	public bool TryPlace(ItemPipeCell cell, int x, int y, Player placer, bool refundOverwrite = true)
 	{
-		if (PipeIntersection.BlocksPipeAt(x, y)) return false;
+		if (!ItemPipeLayerSystem.Pipes.CanPlaceAt(x, y)) return false;
 		var existing = ItemPipeLayerSystem.Pipes.CellAt(x, y);
 		if (existing.HasValue && existing.Value.Equals(cell)) return false;
 		if (existing.HasValue && refundOverwrite) RefundAt(placer, existing.Value);

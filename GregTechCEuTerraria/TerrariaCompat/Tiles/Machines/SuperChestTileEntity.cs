@@ -10,17 +10,6 @@ using Terraria.ModLoader.IO;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Tiles.Machines;
 
-// Port of com.gregtechceu.gtceu.common.machine.storage.QuantumChestMachine.
-// Single-slot huge-capacity item storage - the item mirror of SuperTank.
-// Upstream registers the class twice (super_chest low / quantum_chest high);
-// we collapse both into one all-tier definition. Toggles (verbatim upstream):
-// IsLocked (refuse non-locked types), IsVoiding (accept+discard overflow),
-// IsAutoOutput (AutoOutputTrait, IControllable-aliased below).
-//
-// DEVIATIONS: ItemCache trait collapsed onto the machine (the
-// machine IS the single-slot IItemHandler); getItemHandlerCap front-face
-// null-out dropped (no facing); markClientSyncFieldDirty dropped
-// (MachineStateSyncPacket carries the SaveData blob).
 public class SuperChestTileEntity : MetaMachine, IItemHandler, IControllable
 {
 	public SuperChestTileEntity() { }
@@ -28,8 +17,6 @@ public class SuperChestTileEntity : MetaMachine, IItemHandler, IControllable
 
 	protected override string  Label       => Definition?.Label ?? "Super Chest";
 
-	// upstream registerQuantumChests: MAX -> long.MaxValue, else 4M * 2^(tier-1)
-	// (ULV 2M, doubling per tier).
 	internal static long MaxAmountForTier(VoltageTier tier)
 	{
 		int t = (int)tier;
@@ -47,8 +34,6 @@ public class SuperChestTileEntity : MetaMachine, IItemHandler, IControllable
 		}
 	}
 
-	// _stored carries the item TYPE (stack field unused); _storedAmount (long) is
-	// the real count. protected so CreativeChest can swap source type directly.
 	protected Item _stored = new();
 	protected long _storedAmount;
 	private Item _lockedItem = new();
@@ -58,15 +43,11 @@ public class SuperChestTileEntity : MetaMachine, IItemHandler, IControllable
 	public Item StoredItem => _stored;
 	public long StoredAmount => _storedAmount;
 
-	// Type-equality "same item" (Terraria stackables carry no per-stack NBT, so
-	// it's sufficient - upstream's GTUtil.isSameItemSameTags).
 	private static bool SameItem(Item a, Item b) =>
 		!a.IsAir && !b.IsAir && a.type == b.type;
 
-	// Lock filter - upstream ItemCache.filter.
 	private bool Accepts(Item stack) => !IsLocked || SameItem(stack, _lockedItem);
 
-	// IItemHandler - single slot 0. virtual hooks for CreativeChest's override.
 	public int SlotCount => 1;
 
 	public virtual Item GetSlot(int slot)
@@ -77,9 +58,6 @@ public class SuperChestTileEntity : MetaMachine, IItemHandler, IControllable
 		return view;
 	}
 
-	// upstream ItemCache.insertItem - returns leftover (doesn't mutate input).
-	// When voiding, `free` is unbounded so the whole stack reports stored while
-	// _storedAmount still clamps - overflow accepted and discarded.
 	public virtual Item Insert(int slot, Item item, bool simulate)
 	{
 		if (item is null || item.IsAir) return new Item();
@@ -105,7 +83,6 @@ public class SuperChestTileEntity : MetaMachine, IItemHandler, IControllable
 		return leftover;
 	}
 
-	// upstream ItemCache.extractItem
 	public virtual Item Extract(int slot, int amount, bool simulate)
 	{
 		if (_stored.IsAir || _storedAmount <= 0 || amount <= 0) return new Item();
@@ -120,11 +97,8 @@ public class SuperChestTileEntity : MetaMachine, IItemHandler, IControllable
 		return copy;
 	}
 
-	// Lock filter only - the output-side input gate is AdjacentItemPush's job
-	// (side-aware), not a blanket per-machine gate.
 	public virtual bool IsItemValid(int slot, Item item) => Accepts(item);
 
-	// upstream AutoOutputTrait.ofItems(cache)
 	private AutoOutputTrait? _autoOutput;
 	public override AutoOutputTrait? AutoOutput { get { EnsureAutoOutput(); return _autoOutput; } }
 
@@ -145,21 +119,17 @@ public class SuperChestTileEntity : MetaMachine, IItemHandler, IControllable
 	public override bool SupportsAutoOutputItems  => true;
 	public override bool SupportsAutoOutputFluids => false;
 
-	// SuperChestLayout toggle + ChestAction bind here.
 	public bool IsAutoOutput
 	{
 		get => AutoOutput!.IsAutoOutputItems;
 		set => AutoOutput!.SetAllowAutoOutputItems(value);
 	}
 
-	// IControllable - a chest's "working enabled" IS its item auto-output toggle.
-	// Field-only read (see DrumMachine for the FastParallel rationale).
 	bool IControllable.IsWorkingEnabled() => _autoOutput?.IsAutoOutputItems ?? false;
 	void IControllable.SetWorkingEnabled(bool enabled) => AutoOutput!.SetAllowAutoOutputItems(enabled);
 
 	public override bool SupportsWorkingEnabledToggle => false;
 
-	// Upstream setLocked: snap the locked type to whatever's currently stored.
 	public void SetLocked(bool locked)
 	{
 		if (locked && !_stored.IsAir)
@@ -173,19 +143,15 @@ public class SuperChestTileEntity : MetaMachine, IItemHandler, IControllable
 		}
 	}
 
-	// Hand one stack of the stored item to a player - the GUI dump button.
 	public void DumpStackTo(Player player)
 	{
 		if (_stored.IsAir || _storedAmount <= 0) return;
 		int amount = (int)Math.Min(_storedAmount, _stored.maxStack);
 		var taken = Extract(0, amount, simulate: false);
 		if (taken.IsAir) return;
-		// PlayerGive: dedicated server falls back to a synced world drop; SP
-		// inserts directly. One canonical helper, same observable behavior.
 		global::GregTechCEuTerraria.TerrariaCompat.Utils.PlayerGive.Give(player, player.GetSource_OpenItem(taken.type), taken);
 	}
 
-	// Portable data across break -> re-place (upstream IDropSaveMachine).
 	public override void WritePortableData(TagCompound tag)
 	{
 		if (_stored.IsAir || _storedAmount <= 0) return;
@@ -202,10 +168,10 @@ public class SuperChestTileEntity : MetaMachine, IItemHandler, IControllable
 		}
 	}
 
-	public override void SaveData(TagCompound tag)
+	protected override void SaveMachineData(TagCompound tag)
 	{
 		EnsureAutoOutput();
-		base.SaveData(tag);   // Traits.Save -> AutoOutput trait
+		base.SaveMachineData(tag);
 		if (!_stored.IsAir) tag["stored"] = ItemIO.Save(_stored);
 		tag["storedAmount"] = _storedAmount;
 		tag["voiding"] = IsVoiding;

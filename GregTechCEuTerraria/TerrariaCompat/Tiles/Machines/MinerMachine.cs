@@ -13,10 +13,6 @@ using Terraria.ModLoader.IO;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Tiles.Machines;
 
-// port of com.gregtechceu.gtceu.common.machine.electric.MinerMachine.
-//
-// adaptations:
-//  mines down under self
 public sealed class MinerMachine : TieredEnergyMachine, IControllable, IItemHandler
 {
 	public MinerMachine() { }
@@ -283,10 +279,10 @@ public sealed class MinerMachine : TieredEnergyMachine, IControllable, IItemHand
 		return false;
 	}
 
-	public override void SaveData(TagCompound tag)
+	protected override void SaveMachineData(TagCompound tag)
 	{
 		EnsureTraits();
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		tag["progress"]         = _progress;
 		tag["active"]           = _active;
 		tag["isWorkingEnabled"] = _isWorkingEnabled;

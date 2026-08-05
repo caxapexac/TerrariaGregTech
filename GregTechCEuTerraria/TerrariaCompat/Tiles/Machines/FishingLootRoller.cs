@@ -33,28 +33,53 @@ public static class FishingLootRoller
 		_               => 0.00f,
 	};
 
-	public static Item Roll(VoltageTier tier, int waterTileX, int waterTileY, bool junkEnabled)
+	public static Item Roll(VoltageTier tier, int waterTileX, int waterTileY,
+	                        FisherFilter filters, out bool discarded)
 	{
+		discarded = false;
+
 		int power = ApplyLuckToPower(FishingPower(tier), SyntheticLuck(tier));
 		if (power < 1) power = 1;
 
 		RollDropLevels(power, out bool common, out bool uncommon, out bool rare,
 		                      out bool veryRare, out bool legendary, out bool crate);
 
-		bool junk = junkEnabled
-		         && Main.rand.Next(50) > power
+		bool junk = Main.rand.Next(50) > power
 		         && Main.rand.Next(50) > power;
+
+		Rarity outcome =
+			crate     ? Rarity.Crate     :
+			legendary ? Rarity.Legendary :
+			veryRare  ? Rarity.VeryRare  :
+			rare      ? Rarity.Rare      :
+			uncommon  ? Rarity.Uncommon  :
+			junk      ? Rarity.Junk      :
+			            Rarity.Common;
+
+		bool legendaryCrate = outcome == Rarity.Legendary && Main.rand.Next(100) < 30;
+
+		FisherFilter category =
+			outcome == Rarity.Crate || legendaryCrate ? FisherFilter.Crate :
+			outcome == Rarity.Junk                    ? FisherFilter.Junk  :
+			                                            FisherFilter.Fish;
+
+		if ((filters & category) != 0)
+		{
+			discarded = true;
+			return new Item();
+		}
 
 		var biome = BiomeProbe.GetForTile(waterTileX, waterTileY);
 
 		int itemId =
-			crate     ? RollCrate(biome, waterTileY)                      :
-			legendary ? RollLegendary(biome, Main.hardMode)               :
-			veryRare  ? RollFish(biome, Rarity.VeryRare, waterTileY)      :
-			rare      ? RollFish(biome, Rarity.Rare,     waterTileY)      :
-			uncommon  ? RollFish(biome, Rarity.Uncommon, waterTileY)      :
-			junk      ? RollJunk()                                        :
-			            RollFish(biome, Rarity.Common,   waterTileY);
+			legendaryCrate ? (Main.hardMode ? ItemID.GoldenCrateHard : ItemID.GoldenCrate) :
+			outcome switch
+			{
+				Rarity.Crate     => RollCrate(biome, waterTileY),
+				Rarity.Legendary => RollLegendary(biome, Main.hardMode),
+				Rarity.Junk      => RollJunk(),
+				_                => RollFish(biome, outcome, waterTileY),
+			};
 
 		if (itemId <= 0) return new Item();
 		var item = new Item();
@@ -136,9 +161,6 @@ public static class FishingLootRoller
 
 	private static int RollLegendary(BiomeProbe.Biome biome, bool hm)
 	{
-		if (Main.rand.Next(100) < 30)
-			return hm ? ItemID.GoldenCrateHard : ItemID.GoldenCrate;
-
 		return biome switch
 		{
 			BiomeProbe.Biome.Hallow     => hm ? ItemID.CrystalSerpent : ItemID.Prismite,

@@ -10,12 +10,8 @@ using Terraria.ModLoader.IO;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Net;
 
-// Full state snapshot of a single machine. Payload = (Point16 position, full
-// SaveData TagCompound). Sent on view-begin, periodically by EnergyNetSystem,
-// and after mutations not covered by delta packets.
 public static class MachineStateSyncPacket
 {
-	// Matches vanilla LegacySoundPlayer.SoundAttenuationDistance (~156 tiles).
 	public const float NearbyRadiusPx = 2500f;
 	private const float NearbyRadiusPxSq = NearbyRadiusPx * NearbyRadiusPx;
 
@@ -24,6 +20,13 @@ public static class MachineStateSyncPacket
 		if (Main.netMode != Terraria.ID.NetmodeID.Server) return;
 		byte[] blob = SerializeOnce(machine);
 		SendBlobTo(machine.Position, blob, toClient);
+	}
+
+	public static void SendFullStateTo(MetaMachine machine, int toClient)
+	{
+		if (Main.netMode != Terraria.ID.NetmodeID.Server) return;
+		SendTo(machine, toClient);
+		MachineEnergySyncPacket.SendTo(machine, toClient);
 	}
 
 	public static void Broadcast(MetaMachine machine)
@@ -36,28 +39,12 @@ public static class MachineStateSyncPacket
 			SendBlobTo(machine.Position, blob, viewer);
 	}
 
-	// Reused recipient set - PostUpdateWorld's broadcast loop is single-threaded,
-	// so one static scratch avoids a per-machine HashSet allocation (was a real
-	// contributor to the broadcast-tick alloc churn on a large base).
 	private static readonly HashSet<int> _recipientScratch = new();
 
-	// Snapshot once, send to viewers + players within NearbyRadiusPx of the
-	// footprint center. Dirty-skip via byte-equality against the last broadcast
-	// so idle machines emit zero traffic. View-begin invalidates the cache so
-	// fresh viewers always get a sync (see InvalidateBroadcast).
 	public static void BroadcastNearby(MetaMachine machine)
 	{
 		if (Main.netMode != Terraria.ID.NetmodeID.Server) return;
 
-		// Gather recipients (viewers union players within radius) BEFORE serializing.
-		// If nobody is listening, skip the SaveDataForSync serialize entirely - a
-		// broadcast with no recipient sends nothing, and a player who later walks
-		// into range is bootstrapped by TileEntitySharing (chunk-load) + the
-		// resumed broadcast. On a large base most machines are far from every
-		// player at any tick, so they were paying a full NBT serialize purely to
-		// feed the dirty-compare for a send that never fired. This is the dominant
-		// cost in the state-broadcast phase. Behaviour is unchanged: the SEND set
-		// was already gated to viewers+nearby; only the dead-weight serialize goes.
 		var recipients = _recipientScratch;
 		recipients.Clear();
 		foreach (int viewer in machine.Viewers) recipients.Add(viewer);
@@ -86,10 +73,6 @@ public static class MachineStateSyncPacket
 		}
 		machine.LastBroadcastBlob = blob;
 
-		// Per-type attribution so a JSON dump can name which machine kind is
-		// dominating the live (non-skipped) broadcast traffic. `sent_by_type`
-		// counts events, `bytes_by_type` sums payload bytes (pre-recipient
-		// fan-out - the same blob is reused across viewers + nearby players).
 		Profiler.Profiler.Count("net.sync.sent_by_type", typeName);
 		Profiler.Profiler.Count("net.sync.bytes_by_type", typeName, blob.Length);
 
@@ -97,14 +80,6 @@ public static class MachineStateSyncPacket
 			SendBlobTo(machine.Position, blob, r);
 	}
 
-	// Returned bytes are the wire payload AFTER the position (per-Send) - i.e.
-	// just the NBT body. SendBlobTo prepends position.
-	//
-	// SaveDataForSync (not SaveData) is the wire-only snapshot: by default it
-	// mirrors SaveData, but a noisy machine/trait can override to omit per-tick
-	// monotonic fields (recipe progress, scan cursors) so byte-equality
-	// dirty-skip actually fires between status transitions. Disk save still
-	// goes through SaveData and is unaffected.
 	private static byte[] SerializeOnce(MetaMachine machine)
 	{
 		var tag = new TagCompound();
@@ -117,10 +92,11 @@ public static class MachineStateSyncPacket
 
 	private static void SendBlobTo(Point16 pos, byte[] blob, int toClient)
 	{
-		var p = NetRouter.NewPacket(PacketType.MachineStateSync);
-		p.WritePoint16(pos);
-		p.Write(blob);  // no length prefix; TagIO.Read parses the body
-		p.Send(toClient: toClient);
+		LargePacket.Send(PacketType.MachineStateSync, w =>
+		{
+			w.WritePoint16(pos);
+			w.Write(blob);
+		}, toClient: toClient);
 	}
 
 	private static bool BlobEquals(byte[] a, byte[] b)
@@ -130,8 +106,6 @@ public static class MachineStateSyncPacket
 		return true;
 	}
 
-	// Drop the broadcast cache so the next BroadcastNearby sends fresh.
-	// Called on viewer-join so the new GUI sees real state immediately.
 	public static void InvalidateBroadcast(MetaMachine machine)
 	{
 		machine.LastBroadcastBlob = null;

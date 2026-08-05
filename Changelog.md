@@ -1,3 +1,42 @@
+## 0.0.14
+
+60 days after mod's first release, Greg's completeness was proven by Zub. Mod is playable now!
+Still getting minor stability and multiplayer fixes, but from now on there will be more actual content updates
+
+Important:
+- Changed shapes for RHF and BBC (thanks TheHatShallDie)
+- Fixed rare crash on autosave (thanks 404岛主)
+- Fixed machine covers inert on rejoin (thanks 404岛主)
+- Fixed parallel hathes not respecting max energy (thanks Zub)
+- Fixed ultimate battery recipe (thanks Zub)
+- Fixed multiplayer packet overflow in multiplayer on large bases (thanks perch)
+- Fixed craft missing card lag (thanks 404岛主)
+- Fixed cleanroom recipes in multiblocks (thanks Bup Supreme)
+
+Qol:
+- Added Pipe Intersection support for ME, LD, optical, laser pipes (thanks holeow)
+- Added more options to fisher (thanks Zub)
+- Added object holder slot locking
+- Changed neon sign recipe to accept any lv circuit (thanks 404岛主)
+- Changed ME autocrafting to async for smoother performance
+- Changed RHF and BBC recipe to be craftable earlier (thanks Zub)
+- Fixed piping nbt items into vanilla chests
+- Fixed electric tools max energy inconsistency
+- Fixed fisher and boiler accepting any item through piping (thanks Zub)
+- Fixed machines not detecting cleanroom in some cases (thanks holeow)
+- Fixed tag filter ui sync (thanks Bup Supreme)
+- Fixed subnet storage bus merging with another net interface (thanks 404岛主)
+- Fixed block breaker tree farm vertical conflict (thanks PersonNo.752)
+
+Visual:
+- Added sounds to fusion reactor and plasma generator
+- Removed duplicated generic tooltips in multis
+- Fixed recipe progress tooltip sync on rejoin in research station and HPCA (thanks Zub)
+- Fixed laser hatch tooltip (thanks Zub)
+- Fixed ore spawn height tooltip (thanks holeow)
+- Fixed round robin button visible with 1 filtered item (thanks bobifhd_bg)
+
+
 ## 0.0.13
 
 Minor bugfix

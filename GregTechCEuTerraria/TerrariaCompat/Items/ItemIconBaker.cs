@@ -10,7 +10,7 @@ using Terraria.ModLoader;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Items;
 
-internal readonly record struct IconLayer(string TexturePath, Color Tint, float Scale = 1f)
+internal readonly record struct IconLayer(string TexturePath, Color Tint, float Scale = 1f, float Whiten = 0f)
 {
 	public IconLayer(string texturePath) : this(texturePath, Color.White, 1f) { }
 	public IconLayer(string texturePath, Color tint) : this(texturePath, tint, 1f) { }
@@ -42,6 +42,7 @@ internal static class ItemIconBaker
 			var px = new Color[tex.Width * tex.Height];
 			tex.GetData(px);
 			Tint(px, layer.Tint);
+			Whiten(px, layer.Whiten);
 			if (layer.Scale > 0f && layer.Scale < 1f)
 				px = ScaleCentered(px, tex.Width, tex.Height, layer.Scale);
 			AlphaCompositeOver(canvas, px);
@@ -138,6 +139,22 @@ internal static class ItemIconBaker
 				(byte)(p.R * tint.R / 255),
 				(byte)(p.G * tint.G / 255),
 				(byte)(p.B * tint.B / 255),
+				p.A);
+		}
+	}
+
+	private static void Whiten(Color[] px, float amount)
+	{
+		if (amount <= 0f) return;
+		float a = System.Math.Min(amount, 1f);
+		for (int k = 0; k < px.Length; k++)
+		{
+			var p = px[k];
+			if (p.A == 0) continue;
+			px[k] = new Color(
+				(byte)(p.R + (255 - p.R) * a),
+				(byte)(p.G + (255 - p.G) * a),
+				(byte)(p.B + (255 - p.B) * a),
 				p.A);
 		}
 	}

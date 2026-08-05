@@ -118,9 +118,9 @@ public class LargeBoilerMachine : WorkableMultiblockMachine
 		if (IsServer) MachineStateSyncPacket.Broadcast(this);
 	}
 
-	public override void SaveData(TagCompound tag)
+	protected override void SaveMachineData(TagCompound tag)
 	{
-		base.SaveData(tag);
+		base.SaveMachineData(tag);
 		tag["lb_temp"] = CurrentTemperature;
 		tag["lb_throttle"] = Throttle;
 		tag["lb_steam"] = SteamGenerated;

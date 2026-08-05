@@ -11,5 +11,3 @@ public sealed class CraftBranchFailure : Exception
 	public CraftBranchFailure(AEKey what, long howMany)
 		: base($"Failed: {what} x {howMany}") { }
 }
-
-public sealed class CraftingTooComplexException : Exception { }
