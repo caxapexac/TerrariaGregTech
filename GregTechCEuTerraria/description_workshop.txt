@@ -39,4 +39,4 @@ Credits: EBF-chan sprite by Qiuqiu, used with their permission
 
 Credits: Armor sprites, upgrade cards by Flareguy, used with their permission
 
-AI Usage: Claude was used to speed up the porting process, of course. Theres no fun in manually rewriting stuff line by line, and the existing AST-based java->c# porters are too dumb for such a complex thing. So be aware there still will be stupid unexpected game breaking bugs, play at your own caution
+AI Usage: Claude was used to speed up the porting process at boring mechanical parts, of course. Theres no fun in manually rewriting stuff line by line, and the existing AST-based java->c# porters are too dumb for such a complex thing. Mod was playtested by many people already and fully completable but be aware there still can be some bugs, play at your own caution

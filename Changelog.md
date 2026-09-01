@@ -22,6 +22,7 @@ Qol:
 Visual:
 - Added fusion reactor recipe energy capacity tooltips (thanks Zub)
 - Added tooltip to fisher input slot (thanks Zub)
+- Added Chinese description (thanks moonditch)
 - Fixed screen clamping for the pipe selection context menu (thanks TheLarvi)
 
 ## 0.0.14
