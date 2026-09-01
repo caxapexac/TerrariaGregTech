@@ -1,5 +1,6 @@
 author = caxapexac
 displayName = GregTechCEuUp (Terraria)
+displayName.zh-Hans = 格雷科技（泰拉瑞亚版）
 homepage = https://github.com/caxapexac/TerrariaGregTech
 version = 0.0.15
 hideCode = false

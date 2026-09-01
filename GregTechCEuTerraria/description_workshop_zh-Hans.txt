@@ -1,0 +1,44 @@
+一个基于格雷科技现代版的完整移植. 它从"非官方移植"起步，我们想让Greg遍布每一个角落
+
+本模组汉化包[url=https://steamcommunity.com/sharedfiles/filedetails/?id=3737810194] 格雷科技(泰拉瑞亚版) 汉化补丁 [/url]
+
+> 注意: 这是非官方移植版，请不要向原整合包寻求帮助
+
+更新内容:
+- ~8700 物品
+- ~32000 配方
+- 70 种单方块机器, 15 个电压等级
+- 55 种多方块结构
+- 线缆、物品、流体、激光、光学、以及长距离管道网络
+- 覆盖版系统
+- 格雷科技矿石生成，以及与泰拉瑞亚矿石的兼容
+- 多种配方调整，以更好的融入泰拉瑞亚的进度体系
+- 类似JEI的物品管理器
+- 任务书 (从格雷科技社区版移植，尚未完善)
+- 应用能源AE2 (自动合成与终端)
+- 完整的多人游戏兼容
+- 与魔法存储兼容并支持物品管道和AE2线缆
+
+（物品管理器和 AE2 最终会变为独立的模组）
+
+Discord: https://discord.gg/sqs4G7u6eX
+目前存在bug，如果发现请在discord报告（用英文,不要用中文）
+
+鸣谢: GregTech Modern 团队
+来源: https://github.com/GregTechCEu/GregTech-Modern
+许可证书: LGPL-3.0-or-later
+
+鸣谢: GregTech Modern 社区包 (任务书内容)
+来源: https://github.com/GregTechCEu/GregTech-Modern-Community-Pack
+许可证书: LGPL-2.1
+
+鸣谢: 应用能源2 (内部存储与自动合成逻辑移植)
+来源: https://github.com/AppliedEnergistics/Applied-Energistics-2
+许可证书: LGPL-3.0-only
+
+鸣谢: EBF-chan 贴图来自 Qiuqiu, 已获得使用许可
+
+鸣谢: 盔甲贴图, 升级卡来自 Flareguy, 已获得使用许可
+
+AI使用声明: 
+当然，我们使用了 Claude 来加速移植过程。逐行手动重写代码可没什么乐趣，而且现有的基于 AST 的 Java → C# 移植工具对这种复杂项目来说不够智能。所以请注意，仍然可能会存在一些愚蠢的、意想不到的、破坏游戏的 Bug，游玩时请自行小心。
