@@ -127,10 +127,7 @@ Mods: {
 			// ToolPokeProjectile.DisplayName: Tool Poke Projectile
 		}
 
-		RecipeConditions: {
-			// FluidContainer: Requires the fluid held in a cell or bucket
-		}
-
+		// RecipeConditions.FluidContainer: Requires the fluid held in a cell or bucket
 		// Condition.ShimmerDupesAllowed: Shimmer duplication allowed
 
 		AppliedEnergistics: {
