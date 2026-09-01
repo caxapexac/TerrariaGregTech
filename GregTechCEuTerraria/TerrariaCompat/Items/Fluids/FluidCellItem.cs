@@ -18,18 +18,12 @@ using Terraria.ModLoader.IO;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Items.Fluids;
 
-// Base for every gtceu cell item. Mirrors MetaItem ComponentItem +
-// ItemFluidContainer - one ItemID per cell tier, contents in NBT
-// ("fluid" -> { id, amount }; absent / amount=0 = empty).
-//
-// Subclasses override SnakeName/Label/CellMaterialColor/Capacity/MaxStack.
-// Stacking: only empty cells stack; filled cells unique per slot.
 public abstract class FluidCellItem : ModItem, IFluidHandlerItem, ITextureWarmUp
 {
-	protected abstract string SnakeName { get; }       // upstream id ("fluid_cell")
-	protected abstract string Label { get; }            // "Empty Cell" / ...
+	protected abstract string SnakeName { get; }
+	protected abstract string Label { get; }
 	protected virtual uint CellMaterialColor => 0xFFFFFFFF;
-	public abstract int Capacity { get; }              // mB
+	public abstract int Capacity { get; }
 	protected virtual int CellMaxStack => 99;
 	public override string Texture => $"GregTechCEuTerraria/Content/Textures/item/{SnakeName}/base";
 
@@ -38,8 +32,6 @@ public abstract class FluidCellItem : ModItem, IFluidHandlerItem, ITextureWarmUp
 	public override void SetStaticDefaults()
 	{
 		base.SetStaticDefaults();
-		// Default; per-stack title is set in ModifyTooltips (Terraria has no
-		// per-instance HoverName, so we replace the ItemName line).
 		Terraria.Localization.Language.GetOrRegister($"Mods.GregTechCEuTerraria.Items.{SnakeName}.DisplayName",
 			() => Label);
 	}
@@ -78,7 +70,6 @@ public abstract class FluidCellItem : ModItem, IFluidHandlerItem, ITextureWarmUp
 		};
 	}
 
-	// Per-stack - Terraria gives each Item its own ModItem instance.
 	private TagCompound? _fluidTag;
 	protected override bool CloneNewInstances => false;
 
@@ -93,10 +84,6 @@ public abstract class FluidCellItem : ModItem, IFluidHandlerItem, ITextureWarmUp
 		if (_fluidTag is { Count: 0 }) _fluidTag = null;
 	}
 
-	// Per-stack contents must ride the item-sync wire (ItemIO -> NetSend, default
-	// empty), else a filled cell shows empty on remote clients. Same { id, amount }
-	// shape as SaveData. Covers player-held / dropped / chested cells; cells in
-	// machine slots sync via the machine's SaveData blob instead.
 	public override void NetSend(BinaryWriter writer)
 	{
 		bool has = _fluidTag is not null;
@@ -134,7 +121,6 @@ public abstract class FluidCellItem : ModItem, IFluidHandlerItem, ITextureWarmUp
 
 	public bool IsFluidValid(int tank, FluidStack fluid) => true;
 
-	// Single-tank: whole-handler Fill/Drain ARE the tank-0 methods.
 	public int Fill(FluidStack fluid, bool simulate)
 	{
 		if (fluid.IsEmpty) return 0;
@@ -190,6 +176,11 @@ public abstract class FluidCellItem : ModItem, IFluidHandlerItem, ITextureWarmUp
 		{
 			tooltips.Add(new TooltipLine(Mod, "FluidAmount",
 				$"{stack.Amount:N0} / {Capacity:N0} mB"));
+			tooltips.Add(new TooltipLine(Mod, "FluidTemperature",
+				TerrariaCompat.UI.FluidTooltips.Temperature(stack.Type!))
+			{
+				OverrideColor = TerrariaCompat.UI.FluidTooltips.TemperatureColor,
+			});
 		}
 		else
 		{
@@ -197,12 +188,6 @@ public abstract class FluidCellItem : ModItem, IFluidHandlerItem, ITextureWarmUp
 				$"Capacity: {Capacity:N0} mB"));
 		}
 	}
-
-	// State-dependent: per-stack fluid overlay can't bake into the type-keyed
-	// TextureAssets.Item, so PreDraw composites both layers for inventory +
-	// world drop. ItemIconBaker bakes the empty-cell base into TextureAssets
-	// for the held-item path (which has no PreDraw hook); contents show only
-	// in inventory + world drop.
 
 	private const float ItemRenderScale = 2f;
 
@@ -230,7 +215,6 @@ public abstract class FluidCellItem : ModItem, IFluidHandlerItem, ITextureWarmUp
 	public override bool PreDrawInInventory(SpriteBatch sb, Vector2 position, Rectangle frame,
 		Color drawColor, Color itemColor, Vector2 origin, float scale)
 	{
-		// Recompute origin/frame against the raw 16x16 source - see BatteryItem.
 		_baseTex ??= ModContent.Request<Texture2D>(Texture);
 		var srcFrame = _baseTex?.Value is { } bt ? bt.Frame() : frame;
 		var srcOrigin = srcFrame.Size() * 0.5f;
@@ -243,9 +227,6 @@ public abstract class FluidCellItem : ModItem, IFluidHandlerItem, ITextureWarmUp
 		ref float rotation, ref float scale, int whoAmI)
 	{
 		scale *= ItemRenderScale;
-		// Frame against the raw 16x16 source (DrawLayers draws _baseTex, not the
-		// baked 32x32 TextureAssets entry) - else the oversized source rect smears
-		// edge pixels into a long rectangle under PointClamp. See PreDrawInInventory.
 		_baseTex ??= ModContent.Request<Texture2D>(Texture);
 		var frame = _baseTex?.Value is { } bt ? bt.Frame() : TextureAssets.Item[Item.type].Value.Frame();
 		var origin = frame.Size() * 0.5f;
@@ -256,10 +237,6 @@ public abstract class FluidCellItem : ModItem, IFluidHandlerItem, ITextureWarmUp
 		return false;
 	}
 
-	// Two-layer: base tinted by CellMaterialColor; fluid overlay tinted by
-	// fluid color, animated (16x64 = 4-frame strip, frametime 10 ticks).
-	// Frame snap, no interp. mcmeta frametime is hardcoded; read it from JSON
-	// at load if upstream ever ships non-standard timing.
 	private const int OverlayFrameTicks = 10;
 
 	private void DrawLayers(SpriteBatch sb, Vector2 position, Rectangle frame,
@@ -286,7 +263,7 @@ public abstract class FluidCellItem : ModItem, IFluidHandlerItem, ITextureWarmUp
 
 	private static Rectangle CurrentOverlayFrame(Texture2D sheet)
 	{
-		int frameH = sheet.Width; // square frames
+		int frameH = sheet.Width;
 		int frameCount = frameH > 0 ? sheet.Height / frameH : 1;
 		if (frameCount <= 1) return new Rectangle(0, 0, sheet.Width, sheet.Height);
 		int frameIdx = (int)(Main.GameUpdateCount / OverlayFrameTicks) % frameCount;

@@ -95,6 +95,22 @@ public sealed class PatternProviderMachine : MetaMachine, IMePatternProvider, IM
 		MeNetworkSystem.MarkEndpointsDirty();
 	}
 
+	private IEnumerable<(IODirection side, int x, int y)> ActiveSides()
+	{
+		var net = MeNetworkSystem.NetOf(this);
+		foreach (var (side, x, y) in WorldCapability.Perimeter(this))
+		{
+			if (PushDirection != IODirection.None && side != PushDirection) continue;
+			if (net != null
+				&& MachineCellResolver.TryFindMachineAt(x, y, out var m)
+				&& !ReferenceEquals(m, this)
+				&& (m is IMePatternProvider || m is IMeInventoryExposer)
+				&& ReferenceEquals(MeNetworkSystem.NetOf(m), net))
+				continue;
+			yield return (side, x, y);
+		}
+	}
+
 	private bool OnPushSide(int x, int y)
 	{
 		var (w, h) = Size;
@@ -150,9 +166,8 @@ public sealed class PatternProviderMachine : MetaMachine, IMePatternProvider, IM
 		var names = new List<string>();
 		void Add(string n) { if (!string.IsNullOrEmpty(n) && !names.Contains(n)) names.Add(n); }
 
-		foreach (var (side, x, y) in WorldCapability.Perimeter(this))
+		foreach (var (_, x, y) in ActiveSides())
 		{
-			if (PushDirection != IODirection.None && side != PushDirection) continue;
 			if (MachineCellResolver.TryFindMachineAt(x, y, out var m)
 				&& !ReferenceEquals(m, this)
 				&& (m is not IMeNetworkConnected || m is IMeInventoryExposer))
@@ -292,16 +307,12 @@ public sealed class PatternProviderMachine : MetaMachine, IMePatternProvider, IM
 		return HasAdjacentInventory();
 	}
 
-	private static bool IsNetworkReturnCell(int x, int y, IODirection arrival)
-		=> WorldCapability.ItemHandlerAt(x, y, arrival) is MeNetworkPushHandler;
-
 	private bool HasAdjacentInventory()
 	{
-		foreach (var (side, x, y) in WorldCapability.Perimeter(this))
+		foreach (var (side, x, y) in ActiveSides())
 		{
-			if (PushDirection != IODirection.None && side != PushDirection) continue;
 			var arrival = side.Opposite();
-			if (WorldCapability.HasInventoryAt(x, y, arrival) && !IsNetworkReturnCell(x, y, arrival))
+			if (WorldCapability.HasInventoryAt(x, y, arrival))
 				return true;
 		}
 		return false;
@@ -333,11 +344,10 @@ public sealed class PatternProviderMachine : MetaMachine, IMePatternProvider, IM
 		if (_sendList.Count > 0) return false;
 
 		var targets = new List<(int x, int y, IODirection arrival)>();
-		foreach (var (side, x, y) in WorldCapability.Perimeter(this))
+		foreach (var (side, x, y) in ActiveSides())
 		{
-			if (PushDirection != IODirection.None && side != PushDirection) continue;
 			var arrival = side.Opposite();
-			if (WorldCapability.HasInventoryAt(x, y, arrival) && !IsNetworkReturnCell(x, y, arrival))
+			if (WorldCapability.HasInventoryAt(x, y, arrival))
 				targets.Add((x, y, arrival));
 		}
 		RearrangeRoundRobin(targets);
@@ -398,10 +408,10 @@ public sealed class PatternProviderMachine : MetaMachine, IMePatternProvider, IM
 		var externalStorages = new Dictionary<AEKeyType, MEStorage>();
 		if (WorldCapability.ItemHandlerAt(t.x, t.y, t.arrival) != null)
 			externalStorages[AEKeyType.Items()] = new ItemHandlerMeStorage(
-				() => WorldCapability.ItemHandlerAt(t.x, t.y, t.arrival), filterAvailableContents: false);
+				() => WorldCapability.ItemHandlerAt(t.x, t.y, t.arrival), extractableOnly: false);
 		if (WorldCapability.FluidHandlerAt(t.x, t.y, t.arrival) != null)
 			externalStorages[AEKeyType.Fluids()] = new FluidHandlerMeStorage(
-				() => WorldCapability.FluidHandlerAt(t.x, t.y, t.arrival), filterAvailableContents: false);
+				() => WorldCapability.FluidHandlerAt(t.x, t.y, t.arrival), extractableOnly: false);
 
 		return externalStorages.Count > 0 ? new CompositeStorage(externalStorages) : null;
 	}

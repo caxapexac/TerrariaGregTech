@@ -36,6 +36,11 @@ public sealed class ToolWorldEffects : GlobalTile
 		TileID.JungleGrass, TileID.MushroomGrass, TileID.AshGrass, TileID.GolfGrass,
 	};
 
+	private static readonly HashSet<int> WoodTrees = new()
+	{
+		TileID.Trees, TileID.TreeAsh, TileID.VanityTreeSakura, TileID.VanityTreeYellowWillow,
+	};
+
 	public override bool CanKillTile(int i, int j, int type, ref bool blockDamaged)
 	{
 		if (Main.netMode == NetmodeID.Server) return true;
@@ -62,10 +67,10 @@ public sealed class ToolWorldEffects : GlobalTile
 			return false;
 		}
 
-		if (tool.IsSawLike && type == TileID.Trees && RubberLog > 0)
+		if (tool.IsSawLike && WoodTrees.Contains(type) && RubberLog > 0)
 		{
 			SpawnItem(i, j, RubberLog, 1);
-			if (j + 1 < Main.maxTilesY)
+			if (type == TileID.Trees && j + 1 < Main.maxTilesY)
 			{
 				var below = Main.tile[i, j + 1];
 				if (below.HasTile && below.TileType != TileID.Trees)

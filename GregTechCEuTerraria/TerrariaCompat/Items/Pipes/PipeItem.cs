@@ -80,17 +80,9 @@ public sealed class PipeItem : ModItem, ITextureWarmUp
 				var f = c.Value;
 				tooltips.Add(new TooltipLine(Mod, "PipeThroughput",
 					$"[c/55FFFF:Transfer Rate:] {f.Throughput:N0} mB/t"));
-				tooltips.Add(new TooltipLine(Mod, "PipeMaxTemp",
-					$"[c/FF5555:Temperature Limit:] {f.MaxFluidTemperature} K"));
 				if (f.Channels > 1)
 					tooltips.Add(new TooltipLine(Mod, "PipeChannels",
 						$"[c/FFFF55:Channels:] {f.Channels}"));
-				tooltips.Add(f.GasProof
-					? new TooltipLine(Mod, "PipeGasProof",   "[c/FFAA00:Can handle Gases]")
-					: new TooltipLine(Mod, "PipeNotGasProof","[c/AA0000:Gases may leak!]"));
-				if (f.AcidProof)    tooltips.Add(new TooltipLine(Mod, "PipeAcidProof",   "[c/FFAA00:Can handle Acids]"));
-				if (f.CryoProof)    tooltips.Add(new TooltipLine(Mod, "PipeCryoProof",   "[c/FFAA00:Can handle Cryogenics]"));
-				if (f.PlasmaProof)  tooltips.Add(new TooltipLine(Mod, "PipePlasmaProof", "[c/FFAA00:Can handle all Plasmas]"));
 			}
 		}
 		else

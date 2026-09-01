@@ -73,6 +73,11 @@ multi_furnace: {
 
 cracking_unit.energy: Energy: [c/55FF55:{0}]%
 
+fusion_reactor: {
+	energy: Capacitor: [c/55FF55:{0}] / [c/55FF55:{1}] EU
+	heat: Heat: [c/55FF55:{0}] EU
+}
+
 steam: {
 	steam_stored: Stored Steam: [c/55FF55:{0}] / [c/55FF55:{1}] L
 	low_steam: "[c/FF5555:Not Enough Steam!]"

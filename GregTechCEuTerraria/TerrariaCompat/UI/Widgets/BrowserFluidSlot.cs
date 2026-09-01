@@ -70,10 +70,15 @@ public static class BrowserFluidSlot
 		BrowserTooltipGlobal.Append(name, nameColor);
 		if (amountMb > 0)
 			BrowserTooltipGlobal.Append(amountMb.ToString("N0") + " mB", BrowserTooltipGlobal.Detail);
+		if (fluid is not null)
+			BrowserTooltipGlobal.Append(FluidTooltips.Temperature(fluid), FluidTooltips.TemperatureColor);
 		if (!string.IsNullOrEmpty(extraLine))
 			foreach (var line in extraLine!.Split('\n'))
 				if (line.Length > 0)
 					BrowserTooltipGlobal.Append(line, BrowserTooltipGlobal.Detail);
+
+		if (fluid is not null) BrowserHover.SetFluid(fluid.Id, fluid.DisplayName);
+		else BrowserHover.SetNone();
 
 		Main.HoverItem = new Item();
 		Main.HoverItem.SetDefaults(Terraria.ID.ItemID.WaterBucket);

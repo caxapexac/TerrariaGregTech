@@ -5,16 +5,10 @@ using GregTechCEuTerraria.Common.Energy;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Machine;
 
-// Pre-registered TooltipBuilders for machines with runtime-formatted tooltip
-// lines (%s / %d placeholders in upstream's lang). MachineRegistry.Register
-// auto-attaches by id. Values verbatim from upstream Java constants; see
-// per-entry comments for source.
 public static class MachineTooltipBuilders
 {
-	// MachineTooltipLookup converts upstream's %s / %d to {0} etc. before passing in.
 	private static readonly Dictionary<string, Action<List<string>, MachineDefinition>> _byId = new()
 	{
-		// DataAccessHatchMachine. Line 1: "Adds %s slots for Data Items".
 		["data_access_hatch"] = static (lines, def) =>
 		{
 			int slots = def.PartIo != null
@@ -23,7 +17,6 @@ public static class MachineTooltipBuilders
 			if (lines.Count > 1) lines[1] = string.Format(lines[1], slots);
 		},
 
-		// DataBankMachine.EUT_PER_HATCH = VA[EV], EUT_PER_HATCH_CHAINED = VA[LuV].
 		["data_bank"] = static (lines, _) =>
 		{
 			int eutNormal  = VoltageTiers.VA((int)VoltageTier.EV);
@@ -32,15 +25,12 @@ public static class MachineTooltipBuilders
 			if (lines.Count > 4) lines[4] = string.Format(lines[4], eutChained);
 		},
 
-		// NetworkSwitchMachine.EUT_PER_HATCH = VA[IV].
 		["network_switch"] = static (lines, _) =>
 		{
 			int eut = VoltageTiers.VA((int)VoltageTier.IV);
 			if (lines.Count > 3) lines[3] = string.Format(lines[3], eut);
 		},
 
-		// PowerSubstationMachine.MAX_BATTERY_LAYERS = 18,
-		// PASSIVE_DRAIN_MAX_PER_STORAGE = 100_000 (kEU/t = / 1000 = 100).
 		["power_substation"] = static (lines, _) =>
 		{
 			const int maxLayers = 18;
@@ -48,6 +38,10 @@ public static class MachineTooltipBuilders
 			if (lines.Count > 2) lines[2] = string.Format(lines[2], maxLayers);
 			if (lines.Count > 4) lines[4] = string.Format(lines[4], kEutPerStorage);
 		},
+
+		["luv_fusion_reactor"] = FusionCapacity,
+		["zpm_fusion_reactor"] = FusionCapacity,
+		["uv_fusion_reactor"]  = FusionCapacity,
 
 		// Upstream IMiner.getWorkingArea(tier * 8) = tier * 16 - 1.
 		["miner"] = static (lines, def) =>
@@ -58,7 +52,14 @@ public static class MachineTooltipBuilders
 		},
 	};
 
-	// Verbatim DataAccessHatchMachine.GetInventorySize().
+	private static void FusionCapacity(List<string> lines, MachineDefinition def)
+	{
+		int tier = def.Tiers.Length > 0 ? (int)def.Tiers[0] : (int)VoltageTier.LuV;
+		long megaEu = Multiblock.Electric.FusionReactorMachine
+			.CalculateEnergyStorageFactor(tier, 16) / 1_000_000L;
+		if (lines.Count > 0) lines[0] = string.Format(lines[0], megaEu);
+	}
+
 	private static int SlotsForTier(MachineDefinition def)
 	{
 		int tier = def.Tiers.Length > 0 ? (int)def.Tiers[0] : (int)VoltageTier.HV;

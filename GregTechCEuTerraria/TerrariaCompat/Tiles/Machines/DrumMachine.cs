@@ -32,9 +32,6 @@ public sealed class DrumMachine : MetaMachine, IFluidHandler, IControllable
 		BindDefinition();
 
 		_cache = new NotifiableFluidTank(1, Capacity, Api.Capability.Recipe.IO.BOTH);
-		string? matId = Definition?.MaterialId;
-		if (matId != null && MaterialRegistry.Get(matId)?.FluidPipe is IPropertyFluidFilter filter)
-			_cache.SetFilter(filter.Test);
 		Traits.Attach(_cache);
 		Traits.RegisterPersistent("cache", _cache);
 

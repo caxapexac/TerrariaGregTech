@@ -257,6 +257,13 @@ public static class RecipeRowRenderer
 		string heat = HeatRequirement(recipe);
 		if (heat.Length > 0) sb.Append(heat);
 
+		string euToStart = Machine.Multiblock.Electric.FusionReactorMachine.EuToStartLabel(recipe);
+		if (euToStart.Length > 0)
+		{
+			if (sb.Length > 0) sb.Append("   ");
+			sb.Append(euToStart);
+		}
+
 		foreach (var c in recipe.Conditions)
 		{
 			if (sb.Length > 0) sb.Append("   ");

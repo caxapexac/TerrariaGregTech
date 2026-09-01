@@ -37,8 +37,8 @@ public sealed class MeBusExportRequester : IMeCraftingRequester
 		int nx = X + dx, ny = Y + dy;
 		var arrival = Side.Opposite();
 		MEStorage to = what is AEFluidKey
-			? new FluidHandlerMeStorage(() => WorldCapability.FluidHandlerAt(nx, ny, arrival))
-			: new ItemHandlerMeStorage(() => WorldCapability.ItemHandlerAt(nx, ny, arrival));
+			? new FluidHandlerMeStorage(() => WorldCapability.FluidHandlerAt(nx, ny, arrival), false)
+			: new ItemHandlerMeStorage(() => WorldCapability.ItemHandlerAt(nx, ny, arrival), false);
 		return to.Insert(what, amount, mode, IActionSource.Empty());
 	}
 }

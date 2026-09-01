@@ -84,6 +84,10 @@ public static class MultiblockLocale
 		Register("gtceu.multiblock.multi_furnace.heating_coil_discount","Energy Discount: [c/55FF55:{0}]x");
 		Register("gtceu.multiblock.cracking_unit.energy",               "Energy: [c/55FF55:{0}]%");
 
+		Register("gtceu.multiblock.fusion_reactor.energy",              "Capacitor: [c/55FF55:{0}] / [c/55FF55:{1}] EU");
+		Register("gtceu.multiblock.fusion_reactor.heat",                "Heat: [c/55FF55:{0}] EU");
+		Register("gtceu.recipe.eu_to_start",                            "EU To Start: {0} EU{1}");
+
 		Register("gtceu.multiblock.steam.steam_stored",                 "Stored Steam: [c/55FF55:{0}] / [c/55FF55:{1}] L");
 		Register("gtceu.multiblock.steam.low_steam",                    "[c/FF5555:Not Enough Steam!]");
 

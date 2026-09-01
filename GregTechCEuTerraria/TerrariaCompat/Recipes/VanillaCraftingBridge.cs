@@ -258,7 +258,7 @@ public static class VanillaCraftingBridge
 		    && fluid.Amount <= VanillaBuckets.Amount;
 	}
 
-	private static bool TryResolveItem(Ingredient ing, out int itemType, out int count, out string key)
+	internal static bool TryResolveItem(Ingredient ing, out int itemType, out int count, out string key)
 	{
 		itemType = 0; count = 1; key = RefKey(ing);
 		switch (ing)

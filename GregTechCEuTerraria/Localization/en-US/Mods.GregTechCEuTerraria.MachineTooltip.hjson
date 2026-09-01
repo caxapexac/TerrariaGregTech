@@ -223,6 +223,9 @@ luv_fluid_heater: "[c/AAAAAA:Heat Infuser]"
 luv_fluid_solidifier: "[c/AAAAAA:Not an Ice Machine]"
 luv_forge_hammer: "[c/AAAAAA:Plate Forger]"
 luv_forming_press: "[c/AAAAAA:Object Layerer]"
+luv_fusion_reactor_0: "[c/AAAAAA:Maximum Energy Storage:] [c/FFFF55:%sM EU]"
+luv_fusion_reactor_1: Overclocks double energy and halve duration.
+luv_fusion_reactor_2: The Fusion Reactor MK 1 is a large multiblock structure used for fusing elements into heavier ones. It can only use LuV, ZPM, and UV Energy Hatches. For every Hatch it has, its buffer increases by 10M EU, and has a maximum of 160M.
 luv_gas_collector: "[c/AAAAAA:Collects Gas from the atmosphere depending on the dimension]"
 luv_laser_engraver: "[c/AAAAAA:With the Power of 8.16 MW]"
 luv_lathe: "[c/AAAAAA:Turn-O-Matic L-5907]"
@@ -398,6 +401,9 @@ uv_fluid_heater: "[c/AAAAAA:Thermal Imbuer]"
 uv_fluid_solidifier: "[c/AAAAAA:Fluid Petrificator]"
 uv_forge_hammer: "[c/AAAAAA:Impact Modulator]"
 uv_forming_press: "[c/AAAAAA:Surface Shifter]"
+uv_fusion_reactor_0: "[c/AAAAAA:Maximum Energy Storage:] [c/FFFF55:%sM EU]"
+uv_fusion_reactor_1: Overclocks double energy and halve duration.
+uv_fusion_reactor_2: The Fusion Reactor MK 3 is a large multiblock structure used for fusing elements into heavier ones. It can only use UV Energy Hatches. For every Hatch it has, its buffer increases by 40M EU, and has a maximum of 640M.
 uv_gas_collector: "[c/AAAAAA:Collects Gas from the solar system depending on the dimension]"
 uv_laser_engraver: "[c/AAAAAA:Exact Photon Cannon]"
 uv_lathe: "[c/AAAAAA:Rotation Grinder]"
@@ -442,6 +448,9 @@ zpm_fluid_heater: "[c/AAAAAA:Heat Infuser]"
 zpm_fluid_solidifier: "[c/AAAAAA:Not an Ice Machine]"
 zpm_forge_hammer: "[c/AAAAAA:Plate Forger]"
 zpm_forming_press: "[c/AAAAAA:Object Layerer]"
+zpm_fusion_reactor_0: "[c/AAAAAA:Maximum Energy Storage:] [c/FFFF55:%sM EU]"
+zpm_fusion_reactor_1: Overclocks double energy and halve duration.
+zpm_fusion_reactor_2: The Fusion Reactor MK 2 is a large multiblock structure used for fusing elements into heavier ones. It can only use ZPM and UV Energy Hatches. For every Hatch it has, its buffer increases by 20M EU, and has a maximum of 320M.
 zpm_gas_collector: "[c/AAAAAA:Collects Gas from the atmosphere depending on the dimension]"
 zpm_laser_engraver: "[c/AAAAAA:With the Power of 32.64 MW]"
 zpm_lathe: "[c/AAAAAA:Turn-O-Matic L-5908]"

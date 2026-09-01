@@ -7,6 +7,7 @@ Mods: {
 			RecipeBrowserHowToObtain.DisplayName: Recipe browser - how to obtain hovered item
 			RecipeBrowserUsedAsIngredient.DisplayName: Recipe browser - recipes that use hovered item
 			ToggleDockedBrowser.DisplayName: Toggle docked recipe browser
+			ToggleSidePanels.DisplayName: Toggle favorites and history panels
 		}
 
 		ArmorSet: {
@@ -126,7 +127,10 @@ Mods: {
 			ToolPokeProjectile.DisplayName: Tool Poke Projectile
 		}
 
-		RecipeConditions.FluidContainer: Requires the fluid held in a cell or bucket
+		RecipeConditions: {
+			FluidContainer: Requires the fluid held in a cell or bucket
+		}
+
 		Condition.ShimmerDupesAllowed: Shimmer duplication allowed
 
 		AppliedEnergistics: {

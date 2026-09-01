@@ -28113,11 +28113,6 @@ industrial_steam_casing: {
 	// Tooltip: ""
 }
 
-industrial_tnt: {
-	DisplayName: Industrielles TNT
-	// Tooltip: ""
-}
-
 inert_machine_casing: {
 	DisplayName: Chemisch inertes PTFE-Maschinengehäuse
 	// Tooltip: ""
@@ -38287,66 +38282,6 @@ ulv_solar_panel_machine: {
 	// DisplayName: ULV Solar Panel
 }
 
-max_steam_turbine: {
-	// Tooltip: ""
-	// DisplayName: MAX Steam Turbine
-}
-
-opv_steam_turbine: {
-	// Tooltip: ""
-	// DisplayName: OpV Steam Turbine
-}
-
-uxv_steam_turbine: {
-	// Tooltip: ""
-	// DisplayName: UXV Steam Turbine
-}
-
-uiv_steam_turbine: {
-	// Tooltip: ""
-	// DisplayName: UIV Steam Turbine
-}
-
-uev_steam_turbine: {
-	// Tooltip: ""
-	// DisplayName: UEV Steam Turbine
-}
-
-uhv_steam_turbine: {
-	// Tooltip: ""
-	// DisplayName: UHV Steam Turbine
-}
-
-uv_steam_turbine: {
-	// Tooltip: ""
-	// DisplayName: UV Steam Turbine
-}
-
-zpm_steam_turbine: {
-	// Tooltip: ""
-	// DisplayName: ZPM Steam Turbine
-}
-
-luv_steam_turbine: {
-	// Tooltip: ""
-	// DisplayName: LuV Steam Turbine
-}
-
-iv_steam_turbine: {
-	// Tooltip: ""
-	// DisplayName: IV Steam Turbine
-}
-
-ev_steam_turbine: {
-	// Tooltip: ""
-	// DisplayName: EV Steam Turbine
-}
-
-ulv_steam_turbine: {
-	// Tooltip: ""
-	// DisplayName: ULV Steam Turbine
-}
-
 max_circuit_assembler: {
 	// Tooltip: ""
 	// DisplayName: MAX Circuit Assembler
@@ -40008,6 +39943,11 @@ GregTechIronToolsBag: {
 	// DisplayName: Starter Bag: Iron Tools
 }
 
+compressed_energy_substance: {
+	// Tooltip: 16 Energy Clusters pressed into one stackable unit
+	// DisplayName: Compressed Energy Substance
+}
+
 frozen_frostproof_casing: {
 	/* Tooltip:
 		'''
@@ -40029,7 +39969,7 @@ dirty_stainless_steel_casing: {
 unstable_compressor_charge: {
 	/* Tooltip:
 		'''
-		A steel casing packed with ITNT, primed in a Large Chemical Reactor
+		A steel casing packed with dynamite, primed in a Large Chemical Reactor
 		Use on the surface to summon the Implosion Press
 		''' */
 	// DisplayName: Unstable Compressor Charge
@@ -40051,9 +39991,4 @@ acid_etched_inert_casing: {
 		Use on the surface to summon the Caustic Reactor
 		''' */
 	// DisplayName: Acid-Etched Inert Casing
-}
-
-compressed_energy_substance: {
-	// DisplayName: Compressed Energy Substance
-	// Tooltip: 16 Energy Clusters pressed into one stackable unit
 }

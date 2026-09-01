@@ -128,7 +128,6 @@ public class CustomFluidTank : IFluidHandlerModifiable
 	public TagCompound SerializeNBT()
 	{
 		var tag = new TagCompound();
-		tag["capacity"] = Capacity;
 		if (Fluid.IsEmpty)
 		{
 			tag["isNull"] = true;
@@ -144,7 +143,6 @@ public class CustomFluidTank : IFluidHandlerModifiable
 
 	public void DeserializeNBT(TagCompound tag)
 	{
-		if (tag.ContainsKey("capacity")) Capacity = tag.GetInt("capacity");
 		if (tag.GetBool("isNull") || !tag.ContainsKey("fluid"))
 		{
 			Fluid = FluidStack.Empty;

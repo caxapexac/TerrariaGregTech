@@ -65,7 +65,8 @@ public sealed class UIFluidSlot : UIElement
 				:                              "";
 			string label = stored.IsEmpty
 				? $"Empty  (0 / {capacity:N0} mB)\n{hint}"
-				: $"{stored.Type!.DisplayName}: {stored.Amount:N0} / {capacity:N0} mB\n{hint}";
+				: $"{stored.Type!.DisplayName}: {stored.Amount:N0} / {capacity:N0} mB\n"
+				  + $"{FluidTooltips.Temperature(stored.Type!)}\n{hint}";
 			Main.instance.MouseText(label);
 			if (!stored.IsEmpty)
 				HoverItemTracker.SetFluid(stored.Type!.Id);

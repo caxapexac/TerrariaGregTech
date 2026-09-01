@@ -461,6 +461,25 @@ _MACHINE_TOOLTIP_ALIASES = {
 }
 
 
+_MACHINE_TOOLTIP_COMPOSED = {
+    "luv_fusion_reactor": (
+        "gtceu.machine.fusion_reactor.capacity",
+        "gtceu.machine.fusion_reactor.overclocking",
+        "gtceu.multiblock.luv_fusion_reactor.description",
+    ),
+    "zpm_fusion_reactor": (
+        "gtceu.machine.fusion_reactor.capacity",
+        "gtceu.machine.fusion_reactor.overclocking",
+        "gtceu.multiblock.zpm_fusion_reactor.description",
+    ),
+    "uv_fusion_reactor": (
+        "gtceu.machine.fusion_reactor.capacity",
+        "gtceu.machine.fusion_reactor.overclocking",
+        "gtceu.multiblock.uv_fusion_reactor.description",
+    ),
+}
+
+
 # Formatting codes (l/o/n/m/k) and reset (r) close any open color tag and drop.
 _MC_COLORS = {
     "0": "000000", "1": "0000AA", "2": "00AA00", "3": "00AAAA",
@@ -580,6 +599,16 @@ def emit_machine_tooltips(lines, indent, lang):
             continue
         out[f"{mid}_{n}"] = conv
         n_numbered += 1
+    for mid, keys in _MACHINE_TOOLTIP_COMPOSED.items():
+        for n, key in enumerate(keys):
+            raw = lang.get(key)
+            if raw is None:
+                continue
+            conv = _convert_tooltip(raw, key)
+            if conv is None:
+                continue
+            out[f"{mid}_{n}"] = conv
+            n_numbered += 1
     for mid in sorted(out):
         lines.append(f"{indent}\t{mid}: {json.dumps(out[mid], ensure_ascii=False)}")
     print(f"  machine tooltips: {len(out) - n_numbered} single + {n_numbered} numbered")

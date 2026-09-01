@@ -1,4 +1,6 @@
 #nullable enable
+using System.Collections.Generic;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -6,10 +8,25 @@ namespace GregTechCEuTerraria.TerrariaCompat.Recipes;
 
 public sealed class VanillaCraftingBridgeSystem : ModSystem
 {
+	public const string AnyWorkbench = "GregTechCEuTerraria:workbenches";
+
 	public override void AddRecipeGroups()
 	{
 		ToolRecipeGroups.Register();
 		RegisterRubberAsVanillaWood();
+		RegisterAnyWorkbenchGroup();
+	}
+
+	private void RegisterAnyWorkbenchGroup()
+	{
+		var ids = new List<int> { ItemID.WorkBench };
+		foreach (var (type, item) in ContentSamples.ItemsByType)
+			if (type != ItemID.WorkBench && item.createTile == TileID.WorkBenches)
+				ids.Add(type);
+
+		Terraria.RecipeGroup.RegisterGroup(AnyWorkbench, new Terraria.RecipeGroup(
+			() => $"{Terraria.Lang.misc[37].Value} {Terraria.Lang.GetItemNameValue(ItemID.WorkBench)}",
+			ids.ToArray()));
 	}
 
 	private void RegisterRubberAsVanillaWood()
@@ -23,6 +40,7 @@ public sealed class VanillaCraftingBridgeSystem : ModSystem
 	{
 		VanillaCraftingBridge.Register(Mod);
 		AddCompatHandRecipes();
+		RecyclingShimmer.AddRecipes(Mod);
 	}
 
 	public override void PostAddRecipes()

@@ -12,7 +12,6 @@ using Terraria.ModLoader;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Machine.Rendering;
 
-// Fluid drawer for UI (recipe browser / tank widgets / pipes).
 public static class FluidIconRenderer
 {
 	private const string TexRoot = "GregTechCEuTerraria/Content/Textures";
@@ -97,6 +96,20 @@ public static class FluidIconRenderer
 			baseCol = new Color(baseCol.R * l.R / 255, baseCol.G * l.G / 255, baseCol.B * l.B / 255);
 		Color drawTint = baseCol * alpha;
 		PointClampDraw.Draw(sb, () => sb.Draw(icon.Tex, dest, src, drawTint));
+		return true;
+	}
+
+	public static bool Draw(SpriteBatch sb, FluidType fluid, Vector2 topLeft, Vector2 size,
+		float alpha = 1f, Color? light = null)
+	{
+		if (!TryGetFrame(fluid, out var tex, out var src, out var baseCol) || tex is null) return false;
+
+		if (light is { } l)
+			baseCol = new Color(baseCol.R * l.R / 255, baseCol.G * l.G / 255, baseCol.B * l.B / 255);
+		Color drawTint = baseCol * alpha;
+		var scale = new Vector2(size.X / src.Width, size.Y / src.Height);
+		PointClampDraw.Draw(sb, () => sb.Draw(tex, topLeft, src, drawTint, 0f, Vector2.Zero, scale,
+			SpriteEffects.None, 0f));
 		return true;
 	}
 

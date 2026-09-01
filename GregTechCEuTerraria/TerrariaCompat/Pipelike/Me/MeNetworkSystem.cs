@@ -9,6 +9,8 @@ using GregTechCEuTerraria.Api.Pipenet;
 using GregTechCEuTerraria.AppliedEnergistics.Api.Config;
 using GregTechCEuTerraria.AppliedEnergistics.Api.Networking.Security;
 using GregTechCEuTerraria.AppliedEnergistics.Api.Stacks;
+using GregTechCEuTerraria.AppliedEnergistics.Api.Storage;
+using GregTechCEuTerraria.AppliedEnergistics.Me.Storage;
 using GregTechCEuTerraria.TerrariaCompat.Machine;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Pipelike.Me;
@@ -235,19 +237,26 @@ public sealed class MeNetworkSystem : ModSystem
 			int nx = cx + dx, ny = cy + dy;
 			var arrival = side.Opposite();
 
+			MEInventoryHandler Wrap(MEStorage inventory)
+			{
+				var handler = new MEInventoryHandler(inventory);
+				handler.SetAccessRestriction(att.Access);
+				handler.SetPartitionList(att.ImportAllows, att.PartitionListed);
+				handler.SetExtractFiltering(att.FilterOnExtract, att.ExtractableOnly && att.FilterOnExtract);
+				return handler;
+			}
+
 			if (MachineCellResolver.TryFindMachineAt(nx, ny, out var adj) && adj is IMeInventoryExposer exposer)
 			{
-				net.AddSource(att.Priority, new DelegatingMeStorage(exposer.GetExposedInventory));
+				net.AddSource(att.Priority, Wrap(new DelegatingMeStorage(exposer.GetExposedInventory)));
 				continue;
 			}
 
-			bool filterExt = att.FilterOnExtract;
-			bool filterAvail = att.ExtractableOnly && att.FilterOnExtract;
 			net.AddSource(att.Priority,
-				new ItemHandlerMeStorage(
-					() => Capabilities.WorldCapability.ItemHandlerAt(nx, ny, arrival), att.Access, att.ImportAllows, att.PartitionListed, filterExt, filterAvail),
-				new FluidHandlerMeStorage(
-					() => Capabilities.WorldCapability.FluidHandlerAt(nx, ny, arrival), att.Access, att.ImportAllows, att.PartitionListed, filterExt, filterAvail));
+				Wrap(new ItemHandlerMeStorage(
+					() => Capabilities.WorldCapability.ItemHandlerAt(nx, ny, arrival), att.ExtractableOnly)),
+				Wrap(new FluidHandlerMeStorage(
+					() => Capabilities.WorldCapability.FluidHandlerAt(nx, ny, arrival), att.ExtractableOnly)));
 		}
 	}
 }

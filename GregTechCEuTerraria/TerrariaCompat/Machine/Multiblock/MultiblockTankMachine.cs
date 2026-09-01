@@ -34,9 +34,6 @@ public class MultiblockTankMachine : MultiblockControllerMachine,
 		BindDefinition();
 
 		_tank = new NotifiableFluidTank(1, Capacity, IO.BOTH);
-		string? matId = Definition?.MaterialId;
-		if (matId != null && MaterialRegistry.Get(matId)?.FluidPipe is IPropertyFluidFilter filter)
-			_tank.SetFilter(filter.Test);
 		Traits.Attach(_tank);
 		Traits.RegisterPersistent("Tank", _tank);
 	}

@@ -15,12 +15,14 @@ public sealed class ModalToggleKeybinds : ModSystem
 {
 	public static ModKeybind? OpenRecipeBrowser;
 	public static ModKeybind? ToggleDockedBrowser;
+	public static ModKeybind? ToggleSidePanels;
 	public static ModKeybind? OpenQuestbook;
 
 	private static readonly InputMode[] KeyboardModes = { InputMode.Keyboard, InputMode.KeyboardUI };
 
 	private bool _ownBrowser;
 	private bool _ownDocked;
+	private bool _ownSidePanels;
 	private bool _ownQuestbook;
 
 	public override void Load()
@@ -32,11 +34,15 @@ public sealed class ModalToggleKeybinds : ModSystem
 			"Mods.GregTechCEuTerraria.Keybinds.ToggleDockedBrowser.DisplayName",
 			() => "Toggle docked recipe browser");
 		Language.GetOrRegister(
+			"Mods.GregTechCEuTerraria.Keybinds.ToggleSidePanels.DisplayName",
+			() => "Toggle favorites and history panels");
+		Language.GetOrRegister(
 			"Mods.GregTechCEuTerraria.Keybinds.OpenQuestbook.DisplayName",
 			() => "Open questbook");
 
 		OpenRecipeBrowser   = KeybindLoader.RegisterKeybind(Mod, "OpenRecipeBrowser", Keys.OemQuestion);
 		ToggleDockedBrowser = KeybindLoader.RegisterKeybind(Mod, "ToggleDockedBrowser", Keys.OemTilde);
+		ToggleSidePanels    = KeybindLoader.RegisterKeybind(Mod, "ToggleSidePanels", Keys.None);
 		OpenQuestbook       = KeybindLoader.RegisterKeybind(Mod, "OpenQuestbook", Keys.Q);
 	}
 
@@ -44,6 +50,7 @@ public sealed class ModalToggleKeybinds : ModSystem
 	{
 		OpenRecipeBrowser = null;
 		ToggleDockedBrowser = null;
+		ToggleSidePanels = null;
 		OpenQuestbook = null;
 	}
 
@@ -54,6 +61,7 @@ public sealed class ModalToggleKeybinds : ModSystem
 
 		Handle(OpenRecipeBrowser, GlobalRecipeBrowserSystem.Toggle, ref _ownBrowser);
 		Handle(ToggleDockedBrowser, GlobalRecipeBrowserSystem.ToggleDocked, ref _ownDocked);
+		Handle(ToggleSidePanels, GlobalRecipeBrowserSystem.ToggleSidePanels, ref _ownSidePanels);
 		Handle(OpenQuestbook, QuestbookUISystem.Toggle, ref _ownQuestbook);
 	}
 

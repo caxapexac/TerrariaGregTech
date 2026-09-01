@@ -606,7 +606,6 @@ hv_wiremill.MapEntry: "[c/FFAA00:Advanced Wiremill II]"
 hv_world_accelerator.MapEntry: "[c/FFAA00:Advanced World Accelerator II]"
 implosion_compressor.MapEntry: Implosion Compressor
 industrial_steam_casing.MapEntry: Industrial Steam Casing
-industrial_tnt.MapEntry: Industrial TNT
 inert_machine_casing.MapEntry: Chemically Inert PTFE Machine Casing
 iv_1024a_laser_source_hatch.MapEntry: "[c/5555FF:IV] 1,024[c/FFFF55:A] Laser Source Hatch"
 iv_1024a_laser_target_hatch.MapEntry: "[c/5555FF:IV] 1,024[c/FFFF55:A] Laser Target Hatch"
@@ -1899,18 +1898,6 @@ hv_solar_panel_machine.MapEntry: HV Solar Panel
 mv_solar_panel_machine.MapEntry: MV Solar Panel
 lv_solar_panel_machine.MapEntry: LV Solar Panel
 ulv_solar_panel_machine.MapEntry: ULV Solar Panel
-max_steam_turbine.MapEntry: MAX Steam Turbine
-opv_steam_turbine.MapEntry: OpV Steam Turbine
-uxv_steam_turbine.MapEntry: UXV Steam Turbine
-uiv_steam_turbine.MapEntry: UIV Steam Turbine
-uev_steam_turbine.MapEntry: UEV Steam Turbine
-uhv_steam_turbine.MapEntry: UHV Steam Turbine
-uv_steam_turbine.MapEntry: UV Steam Turbine
-zpm_steam_turbine.MapEntry: ZPM Steam Turbine
-luv_steam_turbine.MapEntry: LuV Steam Turbine
-iv_steam_turbine.MapEntry: IV Steam Turbine
-ev_steam_turbine.MapEntry: EV Steam Turbine
-ulv_steam_turbine.MapEntry: ULV Steam Turbine
 max_circuit_assembler.MapEntry: MAX Circuit Assembler
 ulv_circuit_assembler.MapEntry: ULV Circuit Assembler
 max_forming_press.MapEntry: MAX Forming Press

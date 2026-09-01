@@ -223,6 +223,9 @@ luv_fluid_heater: "[c/AAAAAA:Wärmeinfusor]"
 luv_fluid_solidifier: "[c/AAAAAA:Keine Eismaschine]"
 luv_forge_hammer: "[c/AAAAAA:Plattenfälscher]"
 luv_forming_press: "[c/AAAAAA:Objektebener]"
+luv_fusion_reactor_0: "[c/AAAAAA:Maximale Energiespeicherung:] [c/FFFF55:%sM EU]"
+luv_fusion_reactor_1: Übertaktet doppelte Energie und halbierte Dauer.
+luv_fusion_reactor_2: Der Fusionsreaktor MK 1 ist eine große Multiblockstruktur, die zum Verschmelzen von Elementen zu schwereren Elementen verwendet wird. Es können nur LuV-, ZPM- und UV-Energieklappen verwendet werden. Für jede Klappe, die es hat, erhöht sich sein Puffer um 10 Millionen EU und beträgt maximal 160 Millionen.
 luv_gas_collector: "[c/AAAAAA:Sammelt je nach Dimension Gas aus der Atmosphäre]"
 luv_laser_engraver: "[c/AAAAAA:Mit einer Leistung von 8,16 MW]"
 luv_lathe: "[c/AAAAAA:Turn-O-Matic L-5907]"
@@ -398,6 +401,9 @@ uv_fluid_heater: "[c/AAAAAA:Thermische Verstärkung]"
 uv_fluid_solidifier: "[c/AAAAAA:Flüssigkeitsversteinerer]"
 uv_forge_hammer: "[c/AAAAAA:Auswirkungsmodulator]"
 uv_forming_press: "[c/AAAAAA:Oberflächenwandler]"
+uv_fusion_reactor_0: "[c/AAAAAA:Maximale Energiespeicherung:] [c/FFFF55:%sM EU]"
+uv_fusion_reactor_1: Übertaktet doppelte Energie und halbierte Dauer.
+uv_fusion_reactor_2: Der Fusionsreaktor MK 3 ist eine große Multiblock-Struktur, die zum Verschmelzen von Elementen zu schwereren Elementen verwendet wird. Es können nur UV-Energieklappen verwendet werden. Für jede Klappe, die es hat, erhöht sich sein Puffer um 40 Millionen EU und beträgt maximal 640 Millionen.
 uv_gas_collector: "[c/AAAAAA:Sammelt je nach Dimension Gas aus dem Sonnensystem]"
 uv_laser_engraver: "[c/AAAAAA:Exakte Photonenkanone]"
 uv_lathe: "[c/AAAAAA:Rotationsschleifer]"
@@ -442,6 +448,9 @@ zpm_fluid_heater: "[c/AAAAAA:Wärmeinfusor]"
 zpm_fluid_solidifier: "[c/AAAAAA:Keine Eismaschine]"
 zpm_forge_hammer: "[c/AAAAAA:Plattenfälscher]"
 zpm_forming_press: "[c/AAAAAA:Objektebener]"
+zpm_fusion_reactor_0: "[c/AAAAAA:Maximale Energiespeicherung:] [c/FFFF55:%sM EU]"
+zpm_fusion_reactor_1: Übertaktet doppelte Energie und halbierte Dauer.
+zpm_fusion_reactor_2: Der Fusionsreaktor MK 2 ist eine große Multiblockstruktur, die zum Verschmelzen von Elementen zu schwereren Elementen verwendet wird. Es können nur ZPM- und UV-Energieklappen verwendet werden. Für jede Klappe, die es hat, erhöht sich sein Puffer um 20 Millionen EU und beträgt maximal 320 Millionen.
 zpm_gas_collector: "[c/AAAAAA:Sammelt je nach Dimension Gas aus der Atmosphäre]"
 zpm_laser_engraver: "[c/AAAAAA:Mit einer Leistung von 32,64 MW]"
 zpm_lathe: "[c/AAAAAA:Turn-O-Matic L-5908]"

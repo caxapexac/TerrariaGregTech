@@ -108,6 +108,10 @@ public sealed class FluidBucketItem : ModItem, ITextureWarmUp, IFluidHandlerItem
 	{
 		if (_fluid is null) return;
 		tooltips.Add(new TooltipLine(Mod, "FluidContents", $"Contains 1000 mB {_fluid.DisplayName}"));
+		tooltips.Add(new TooltipLine(Mod, "FluidTemperature", UI.FluidTooltips.Temperature(_fluid))
+		{
+			OverrideColor = UI.FluidTooltips.TemperatureColor,
+		});
 		foreach (var attr in _fluid.Attributes)
 			attr.AppendFluidTooltips(s => tooltips.Add(new TooltipLine(Mod, "FluidAttribute", s)));
 	}

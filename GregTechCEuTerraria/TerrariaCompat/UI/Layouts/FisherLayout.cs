@@ -49,7 +49,8 @@ public static class FisherLayout
 		layout.Widgets.Add(new SlotWidgetSpec(
 			X: baitX, Y: baitY,
 			Group: SlotGroup.InventoryInput,
-			SlotIndex: 0));
+			SlotIndex: 0,
+			EmptyHint: "Accepts: Silk, Bait"));
 
 		int filterY = baitY + SlotSize + 4;
 		void AddFilter(FisherFilter filter, string tooltip)

@@ -108,6 +108,12 @@ public sealed class GregTechCEuTerraria : Mod
 		TerrariaCompat.Items.Fluids.FluidCellRegistry.Register(this);
 		Stage("Building machine definitions");
 		MachineDefinitions.RegisterAll();
+		TerrariaCompat.Machine.Multiblock.Electric.FusionReactorMachine.RegisterFusionTier(
+			(int)Common.Energy.VoltageTier.LuV, " (MKI)");
+		TerrariaCompat.Machine.Multiblock.Electric.FusionReactorMachine.RegisterFusionTier(
+			(int)Common.Energy.VoltageTier.ZPM, " (MKII)");
+		TerrariaCompat.Machine.Multiblock.Electric.FusionReactorMachine.RegisterFusionTier(
+			(int)Common.Energy.VoltageTier.UV, " (MKIII)");
 		TerrariaCompat.Pipelike.LongDistance.LongDistanceLocale.RegisterAll();
 		TerrariaCompat.Machine.Multiblock.MultiblockLocale.RegisterAll();
 		AppliedEnergistics.Api.Stacks.AEKeyTypes.RegisterBuiltins();
@@ -172,6 +178,7 @@ public sealed class GregTechCEuTerraria : Mod
 		TerrariaCompat.BossDrops.BossDropRegistry.Unload();
 		TerrariaCompat.BossDrops.MultiblockBag.MultiblockBagLoader.Unload();
 		RecipeRegistry.Clear();
+		TerrariaCompat.Recipes.RecyclingShimmer.Unload();
 		TerrariaCompat.Items.Tools.ToolItemLoader.Unload();
 		TerrariaCompat.Items.Tools.GregithItemLoader.Unload();
 		TerrariaCompat.Items.Armor.ArmorItemLoader.Unload();

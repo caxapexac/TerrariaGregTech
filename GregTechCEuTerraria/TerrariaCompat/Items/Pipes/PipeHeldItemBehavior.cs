@@ -63,13 +63,7 @@ public static class PipeHeldItemBehavior
 			string line1 = f.IsSimple
 				? "Simple Fluid Pipe"
 				: $"{HumanizeMaterial(f.MaterialId)} {Capitalize(sizeWord)} Fluid Pipe";
-			var proofs = new List<string>();
-			if (f.GasProof)    proofs.Add("gas");
-			if (f.CryoProof)   proofs.Add("cryo");
-			if (f.PlasmaProof) proofs.Add("plasma");
-			if (f.AcidProof)   proofs.Add("acid");
-			string proofLine = proofs.Count == 0 ? "" : $"   {string.Join(" / ", proofs)}-proof";
-			return $"{line1}\n{f.Throughput:N0} mB/t   {f.Channels} channel{(f.Channels == 1 ? "" : "s")}   max {f.MaxFluidTemperature}K{proofLine}";
+			return $"{line1}\n{f.Throughput:N0} mB/t   {f.Channels} channel{(f.Channels == 1 ? "" : "s")}";
 		}
 
 		var ci = ItemPipeLayerSystem.Pipes.CellAt(x, y);

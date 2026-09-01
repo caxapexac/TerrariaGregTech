@@ -65,11 +65,6 @@ public sealed class SimpleFluidPipeItem : ModItem, ITextureWarmUp
 		base.ModifyTooltips(tooltips);
 		tooltips.Add(new TooltipLine(Mod, "PipeKind", $"{Capitalize(SizeWord)} Simple Fluid Pipe"));
 		tooltips.Add(new TooltipLine(Mod, "PipeRate", $"[c/55FFFF:Transfer Rate:] {Throughput:N0} mB/t"));
-		tooltips.Add(new TooltipLine(Mod, "PipeTemp", $"[c/FF5555:Temperature Limit:] {NaquadahMaxTemp} K"));
-		tooltips.Add(new TooltipLine(Mod, "PipeGasProof",   "[c/FFAA00:Can handle Gases]"));
-		tooltips.Add(new TooltipLine(Mod, "PipeCryoProof",  "[c/FFAA00:Can handle Cryogenics]"));
-		tooltips.Add(new TooltipLine(Mod, "PipePlasmaProof","[c/FFAA00:Can handle all Plasmas]"));
-		tooltips.Add(new TooltipLine(Mod, "PipePlasmaProof","[c/FFAA00:Can handle Acid]"));
 		tooltips.Add(new TooltipLine(Mod, "PipeSimple", "[c/AAFFAA:Auto-connects to adjacent storage on placement.]"));
 		tooltips.Add(new TooltipLine(Mod, "PipeSimpleUI", "[c/AAFFAA:Right-click to toggle per-side mode (Off / Insert / Extract).]"));
 		Tools.GregTechMultitool.AppendHint(Mod, tooltips);

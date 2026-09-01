@@ -172,6 +172,11 @@ public sealed class WorldInteractPickerState : UIModalWindow
 	{
 		if (_panel is null) return;
 		WorldCursor.WorldToUi(TileX * 16f, TileY * 16f, out float ux, out float uy);
+		WorldCursor.UiScreenSize(out float screenW, out float screenH);
+		float maxX = System.Math.Max(0f, screenW - _panel.Width.Pixels);
+		float maxY = System.Math.Max(0f, screenH - _panel.Height.Pixels);
+		ux = MathHelper.Clamp(ux, 0f, maxX);
+		uy = MathHelper.Clamp(uy, 0f, maxY);
 		_panel.Left = StyleDimension.FromPixels(ux);
 		_panel.Top = StyleDimension.FromPixels(uy);
 		_panel.Recalculate();

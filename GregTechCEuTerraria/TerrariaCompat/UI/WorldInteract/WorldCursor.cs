@@ -1,6 +1,7 @@
 #nullable enable
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.GameInput;
 
 namespace GregTechCEuTerraria.TerrariaCompat.UI.WorldInteract;
 
@@ -28,5 +29,12 @@ public static class WorldCursor
 		var screen = Vector2.Transform(new Vector2(worldX, worldY) - Main.screenPosition, Main.GameViewMatrix.ZoomMatrix);
 		uiX = screen.X / Main.UIScale;
 		uiY = screen.Y / Main.UIScale;
+	}
+
+	public static void UiScreenSize(out float uiW, out float uiH)
+	{
+		var size = PlayerInput.OriginalScreenSize;
+		uiW = size.X / Main.UIScale;
+		uiH = size.Y / Main.UIScale;
 	}
 }

@@ -109,7 +109,7 @@ public sealed class QuestbookUIState : FreeModalWindow
 		};
 		_panel.Append(_title);
 
-		var warning = new UIText("WIP - new questbook ETA v0.0.15", 1.0f)
+		var warning = new UIText("WIP - new questbook ETA v0.0.16", 1.0f)
 		{
 			HAlign = 0.5f,
 			Top = StyleDimension.FromPixels(Pad),

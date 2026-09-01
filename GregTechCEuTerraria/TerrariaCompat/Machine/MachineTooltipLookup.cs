@@ -17,8 +17,33 @@ public static class MachineTooltipLookup
 		AppendBuilder(lines, machineKey, machineId, definition);
 		string? text = Lookup(machineKey) ?? (machineId != null ? Lookup(machineId) : null);
 		if (text != null && AcceptOrSubstitute(ref text, definition))
-			lines.Add(CollapsePercentEscape(text));
+			AppendWrapped(lines, CollapsePercentEscape(text));
 		AppendAvailableRecipeMaps(lines, definition);
+	}
+
+	private const int WrapWidth = 110;
+
+	private static void AppendWrapped(List<string> lines, string text)
+	{
+		if (text.Length <= WrapWidth || text.Contains("[c/"))
+		{
+			lines.Add(text);
+			return;
+		}
+		int start = 0;
+		while (start < text.Length)
+		{
+			if (text.Length - start <= WrapWidth)
+			{
+				lines.Add(text.Substring(start));
+				return;
+			}
+			int split = text.LastIndexOf(' ', start + WrapWidth, WrapWidth);
+			if (split <= start) split = start + WrapWidth;
+			lines.Add(text.Substring(start, split - start));
+			start = split;
+			while (start < text.Length && text[start] == ' ') start++;
+		}
 	}
 
 	private static void AppendAvailableRecipeMaps(List<string> lines, MachineDefinition? def)
@@ -33,7 +58,7 @@ public static class MachineTooltipLookup
 		string filled;
 		try { filled = string.Format(template, names); }
 		catch { return; }
-		lines.Add(CollapsePercentEscape(filled));
+		AppendWrapped(lines, CollapsePercentEscape(filled));
 	}
 
 	public static string RecipeTypeDisplayName(Api.Recipe.GTRecipeType recipeType)
@@ -70,7 +95,7 @@ public static class MachineTooltipLookup
 		RunBuilder(collected, def, machineId);
 		foreach (var line in collected)
 			if (!_unfilledFormat.IsMatch(line))
-				lines.Add(CollapsePercentEscape(line));
+				AppendWrapped(lines, CollapsePercentEscape(line));
 	}
 
 	private static string CollapsePercentEscape(string text) => text.Replace("%%", "%");

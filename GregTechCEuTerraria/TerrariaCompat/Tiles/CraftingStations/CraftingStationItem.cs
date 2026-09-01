@@ -62,7 +62,7 @@ public sealed class CraftingStationItem : ModItem, ITextureWarmUp
 		if (!VanillaItemMap.TryGetGroup(_gtTag, out int groupId)) return;
 		CreateRecipe()
 			.AddRecipeGroup(groupId, 1)
-			.AddIngredient(ItemID.WorkBench, 1)
+			.AddRecipeGroup(VanillaCraftingBridgeSystem.AnyWorkbench, 1)
 			.DisableDecraft()
 			.Register();
 	}

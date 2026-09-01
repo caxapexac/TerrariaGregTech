@@ -123,7 +123,7 @@ public static class MachineDefinitions
 
 		Wtm("macerator",   "Macerator",   GTRecipeTypes.MACERATOR, 1, 4, outputLimits: MaceratorOutputLimit);
 		Wtm("alloy_smelter", "Alloy Smelter", GTRecipeTypes.ALLOY_SMELTER, 2, 1, circuit: true);
-		Wtm("brewery",     "Brewery",     GTRecipeTypes.BREWERY,   1, 0, inTanks: 1, outTanks: 1);
+		Wtm("brewery",     "Brewery",     GTRecipeTypes.BREWERY,   1, 0, inTanks: 1, outTanks: 1, tankScaling: GTMachineUtils.HvCappedTankSizeFunction);
 		Wtm("compressor",  "Compressor",  GTRecipeTypes.COMPRESSOR, 1, 1);
 		Wtm("extractor",   "Extractor",   GTRecipeTypes.EXTRACTOR,  1, 1, outTanks: 1);
 		Wtm("forge_hammer", "Forge Hammer", GTRecipeTypes.FORGE_HAMMER, 1, 1);
@@ -133,42 +133,43 @@ public static class MachineDefinitions
 		Wtm("wiremill",    "Wiremill",    GTRecipeTypes.WIREMILL,   2, 1, circuit: true);
 		Wtm("electromagnetic_separator", "Electromagnetic Separator", GTRecipeTypes.ELECTROMAGNETIC_SEPARATOR, 1, 3);
 		Wtm("packer",      "Packer",      GTRecipeTypes.PACKER,     2, 2, circuit: true);
-		Wtm("fluid_solidifier", "Fluid Solidifier", GTRecipeTypes.FLUID_SOLIDIFIER, 1, 1, inTanks: 1);
-		Wtm("chemical_reactor", "Chemical Reactor", GTRecipeTypes.CHEMICAL_REACTOR, 2, 2, inTanks: 3, outTanks: 2, circuit: true);
-		Wtm("electrolyzer", "Electrolyzer", GTRecipeTypes.ELECTROLYZER, 2, 6, inTanks: 1, outTanks: 6, circuit: true);
-		Wtm("centrifuge",  "Centrifuge",  GTRecipeTypes.CENTRIFUGE, 2, 6, inTanks: 1, outTanks: 6, circuit: true);
-		Wtm("arc_furnace",        "Arc Furnace",        GTRecipeTypes.ARC_FURNACE,        1, 4, inTanks: 1, outTanks: 1);
+		Wtm("fluid_solidifier", "Fluid Solidifier", GTRecipeTypes.FLUID_SOLIDIFIER, 1, 1, inTanks: 1, tankScaling: GTMachineUtils.HvCappedTankSizeFunction);
+		Wtm("chemical_reactor", "Chemical Reactor", GTRecipeTypes.CHEMICAL_REACTOR, 2, 2, inTanks: 3, outTanks: 2, circuit: true, tankScaling: _ => 16 * GTMachineUtils.BUCKET_VOLUME);
+		Wtm("electrolyzer", "Electrolyzer", GTRecipeTypes.ELECTROLYZER, 2, 6, inTanks: 1, outTanks: 6, circuit: true, tankScaling: GTMachineUtils.LargeTankSizeFunction);
+		Wtm("centrifuge",  "Centrifuge",  GTRecipeTypes.CENTRIFUGE, 2, 6, inTanks: 1, outTanks: 6, circuit: true, tankScaling: GTMachineUtils.LargeTankSizeFunction);
+		Wtm("arc_furnace",        "Arc Furnace",        GTRecipeTypes.ARC_FURNACE,        1, 4, inTanks: 1, outTanks: 1, tankScaling: GTMachineUtils.HvCappedTankSizeFunction);
 		Wtm("cutter",             "Cutter",             GTRecipeTypes.CUTTER,             1, 2, inTanks: 1);
 		Wtm("extruder",           "Extruder",           GTRecipeTypes.EXTRUDER,           2, 1);
 		Wtm("scanner",            "Scanner",            GTRecipeTypes.SCANNER,            2, 1, inTanks: 1);
 		Wtm("laser_engraver",     "Laser Engraver",     GTRecipeTypes.LASER_ENGRAVER,     2, 1);
 		Wtm("sifter",             "Sifter",             GTRecipeTypes.SIFTER,             1, 6);
 		Wtm("thermal_centrifuge", "Thermal Centrifuge", GTRecipeTypes.THERMAL_CENTRIFUGE, 1, 3);
-		Wtm("gas_collector",      "Gas Collector",      GTRecipeTypes.GAS_COLLECTOR,      1, 0, outTanks: 1, circuit: true);
-		Wtm("air_scrubber",       "Air Scrubber",       GTRecipeTypes.AIR_SCRUBBER,       1, 3, inTanks: 1, outTanks: 3);
+		Wtm("gas_collector",      "Gas Collector",      GTRecipeTypes.GAS_COLLECTOR,      1, 0, outTanks: 1, circuit: true, tankScaling: GTMachineUtils.LargeTankSizeFunction);
+		Wtm("air_scrubber",       "Air Scrubber",       GTRecipeTypes.AIR_SCRUBBER,       1, 3, inTanks: 1, outTanks: 3, tankScaling: GTMachineUtils.LargeTankSizeFunction);
 		Wtm("electric_furnace",   "Electric Furnace",   GTRecipeTypes.ELECTRIC_FURNACE,   1, 1);
 		Wtm("rock_crusher",       "Rock Crusher",       GTRecipeTypes.ROCK_BREAKER,       1, 4);
-		Wtm("distillery",  "Distillery",  GTRecipeTypes.DISTILLERY, 1, 1, inTanks: 1, outTanks: 1, circuit: true);
-		Wtm("mixer",       "Mixer",       GTRecipeTypes.MIXER,      6, 1, inTanks: 2, outTanks: 1, circuit: true);
-		Wtm("autoclave",   "Autoclave",   GTRecipeTypes.AUTOCLAVE,  2, 2, inTanks: 1, outTanks: 1);
+		Wtm("distillery",  "Distillery",  GTRecipeTypes.DISTILLERY, 1, 1, inTanks: 1, outTanks: 1, circuit: true, tankScaling: GTMachineUtils.HvCappedTankSizeFunction);
+		Wtm("mixer",       "Mixer",       GTRecipeTypes.MIXER,      6, 1, inTanks: 2, outTanks: 1, circuit: true, tankScaling: GTMachineUtils.HvCappedTankSizeFunction);
+		Wtm("autoclave",   "Autoclave",   GTRecipeTypes.AUTOCLAVE,  2, 2, inTanks: 1, outTanks: 1, tankScaling: GTMachineUtils.HvCappedTankSizeFunction);
 		Wtm("ore_washer",  "Ore Washer",  GTRecipeTypes.ORE_WASHER, 2, 3, inTanks: 1, circuit: true);
-		Wtm("chemical_bath", "Chemical Bath", GTRecipeTypes.CHEMICAL_BATH, 1, 6, inTanks: 1, outTanks: 1);
-		Wtm("fluid_heater", "Fluid Heater", GTRecipeTypes.FLUID_HEATER, 1, 0, inTanks: 1, outTanks: 1, circuit: true);
-		Wtm("fermenter",   "Fermenter",   GTRecipeTypes.FERMENTER,  1, 1, inTanks: 1, outTanks: 1);
+		Wtm("chemical_bath", "Chemical Bath", GTRecipeTypes.CHEMICAL_BATH, 1, 6, inTanks: 1, outTanks: 1, tankScaling: GTMachineUtils.HvCappedTankSizeFunction);
+		Wtm("fluid_heater", "Fluid Heater", GTRecipeTypes.FLUID_HEATER, 1, 0, inTanks: 1, outTanks: 1, circuit: true, tankScaling: GTMachineUtils.HvCappedTankSizeFunction);
+		Wtm("fermenter",   "Fermenter",   GTRecipeTypes.FERMENTER,  1, 1, inTanks: 1, outTanks: 1, tankScaling: GTMachineUtils.HvCappedTankSizeFunction);
 		Wtm("canner",      "Canner",      GTRecipeTypes.CANNER,     2, 2, inTanks: 1, outTanks: 1, circuit: true);
-		Wtm("assembler",   "Assembler",   GTRecipeTypes.ASSEMBLER,  9, 1, inTanks: 1, circuit: true);
+		Wtm("assembler",   "Assembler",   GTRecipeTypes.ASSEMBLER,  9, 1, inTanks: 1, circuit: true, tankScaling: GTMachineUtils.HvCappedTankSizeFunction);
 		Wtm("forming_press", "Forming Press", GTRecipeTypes.FORMING_PRESS, 6, 1, circuit: true);
-		Wtm("circuit_assembler", "Circuit Assembler", GTRecipeTypes.CIRCUIT_ASSEMBLER, 6, 1, inTanks: 1, circuit: true);
+		Wtm("circuit_assembler", "Circuit Assembler", GTRecipeTypes.CIRCUIT_ASSEMBLER, 6, 1, inTanks: 1, circuit: true, tankScaling: GTMachineUtils.HvCappedTankSizeFunction);
 
 		MachineRegistry.Register(new MachineDefinition
 		{
 			Id = "steam_turbine", Label = "Steam Turbine",
 			Family = MachineFamily.SimpleGenerator,
-			Tiers = AllTiers,
+			Tiers = GeneratorTiers,
 			RecipeType = GTRecipeTypes.STEAM_TURBINE,
 			InputSlotCount = 0, OutputSlotCount = 0,
 			InputFluidTankCount = 1, OutputFluidTankCount = 1,
 			OutputLimits = GeneratorOutputLimit,
+			TankScalingFunction = GTMachineUtils.SteamGeneratorTankSizeFunction,
 			OverlayDir = "block/generators/steam_turbine", OverlayBasename = "overlay_side",
 			LayoutKey = "steam_turbine",
 		});
@@ -182,6 +183,7 @@ public static class MachineDefinitions
 			InputSlotCount = 0, OutputSlotCount = 0,
 			InputFluidTankCount = 1, OutputFluidTankCount = 0,
 			OutputLimits = GeneratorOutputLimit,
+			TankScalingFunction = GTMachineUtils.GenericGeneratorTankSizeFunction,
 			OverlayDir = "block/generators/gas_turbine", OverlayBasename = "overlay_side",
 			LayoutKey = "steam_turbine",
 		});
@@ -195,6 +197,7 @@ public static class MachineDefinitions
 			InputSlotCount = 0, OutputSlotCount = 0,
 			InputFluidTankCount = 1, OutputFluidTankCount = 0,
 			OutputLimits = GeneratorOutputLimit,
+			TankScalingFunction = GTMachineUtils.GenericGeneratorTankSizeFunction,
 			OverlayDir = "block/generators/combustion", OverlayBasename = "overlay_top",
 			LayoutKey = "steam_turbine",
 		});
@@ -1303,7 +1306,8 @@ public static class MachineDefinitions
 	private static void Wtm(string id, string label, Api.Recipe.GTRecipeType recipeType,
 		int inSlots, int outSlots, int inTanks = 0, int outTanks = 0,
 		bool circuit = false, string layout = "generic",
-		Func<VoltageTier, IReadOnlyDictionary<object, int>>? outputLimits = null)
+		Func<VoltageTier, IReadOnlyDictionary<object, int>>? outputLimits = null,
+		Func<VoltageTier, int>? tankScaling = null)
 	{
 		MachineRegistry.Register(new MachineDefinition
 		{
@@ -1316,6 +1320,7 @@ public static class MachineDefinitions
 			UsesCircuit = circuit,
 			LayoutKey = layout,
 			OutputLimits = outputLimits,
+			TankScalingFunction = tankScaling ?? GTMachineUtils.DefaultTankSizeFunction,
 		});
 	}
 
@@ -1736,6 +1741,7 @@ public static class MachineDefinitions
 			OverlayDir = "block/multiblock/fusion_reactor", OverlayBasename = "overlay_front",
 			LayoutKey = "generic_multi",
 			PatternFactory = () => BuildFusionReactorPattern(id, casingTile, coilTile),
+			AdditionalDisplay = Multiblock.FusionAdditionalDisplay.FusionInfo,
 			MultiRecipeModifier = GTRecipeModifiers.FUSION_OC,
 			FusedCasingTileName = casingTile,
 		});
@@ -2288,8 +2294,7 @@ public static class MachineDefinitions
 			['S'] = Predicates.Controller(cleanroomDef),
 			['X'] = wallPred,
 			['F'] = Predicates.CleanroomFilters(),
-			[' '] = Predicates.Custom(Multiblock.Electric.CleanroomMachine.InnerPredicateMatch,
-				() => System.Array.Empty<Terraria.Item>()),
+			[' '] = Multiblock.Electric.CleanroomMachine.InnerPredicate(),
 		});
 	}
 

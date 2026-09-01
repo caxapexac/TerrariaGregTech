@@ -606,7 +606,6 @@ hv_wiremill.MapEntry: "[c/FFAA00:进阶线材轧机 II]"
 hv_world_accelerator.MapEntry: "[c/FFAA00:进阶世界加速器 II]"
 implosion_compressor.MapEntry: 聚爆压缩机
 industrial_steam_casing.MapEntry: 工业蒸汽机械方块
-industrial_tnt.MapEntry: 工业TNT
 inert_machine_casing.MapEntry: 聚四氟乙烯化学惰性机械方块
 iv_1024a_laser_source_hatch.MapEntry: 1024[c/FFFF55:安][c/5555FF:IV]激光源仓
 iv_1024a_laser_target_hatch.MapEntry: 1024[c/FFFF55:安][c/5555FF:IV]激光靶仓
@@ -1899,18 +1898,6 @@ zpm_world_accelerator.MapEntry: "[c/FF5555:精英世界加速器 III]"
 // mv_solar_panel_machine.MapEntry: MV Solar Panel
 // lv_solar_panel_machine.MapEntry: LV Solar Panel
 // ulv_solar_panel_machine.MapEntry: ULV Solar Panel
-// max_steam_turbine.MapEntry: MAX Steam Turbine
-// opv_steam_turbine.MapEntry: OpV Steam Turbine
-// uxv_steam_turbine.MapEntry: UXV Steam Turbine
-// uiv_steam_turbine.MapEntry: UIV Steam Turbine
-// uev_steam_turbine.MapEntry: UEV Steam Turbine
-// uhv_steam_turbine.MapEntry: UHV Steam Turbine
-// uv_steam_turbine.MapEntry: UV Steam Turbine
-// zpm_steam_turbine.MapEntry: ZPM Steam Turbine
-// luv_steam_turbine.MapEntry: LuV Steam Turbine
-// iv_steam_turbine.MapEntry: IV Steam Turbine
-// ev_steam_turbine.MapEntry: EV Steam Turbine
-// ulv_steam_turbine.MapEntry: ULV Steam Turbine
 // max_circuit_assembler.MapEntry: MAX Circuit Assembler
 // ulv_circuit_assembler.MapEntry: ULV Circuit Assembler
 // max_forming_press.MapEntry: MAX Forming Press

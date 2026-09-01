@@ -223,6 +223,9 @@ luv_fluid_heater: "[c/AAAAAA:热量灌注器]"
 luv_fluid_solidifier: "[c/AAAAAA:并不是制冰机]"
 luv_forge_hammer: "[c/AAAAAA:锻板机]"
 luv_forming_press: "[c/AAAAAA:对象层化机]"
+luv_fusion_reactor_0: "[c/AAAAAA:储能上限：][c/FFFF55:%sM EU]"
+luv_fusion_reactor_1: 超频时消耗两倍能量，工作时间减半
+luv_fusion_reactor_2: 核聚变反应堆MK-I是台大型多方块结构，用于融合元素形成更重的元素。它仅可使用LuV，ZPM或UV等级的能源仓。每个能源仓可增加10MEU的能量缓存，最大能量缓存为160MEU。
 luv_gas_collector: "[c/AAAAAA:依照维度从大气层中收集种类各异的气体]"
 luv_laser_engraver: "[c/AAAAAA:功率高达八百一十六万瓦]"
 luv_lathe: "[c/AAAAAA:全自动旋转车削机 L-5907]"
@@ -398,6 +401,9 @@ uv_fluid_heater: "[c/AAAAAA:热量灌输器]"
 uv_fluid_solidifier: "[c/AAAAAA:流体硬化器]"
 uv_forge_hammer: "[c/AAAAAA:冲击调制器]"
 uv_forming_press: "[c/AAAAAA:表面移相器]"
+uv_fusion_reactor_0: "[c/AAAAAA:储能上限：][c/FFFF55:%sM EU]"
+uv_fusion_reactor_1: 超频时消耗两倍能量，工作时间减半
+uv_fusion_reactor_2: 核聚变反应堆MK-III是台大型多方块结构，用于融合元素形成更重的元素。它仅可使用UV等级的能源仓。每个能源仓可增加40MEU的能量缓存，最大能量缓存为640MEU。
 uv_gas_collector: "[c/AAAAAA:根据维度从太阳系中收集气体]"
 uv_laser_engraver: "[c/AAAAAA:高精度光子加农炮]"
 uv_lathe: "[c/AAAAAA:飞旋磨轮]"
@@ -442,6 +448,9 @@ zpm_fluid_heater: "[c/AAAAAA:热量灌注器]"
 zpm_fluid_solidifier: "[c/AAAAAA:并不是制冰机]"
 zpm_forge_hammer: "[c/AAAAAA:锻板机]"
 zpm_forming_press: "[c/AAAAAA:对象层化机]"
+zpm_fusion_reactor_0: "[c/AAAAAA:储能上限：][c/FFFF55:%sM EU]"
+zpm_fusion_reactor_1: 超频时消耗两倍能量，工作时间减半
+zpm_fusion_reactor_2: 核聚变反应堆MK-II是台大型多方块结构，用于融合元素形成更重的元素。它仅可使用ZPM或UV等级的能源仓。每个能源仓可增加20MEU的能量缓存，最大能量缓存为320MEU。
 zpm_gas_collector: "[c/AAAAAA:收集不同维度的大气中种类各异的气体]"
 zpm_laser_engraver: "[c/AAAAAA:功率高达三千两百六十四万瓦]"
 zpm_lathe: "[c/AAAAAA:全自动旋转车削机 L-5908]"

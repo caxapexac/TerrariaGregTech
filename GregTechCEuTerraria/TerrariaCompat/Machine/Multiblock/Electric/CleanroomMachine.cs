@@ -105,15 +105,11 @@ public sealed class CleanroomMachine : WorkableElectricMultiblockMachine, IContr
 	public override bool ShouldAddPartToController(IMultiPart part)
 	{
 		var state = GetMultiblockState();
-		var cache = state.Cache;
-		if (cache == null) return true;
+		if (state.Cache == null) return true;
 		var pos = part.Self().Position;
-		for (int dx = -1; dx <= 1; dx++)
-		for (int dy = -1; dy <= 1; dy++)
+		foreach (var (_, dx, dy) in IODirectionExtensions.Cardinal4)
 		{
-			if ((dx == 0) == (dy == 0)) continue;
-			long key = ((long)(pos.X + dx) << 32) | (uint)(pos.Y + dy);
-			if (!cache.Contains(key)) return true;
+			if (!state.IsPosInCache(pos.X + dx * 2, pos.Y + dy * 2)) return true;
 		}
 		return false;
 	}
@@ -139,6 +135,19 @@ public sealed class CleanroomMachine : WorkableElectricMultiblockMachine, IContr
 	}
 
 	private static bool IsPartIgnored(IMultiPart part) => false;
+
+	private sealed class InnerTraceabilityPredicate : TraceabilityPredicate
+	{
+		public InnerTraceabilityPredicate(
+			System.Func<MultiblockState, bool> predicate, System.Func<Terraria.Item[]>? candidates)
+			: base(predicate, candidates) { }
+
+		public override bool IsAny()    => true;
+		public override bool AddCache() => true;
+	}
+
+	internal static TraceabilityPredicate InnerPredicate() =>
+		new InnerTraceabilityPredicate(InnerPredicateMatch, () => System.Array.Empty<Terraria.Item>());
 
 	internal static bool InnerPredicateMatch(MultiblockState state)
 	{

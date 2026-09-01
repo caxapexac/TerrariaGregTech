@@ -83,12 +83,11 @@ public class DrumItem : TieredMachineItem, IFluidHandlerItem
 		return new FluidStack(type, amt, d.ContainsKey("fluidNbt") ? d.GetCompound("fluidNbt") : null);
 	}
 
-	public bool IsFluidValid(int tank, FluidStack fluid) => Filter?.Test(fluid) ?? true;
+	public bool IsFluidValid(int tank, FluidStack fluid) => true;
 
 	public int Fill(FluidStack resource, bool simulate)
 	{
 		if (resource.IsEmpty) return 0;
-		if (!IsFluidValid(0, resource)) return 0;
 		var existing = GetTank(0);
 		if (!existing.IsEmpty && !existing.SameTypeAs(resource)) return 0;
 		int room = Capacity - existing.Amount;
@@ -143,19 +142,5 @@ public class DrumItem : TieredMachineItem, IFluidHandlerItem
 		d["fluidId"]     = stack.Type!.Id;
 		d["fluidAmount"] = stack.Amount;
 		if (stack.Nbt != null) d["fluidNbt"] = stack.Nbt; else d.Remove("fluidNbt");
-	}
-
-	private IPropertyFluidFilter? _filter;
-	private bool _filterResolved;
-	private IPropertyFluidFilter? Filter
-	{
-		get
-		{
-			if (_filterResolved) return _filter;
-			_filterResolved = true;
-			if (_def?.MaterialId is { } matId)
-				_filter = MaterialRegistry.Get(matId)?.FluidPipe as IPropertyFluidFilter;
-			return _filter;
-		}
 	}
 }

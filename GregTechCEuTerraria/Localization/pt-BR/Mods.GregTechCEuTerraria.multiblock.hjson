@@ -73,6 +73,11 @@ multi_furnace: {
 
 cracking_unit.energy: Uso de Energia: {0}%%
 
+fusion_reactor: {
+	energy: EU: {0} / {1}
+	heat: Calor: {0}
+}
+
 steam: {
 	steam_stored: Vapor: {0} / {1} mb
 	low_steam: Vapor insuficiente para funcionar!

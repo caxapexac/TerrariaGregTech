@@ -48,6 +48,7 @@ public static class CraftingRecipeResolver
 			{
 				var r = Main.recipe[i];
 				if (r is null || r.createItem is null || r.createItem.IsAir) continue;
+				if (Recipes.RecyclingShimmer.Registered.Contains(r)) continue;
 				int t = r.createItem.type;
 				if (!d.TryGetValue(t, out var l)) d[t] = l = new List<(int, Terraria.Recipe)>();
 				l.Add((i, r));

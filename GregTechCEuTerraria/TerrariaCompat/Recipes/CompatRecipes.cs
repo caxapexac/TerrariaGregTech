@@ -144,6 +144,26 @@ public static class CompatRecipes
 	]
 	""";
 
+	private const string PaperDust = """
+	[
+	  { "id": "crafting_shaped/compat_paper_dust_from_vine", "type": "minecraft:crafting_shaped",
+	    "inputs":  { "item": [
+	      { "content": { "type": "gtceu:sized", "count": 3,
+	        "ingredient": { "item": "terraria:Vine" } } },
+	      { "content": { "tag": "gtceu:tools/crafting_mortars" } }
+	    ] },
+	    "outputs": { "item": [ { "content": { "item": "gtceu:paper_dust" } } ] } },
+
+	  { "id": "crafting_shaped/compat_paper_dust_from_cactus", "type": "minecraft:crafting_shaped",
+	    "inputs":  { "item": [
+	      { "content": { "type": "gtceu:sized", "count": 2,
+	        "ingredient": { "item": "terraria:Cactus" } } },
+	      { "content": { "tag": "gtceu:tools/crafting_mortars" } }
+	    ] },
+	    "outputs": { "item": [ { "content": { "item": "gtceu:paper_dust" } } ] } }
+	]
+	""";
+
 	private const string SimplePipes = """
 	[
 	  { "id": "crafting_shaped/compat_simple_item_pipe", "type": "minecraft:crafting_shaped",
@@ -251,7 +271,7 @@ public static class CompatRecipes
 	    "inputs":  {
 	      "item":  [
 	        { "content": { "item": "gtceu:solid_machine_casing" } },
-	        { "content": { "type": "gtceu:sized", "count": 4, "ingredient": { "item": "gtceu:industrial_tnt" } } },
+	        { "content": { "type": "gtceu:sized", "count": 50, "ingredient": { "item": "gtceu:dynamite" } } },
 	        { "content": { "type": "gtceu:sized", "count": 4, "ingredient": { "item": "gtceu:titanium_plate" } } }
 	      ],
 	      "fluid": [ { "content": { "amount": 1000, "value": { "fluid": "gtceu:lubricant" } } } ]
@@ -788,7 +808,7 @@ public static class CompatRecipes
 
 	private static readonly string[] JsonGroups =
 	{
-		HatchesAndBuses, Bootstrap, Misc, SimplePipes, Casings, Clay,
+		HatchesAndBuses, Bootstrap, Misc, PaperDust, SimplePipes, Casings, Clay,
 		TerrariaIntermediates, TerraPrisma, RedstoneGem, Coins, LegacyConversions,
 		Ae2FluixCables, Ae2Machines, Money, Damascus, Hellforge, HellstoneOre,
 		CompressedEnergySubstance,

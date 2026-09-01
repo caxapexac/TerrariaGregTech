@@ -1,3 +1,29 @@
+## 0.0.15
+
+Minor bugfix
+
+Important:
+- Added balanced shimmering back, so recipe browser is cleaned from machine recycling stuff, and its all moves as shimmer recipes
+- Removed temperature requirements completely from tanks/cells/pipes, temperature makes gt logistics too useless in comparison with AE, so should be more balanced now (thanks TheHatShallDie)
+- Fixed singleblocks fluid slots capacity tier scaling (thanks Bup Supreme)
+- Fixed storage bus leaked subnet connection to interface into main net (thanks 404岛主)
+- Fixed multiblocks energy consumption in cleanroom (thanks Moyuruna)
+
+Qol:
+- Added hotkey to toggle favorites and history (thanks CloneCreatesClassics)
+- Added fluid interaction in terminal for super tanks (thanks Moyuruna)
+- Added alternative early game recipes for paper dust (thanks TheLarvi)
+- Fixed fluid usage lookup showing water recipes (thanks Moyuruna)
+- Fixed manual workbench recipes were craftable only from oak workbench (thanks TheLarvi)
+- Fixed nether trees didnt drop rubber wood from using saw (thanks TheLarvi)
+- Fixed improsion compressor boss summon item recipe (thanks Bup Supreme)
+- Fixed pattern provider pushing into interface in processing mode
+
+Visual:
+- Added fusion reactor recipe energy capacity tooltips (thanks Zub)
+- Added tooltip to fisher input slot (thanks Zub)
+- Fixed screen clamping for the pipe selection context menu (thanks TheLarvi)
+
 ## 0.0.14
 
 60 days after mod's first release, Greg's completeness was proven by Zub. Mod is playable now!

@@ -73,6 +73,11 @@ multi_furnace: {
 
 cracking_unit.energy: 耗能：{0}%%
 
+fusion_reactor: {
+	energy: EU：{0} / {1}
+	heat: 热量：{0}
+}
+
 steam: {
 	steam_stored: 蒸汽：{0} / {1} mB
 	low_steam: 蒸汽不足，无法运行！

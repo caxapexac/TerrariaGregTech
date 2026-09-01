@@ -44,7 +44,8 @@ public class WorkableTieredMachine : TieredEnergyMachine, IItemHandler, IFluidHa
 
 	public virtual bool UsesCircuit => Definition?.UsesCircuit ?? false;
 
-	protected virtual int FluidTankCapacity => Definition?.FluidTankCapacity ?? 16_000;
+	protected virtual int FluidTankCapacity =>
+		(Definition?.TankScalingFunction ?? GTMachineUtils.DefaultTankSizeFunction).Invoke(Tier);
 
 	public override long EnergyCapacity => VoltageTiers.Voltage(Tier) * 64;
 	public override bool CanAccept => true;

@@ -223,6 +223,9 @@ luv_fluid_heater: "[c/AAAAAA:Infusor de Calor]"
 luv_fluid_solidifier: "[c/AAAAAA:Não é uma Máquina de Gelo]"
 luv_forge_hammer: "[c/AAAAAA:Forjador de Chapas]"
 luv_forming_press: "[c/AAAAAA:Camadeador de Objetos]"
+luv_fusion_reactor_0: "[c/AAAAAA:Armazenamento Máximo de Energia:] [c/FFFF55:%sM EU]"
+luv_fusion_reactor_1: Overclocks dobram a energia e reduzem a duração pela metade.
+luv_fusion_reactor_2: O Reator de Fusão MK 1 é uma grande estrutura multibloco usada para fundir elementos em outros mais pesados. Ele só pode usar Escotilhas de Energia LuV, ZPM e UV. Para cada Escotilha que possui, seu buffer aumenta em 10M EU, e tem um máximo de 160M.
 luv_gas_collector: "[c/AAAAAA:Coleta Gás da atmosfera dependendo da dimensão]"
 luv_laser_engraver: "[c/AAAAAA:Com o Poder de 8.16 MW]"
 luv_lathe: "[c/AAAAAA:Turn-O-Matic L-5907]"
@@ -398,6 +401,9 @@ uv_fluid_heater: "[c/AAAAAA:Imbuidor Térmico]"
 uv_fluid_solidifier: "[c/AAAAAA:Petrificador de Fluidos]"
 uv_forge_hammer: "[c/AAAAAA:Modulador de Impacto]"
 uv_forming_press: "[c/AAAAAA:Deslocador de Superfície]"
+uv_fusion_reactor_0: "[c/AAAAAA:Armazenamento Máximo de Energia:] [c/FFFF55:%sM EU]"
+uv_fusion_reactor_1: Overclocks dobram a energia e reduzem a duração pela metade.
+uv_fusion_reactor_2: O Reator de Fusão MK 3 é uma grande estrutura multibloco usada para fundir elementos em outros mais pesados. Ele só pode usar Escotilhas de Energia UV. Para cada Escotilha que possui, seu buffer aumenta em 40M EU, e tem um máximo de 640M.
 uv_gas_collector: "[c/AAAAAA:Coleta Gás do sistema solar dependendo da dimensão]"
 uv_laser_engraver: "[c/AAAAAA:Canhão de Fótons Exato]"
 uv_lathe: "[c/AAAAAA:Moedor de Rotação]"
@@ -442,6 +448,9 @@ zpm_fluid_heater: "[c/AAAAAA:Infusor de Calor]"
 zpm_fluid_solidifier: "[c/AAAAAA:Não é uma Máquina de Gelo]"
 zpm_forge_hammer: "[c/AAAAAA:Forjador de Chapas]"
 zpm_forming_press: "[c/AAAAAA:Camadeador de Objetos]"
+zpm_fusion_reactor_0: "[c/AAAAAA:Armazenamento Máximo de Energia:] [c/FFFF55:%sM EU]"
+zpm_fusion_reactor_1: Overclocks dobram a energia e reduzem a duração pela metade.
+zpm_fusion_reactor_2: O Reator de Fusão MK 2 é uma grande estrutura multibloco usada para fundir elementos em outros mais pesados. Ele só pode usar Escotilhas de Energia ZPM e UV. Para cada Escotilha que possui, seu buffer aumenta em 20M EU, e tem um máximo de 320M.
 zpm_gas_collector: "[c/AAAAAA:Coleta Gás da atmosfera dependendo da dimensão]"
 zpm_laser_engraver: "[c/AAAAAA:Com o Poder de 32.64 MW]"
 zpm_lathe: "[c/AAAAAA:Turn-O-Matic L-5908]"

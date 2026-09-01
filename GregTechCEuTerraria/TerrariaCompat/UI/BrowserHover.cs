@@ -37,6 +37,16 @@ internal static class BrowserHover
 		_frame = Main.GameUpdateCount;
 	}
 
+	public static void SetNone()
+	{
+		ItemType = 0;
+		FluidId = null;
+		FluidLabel = null;
+		TagLabel = null;
+		TagItems = null;
+		_frame = Main.GameUpdateCount;
+	}
+
 	public static void SetTag(string label, HashSet<int> items)
 	{
 		TagLabel = label;

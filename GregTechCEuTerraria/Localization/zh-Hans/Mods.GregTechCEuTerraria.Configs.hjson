@@ -31,6 +31,11 @@ GTConfig: {
 		// Label: Free Me Patterns
 	}
 
+	CraftingCalculationTimePerTick: {
+		// Tooltip: ""
+		// Label: Crafting Calculation Time Per Tick
+	}
+
 	CraftingSimulatedExtraction: {
 		// Tooltip: ""
 		// Label: Crafting Simulated Extraction
@@ -64,11 +69,6 @@ GTConfig: {
 	AllowShimmerDupes: {
 		// Tooltip: ""
 		// Label: Allow Shimmer Dupes
-	}
-
-	CraftingCalculationTimePerTick: {
-		// Label: Crafting Calculation Time Per Tick
-		// Tooltip: ""
 	}
 }
 

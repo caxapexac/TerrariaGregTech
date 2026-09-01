@@ -48,6 +48,7 @@ REMOVED_ITEM_IDS = frozenset((
     "gtceu:matches", "gtceu:matchbox",
     "gtceu:rubber_wood",
     "gtceu:text_module", "gtceu:image_module",
+    "gtceu:industrial_tnt",
 ))
 
 

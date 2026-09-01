@@ -34,7 +34,7 @@ public sealed class MachineDefinition
 	public int           InputFluidTankCount  { get; init; }
 	public int           OutputFluidTankCount { get; init; }
 	public bool          UsesCircuit          { get; init; }
-	public int?          FluidTankCapacity    { get; init; }   // null = 16_000
+	public Func<VoltageTier, int>? TankScalingFunction { get; init; }
 
 	public bool IsHighPressure { get; init; }
 
@@ -92,10 +92,8 @@ public sealed class MachineDefinition
 	public Func<IBlockPattern>? PatternFactory { get; init; }
 
 	// Standard processing multis - subclasses with hardcoded modifiers (EBF)
-	// override GetRecipeModifier directly.
 	public Api.Recipe.Modifier.RecipeModifier? MultiRecipeModifier { get; init; }
 
-	// Verbatim MachineDefinition.getAdditionalDisplay - extra status lines
 	// (EBF heat, coil discount, ...) after the standard builder.
 	public System.Action<MetaMachine, System.Collections.Generic.List<string>>? AdditionalDisplay { get; init; }
 
@@ -105,7 +103,6 @@ public sealed class MachineDefinition
 	// Generator multis flip GetMaxVoltage to read output-side hatches.
 	public bool IsGenerator { get; init; } = false;
 
-	// Verbatim MachineDefinition.tooltipBuilder - runtime-formatted lines
 	// (slot count, EU/t, capacitor cap, ...).
 	public Action<System.Collections.Generic.List<string>, MachineDefinition>? TooltipBuilder { get; init; }
 

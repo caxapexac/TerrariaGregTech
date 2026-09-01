@@ -74,7 +74,6 @@ public sealed class PipeTankList : IFluidHandlerModifiable, IEnumerable<CustomFl
 			{
 				tank.SetFluid(newFluid);
 				_pipe.ReceivedFrom(_facing);
-				_pipe.CheckAndDestroy(newFluid);
 			}
 			return newFluid.Amount;
 		}
@@ -88,7 +87,6 @@ public sealed class PipeTankList : IFluidHandlerModifiable, IEnumerable<CustomFl
 					FluidStack updated = currentFluid.WithAmount(currentFluid.Amount + toAdd);
 					tank.SetFluid(updated);
 					_pipe.ReceivedFrom(_facing);
-					_pipe.CheckAndDestroy(updated);
 				}
 				return toAdd;
 			}

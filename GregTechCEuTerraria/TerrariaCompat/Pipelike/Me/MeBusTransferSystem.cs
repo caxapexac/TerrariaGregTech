@@ -90,8 +90,8 @@ public sealed class MeBusTransferSystem : ModSystem
 					if (canWork)
 					{
 						var netStorage = net.GetStorage();
-						MEStorage item = new ItemHandlerMeStorage(() => WorldCapability.ItemHandlerAt(nx, ny, arrival));
-						MEStorage fluid = new FluidHandlerMeStorage(() => WorldCapability.FluidHandlerAt(nx, ny, arrival));
+						MEStorage item = new ItemHandlerMeStorage(() => WorldCapability.ItemHandlerAt(nx, ny, arrival), false);
+						MEStorage fluid = new FluidHandlerMeStorage(() => WorldCapability.FluidHandlerAt(nx, ny, arrival), false);
 						int ops = MeBusAttachment.OperationsForSpeed(att.Speed);
 						if (import)
 						{

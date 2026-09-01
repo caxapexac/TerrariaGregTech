@@ -32,7 +32,7 @@ public static class RecipeJsonLoader
 		}
 
 		var byStation = new Dictionary<string, List<GTRecipe>>();
-		int total = 0, skipped = 0;
+		int total = 0, skipped = 0, dropped = 0;
 
 		var patches = CompatRecipes.Patches;
 		var patchBaseIds = new HashSet<string>(patches.Count);
@@ -84,6 +84,13 @@ public static class RecipeJsonLoader
 			{
 				mod.Logger.Warn($"Skipping recipe {id}: {ex.Message}");
 				skipped++;
+				continue;
+			}
+
+			if (RecyclingShimmer.ShouldDrop(recipe))
+			{
+				RecyclingShimmer.Capture(recipe);
+				dropped++;
 				continue;
 			}
 
@@ -143,6 +150,7 @@ public static class RecipeJsonLoader
 		RecipeRegistry.Set(map);
 
 		mod.Logger.Info($"Loaded {total:N0} recipes across {byStation.Count} stations" +
-		                 (skipped > 0 ? $" (skipped {skipped})" : "") + ".");
+		                 (skipped > 0 ? $" (skipped {skipped})" : "") +
+		                 (dropped > 0 ? $" (dropped {dropped:N0} recycling)" : "") + ".");
 	}
 }

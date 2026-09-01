@@ -95,6 +95,19 @@ public sealed class GlobalRecipeBrowserSystem : ModalUISystem
 		else EnterDocked();
 	}
 
+	public static void ToggleSidePanels()
+	{
+		var cfg = Config.GTClientConfig.Instance;
+		bool show = !(cfg.ShowFavoritesPanel || cfg.ShowHistoryPanel);
+		cfg.ShowFavoritesPanel = show;
+		cfg.ShowHistoryPanel = show;
+		cfg.Persist();
+
+		var s = _instance;
+		if (s?._state is { } state && s.IsOpenInternal)
+			state.RelayoutNow(state.Docked);
+	}
+
 	private static void EnterDocked()
 	{
 		var s = _instance;

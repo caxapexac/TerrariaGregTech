@@ -101,7 +101,7 @@ public static class NativeRecipeProxy
 			var rec = Main.recipe[r];
 			if (rec is null) continue;
 
-			if (VanillaCraftingBridge.BridgeRegistered.Contains(rec))
+			if (VanillaCraftingBridge.BridgeRegistered.Contains(rec) || RecyclingShimmer.Registered.Contains(rec))
 			{
 				skippedBridged++;
 				continue;

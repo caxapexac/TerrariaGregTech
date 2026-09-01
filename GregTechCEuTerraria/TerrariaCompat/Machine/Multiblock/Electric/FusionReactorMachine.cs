@@ -10,6 +10,12 @@ namespace GregTechCEuTerraria.TerrariaCompat.Machine.Multiblock.Electric;
 
 public class FusionReactorMachine : WorkableElectricMultiblockMachine
 {
+	private static readonly SortedDictionary<long, int> FUSION_ENERGY = new();
+
+	private static readonly Dictionary<int, string> FUSION_NAMES = new();
+
+	private static int MINIMUM_TIER = (int)VoltageTier.MAX;
+
 	private NotifiableEnergyContainer? _capacitor;
 
 	private Api.Misc.EnergyContainerList? _inputEnergyContainers;
@@ -29,7 +35,7 @@ public class FusionReactorMachine : WorkableElectricMultiblockMachine
 	private NotifiableEnergyContainer EnsureCapacitor()
 	{
 		BindDefinition();
-		var cap = new NotifiableEnergyContainer(0, 0, 0, 0, 0);
+		var cap = new FusionCapacitorContainer();
 		Traits.Attach(cap);
 		Traits.RegisterPersistent("fusion_capacitor", cap);
 		return cap;
@@ -139,6 +145,37 @@ public class FusionReactorMachine : WorkableElectricMultiblockMachine
 
 	public override int GetTier() => (int)Tier;
 
+	public static string EuToStartLabel(Api.Recipe.GTRecipe recipe)
+	{
+		long euToStart = Common.Recipe.GTRecipeModifiers.ReadDataLong(recipe.Data, "eu_to_start");
+		if (euToStart <= 0) return "";
+		int recipeTier = Api.Recipe.RecipeHelper.GetPreOCRecipeEuTier(recipe);
+		int fusionTier = FindCeilingTier(euToStart);
+		int tier = System.Math.Max(MINIMUM_TIER, System.Math.Max(recipeTier, fusionTier));
+		string name = FUSION_NAMES.TryGetValue(tier, out var n) ? n : "";
+		return Api.Machine.Multiblock.MultiblockDisplayText.Tr(
+			"gtceu.recipe.eu_to_start", $"{euToStart:N0}", name);
+	}
+
+	public static void RegisterFusionTier(int tier, string name)
+	{
+		long maxEU = CalculateEnergyStorageFactor(tier, 16);
+		FUSION_ENERGY[maxEU] = tier;
+		FUSION_NAMES[tier] = name;
+		MINIMUM_TIER = System.Math.Min(tier, MINIMUM_TIER);
+	}
+
+	private static int FindCeilingTier(long euToStart)
+	{
+		long key = 0;
+		foreach (long k in FUSION_ENERGY.Keys)
+		{
+			key = k;
+			if (k >= euToStart) break;
+		}
+		return FUSION_ENERGY[key];
+	}
+
 	public static long CalculateEnergyStorageFactor(int tier, int energyInputAmount) =>
 		(long)energyInputAmount * (long)System.Math.Pow(2, tier - (int)VoltageTier.LuV) * 10_000_000L;
 
@@ -146,8 +183,8 @@ public class FusionReactorMachine : WorkableElectricMultiblockMachine
 	{
 		base.AppendTooltip(lines);
 		if (!IsFormed) return;
-		var cap = _capacitor;
-		if (cap is not null && cap.EnergyCapacity > 0)
+		var cap = CapacitorContainer;
+		if (cap.EnergyCapacity > 0)
 			lines.Add($"Capacitor: {cap.EnergyStored:N0} / {cap.EnergyCapacity:N0} EU");
 		lines.Add($"Heat: {_heat:N0} EU");
 	}

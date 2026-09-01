@@ -73,6 +73,11 @@ multi_furnace: {
 
 cracking_unit.energy: Энергопотребление: {0}%%
 
+fusion_reactor: {
+	energy: EU: {0} / {1}
+	heat: Нагрев: {0}
+}
+
 steam: {
 	steam_stored: Пар: {0} / {1} mВ
 	low_steam: Недостаточно пара для работы!
