@@ -35,6 +35,7 @@ public static class NetRouter
 			case PacketType.IOConfigSet:      MachineActions.HandleIncoming<IOConfigSetAction>(reader, whoAmI); break;
 			case PacketType.PowerToggle:      MachineActions.HandleIncoming<PowerToggleAction>(reader, whoAmI); break;
 			case PacketType.TankConfigSet:    MachineActions.HandleIncoming<TankConfigSetAction>(reader, whoAmI); break;
+			case PacketType.FluidLockSet:     MachineActions.HandleIncoming<FluidLockSetAction>(reader, whoAmI); break;
 			case PacketType.ChestAction:      MachineActions.HandleIncoming<ChestAction>(reader, whoAmI); break;
 			case PacketType.PartIoDirection:  MachineActions.HandleIncoming<PartIoDirectionSetAction>(reader, whoAmI); break;
 			case PacketType.ParallelSet:      MachineActions.HandleIncoming<ParallelSetAction>(reader, whoAmI); break;

@@ -11,10 +11,8 @@ internal static class MultitoolBudget
 	internal static int CountUnits(Player p, Func<Item, int> unitOf)
 	{
 		int u = 0;
-		for (int i = 0; i < 58; i++)
+		foreach (var it in MultitoolInventory.Slots(p))
 		{
-			var it = p.inventory[i];
-			if (it is null || it.IsAir) continue;
 			int pu = unitOf(it);
 			if (pu > 0) u += pu * it.stack;
 		}
@@ -25,20 +23,21 @@ internal static class MultitoolBudget
 	{
 		if (units <= 0) return;
 
-		var slots = new List<(int slot, int u)>();
-		for (int i = 0; i < 58; i++)
+		var slots = new List<(Item it, int u, int order)>();
+		foreach (var it in MultitoolInventory.Slots(p))
 		{
-			var it = p.inventory[i];
-			if (it is null || it.IsAir) continue;
 			int pu = unitOf(it);
-			if (pu > 0) slots.Add((i, pu));
+			if (pu > 0) slots.Add((it, pu, slots.Count));
 		}
-		slots.Sort((a, b) => a.u.CompareTo(b.u));
+		slots.Sort((a, b) =>
+		{
+			int c = a.u.CompareTo(b.u);
+			return c != 0 ? c : a.order.CompareTo(b.order);
+		});
 
 		int removed = 0;
-		foreach (var (slot, pu) in slots)
+		foreach (var (it, pu, _) in slots)
 		{
-			var it = p.inventory[slot];
 			while (it.stack > 0 && removed < units)
 			{
 				it.stack--;

@@ -13,13 +13,9 @@ internal static class MultitoolWires
 	internal static int CountUnits(Player p, string materialId, bool insulated)
 	{
 		int u = 0;
-		for (int i = 0; i < 58; i++)
-		{
-			var it = p.inventory[i];
-			if (it is null || it.IsAir) continue;
+		foreach (var it in MultitoolInventory.Slots(p))
 			if (it.ModItem is WireItem w && w.Insulated == insulated && w.MaterialId == materialId)
 				u += w.WireSize * it.stack;
-		}
 		return u;
 	}
 
@@ -39,20 +35,19 @@ internal static class MultitoolWires
 	{
 		if (units <= 0) return;
 
-		var slots = new List<(int slot, byte size)>();
-		for (int i = 0; i < 58; i++)
-		{
-			var it = p.inventory[i];
-			if (it is null || it.IsAir) continue;
+		var slots = new List<(Item it, byte size, int order)>();
+		foreach (var it in MultitoolInventory.Slots(p))
 			if (it.ModItem is WireItem w && w.Insulated == insulated && w.MaterialId == materialId)
-				slots.Add((i, w.WireSize));
-		}
-		slots.Sort((a, b) => a.size.CompareTo(b.size));
+				slots.Add((it, w.WireSize, slots.Count));
+		slots.Sort((a, b) =>
+		{
+			int c = a.size.CompareTo(b.size);
+			return c != 0 ? c : a.order.CompareTo(b.order);
+		});
 
 		int removed = 0;
-		foreach (var (slot, size) in slots)
+		foreach (var (it, size, _) in slots)
 		{
-			var it = p.inventory[slot];
 			while (it.stack > 0 && removed < units)
 			{
 				it.stack--;

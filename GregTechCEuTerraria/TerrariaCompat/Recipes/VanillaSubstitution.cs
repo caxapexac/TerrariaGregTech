@@ -76,7 +76,7 @@ public static class VanillaItemMap
 		{ "minecraft:white_wool",       ItemID.Cloud },
 		{ "minecraft:dropper",          ItemID.DartTrap },
 		{ "minecraft:item_frame",       ItemID.ItemFrame },
-		{ "gtceu:nano_saber",           ItemID.Muramasa },
+		{ "gtceu:nano_saber",           ItemID.RodofDiscord },
 		{ "minecraft:painting",         ItemID.PlacePainting },
 		{ "minecraft:redstone_torch",   ItemID.Wire },
 		{ "minecraft:lever",            ItemID.Lever },

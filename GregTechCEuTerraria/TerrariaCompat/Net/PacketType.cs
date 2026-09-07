@@ -14,6 +14,7 @@ public enum PacketType : byte
 	IOConfigSet,           // C->S  output side / input-from-output flags
 	PowerToggle,           // C->S  power on/off
 	TankConfigSet,         // C->S  tank locked / voiding / auto-output
+	FluidLockSet,          // C->S  fluid hatch lock toggle / locked-fluid phantom
 	ChestAction,           // C->S  chest locked / voiding / auto-output / dump
 	PartIoDirection,       // C->S  part IoDirection (auto-IO side)
 	ParallelSet,           // C->S  parallel hatch CurrentParallel

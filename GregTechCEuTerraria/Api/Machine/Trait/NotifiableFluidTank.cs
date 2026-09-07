@@ -241,6 +241,14 @@ public class NotifiableFluidTank
 		return System.Array.Empty<FluidStack>();
 	}
 
+	public override bool Test(FluidIngredient ingredient) =>
+		!IsLocked || ingredient.TestFluid(LockedFluid.Fluid.Type);
+
+	public override int GetPriority() =>
+		!IsLocked || LockedFluid.Fluid.IsEmpty
+			? base.GetPriority()
+			: IFilteredHandler<FluidIngredient>.HIGH - GetTanks();
+
 	public bool IsLocked => !LockedFluid.Fluid.IsEmpty;
 
 	public void SetLocked(bool locked)

@@ -27,7 +27,6 @@ public static class NativeRecipeProxy
 		{ TileID.Hellforge,       ("electric_furnace", 2) },   // MV
 		{ TileID.AdamantiteForge, ("electric_furnace", 4) },   // EV
 		{ TileID.LihzahrdFurnace, ("electric_furnace", 6) },   // LuV
-		{ TileID.GlassKiln,       ("arc_furnace",      1) },   // LV
 		{ TileID.BoneWelder,      ("forming_press",    1) },   // LV
 		{ TileID.HoneyDispenser,  ("canner",           2) },   // MV
 		{ TileID.DemonAltar,      ("circuit_assembler", 1) },  // LV

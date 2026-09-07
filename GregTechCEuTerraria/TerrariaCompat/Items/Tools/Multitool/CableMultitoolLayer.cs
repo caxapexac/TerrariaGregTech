@@ -26,10 +26,8 @@ internal sealed class CableMultitoolLayer : MultitoolLayer
 	public override List<MultitoolVariant> Variants(Player p)
 	{
 		var groups = new Dictionary<(string mat, bool ins), (byte repSize, int units, WireItem rep)>();
-		for (int i = 0; i < 58; i++)
+		foreach (var it in MultitoolInventory.Slots(p))
 		{
-			var it = p.inventory[i];
-			if (it is null || it.IsAir) continue;
 			if (it.ModItem is not WireItem w || w.MaterialId is not { } mat) continue;
 
 			var key = (mat, w.Insulated);

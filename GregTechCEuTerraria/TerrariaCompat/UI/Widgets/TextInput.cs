@@ -139,6 +139,10 @@ internal static class TextInputUtil
 		{
 			Keys.Space        => ' ',
 			Keys.Multiply     => '*',
+			Keys.Divide       => '/',
+			Keys.Add          => '+',
+			Keys.Subtract     => '-',
+			Keys.Decimal      => '.',
 			Keys.OemSemicolon => shift ? ':' : ';',
 			Keys.OemQuestion  => shift ? '?' : '/',
 			Keys.OemPipe      => shift ? '|' : '\\',

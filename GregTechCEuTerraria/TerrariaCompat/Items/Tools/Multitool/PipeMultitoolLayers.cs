@@ -68,10 +68,8 @@ internal sealed class ItemPipeMultitoolLayer : MultitoolLayer
 	public override List<MultitoolVariant> Variants(Player p)
 	{
 		var groups = new Dictionary<(string mat, bool restr), (PipeSize repSize, int units, PipeItem rep)>();
-		for (int i = 0; i < 58; i++)
+		foreach (var it in MultitoolInventory.Slots(p))
 		{
-			var it = p.inventory[i];
-			if (it is null || it.IsAir) continue;
 			if (it.ModItem is not PipeItem pi || pi.Kind != PipeKind.Item || pi.MaterialId is not { } mat) continue;
 
 			var key = (mat, pi.Restrictive);
@@ -329,10 +327,8 @@ internal sealed class FluidPipeMultitoolLayer : MultitoolLayer
 	public override List<MultitoolVariant> Variants(Player p)
 	{
 		var groups = new Dictionary<string, (PipeSize repSize, int units, PipeItem rep)>();
-		for (int i = 0; i < 58; i++)
+		foreach (var it in MultitoolInventory.Slots(p))
 		{
-			var it = p.inventory[i];
-			if (it is null || it.IsAir) continue;
 			if (it.ModItem is not PipeItem pi || pi.Kind != PipeKind.Fluid || pi.MaterialId is not { } mat) continue;
 
 			int u = PipeUnits.UnitsOf(T, pi.Size) * it.stack;

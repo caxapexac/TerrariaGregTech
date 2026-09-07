@@ -55,7 +55,6 @@ Workshop: https://steamcommunity.com/sharedfiles/filedetails/?id=3736597795
   - Hellforge Furnace MV
   - AdamantiteForge Furnace EV
   - LihzahrdFurnace Furnace LuV
-  - GlassKiln Arc Furnace LV
   - BoneWelder Forging Press LV
   - HoneyDispenser into Canner MV
   - DemonAltar into Circuit Assembler LV

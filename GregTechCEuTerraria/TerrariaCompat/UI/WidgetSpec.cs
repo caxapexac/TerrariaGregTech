@@ -81,10 +81,12 @@ public sealed record ToggleButtonWidgetSpec(int X, int Y, string IconAssetPath, 
 	: WidgetSpec(X, Y)
 {
 	public bool VerticalSplit { get; init; } = false;
+	public Func<bool, string>? TooltipFor { get; init; }
 
 	public override UIElement Create(MetaMachine entity)
 	{
 		var btn = new UIToggleButton(IconAssetPath, Getter, Setter, Tooltip);
+		if (TooltipFor is not null) btn.TooltipFor = TooltipFor;
 		if (VerticalSplit)
 		{
 			btn.IconSrcRectFor = on =>

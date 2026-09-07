@@ -43,7 +43,7 @@ public sealed class CleanroomWallRenderer : ModSystem
 		Draw(Main.spriteBatch);
 	}
 
-	private static void Draw(SpriteBatch sb)
+	internal static void Draw(SpriteBatch sb)
 	{
 		// Lazy resolution - CasingRegistry hasn't run when Load fires.
 		if (_plascreteTileType < 0)

@@ -2356,12 +2356,13 @@ public static class MachineDefinitions
 	private static IBlockPattern BuildPrimitivePumpPattern()
 	{
 		var def      = MachineRegistry.Get("primitive_pump")!;
+		var wood     = Common.Materials.MaterialRegistry.Get("wood")!;
 		var treated  = Common.Materials.MaterialRegistry.Get("treated_wood")!;
 		return new BlockPattern(MultiblockShapes.PrimitivePump, new Dictionary<char, TraceabilityPredicate>
 		{
 			['S'] = Predicates.Controller(def),
 			['X'] = Predicates.Blocks("pump_deck"),
-			['F'] = Predicates.Frames(treated),
+			['F'] = Predicates.Frames(wood, treated),
 			['H'] = Predicates.Abilities(Api.Machine.Multiblock.PartAbility.PUMP_FLUID_HATCH),
 		});
 	}

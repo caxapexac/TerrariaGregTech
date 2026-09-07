@@ -113,20 +113,17 @@ internal abstract class SimplePipeMultitoolLayer : MultitoolLayer
 	private static int CountItem(Player p, int type)
 	{
 		int n = 0;
-		for (int i = 0; i < 58; i++)
-		{
-			var it = p.inventory[i];
-			if (it is not null && !it.IsAir && it.type == type) n += it.stack;
-		}
+		foreach (var it in MultitoolInventory.Slots(p))
+			if (it.type == type) n += it.stack;
 		return n;
 	}
 
 	private static void ConsumeItem(Player p, int type, int count)
 	{
-		for (int i = 0; i < 58 && count > 0; i++)
+		foreach (var it in MultitoolInventory.Slots(p))
 		{
-			var it = p.inventory[i];
-			if (it is null || it.IsAir || it.type != type) continue;
+			if (count <= 0) break;
+			if (it.type != type) continue;
 			int take = Math.Min(count, it.stack);
 			it.stack -= take;
 			count -= take;

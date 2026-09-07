@@ -117,10 +117,7 @@ REMOVED_TOKENS = (
     "note_block", "scaffolding", "smithing_table",
     "oak_slab", "oak_stairs", "oak_boat", "oak_door", "oak_fence", "oak_sign",
     "smooth_", "smoker", "bread", "dough",
-    "treated_wood_boat", "treated_wood_door", "treated_wood_fence",
-    "treated_wood_sign", "treated_wood_slab", "treated_wood_stairs",
-    "treated_wood_trapdoor",
-    "treated_wood_plate",
+    "treated_wood", "treated_planks",
     "candle", "white_bed", "white_carpet",
     "end_crystal", "ghast_tear", "polished_basalt", "stained_glass",
     "activator_rail", "nether_brick",
@@ -197,6 +194,8 @@ KEEP_RECIPE_IDS = frozenset((
     "assembler/cover_fluid_detector",
     "assembler/cover_item_detector",
     "assembler/cover_shutter",
+    "shaped/primitive_pump", "shaped/pump_deck", "shaped/pump_hatch",
+    "shaped/wood_wall",
 ))
 
 REMOVED_RECIPE_IDS = frozenset((

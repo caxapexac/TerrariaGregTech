@@ -23,10 +23,8 @@ internal sealed class MeCableMultitoolLayer : MultitoolLayer
 	public override List<MultitoolVariant> Variants(Player p)
 	{
 		var counts = new Dictionary<AEColor, int>();
-		for (int i = 0; i < 58; i++)
+		foreach (var it in MultitoolInventory.Slots(p))
 		{
-			var it = p.inventory[i];
-			if (it is null || it.IsAir) continue;
 			if (it.ModItem is not MeCableItem m) continue;
 			counts.TryGetValue(m.Color, out int c);
 			counts[m.Color] = c + it.stack;

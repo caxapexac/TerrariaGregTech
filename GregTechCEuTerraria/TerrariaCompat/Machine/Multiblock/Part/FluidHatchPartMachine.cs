@@ -11,7 +11,6 @@ using Terraria.ModLoader.IO;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Machine.Multiblock.Part;
 
-// Port of FluidHatchPartMachine, _1X, _4X, _9X. See ItemBusPartMachine header for the full adaptation list
 public class FluidHatchPartMachine : TieredIOPartMachine, IHasCircuitSlot
 {
 	public const int BUCKET_VOLUME           = 1000;
@@ -94,7 +93,12 @@ public class FluidHatchPartMachine : TieredIOPartMachine, IHasCircuitSlot
 	private static bool IsProgrammedCircuit(Item stack) =>
 		stack != null && stack.ModItem is IntCircuitItem;
 
-	// === IHasCircuitSlot ==================================================
+	public override int PaintingColor => MachinePaintColor.Of(this);
+
+	public override void OnPaintingColorChanged(int color)
+	{
+		GetHandlerList().SetColor(color, true);
+	}
 
 	public bool IsCircuitSlotEnabled() => CircuitSlotEnabled;
 
@@ -103,8 +107,6 @@ public class FluidHatchPartMachine : TieredIOPartMachine, IHasCircuitSlot
 		CircuitSlotEnabled = enabled;
 		if (IsServer) MachineStateSyncPacket.Broadcast(this);
 	}
-
-	// === Lifecycle =========================================================
 
 	public override void AddedToController(MultiblockControllerMachine controller)
 	{
@@ -138,7 +140,6 @@ public class FluidHatchPartMachine : TieredIOPartMachine, IHasCircuitSlot
 		_autoIOSubs ??= SubscribeServerTick(AutoIOTick);
 	}
 
-	// See ItemBusPartMachine.AutoIOTick
 	protected virtual void AutoIOTick()
 	{
 		if (GetOffsetTimer() % global::GregTechCEuTerraria.Api.TickScale.FromMcTicks(5) != 0) return;
@@ -199,5 +200,6 @@ public class FluidHatchPartMachine : TieredIOPartMachine, IHasCircuitSlot
 		EnsureTraits();
 		Traits.Load(tag);
 		EnsureAutoIOSubscription();
+		GetHandlerList().SetColor(PaintingColor);
 	}
 }

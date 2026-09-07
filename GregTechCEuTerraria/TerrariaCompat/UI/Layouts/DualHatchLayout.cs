@@ -1,17 +1,10 @@
 #nullable enable
 using GregTechCEuTerraria.Api.Capability.Recipe;
+using GregTechCEuTerraria.Api.Machine.Feature;
 using GregTechCEuTerraria.TerrariaCompat.Machine.Multiblock.Part;
 
 namespace GregTechCEuTerraria.TerrariaCompat.UI.Layouts;
 
-// Layout for dual_input_hatch / dual_output_hatch - an NxN item-slot grid with
-// a vertical column of N fluid-tank widgets to its right, where N = sqrt of the
-// part's item inventory. Mirrors upstream DualHatchPartMachine.createUIWidget
-// (DualHatchPartMachine.java:156-182). No circuit slot - upstream's override
-// doesn't render one (unlike the plain ItemBus / FluidHatch layouts).
-//
-// Working-enabled toggle is added by MachineUIState as a satellite panel for
-// every IControllable machine - do not re-add it here.
 public static class DualHatchLayout
 {
 	private const int SlotSize = 22;
@@ -31,9 +24,14 @@ public static class DualHatchLayout
 			? TerrariaCompat.Machine.SlotGroup.InventoryInput
 			: TerrariaCompat.Machine.SlotGroup.InventoryOutput;
 
+		bool showCircuit = hatch.Io == IO.IN
+			&& hatch is IHasCircuitSlot icc && icc.IsCircuitSlotEnabled()
+			&& hatch.CircuitInventory != null && hatch.CircuitInventory.SlotCount > 0;
+		int circuitColW = showCircuit ? (Padding + SlotSize) : 0;
+
 		var layout = new MachineUILayout
 		{
-			Width  = Padding + itemStripW + SlotSize + Padding,
+			Width  = Padding + itemStripW + SlotSize + circuitColW + Padding,
 			Height = Padding + TitleH + stripH + Padding,
 			Title  = hatch.DisplayName,
 		};
@@ -59,6 +57,13 @@ public static class DualHatchLayout
 				Width: SlotSize, Height: SlotSize,
 				Direction: hatch.Io,
 				TankIndex: t));
+		}
+
+		if (showCircuit)
+		{
+			int circuitX = Padding + itemStripW + SlotSize + Padding;
+			int circuitY = baseY + (stripH - SlotSize) / 2;
+			layout.Widgets.Add(new CircuitButtonWidgetSpec(X: circuitX, Y: circuitY));
 		}
 
 		return layout;

@@ -14,14 +14,6 @@ using Terraria.ModLoader.IO;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Machine.Multiblock.Part;
 
-// Port of ItemBusPartMachine. Tier-sized item inventory ((1+min(9,tier))^2 slots)
-//
-// Adaptations:
-//   ctor -> Configure(tier, io)
-//   paint dropped
-//   frontFacing -> TieredIOPartMachine.IoDirection
-//   onLoad TickTask deferred init -> kicked from Configure
-//   swapIO deferred
 public class ItemBusPartMachine : TieredIOPartMachine, IDistinctPart, IHasCircuitSlot
 {
 	protected override string Label => "Item Bus";
@@ -102,8 +94,6 @@ public class ItemBusPartMachine : TieredIOPartMachine, IDistinctPart, IHasCircui
 		FilterHandler = new ItemFilterHandler(this);
 	}
 
-	// === Filter ============================================================
-
 	protected bool MatchesFilter(Item stack)
 	{
 		var fh = FilterHandler;
@@ -122,6 +112,13 @@ public class ItemBusPartMachine : TieredIOPartMachine, IDistinctPart, IHasCircui
 		_isDistinct = (Io != IO.OUT && distinct);
 		if (IsServer) MachineStateSyncPacket.Broadcast(this);
 		GetHandlerList().SetDistinctAndNotify(_isDistinct);
+	}
+
+	public override int PaintingColor => MachinePaintColor.Of(this);
+
+	public override void OnPaintingColorChanged(int color)
+	{
+		GetHandlerList().SetColor(color, true);
 	}
 
 	public bool IsCircuitSlotEnabled() => CircuitSlotEnabled;
@@ -160,7 +157,6 @@ public class ItemBusPartMachine : TieredIOPartMachine, IDistinctPart, IHasCircui
 			CircuitInventory.SetSlot(i, new Item());
 	}
 
-	// TODO check if its optimal
 	private void EnsureAutoIOSubscription()
 	{
 		_autoIOSubs ??= SubscribeServerTick(AutoIOTick);
@@ -227,5 +223,6 @@ public class ItemBusPartMachine : TieredIOPartMachine, IDistinctPart, IHasCircui
 		Traits.Load(tag);
 		EnsureAutoIOSubscription();
 		GetHandlerList().SetDistinctAndNotify(_isDistinct);
+		GetHandlerList().SetColor(PaintingColor);
 	}
 }

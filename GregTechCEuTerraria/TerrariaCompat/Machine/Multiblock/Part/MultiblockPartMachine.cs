@@ -100,10 +100,14 @@ public abstract class MultiblockPartMachine : MetaMachine, IMultiPart, IItemHand
 			}
 			_handlerList = handlers.Count == 0
 				? RecipeHandlerList.NO_DATA
-				: RecipeHandlerList.Of(handlerIO, handlers);
+				: RecipeHandlerList.Of(handlerIO, PaintingColor, handlers);
 		}
 		return _handlerList;
 	}
+
+	public virtual int PaintingColor => -1;
+
+	public virtual void OnPaintingColorChanged(int color) { }
 
 	public override void OnKill()
 	{

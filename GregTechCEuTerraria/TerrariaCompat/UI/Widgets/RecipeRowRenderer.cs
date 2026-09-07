@@ -744,11 +744,21 @@ public static class RecipeRowRenderer
 		}
 	}
 
+	private static bool IsToolInput(RecipeContent c) => c.MaxChance > 0 && c.Chance == 0;
+
 	private static List<RecipeContent> AllInputs(GTRecipe recipe)
 	{
 		var list = new List<RecipeContent>();
 		list.AddRange(recipe.GetInputContents(ItemRecipeCapability.CAP));
 		list.AddRange(recipe.GetInputContents(FluidRecipeCapability.CAP));
+		int next = 0;
+		for (int i = 0; i < list.Count; i++)
+		{
+			if (!IsToolInput(list[i])) continue;
+			var tool = list[i];
+			list.RemoveAt(i);
+			list.Insert(next++, tool);
+		}
 		return list;
 	}
 

@@ -1,3 +1,26 @@
+## 0.0.16
+
+UnTreated update. We've been discussing the ways to avoid early game issues, related to non-consistent recipes like fluid crafting, that doesn't work properly in Magic Storage etc., and I think that treated wood is a part of a bigger issue - treated wood is progression-wise weird, and it puts a player onto early game rails without any gameplay choice, so I think the complete removal with reduce the early game churn without skipping any progression, because you still most likely want to build coke ovens for a proper early game energy
+
+Important:
+- Added colored hatches using terraria tile painting (thanks 404岛主)
+- Added output hatch locking
+- Added Greg Multitool compatibility with piggy bank, safe, void vault, defenders forge (thanks holeow)
+- Removed treated wood recipes (thanks holeow)
+
+Qol:
+- Added packer recipes for custom superconductors (thanks 404岛主)
+- Added ghost circuit into dual hatches
+- Added alternative lava recipes (thanks holeow)
+- Fixed negative priority input in storage bus (thanks Moyuruna)
+- Changed nano saber recipe to give Rod of discord
+- Removed glass kiln recipes from arc furnace, was conflicting with glass (thanks Moyuruna)
+
+Visual:
+- Changed recipe view sorting so non-consumable ingredients are shown first (thanks TheLarvi)
+- Fixed impure dust texture render artifacts (thanks TheHatShallDie)
+- Fixed camera mode didn't render pipes (thanks Isenki)
+
 ## 0.0.15
 
 Minor bugfix

@@ -5,10 +5,6 @@ using GregTechCEuTerraria.TerrariaCompat.Machine.Multiblock.Part;
 
 namespace GregTechCEuTerraria.TerrariaCompat.UI.Layouts;
 
-// Mirrors FluidHatchPartMachine.createUIWidget (java:268-370). 1x = tall tank
-// + readout; 4x/9x = sqrtN grid. Circuit slot for IN hatches. Working-enabled
-// toggle is the universal MachineUIState satellite - don't re-add here.
-// Output-side phantom-fluid lock widget dropped (covers' phantoms are item-only).
 public static class FluidHatchLayout
 {
 	private const int SlotSize = 22;
@@ -24,8 +20,6 @@ public static class FluidHatchLayout
 		return slots == 1 ? BuildSingle(hatch, showCircuit) : BuildGrid(hatch, slots, showCircuit);
 	}
 
-	// Returns extra width consumed (slot + padding) or 0. Caller bakes this
-	// into the layout Width at construction (Width is init-only).
 	private static int EmitCircuitSlot(MachineUILayout layout, FluidHatchPartMachine hatch, bool show, int contentRightX, int contentBaseY, int contentHeight)
 	{
 		if (!show) return 0;
@@ -40,9 +34,14 @@ public static class FluidHatchLayout
 		const int TankW = 18;
 		const int TankH = 60;
 		const int ReadoutW = 110;
+		const int LockRowDy   = 42;
+		const int LockSlotSize = 22;
+		const int LockButtonSize = 18;
+
+		bool showLock = hatch.Io == IO.OUT;
 
 		int contentW = ReadoutW + 6 + TankW;
-		int contentH = TankH;
+		int contentH = showLock ? System.Math.Max(TankH, LockRowDy + LockSlotSize) : TankH;
 		int circuitW = showCircuit ? (Padding + SlotSize) : 0;
 
 		var layout = new MachineUILayout
@@ -64,11 +63,39 @@ public static class FluidHatchLayout
 			return $"{t.Fluid.Amount:N0} / {t.Capacity:N0} mB";
 		}));
 		layout.Widgets.Add(new DynamicLabelWidgetSpec(X: readoutX, Y: baseY + 30, Getter: () =>
-			hatch.Tank?.Storages[0].Fluid.Type?.DisplayName ?? "(no fluid)"));
+		{
+			var tank = hatch.Tank;
+			if (tank is null) return "(no fluid)";
+			var stored = tank.Storages[0].Fluid;
+			if (!stored.IsEmpty) return stored.Type!.DisplayName;
+			return tank.LockedFluid.Fluid.Type?.DisplayName ?? "(no fluid)";
+		}));
 
 		layout.Widgets.Add(new FluidSlotWidgetSpec(X: tankX, Y: baseY,
 			Width: TankW, Height: TankH,
 			Direction: hatch.Io, TankIndex: 0));
+
+		if (showLock)
+		{
+			layout.Widgets.Add(new ToggleButtonWidgetSpec(
+				X: readoutX,
+				Y: baseY + LockRowDy + (LockSlotSize - LockButtonSize) / 2,
+				IconAssetPath: "GregTechCEuTerraria/Content/Textures/gui/widget/button_lock",
+				Getter: () => hatch.Tank?.IsLocked ?? false,
+				Setter: v => TerrariaCompat.Net.Actions.MachineActions.Send(
+					TerrariaCompat.Net.Actions.FluidLockSetAction.Toggle(v), hatch),
+				Tooltip: "Fluid Locking Disabled")
+			{
+				TooltipFor = on => on ? "Fluid Locking Enabled" : "Fluid Locking Disabled",
+			});
+
+			layout.Widgets.Add(new CreativeSourceFluidSlotWidgetSpec(
+				X: readoutX + LockButtonSize + 6,
+				Y: baseY + LockRowDy,
+				Getter: () => hatch.Tank?.LockedFluid.Fluid.Type,
+				Setter: t => TerrariaCompat.Net.Actions.MachineActions.Send(
+					TerrariaCompat.Net.Actions.FluidLockSetAction.Phantom(t), hatch)));
+		}
 
 		EmitCircuitSlot(layout, hatch,
 			show: showCircuit,
@@ -79,7 +106,6 @@ public static class FluidHatchLayout
 		return layout;
 	}
 
-	// Upstream createMultiSlotGUI (java:346-370). Each tank = Storages[i].
 	private static MachineUILayout BuildGrid(FluidHatchPartMachine hatch, int slots, bool showCircuit)
 	{
 		int rows = (int)System.Math.Sqrt(slots);

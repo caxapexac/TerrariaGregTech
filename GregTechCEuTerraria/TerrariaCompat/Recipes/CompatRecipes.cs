@@ -802,7 +802,19 @@ public static class CompatRecipes
 	      "fluid": [ { "content": { "amount": 100, "value": { "tag": "forge:oxygen" } } } ]
 	    },
 	    "tickInputs": { "eu": [ { "content": 512 } ] },
-	    "outputs": { "item": [ { "content": { "item": "terraria:Hellstone" } } ] } }
+	    "outputs": { "item": [ { "content": { "item": "terraria:Hellstone" } } ] } },
+
+	  { "id": "extractor/compat_hellstone_to_lava", "type": "gtceu:extractor", "duration": 200,
+	    "inputs":  { "item": [ { "content": { "type": "gtceu:sized", "count": 10,
+	      "ingredient": { "item": "terraria:Hellstone" } } } ] },
+	    "tickInputs": { "eu": [ { "content": 128 } ] },
+	    "outputs": { "fluid": [ { "content": { "amount": 1000, "value": { "fluid": "gtceu:lava" } } } ] } },
+
+	  { "id": "extractor/compat_crimstone_to_lava", "type": "gtceu:extractor", "duration": 200,
+	    "inputs":  { "item": [ { "content": { "type": "gtceu:sized", "count": 10,
+	      "ingredient": { "item": "terraria:CrimstoneBlock" } } } ] },
+	    "tickInputs": { "eu": [ { "content": 2048 } ] },
+	    "outputs": { "fluid": [ { "content": { "amount": 100, "value": { "fluid": "gtceu:lava" } } } ] } }
 	]
 	""";
 
@@ -966,6 +978,22 @@ public static class CompatRecipes
 			  "W": { "item": "gtceu:indium_tin_barium_titanium_cuprate_quadruple_wire" }
 			} }
 			"""),
+
+		Override("shaped/primitive_pump", """
+			{ "key": { "W": { "item": null, "tag": "minecraft:planks" } } }
+			"""),
+
+		Override("shaped/pump_deck", """
+			{ "key": { "W": { "item": null, "tag": "minecraft:planks" } } }
+			"""),
+
+		Override("shaped/pump_hatch", """
+			{ "key": { "P": { "item": null, "tag": "minecraft:planks" } } }
+			"""),
+
+		Override("shaped/wood_wall", """
+			{ "key": { "W": { "item": null, "tag": "minecraft:planks" } } }
+			"""),
 	};
 
 	// Per-tier crafting recipes for our custom-block machines
@@ -1081,6 +1109,41 @@ public static class CompatRecipes
 		}
 	}
 
+	private const int SuperconductorPackerDuration = 10;
+	private const int SuperconductorPackerEut = 12;
+
+	private static string SuperconductorPackingRecipe(
+		SuperconductorWireLoader.ScTier tier,
+		string idSuffix, byte inSize, int inCount, int circuit, byte outSize, int outCount)
+	{
+		string inId  = SuperconductorWireLoader.WireItemName(tier, inSize);
+		string outId = SuperconductorWireLoader.WireItemName(tier, outSize);
+		return $$"""
+		{ "id": "packer/compat_sc_pack_{{tier.MetalId}}_wires_{{idSuffix}}", "type": "gtceu:packer", "duration": {{SuperconductorPackerDuration}},
+		  "inputs": { "item": [
+		    { "content": { "type": "gtceu:sized", "count": {{inCount}}, "ingredient": { "item": "GregTechCEuTerraria/{{inId}}" } } },
+		    { "chance": 0, "content": { "type": "gtceu:circuit", "configuration": {{circuit}} } }
+		  ] },
+		  "tickInputs": { "eu": [ { "content": {{SuperconductorPackerEut}} } ] },
+		  "outputs": { "item": [
+		    { "content": { "type": "gtceu:sized", "count": {{outCount}}, "ingredient": { "item": "GregTechCEuTerraria/{{outId}}" } } }
+		  ] } }
+		""";
+	}
+
+	private static IEnumerable<string> SuperconductorPackingRecipes(SuperconductorWireLoader.ScTier tier)
+	{
+		var order = SuperconductorWireLoader.Sizes;
+		for (int startTier = 0; startTier < order.Length - 1; startTier++)
+			for (int i = 1; i < order.Length - startTier; i++)
+				yield return SuperconductorPackingRecipe(tier, $"{i}_{startTier}",
+					order[startTier], 1 << i, 1 << i, order[startTier + i], 1);
+
+		for (int i = 1; i < order.Length; i++)
+			yield return SuperconductorPackingRecipe(tier, $"{i}_single",
+				order[i], 1, 1, order[0], 1 << i);
+	}
+
 	public static List<(string Station, GTRecipe Recipe)> Build(IIngredientResolver resolver)
 	{
 		var result = new List<(string, GTRecipe)>();
@@ -1106,6 +1169,10 @@ public static class CompatRecipes
 
 		foreach (var scTier in SuperconductorWireLoader.Tiers)
 			foreach (var json in SuperconductorCombiningRecipes(scTier))
+				ParseOne(json, resolver, result);
+
+		foreach (var scTier in SuperconductorWireLoader.Tiers)
+			foreach (var json in SuperconductorPackingRecipes(scTier))
 				ParseOne(json, resolver, result);
 
 		foreach (var json in Ae2ColoredCableRecipes())

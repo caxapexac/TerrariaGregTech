@@ -45,20 +45,16 @@ internal static class MultitoolIntersect
 	private static int CountItem(Player p, int type)
 	{
 		int n = 0;
-		for (int i = 0; i < 58; i++)
-		{
-			var it = p.inventory[i];
-			if (it is not null && !it.IsAir && it.type == type) n += it.stack;
-		}
+		foreach (var it in MultitoolInventory.Slots(p))
+			if (it.type == type) n += it.stack;
 		return n;
 	}
 
 	private static void ConsumeOne(Player p, int type)
 	{
-		for (int i = 0; i < 58; i++)
+		foreach (var it in MultitoolInventory.Slots(p))
 		{
-			var it = p.inventory[i];
-			if (it is null || it.IsAir || it.type != type) continue;
+			if (it.type != type) continue;
 			it.stack--;
 			if (it.stack <= 0) it.TurnToAir();
 			return;
