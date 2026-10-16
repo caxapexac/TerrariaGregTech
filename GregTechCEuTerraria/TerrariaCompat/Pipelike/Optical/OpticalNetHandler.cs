@@ -6,21 +6,6 @@ using GregTechCEuTerraria.TerrariaCompat.Machine;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Pipelike.Optical;
 
-// Verbatim port of com.gregtechceu.gtceu.common.pipelike.optical.OpticalNetHandler.
-//
-// Per-side capability the optical pipe exposes outward - it is BOTH an
-// `IDataAccessHatch` (research-data lookup) and an `IOpticalComputationProvider`
-// (CWU/t). When an adjacent endpoint queries one of these through the pipe's
-// face, the handler resolves the unique destination via the net's route cache
-// and delegates. Mirror of LaserNetHandler.
-//
-// === Documented adaptations =================================================
-//
-//   - `OpticalPipeBlockEntity pipe` -> `(int x, int y) pipePos` + axis-side
-//     `_facing` field. The layer's cell is the source of truth.
-//   - `pipe.isRemoved()` check -> layer membership check.
-//   - `setActive(true, 100)` on the route -> per-cell tick counter in
-//     `OpticalPipeLayerSystem.SetActive(pos, ticks)`.
 public sealed class OpticalNetHandler : IDataAccessHatch, IOpticalComputationProvider
 {
 	private OpticalPipeNet _net;
@@ -46,8 +31,6 @@ public sealed class OpticalNetHandler : IDataAccessHatch, IOpticalComputationPro
 	private bool IsNetInvalidForTraversal() =>
 		_net == null || _facing == IODirection.None || !OpticalPipeLayerSystem.Pipes.Has(_pipePos.x, _pipePos.y);
 
-	// === IDataAccessHatch ===================================================
-
 	public bool IsRecipeAvailable(GTRecipe recipe, ICollection<IDataAccessHatch> seen)
 	{
 		bool available = TraverseRecipeAvailable(recipe, seen);
@@ -67,7 +50,7 @@ public sealed class OpticalNetHandler : IDataAccessHatch, IOpticalComputationPro
 	private bool TraverseRecipeAvailable(GTRecipe recipe, ICollection<IDataAccessHatch> seen)
 	{
 		if (IsNetInvalidForTraversal()) return false;
-		var inv = _net.GetNetData(_pipePos, _facing);
+		var inv = _net.GetNetData(_pipePos, _facing, OpticalRouteKind.Data);
 		if (inv == null) return false;
 		var hatch = inv.GetDataHatch();
 		if (hatch == null || seen.Contains(hatch)) return false;
@@ -76,28 +59,26 @@ public sealed class OpticalNetHandler : IDataAccessHatch, IOpticalComputationPro
 		return false;
 	}
 
-	// Diagnostic: the remote optical data hatch this handler resolves to across
-	// the net (or null if the net/route doesn't reach one). Used by the
-	// hover-tooltip chain tracer.
 	public IOpticalDataAccessHatch? ResolveRemoteDataHatch()
 	{
 		if (IsNetInvalidForTraversal()) return null;
-		return _net.GetNetData(_pipePos, _facing)?.GetDataHatch();
+		return _net.GetNetData(_pipePos, _facing, OpticalRouteKind.Data)?.GetDataHatch();
 	}
 
-	// Diagnostic count (see IDataAccessHatch.CountVisibleResearch): resolve the
-	// remote endpoint across the net and forward to the transmitter on the far
-	// side. Mirrors TraverseRecipeAvailable's resolution exactly.
+	public IOpticalComputationProvider? ResolveRemoteComputationProvider()
+	{
+		if (IsNetInvalidForTraversal()) return null;
+		return _net.GetNetData(_pipePos, _facing, OpticalRouteKind.Computation)?.GetComputationHatch();
+	}
+
 	public int CountVisibleResearch(ICollection<IDataAccessHatch> seen)
 	{
 		if (IsNetInvalidForTraversal()) return 0;
-		var inv = _net.GetNetData(_pipePos, _facing);
+		var inv = _net.GetNetData(_pipePos, _facing, OpticalRouteKind.Data);
 		var hatch = inv?.GetDataHatch();
 		if (hatch == null || seen.Contains(hatch)) return 0;
 		return hatch.IsTransmitter() ? hatch.CountVisibleResearch(seen) : 0;
 	}
-
-	// === IOpticalComputationProvider ========================================
 
 	public int RequestCWUt(int cwut, bool simulate, ICollection<IOpticalComputationProvider> seen)
 	{
@@ -122,7 +103,6 @@ public sealed class OpticalNetHandler : IDataAccessHatch, IOpticalComputationPro
 	public bool CanBridge(ICollection<IOpticalComputationProvider> seen)
 	{
 		var provider = GetComputationProvider(seen);
-		// nothing found, so don't report a problem, just pass quietly
 		return provider == null || provider.CanBridge(seen);
 	}
 
@@ -131,7 +111,7 @@ public sealed class OpticalNetHandler : IDataAccessHatch, IOpticalComputationPro
 	private IOpticalComputationProvider? GetComputationProvider(ICollection<IOpticalComputationProvider> seen)
 	{
 		if (IsNetInvalidForTraversal()) return null;
-		var inv = _net.GetNetData(_pipePos, _facing);
+		var inv = _net.GetNetData(_pipePos, _facing, OpticalRouteKind.Computation);
 		if (inv == null) return null;
 		var hatch = inv.GetComputationHatch();
 		if (hatch == null || seen.Contains(hatch)) return null;

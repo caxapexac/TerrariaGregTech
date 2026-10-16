@@ -22,7 +22,7 @@ public sealed class MagicStorageItemHandler : IItemHandler
 	private MagicStorageItemHandler(TEStorageHeart heart) => _heart = heart;
 
 	private List<Item> Snapshot =>
-		_snapshot ??= _heart.GetStoredItems().Where(static i => !i.IsAir).Select(static i => i.Clone()).ToList();
+		_snapshot ??= _heart.GetStoredItems().Where(static i => !i.IsAir).ToList();
 
 	public static IItemHandler? At(int x, int y)
 	{
@@ -102,11 +102,7 @@ public sealed class MagicStorageItemHandler : IItemHandler
 		lookFor.stack = take;
 		Item withdrawn = _heart.Withdraw(lookFor, keepOneIfFavorite: true);
 		if (!withdrawn.IsAir && withdrawn.stack > 0)
-		{
-			stored.stack -= withdrawn.stack;
-			if (stored.stack <= 0) stored.TurnToAir();
 			HandleStorageItemChange();
-		}
 		return withdrawn;
 	}
 

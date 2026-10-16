@@ -63,7 +63,6 @@ public static class BiomeWorldIORecipeSynth
 
 	private static GTRecipe? BuildPumpRecipe(BiomeProbe.Biome biome)
 	{
-		if (biome == BiomeProbe.Biome.Cavern) return null;
 		int mb = PumpBiomeModifier.ForBiome(biome);
 		if (mb <= 0) return null;
 		var outputs = new Dictionary<object, List<Content>>();

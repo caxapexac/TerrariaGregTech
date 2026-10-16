@@ -92,12 +92,12 @@ public class TieredMachineItem : TieredItem, Rendering.ITextureWarmUp
 				break;
 			case Multiblock.Part.Hpca.HpcaComponentKind.Computation:
 				L("[c/55AAFF:Computation: 4 CWU/t]");
-				L("[c/FFAA55:Produces heat under load]");
+				L("[c/FFAA55:Requires up to: 2 Cooling]");
 				L($"[c/AAAAAA:EU upkeep {Va(VoltageTier.EV):N0} -> {Va(VoltageTier.LuV):N0} EU/t]");
 				break;
 			case Multiblock.Part.Hpca.HpcaComponentKind.AdvancedComputation:
 				L("[c/55AAFF:Computation: 16 CWU/t]");
-				L("[c/FFAA55:Produces heat under load]");
+				L("[c/FFAA55:Requires up to: 4 Cooling]");
 				L($"[c/AAAAAA:EU upkeep {Va(VoltageTier.IV):N0} -> {Va(VoltageTier.ZPM):N0} EU/t]");
 				break;
 			case Multiblock.Part.Hpca.HpcaComponentKind.HeatSink:

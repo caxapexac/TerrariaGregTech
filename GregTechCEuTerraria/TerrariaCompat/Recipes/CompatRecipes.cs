@@ -794,6 +794,16 @@ public static class CompatRecipes
 	]
 	""";
 
+	private const string CompressedDataOrbs = """
+	[
+	  { "id": "compressor/compat_compressed_data_orbs", "type": "gtceu:compressor", "duration": 400,
+	    "inputs":  { "item": [ { "content": { "type": "gtceu:sized", "count": 4,
+	      "ingredient": { "item": "gtceu:data_orb" } } } ] },
+	    "tickInputs": { "eu": [ { "content": 7680 } ] },
+	    "outputs": { "item": [ { "content": { "item": "GregTechCEuTerraria/compressed_data_orbs" } } ] } }
+	]
+	""";
+
 	private const string HellstoneOre = """
 	[
 	  { "id": "arc_furnace/compat_hellstone_ore", "type": "gtceu:arc_furnace", "duration": 100,
@@ -823,7 +833,7 @@ public static class CompatRecipes
 		HatchesAndBuses, Bootstrap, Misc, PaperDust, SimplePipes, Casings, Clay,
 		TerrariaIntermediates, TerraPrisma, RedstoneGem, Coins, LegacyConversions,
 		Ae2FluixCables, Ae2Machines, Money, Damascus, Hellforge, HellstoneOre,
-		CompressedEnergySubstance,
+		CompressedEnergySubstance, CompressedDataOrbs,
 	};
 
 	public sealed record RecipePatch(string BaseId, string NewId, string MergeJson)
@@ -957,6 +967,14 @@ public static class CompatRecipes
 			  { "content": { "type": "gtceu:sized", "count": 64, "ingredient": { "item": "gtceu:advanced_smd_inductor" } } },
 			  { "content": { "type": "gtceu:sized", "count": 64, "ingredient": { "item": "gtceu:enriched_naquadah_trinium_europium_duranide_single_wire" } } },
 			  { "content": { "type": "gtceu:sized", "count": 64, "ingredient": { "tag": "forge:bolts/neutronium" } } }
+			] } }
+			"""),
+
+		Override("assembly_line/advanced_data_access_hatch", """
+			{ "inputs": { "item": [
+			  { "content": { "type": "gtceu:sized", "count": 1, "ingredient": { "item": "gtceu:luv_input_bus" } } },
+			  { "content": { "type": "gtceu:sized", "count": 1, "ingredient": { "item": "GregTechCEuTerraria/compressed_data_orbs" } } },
+			  { "content": { "type": "gtceu:sized", "count": 4, "ingredient": { "tag": "gtceu:circuits/zpm" } } }
 			] } }
 			"""),
 

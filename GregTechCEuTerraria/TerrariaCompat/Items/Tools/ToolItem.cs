@@ -337,6 +337,7 @@ public sealed class ToolItem : ModItem, IElectricItem
 		if (IsWireCutter)
 		{
 			if (WireItem.CutCableAt(player, x, y)) return;
+			if (MeCables.MeCableItem.CutAt(player, x, y)) return;
 			Pipelike.Laser.LaserPipeLayerHandle.Instance.CutAt(x, y, player);
 			return;
 		}

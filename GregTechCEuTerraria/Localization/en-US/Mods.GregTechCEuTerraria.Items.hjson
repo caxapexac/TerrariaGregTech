@@ -39992,3 +39992,8 @@ acid_etched_inert_casing: {
 		'''
 	DisplayName: Acid-Etched Inert Casing
 }
+
+compressed_data_orbs: {
+	Tooltip: 4 Data Orbs pressed into one stackable unit
+	DisplayName: Compressed Data Orbs
+}

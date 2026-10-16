@@ -4,7 +4,6 @@ using GregTechCEuTerraria.Api.Capability.Recipe;
 using GregTechCEuTerraria.Api.Machine;
 using GregTechCEuTerraria.Api.Machine.Feature.Multiblock;
 using GregTechCEuTerraria.Api.Machine.Trait;
-using GregTechCEuTerraria.TerrariaCompat.Net;
 using Terraria;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Machine.Multiblock.Part;
@@ -19,32 +18,20 @@ public class CokeOvenHatch : MultiblockPartMachine
 	public ItemHandlerProxyTrait? OutputInventory { get; protected set; }
 	public FluidTankProxyTrait?   Tank            { get; protected set; }
 
-	public IODirection IoDirection { get; protected set; } = IODirection.Up;
-	public void SetIoDirection(IODirection direction)
-	{
-		if (IoDirection == direction) return;
-		IoDirection = direction;
-		if (IsServer) MachineStateSyncPacket.Broadcast(this);
-	}
-
 	private IoFacadeHandler? _itemFacade;
 	public override IItemHandler? ExposedItemHandler  => _itemFacade;
 	public override IFluidHandler? ExposedFluidHandler => Tank;
-
-	private TickableSubscription? _autoIOSubs;
 
 	public CokeOvenHatch() : base() { }
 
 	public void Configure()
 	{
 		EnsureTraits();
-		EnsureAutoIOSubscription();
 	}
 
 	protected override void OnTick()
 	{
 		EnsureTraits();
-		EnsureAutoIOSubscription();
 		base.OnTick();
 	}
 
@@ -58,11 +45,6 @@ public class CokeOvenHatch : MultiblockPartMachine
 		Traits.Attach(OutputInventory);
 		Traits.Attach(Tank);
 		_itemFacade = new IoFacadeHandler(InputInventory, OutputInventory);
-	}
-
-	private void EnsureAutoIOSubscription()
-	{
-		_autoIOSubs ??= SubscribeServerTick(AutoIOTick);
 	}
 
 	public bool CanShared() => false;
@@ -87,28 +69,10 @@ public class CokeOvenHatch : MultiblockPartMachine
 		if (Tank            != null) Tank.Proxy            = null;
 	}
 
-	private void AutoIOTick()
-	{
-		if (GetOffsetTimer() % global::GregTechCEuTerraria.Api.TickScale.FromMcTicks(5) != 0) return;
-		if (!WorkingEnabled) return;
-		if (OutputInventory != null && !OutputInventory.IsEmpty())
-			OutputInventory.ExportToNearby(IoDirection);
-		if (Tank != null && !Tank.IsEmpty())
-			Tank.ExportToNearby(IoDirection);
-	}
-
-	protected override void SaveMachineData(Terraria.ModLoader.IO.TagCompound tag)
-	{
-		base.SaveMachineData(tag);
-		tag["ioDirection"] = (byte)IoDirection;
-	}
-
 	public override void LoadData(Terraria.ModLoader.IO.TagCompound tag)
 	{
 		base.LoadData(tag);
-		if (tag.ContainsKey("ioDirection")) IoDirection = (IODirection)tag.GetByte("ioDirection");
 		EnsureTraits();
-		EnsureAutoIOSubscription();
 	}
 
 	private sealed class IoFacadeHandler : IItemHandler

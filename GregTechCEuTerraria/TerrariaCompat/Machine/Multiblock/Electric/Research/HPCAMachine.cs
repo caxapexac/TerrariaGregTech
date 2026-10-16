@@ -165,8 +165,7 @@ public class HPCAMachine : WorkableElectricMultiblockMachine, IOpticalComputatio
 	public int GetMaxCWUt(ICollection<IOpticalComputationProvider> seen)
 	{
 		seen.Add(this);
-		if (!(IsActive && IsWorkingEnabledFlag())) return 0;
-		return _hpcaHandler.ComponentCount > 0 ? _hpcaHandler.GetMaxCWUt() : _syncMaxCWUt;
+		return IsActive && IsWorkingEnabledFlag() ? _hpcaHandler.GetMaxCWUt() : 0;
 	}
 
 	public int GetMaxCWUt() => GetMaxCWUt(NewSeen());
@@ -174,8 +173,7 @@ public class HPCAMachine : WorkableElectricMultiblockMachine, IOpticalComputatio
 	public bool CanBridge(ICollection<IOpticalComputationProvider> seen)
 	{
 		seen.Add(this);
-		if (!IsFormed) return true;
-		return _hpcaHandler.ComponentCount > 0 ? _hpcaHandler.HasHPCABridge() : _syncHasBridge;
+		return !IsFormed || _hpcaHandler.HasHPCABridge();
 	}
 
 	public bool CanBridge() => CanBridge(NewSeen());

@@ -22,21 +22,18 @@ public class OpticalComputationHatchMachine : MultiblockPartMachine, IOpticalCom
 
 	public int RequestCWUt(int cwut, bool simulate, ICollection<IOpticalComputationProvider> seen)
 	{
-		if (seen.Contains(this)) return 0;
 		seen.Add(this);
 		return ComputationContainer?.RequestCWUt(cwut, simulate, seen) ?? 0;
 	}
 
 	public int GetMaxCWUt(ICollection<IOpticalComputationProvider> seen)
 	{
-		if (seen.Contains(this)) return 0;
 		seen.Add(this);
 		return ComputationContainer?.GetMaxCWUt(seen) ?? 0;
 	}
 
 	public bool CanBridge(ICollection<IOpticalComputationProvider> seen)
 	{
-		if (seen.Contains(this)) return false;
 		seen.Add(this);
 		return ComputationContainer?.CanBridge(seen) ?? false;
 	}

@@ -15,13 +15,6 @@ using Terraria.ModLoader.IO;
 
 namespace GregTechCEuTerraria.TerrariaCompat.Items.Batteries;
 
-// One Terraria ItemID per upstream battery id (lv_lithium_battery, max_battery,
-// ...). Mirrors ComponentItem + ElectricStats composition. Configured by ctor
-// from the registry dump (BatteryItemLoader): id/label/tier/capacity all come
-// from upstream's `ElectricStats` verbatim. Per-stack EU via Clone+Save/Load.
-//
-// Texture: Content/Textures/item/<id>/{1..8}.png - frame 1 empty -> frame 8 full;
-// single-frame batteries ship a flat <id>.png (loader detects via file probe).
 public sealed class BatteryItem : ModItem, IElectricItem, ITextureWarmUp
 {
 	private readonly string? _id;
@@ -51,13 +44,11 @@ public sealed class BatteryItem : ModItem, IElectricItem, ITextureWarmUp
 	public override string Name => _id ?? nameof(BatteryItem);
 	protected override bool CloneNewInstances => true;
 
-	// upstream ElectricStats.{tier, maxCharge, chargeable, dischargeable}
 	public VoltageTier Tier => _tier;
 	public long MaxEu => _maxEu;
 	public bool IsChargeable    => _chargeable;
 	public bool IsDischargeable => _dischargeable;
 
-	// Every shipped upstream battery uses transferLimit = V[tier].
 	public long TransferLimit => VoltageTiers.Voltage(_tier);
 
 	public override string Texture => _id == null
@@ -129,8 +120,6 @@ public sealed class BatteryItem : ModItem, IElectricItem, ITextureWarmUp
 		Item.rare = ItemRarityID.White;
 	}
 
-	// Default Clone doesn't carry our private fields - override so stack-clone
-	// paths preserve per-stack charge.
 	public override ModItem Clone(Item newEntity)
 	{
 		var clone = (BatteryItem)base.Clone(newEntity);
@@ -142,10 +131,6 @@ public sealed class BatteryItem : ModItem, IElectricItem, ITextureWarmUp
 	public override void LoadData(TagCompound tag) => _storedEu = tag.ContainsKey("eu") ? tag.GetLong("eu") : 0;
 	public override void NetSend(System.IO.BinaryWriter writer) => writer.Write(_storedEu);
 	public override void NetReceive(System.IO.BinaryReader reader) => _storedEu = reader.ReadInt64();
-
-	// State-dependent: animated batteries swap through 8 frames per charge level
-	// for inventory + world; ItemIconBaker bakes frame 1 into TextureAssets.Item
-	// so the held-item draw path (no PreDraw hook) gets a real upscaled icon.
 
 	private const float ItemRenderScale = 2f;
 
@@ -165,14 +150,19 @@ public sealed class BatteryItem : ModItem, IElectricItem, ITextureWarmUp
 		return $"GregTechCEuTerraria/Content/Textures/item/{_id}/{frame}";
 	}
 
+	private static Rectangle CurrentAnimationFrame(Texture2D tex)
+	{
+		int side = tex.Width;
+		if (side <= 0 || tex.Height <= side || tex.Height % side != 0) return tex.Frame();
+		int frames = tex.Height / side;
+		int frame  = (int)((Main.GameUpdateCount / (uint)MachineRenderer.AnimationTicksPerFrame) % (uint)frames);
+		return new Rectangle(0, frame * side, side, side);
+	}
+
 	public override bool PreDrawInInventory(SpriteBatch sb, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
 	{
 		var tex = ModContent.Request<Texture2D>(CurrentChargeFrameTexture()).Value;
-		// Vanilla's origin/frame are sized for the 2x baked frame-1 in
-		// TextureAssets.Item; we're drawing the raw 16x16 per-charge source so
-		// recompute both against `tex` (else origin=(16,16) on a 16x16 source
-		// pushes the icon off-center).
-		var srcFrame = tex.Frame();
+		var srcFrame = CurrentAnimationFrame(tex);
 		var srcOrigin = srcFrame.Size() * 0.5f;
 		float drawScale = scale * ItemRenderScale;
 		TerrariaCompat.UI.PointClampDraw.Draw(sb, () =>
@@ -183,7 +173,7 @@ public sealed class BatteryItem : ModItem, IElectricItem, ITextureWarmUp
 	public override bool PreDrawInWorld(SpriteBatch sb, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
 	{
 		var tex = ModContent.Request<Texture2D>(CurrentChargeFrameTexture()).Value;
-		var srcFrame = tex.Frame();
+		var srcFrame = CurrentAnimationFrame(tex);
 		var origin = srcFrame.Size() * 0.5f;
 		var pos = Item.Center - Main.screenPosition;
 		float drawScale = scale * ItemRenderScale;

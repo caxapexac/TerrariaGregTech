@@ -11,7 +11,7 @@ public static class BiomeProbe
 	{
 		Forest, Desert, Snow, Jungle, Ocean, Mushroom,
 		Crimson, Corruption, Hallow, Underworld,
-		Cavern,
+		Underground, Cavern,
 	}
 
 	public enum Depth { Surface, Underground, Cavern, Underworld }
@@ -63,6 +63,11 @@ public static class BiomeProbe
 		if (m.EnoughTilesForCrimson)         return Biome.Crimson;
 		if (m.EnoughTilesForCorruption)      return Biome.Corruption;
 		if (m.EnoughTilesForDesert)          return Biome.Desert;
-		return Biome.Forest;
+		return DepthAt(tileY) switch
+		{
+			Depth.Cavern      => Biome.Cavern,
+			Depth.Underground => Biome.Underground,
+			_                 => Biome.Forest,
+		};
 	}
 }

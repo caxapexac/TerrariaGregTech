@@ -109,15 +109,6 @@ public sealed class QuestbookUIState : FreeModalWindow
 		};
 		_panel.Append(_title);
 
-		var warning = new UIText("WIP - new questbook ETA v0.0.16", 1.0f)
-		{
-			HAlign = 0.5f,
-			Top = StyleDimension.FromPixels(Pad),
-			TextColor = Color.Red,
-			IgnoresMouseInteraction = true,
-		};
-		_panel.Append(warning);
-
 		_editToggle = new UITextButton(
 			() => "Edit",
 			() =>

@@ -650,11 +650,6 @@
           "y": 1.125
         },
         {
-          "quest": "11989C3388C969DF",
-          "x": 8.91,
-          "y": 1.65
-        },
-        {
           "quest": "70BBF00528C68A05",
           "x": 5.94,
           "y": 2.97
@@ -677,11 +672,6 @@
         {
           "quest": "7D7A4CC66A3C193F",
           "x": -2.25,
-          "y": 7.875
-        },
-        {
-          "quest": "41DD503169987D50",
-          "x": 1.12,
           "y": 7.875
         },
         {
@@ -806,11 +796,6 @@
           "quest": "75F38905DEA60F15",
           "x": 1.125,
           "y": -0.75
-        },
-        {
-          "quest": "2655B72C9FF3B372",
-          "x": -1.125,
-          "y": 0.375
         },
         {
           "quest": "1C55AE6AD5BDE304",
@@ -1189,11 +1174,6 @@
           "quest": "6B1595678ECB7AC8",
           "x": 7.875,
           "y": -3.0
-        },
-        {
-          "quest": "41D32C5178760F47",
-          "x": 7.875,
-          "y": -1.875
         },
         {
           "quest": "14D277A164202FF8",
@@ -1995,11 +1975,6 @@
           "y": 4.5
         },
         {
-          "quest": "63F9531F391040B2",
-          "x": 2.25,
-          "y": 3.375
-        },
-        {
           "quest": "35D4F93EFB6EACB6",
           "x": 0.375,
           "y": 3.75
@@ -2291,11 +2266,6 @@
           "y": -0.75
         },
         {
-          "quest": "428C62749A1A1BAB",
-          "x": 7.875,
-          "y": -1.875
-        },
-        {
           "quest": "0009F48B6E385A47",
           "x": 7.875,
           "y": -0.75
@@ -2550,11 +2520,6 @@
           "quest": "38E5B595C33A071C",
           "x": -2.15,
           "y": -0.7
-        },
-        {
-          "quest": "7ECD974215E77432",
-          "x": 1.0,
-          "y": 0.5
         }
       ]
     },
@@ -2763,11 +2728,6 @@
           "quest": "7CAD6FF241A827F7",
           "x": 9.0,
           "y": -2.0
-        },
-        {
-          "quest": "41D32C5178760F47",
-          "x": 9.0,
-          "y": 3.0
         },
         {
           "quest": "2124BF15006733D5",
@@ -3274,11 +3234,6 @@
         {
           "quest": "6DDDE2268B691F74",
           "x": 6.0,
-          "y": 1.5
-        },
-        {
-          "quest": "2655B72C9FF3B372",
-          "x": 4.5,
           "y": 1.5
         },
         {
@@ -4023,13 +3978,6 @@
             "gtceu:primitive_blast_furnace"
           ],
           "count": 1
-        },
-        {
-          "type": "item",
-          "items": [
-            "gtceu:firebricks"
-          ],
-          "count": 11
         }
       ],
       "subtitle": "Steel Yourself for Greater Things",
@@ -4047,20 +3995,6 @@
           "type": "item",
           "items": [
             "gtceu:coke_oven"
-          ],
-          "count": 2
-        },
-        {
-          "type": "item",
-          "items": [
-            "gtceu:coke_oven_bricks"
-          ],
-          "count": 8
-        },
-        {
-          "type": "item",
-          "items": [
-            "gtceu:coke_oven_hatch"
           ],
           "count": 2
         }
@@ -4325,7 +4259,9 @@
         }
       ],
       "subtitle": "Liquids, gases... we don't discriminate",
-      "desc": "Fluid Pipes will transport Steam between machines for you.\n\nEach Pipe has a certain throughput in mB/t, and a Temperature Limit. This is relevant right now, as Steam will burn Simple Pipes. Some pipes have special attributes you don't need to worry about for now.\n\nEach material has several sizes for Pipes. The bigger the Pipe, the higher the throughput, but the more expensive the craft. For example, a normal Bronze Fluid Pipe transfers 120 mB/t.\n\nGet any Bronze Fluid Pipe to complete this quest. The small and normal ones in particular are used in other recipes as well.\n\nReminder: 1 second = 20 ticks... assuming the server isn't lagging (Yes, even in Terraria, for GregTech purposes anyway).",
+      "desc": "Fluid Pipes will transport Steam between machines for you.\n\nEach Pipe has a certain throughput in mB/t, and a Temperature Limit. This is relevant right now, as Steam will burn Simple Pipes. Some pipes have special attributes you don't need to worry about for now.\n\nEach material has several sizes for Pipes. The bigger the Pipe, the higher the throughput, but the more expensive the craft. For example, a normal Bronze Fluid Pipe transfers 120 mB/t.\n\nGet any Bronze Fluid Pipe to complete this quest. The small and normal ones in particular are used in other recipes as well.\n\nReminder: 1 second = 20 ticks... assuming the server isn't lagging (Yes, even in Terraria, for GregTech purposes anyway)."
+    },
+    {
       "id": "5DD49D500327A0E2",
       "icon": "gtceu:lp_steam_solid_boiler",
       "title": "Pressure Cookin'",
@@ -4615,34 +4551,6 @@
             "gtceu:steam_grinder"
           ],
           "count": 1
-        },
-        {
-          "type": "item",
-          "items": [
-            "gtceu:steam_input_hatch"
-          ],
-          "count": 1
-        },
-        {
-          "type": "item",
-          "items": [
-            "gtceu:steam_input_bus"
-          ],
-          "count": 1
-        },
-        {
-          "type": "item",
-          "items": [
-            "gtceu:steam_output_bus"
-          ],
-          "count": 1
-        },
-        {
-          "type": "item",
-          "items": [
-            "gtceu:steam_machine_casing"
-          ],
-          "count": 5
         }
       ],
       "subtitle": "The Steam Oven's elder brother",
@@ -4662,41 +4570,6 @@
             "gtceu:steam_oven"
           ],
           "count": 1
-        },
-        {
-          "type": "item",
-          "items": [
-            "gtceu:steam_input_hatch"
-          ],
-          "count": 1
-        },
-        {
-          "type": "item",
-          "items": [
-            "gtceu:steam_input_bus"
-          ],
-          "count": 1
-        },
-        {
-          "type": "item",
-          "items": [
-            "gtceu:steam_output_bus"
-          ],
-          "count": 1
-        },
-        {
-          "type": "item",
-          "items": [
-            "gtceu:steam_machine_casing"
-          ],
-          "count": 8
-        },
-        {
-          "type": "item",
-          "items": [
-            "gtceu:bronze_firebox_casing"
-          ],
-          "count": 8
         }
       ],
       "subtitle": "The Steam Grinder's big brother",
@@ -4760,26 +4633,6 @@
           ],
           "count": 1,
           "label": "Multiblock Tank"
-        },
-        {
-          "type": "item",
-          "items": [
-            "gtceu:wooden_tank_valve",
-            "gtceu:bronze_tank_valve",
-            "gtceu:steel_tank_valve"
-          ],
-          "count": 1,
-          "label": "Tank Valves"
-        },
-        {
-          "type": "item",
-          "items": [
-            "gtceu:solid_machine_casing",
-            "gtceu:steam_machine_casing",
-            "gtceu:wood_wall"
-          ],
-          "count": 7,
-          "label": "7 Casings"
         }
       ],
       "subtitle": "So long, and Tanks for all the fish!",
@@ -5466,11 +5319,11 @@
           "items": [
             "gtceu:cupronickel_coil_block"
           ],
-          "count": 16
+          "count": 15
         }
       ],
       "subtitle": "Baby's first heating coil",
-      "desc": "Prepare 128 Cupronickel, 32 Bronze and 16 Tin Alloy to craft the Heating Coils required for your first Electric Blast Furnace.\n\nThis is still less than half (!) of the cost of the whole EBF in raw materials. You will also need about a stack each of Invar and Steel, so get mining.\n\nThe Cupronickel Coils will allow the EBF to perform recipes up to 1,800K (ignoring Voltage bonuses). That's pretty hot if you ask us.\n\nThis quest unlocks a new tutorial on Coils in the Tips and Tricks tab - check it out to learn more!"
+      "desc": "Prepare 120 Cupronickel, 30 Bronze and 15 Tin Alloy to craft the Heating Coils required for your first Electric Blast Furnace.\n\nThis is still less than half (!) of the cost of the whole EBF in raw materials. You will also need about a stack each of Invar and Steel, so get mining.\n\nThe Cupronickel Coils will allow the EBF to perform recipes up to 1,800K (ignoring Voltage bonuses). That's pretty hot if you ask us.\n\nThis quest unlocks a new tutorial on Coils in the Tips and Tricks tab - check it out to learn more!"
     },
     {
       "id": "1DA54DA70E12F499",
@@ -6130,25 +5983,6 @@
       "desc": "This quest's subject is optional, but may still be of interest to you. We've put it here in the name of completeness.\n\nThe World Accelerator... well, accelerates the world. Placing it down and powering it will cause it to tick-accelerate any Tile Entities around it. Using a Screwdriver, you can also toggle it to tick-accelerate random blocks in its area, such as farmland. \n\nKeep in mind that GregTech machines are blacklisted from tick acceleration - this is for the better, as tick-accelerating a GregTech machine can lead to it consuming many Amps at once and nuking your power system."
     },
     {
-      "id": "11989C3388C969DF",
-      "icon": "gtceu:construction_core",
-      "title": "Building Resources",
-      "deps": [
-        "46AD7A6F3B6775F5"
-      ],
-      "tasks": [
-        {
-          "type": "item",
-          "items": [
-            "gtceu:construction_core"
-          ],
-          "count": 1
-        }
-      ],
-      "subtitle": "If you build it, they will come",
-      "desc": "If you're a builder, weep no more - this custom multiblock, freshly made with the powers of KubeJS, is made for you.\n\nBy providing the multiblock with a near-negligible amount of Construction Foam, you'll gain access to increased yields of many different building blocks to spice up your base.\n\nDon't go too crazy!\n\n(Crazy? I was crazy once!)"
-    },
-    {
       "id": "70BBF00528C68A05",
       "icon": "gtceu:lv_iron_drill",
       "title": "Oh Yeah, we Drillin'",
@@ -6249,44 +6083,6 @@
       ],
       "subtitle": "Free nitro?",
       "desc": "Nitrogen is commonly obtained from centrifuging air. It's very useful, speeding up recipes in many multiblocks like the Electric Blast Furnace and the Pyrolyse Oven. We would highly recommend setting up a dedicated passive line to generate Nitrogen!"
-    },
-    {
-      "id": "41DD503169987D50",
-      "icon": "gtceu:light_concrete",
-      "title": "Gotta go fast",
-      "deps": [
-        "257DB4B39B2A928E",
-        "581CDF545E1EA1FD"
-      ],
-      "tasks": [
-        {
-          "type": "item",
-          "items": [
-            "gtceu:light_concrete",
-            "gtceu:dark_concrete",
-            "gtceu:white_studs",
-            "gtceu:orange_studs",
-            "gtceu:magenta_studs",
-            "gtceu:light_blue_studs",
-            "gtceu:yellow_studs",
-            "gtceu:lime_studs",
-            "gtceu:pink_studs",
-            "gtceu:gray_studs",
-            "gtceu:light_gray_studs",
-            "gtceu:cyan_studs",
-            "gtceu:purple_studs",
-            "gtceu:blue_studs",
-            "gtceu:brown_studs",
-            "gtceu:green_studs",
-            "gtceu:red_studs",
-            "gtceu:black_studs"
-          ],
-          "count": 1,
-          "label": "Blocks"
-        }
-      ],
-      "subtitle": "Subsonic!",
-      "desc": "Concrete and Studs are two decorative block families added that increse your speed when walking on them, with Concrete increasing your speed more.\n\nGet either of them to complete this quest."
     },
     {
       "id": "53DC6E32C41C94C3",
@@ -6817,26 +6613,6 @@
       "desc": "The Assembler is a staple for every Tier; an important goal to unlock more recipes and progress further into the Age. Many in the community see crafting a voltage tier's Assembler as a sign of properly reaching said voltage.\n\nThat being said, welcome to MV!\n\nThe MV Assembler unlocks Transistors, Capacitors and Inductors, used for the next tiers of Circuits."
     },
     {
-      "id": "2655B72C9FF3B372",
-      "icon": "minecraft:oak_sapling",
-      "title": "Greenhouse",
-      "deps": [
-        "7567E885B7166603",
-        "0DBC148D92A9F69F"
-      ],
-      "tasks": [
-        {
-          "type": "item",
-          "items": [
-            "gtceu:greenhouse"
-          ],
-          "count": 1
-        }
-      ],
-      "subtitle": "The power of KubeJS",
-      "desc": "GregTech doesn't provide ways to farm plants or trees, so we made a custom multiblock for the modpack!\n\nThe multiblock Greenhouse will be your source of Wood and other plants if you wish.\n\nIts Wood production should be enough to run 2 Pyrolyse Ovens at their lowest Power.\n\nYou can also use this for automated Resin. The yields are kept low to incentivize other rubber sources later in the game.\n\nNote: With 40 EU/t recipes, it needs either 1 MV energy hatch or 2 LV energy hatches. Multiblocks will not use 2A of one tier to reach the next one for recipe voltage minimums. \n\nIn other words, the controller needs to say at least \"MV\" in the GUI to run recipes which say \"MV\" in emi, even if they can draw enough EU/t with a lower tier hatch configuration.\n\nNote: The structure requires a lot of Wrought Iron. Make sure you have an Arc Furnace for that.\n\nLore: We originally implemented a Chemical Reactor recipe for wood in the modpack to solve the tree problem. Our implementation turned out to be completely busted, so we decided that a rebalance was due. Hopefully, the Greenhouse is a happy middle ground."
-    },
-    {
       "id": "1C55AE6AD5BDE304",
       "icon": "gtceu:kanthal_coil_block",
       "title": "Kanthal Coils",
@@ -6851,7 +6627,7 @@
           "items": [
             "gtceu:kanthal_coil_block"
           ],
-          "count": 16
+          "count": 15
         }
       ],
       "subtitle": "Is it getting hot in here?",
@@ -8354,7 +8130,7 @@
           "items": [
             "gtceu:nichrome_coil_block"
           ],
-          "count": 16
+          "count": 15
         }
       ],
       "subtitle": "A long way to go before we beat the Sun",
@@ -8442,7 +8218,9 @@
       "icon": "gtceu:hv_circuit_assembler",
       "title": "HV Circuit Assembler",
       "deps": [
-        "41D32C5178760F47",
+        "124B32A0583A636A",
+        "16E3465CF94E2BDD",
+        "4024C831C77101CA",
         "4AFD3073C731A1E4"
       ],
       "tasks": [
@@ -8455,27 +8233,6 @@
         }
       ],
       "desc": "The next Circuit Assembler. This tier of Circuit Assembler is only required for one type of Circuit - your first ever Mainframe.\n\nYou can put this off until EV."
-    },
-    {
-      "id": "41D32C5178760F47",
-      "icon": "minecraft:end_portal_frame",
-      "title": "The End of an Era",
-      "deps": [
-        "124B32A0583A636A",
-        "16E3465CF94E2BDD",
-        "4024C831C77101CA"
-      ],
-      "tasks": [
-        {
-          "type": "item",
-          "items": [
-            "minecraft:ender_eye"
-          ],
-          "count": 12
-        }
-      ],
-      "subtitle": "...but not the end of your playthrough",
-      "desc": "Regardless of whether you're playing on Peaceful or not, you will have to defeat the Ender Dragon to return to the Overworld safely.\n\nPrepare yourself with a bow, a few arrows, a blade, and some beds (speedrunner strats!).\n\nThis quest will print the location of the nearest Stronghold in chat. This won't work if you have cheats disabled, unfortunately.\n\nThe End has even more new veins and materials to harvest, such as Platinum and Naquadah! Similar to Nether ores, End ores are worth two Overworld ores.\n\nEyes of Ender are additionally used in crafting certain components, or for creating Quantum Eyes."
     },
     {
       "id": "14D277A164202FF8",
@@ -8512,22 +8269,6 @@
             "gtceu:cleanroom"
           ],
           "count": 1
-        },
-        {
-          "type": "item",
-          "items": [
-            "gtceu:filter_casing"
-          ],
-          "count": 8
-        },
-        {
-          "type": "item",
-          "items": [
-            "gtceu:cleanroom_glass",
-            "gtceu:plascrete"
-          ],
-          "count": 50,
-          "label": "Plascrete or Cleanroom Glass"
         }
       ],
       "subtitle": "They put me in a room... a clean room",
@@ -8538,7 +8279,9 @@
       "icon": "gtceu:prospector.hv",
       "title": "HV Prospector",
       "deps": [
-        "41D32C5178760F47"
+        "124B32A0583A636A",
+        "16E3465CF94E2BDD",
+        "4024C831C77101CA"
       ],
       "tasks": [
         {
@@ -8635,20 +8378,6 @@
           "type": "item",
           "items": [
             "gtceu:large_chemical_reactor"
-          ],
-          "count": 1
-        },
-        {
-          "type": "item",
-          "items": [
-            "gtceu:inert_machine_casing"
-          ],
-          "count": 10
-        },
-        {
-          "type": "item",
-          "items": [
-            "gtceu:ptfe_pipe_casing"
           ],
           "count": 1
         }
@@ -9068,13 +8797,6 @@
             "gtceu:large_combustion_engine"
           ],
           "count": 1
-        },
-        {
-          "type": "item",
-          "items": [
-            "gtceu:ev_energy_output_hatch"
-          ],
-          "count": 1
         }
       ],
       "desc": "The Large Combustion Engine is a multiblock that can burn Combustion Fuels for even... more... power generation!\n\nBy default, this puppy outputs 2048 EU/t, which is equivalent to 4 Turbo Combustion Generators.\n\nThis might not convince you, but unlike the singleblock generators, you can actually boost this by providing Oxygen. This will double the fuel consumption, but triple the power generation. This'll output 6144 EU/t with 150% Fuel efficiency.\n\nYou'll also need to supply a small amount of Lubricant to the LCE during operation - nothing too crazy.\n\nThe LCE is also void-free, unlike Large Turbines. Any energy that cannot be output will momentarily pause the multiblock.\n\nTo harness the cataclysmic power of the 6144 EU/t output, you'll need a 4A EV Dynamo Hatch or an IV Dynamo Hatch."
@@ -9105,7 +8827,9 @@
       "title": "Platinum",
       "deps": [
         "330BDB559A7BAB35",
-        "41D32C5178760F47",
+        "124B32A0583A636A",
+        "16E3465CF94E2BDD",
+        "4024C831C77101CA",
         "57D4E09A9CAB150C"
       ],
       "tasks": [
@@ -9198,7 +8922,9 @@
       "title": "Tungsten Chain",
       "deps": [
         "3398FC108D9DCB46",
-        "41D32C5178760F47",
+        "124B32A0583A636A",
+        "16E3465CF94E2BDD",
+        "4024C831C77101CA",
         "40408FFD02134148",
         "4AFD3073C731A1E4",
         "6B08799BCFD01D3D",
@@ -9331,7 +9057,7 @@
           "items": [
             "gtceu:rtm_alloy_coil_block"
           ],
-          "count": 16
+          "count": 15
         }
       ],
       "subtitle": "What happened to my Tungstensteel!?",
@@ -9775,7 +9501,9 @@
       "icon": "gtceu:uranium_dust",
       "title": "Uranium Refinement",
       "deps": [
-        "41D32C5178760F47",
+        "124B32A0583A636A",
+        "16E3465CF94E2BDD",
+        "4024C831C77101CA",
         "42FB276AB16258D9"
       ],
       "tasks": [
@@ -11390,7 +11118,7 @@
           "items": [
             "gtceu:naquadah_coil_block"
           ],
-          "count": 16
+          "count": 15
         }
       ],
       "subtitle": "Hotter than the surface temperature of the Sun!",
@@ -11880,21 +11608,6 @@
       "desc": "A requirement for LuV+ cables."
     },
     {
-      "id": "63F9531F391040B2",
-      "icon": "minecraft:mud",
-      "title": "Combatting Lag",
-      "deps": [
-        "4F6E351C5F676618"
-      ],
-      "tasks": [
-        {
-          "type": "checkmark"
-        }
-      ],
-      "subtitle": "They call me 007 - 0 Naquadah, 0 EU/t, 7 TPS",
-      "desc": "The chances you are having TPS issues playing this modpack are slim - this Quest is more suited for late game bases with GregTech and AE2.\n\nIf you run the command /forge tps, you will be given the current TPS and the tick time in milliseconds.\n\nIf the tick time exceeds 50ms, the server is under too much load, and won't be able to keep up with a steady 20 TPS.\n\nAny machine will add up to the tick time, but don't be too scared of adding machines. Most of the lag usually comes from things that are unoptimized.\n\nThings to avoid in general:\n\n- Entities are pretty bad. Ground items or mob entities should be kept as low as possible at any given time. Thankfully, this shouldn't be an issue in this modpack.\n\n- Building everything packed together in a small space. Note that this does not affect TPS, but you will suffer FPS drops instead.\n\n- Huge walls of drawers, as iterating through every single one of them for insertion and extraction can be pretty taxing.\n\nThings to avoid with AE2:\n\n- ME Import and Export Buses on large networks. Use ME Interfaces instead.\n\n- Crafting Cards to passively do large requests.\n\n- Recursive insertion and/or extraction through sub-networks. If you use sub-networks, make them do very specific things rather than interacting with another AE2 network.\n\nThings to avoid with GregTech (GTCEu has received a lot of improvements over GTCE, but it is possible to destroy your TPS, as with any mod):\n\n- Many EU Producers connected to many EU Consumers in the same line. Instead, use a Diode or Battery Buffer to separate your line of generators to your line of machines.\n\n- Large amounts of Fluid Pipes. They are not laggy individually, but they can add up if you have thousands of them.\n\n- Big Item Pipe networks. Small networks are better, to reduce the number of iterations over inventories."
-    },
-    {
       "id": "35D4F93EFB6EACB6",
       "icon": "gtceu:iv_polarizer",
       "title": "IV Magnetism",
@@ -12102,7 +11815,7 @@
           "items": [
             "gtceu:trinium_coil_block"
           ],
-          "count": 16
+          "count": 15
         }
       ],
       "subtitle": "IT'S OVER 9000!!!",
@@ -12735,7 +12448,7 @@
           "items": [
             "gtceu:tritanium_coil_block"
           ],
-          "count": 16
+          "count": 15
         }
       ],
       "subtitle": "Why would you even need something this hot?!",
@@ -12897,25 +12610,6 @@
       ],
       "subtitle": "Neutron -> Electron Holes",
       "desc": "This is the final silicon boule, which will allow you to produce a ton of wafers.\n\nIt also unlocks the recipe for the Highly Advanced SoC, which is used to make cheaper wetware circuits."
-    },
-    {
-      "id": "428C62749A1A1BAB",
-      "icon": "ae2:creative_energy_cell",
-      "title": "Creative ME Energy",
-      "deps": [
-        "0009F48B6E385A47"
-      ],
-      "tasks": [
-        {
-          "type": "item",
-          "items": [
-            "ae2:creative_energy_cell"
-          ],
-          "count": 1
-        }
-      ],
-      "subtitle": "Ok, maybe there are Creative items.",
-      "desc": "The Creative Energy Cell is one of the few craftable creative items. It provides infinite energy to your AE system, so you don't have to worry about blackouts or power anymore."
     },
     {
       "id": "0009F48B6E385A47",
@@ -13691,21 +13385,6 @@
       ],
       "subtitle": "Carbon, Coal Gas, Helium-3...",
       "desc": "Carbon Monoxide is useful when making Butyraldehyde for your Laminated Glass in late IV.\n\nCoal Gas can be processed in a Distillation Tower for a variety of useful outputs.\n\nHelium-3 is only used in Fusion, and Neon is used to boost a single Blast Furnace recipe - UHV superconductors!\n\nAshes are always useful for the handful of resources they grant."
-    },
-    {
-      "id": "7ECD974215E77432",
-      "icon": "minecraft:iron_golem_spawn_egg",
-      "title": "What about my mob farm?",
-      "deps": [
-        "4D7A771B67DAFC6F"
-      ],
-      "tasks": [
-        {
-          "type": "checkmark"
-        }
-      ],
-      "subtitle": "Is it safe? Is it alright?",
-      "desc": "Just so you're aware - vanilla farms such as Iron Golems or Piglins have been disabled in this pack. There are obviously ways to cheese the pack (such as some good old Minecraft capitalism, if you catch our drift), but we encourage you to try to play without taking advantage of some notorious vanilla \"cheese\".\n\nIt's possible that in the future, we'll just make a core-mod for the pack, so players can re-enable the disabled mob drops. For now, the drops are disabled via KubeJS script, so if you're script-savvy, the file can be removed at server_scripts/vanilla/loot_drops.js."
     },
     {
       "id": "41730E340B3D8EDA",
@@ -14860,7 +14539,9 @@
       "icon": "gtceu:endstone_magnetite_ore",
       "title": "Magnetite",
       "deps": [
-        "41D32C5178760F47"
+        "124B32A0583A636A",
+        "16E3465CF94E2BDD",
+        "4024C831C77101CA"
       ],
       "tasks": [
         {
@@ -14900,7 +14581,9 @@
       "icon": "gtceu:endstone_naquadah_ore",
       "title": "Naquadah",
       "deps": [
-        "41D32C5178760F47"
+        "124B32A0583A636A",
+        "16E3465CF94E2BDD",
+        "4024C831C77101CA"
       ],
       "tasks": [
         {
@@ -14926,7 +14609,9 @@
       "icon": "gtceu:endstone_cooperite_ore",
       "title": "Sheldonite",
       "deps": [
-        "41D32C5178760F47"
+        "124B32A0583A636A",
+        "16E3465CF94E2BDD",
+        "4024C831C77101CA"
       ],
       "tasks": [
         {
@@ -14966,7 +14651,9 @@
       "icon": "gtceu:endstone_scheelite_ore",
       "title": "Scheelite",
       "deps": [
-        "41D32C5178760F47"
+        "124B32A0583A636A",
+        "16E3465CF94E2BDD",
+        "4024C831C77101CA"
       ],
       "tasks": [
         {
@@ -14999,7 +14686,9 @@
       "icon": "gtceu:endstone_bauxite_ore",
       "title": "Bauxite",
       "deps": [
-        "41D32C5178760F47"
+        "124B32A0583A636A",
+        "16E3465CF94E2BDD",
+        "4024C831C77101CA"
       ],
       "tasks": [
         {
@@ -15032,7 +14721,9 @@
       "icon": "gtceu:endstone_pitchblende_ore",
       "title": "Pitchblende",
       "deps": [
-        "41D32C5178760F47"
+        "124B32A0583A636A",
+        "16E3465CF94E2BDD",
+        "4024C831C77101CA"
       ],
       "tasks": [
         {

@@ -222,6 +222,8 @@ public static class BiomeWorldIOTables
 		[BiomeProbe.Biome.Corruption] = "oil_heavy",
 		[BiomeProbe.Biome.Hallow]     = "oil",
 		[BiomeProbe.Biome.Underworld] = "lava",
+		[BiomeProbe.Biome.Underground] = "oil_medium",
+		[BiomeProbe.Biome.Cavern]     = "oil",
 	};
 
 	public static FluidType? GetFluid(BiomeProbe.Biome biome)

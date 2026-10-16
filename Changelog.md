@@ -1,3 +1,22 @@
+## 0.0.17
+
+Minor bugfix
+
+Important:
+- Fixed lagging on Magic Storage interop (thanks Bup Supreme)
+- Fixed Advanced Data Access Hatch recipe (thanks Bup Supreme)
+- Fixed research suite overall stability (thanks Zub, Bup Supreme, Moyuruna)
+
+Qol:
+- Added wirecutter support for me cables (thanks TheBobster)
+- Fixed some quests (thanks Bup Supreme)
+- Fixed biome separation for oil check (thanks Felwraith)
+- Removed auto-output from coke and tank hatches, obsolete because no rotation and pipes have free pumps (thanks deepacat)
+
+Visual:
+- Fixed Enegy Cluster charge rendering (thanks PersonNo.752)
+- Fixed HPCA heat tooltip (thanks Moyuruna)
+
 ## 0.0.16
 
 UnTreated update. We've been discussing the ways to avoid early game issues, related to non-consistent recipes like fluid crafting, that doesn't work properly in Magic Storage etc., and I think that treated wood is a part of a bigger issue - treated wood is progression-wise weird, and it puts a player onto early game rails without any gameplay choice, so I think the complete removal with reduce the early game churn without skipping any progression, because you still most likely want to build coke ovens for a proper early game energy

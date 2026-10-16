@@ -214,7 +214,12 @@ public sealed class PipeSettingsSystem : ModalUISystem
 				{ IODirection.Up, IODirection.Down,
 				  IODirection.Left, IODirection.Right })
 			{
-				if (net.GetNetData((x, y), side) is not null) { hasEndpoint = true; break; }
+				if (net.GetNetData((x, y), side, Pipelike.Optical.OpticalRouteKind.Computation) is not null
+					|| net.GetNetData((x, y), side, Pipelike.Optical.OpticalRouteKind.Data) is not null)
+				{
+					hasEndpoint = true;
+					break;
+				}
 			}
 		}
 		string state = active ? "[c/55FF55:Active]" : "[c/AAAAAA:Idle]";
