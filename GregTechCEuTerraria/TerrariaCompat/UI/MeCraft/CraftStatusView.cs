@@ -59,7 +59,7 @@ public sealed class CraftStatusView : UIElement
 	public override void Update(GameTime gameTime)
 	{
 		base.Update(gameTime);
-		if (Main.GameUpdateCount % 30 == 0)
+		if (UiFrame.Count % 30 == 0)
 			MeCraftPackets.RequestStatus(_termPos, MeCraftStatusSystem.SelectedIndex);
 	}
 }

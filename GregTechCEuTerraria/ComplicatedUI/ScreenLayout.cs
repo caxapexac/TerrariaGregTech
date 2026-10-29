@@ -33,8 +33,8 @@ public static class ScreenLayout
 
 	private static void Snapshot()
 	{
-		if (_snapTick == Main.GameUpdateCount) return;
-		_snapTick = Main.GameUpdateCount;
+		if (_snapTick == UiFrame.Count) return;
+		_snapTick = UiFrame.Count;
 		_occupied.Clear();
 		foreach (var provider in _providers.Values)
 		{

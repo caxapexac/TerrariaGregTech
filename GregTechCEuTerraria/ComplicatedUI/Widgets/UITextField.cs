@@ -328,7 +328,7 @@ public sealed class UITextField : UIElement, ITextInput
 			}
 			if (right.Length > 0)
 				Terraria.Utils.DrawBorderString(sb, right, new Vector2(x, ty), textColor, TextScale);
-			if (IsFocused && Main.GameUpdateCount % 30 < 15)
+			if (IsFocused && UiFrame.Count % 30 < 15)
 				Terraria.Utils.DrawBorderString(sb, "|", new Vector2(x, ty), Color.LightYellow, TextScale);
 		}
 

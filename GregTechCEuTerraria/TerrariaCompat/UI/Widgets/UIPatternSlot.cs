@@ -53,9 +53,9 @@ public sealed class UIPatternSlot : UIElement
 	private static long _craftCacheTick = -1;
 	private bool IsCraftable(AEKey what)
 	{
-		if (_craftCacheTick != Main.GameUpdateCount)
+		if (_craftCacheTick != UiFrame.Count)
 		{
-			_craftCacheTick = Main.GameUpdateCount;
+			_craftCacheTick = UiFrame.Count;
 			_craftCache = _term.Network?.GetCraftables();
 		}
 		return _craftCache != null && _craftCache.Contains(what);

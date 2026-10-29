@@ -42,9 +42,9 @@ public sealed class MeCraftStatusSystem : ModalUISystem
 
 	public static int CountFor(Point16 termPos)
 	{
-		if (Main.GameUpdateCount - _lastPollTick > 30 || _lastPollPos != termPos)
+		if (UiFrame.Count - _lastPollTick > 30 || _lastPollPos != termPos)
 		{
-			_lastPollTick = Main.GameUpdateCount;
+			_lastPollTick = UiFrame.Count;
 			_lastPollPos = termPos;
 			MeCraftPackets.RequestStatus(termPos, SelectedIndex);
 		}

@@ -71,7 +71,10 @@ public sealed class MeInterfaceMachine : MetaMachine, IMeInventoryExposer, IMeCr
 	public void ApplySetConfig(int slot, AEKey? key, long amount)
 	{
 		if (slot < 0 || slot >= Slots) return;
+		var oldKey = _config.GetKey(slot);
 		_config.SetStack(slot, key == null ? null : new GenericStack(key, System.Math.Max(1, amount)));
+		if (!Equals(oldKey, _config.GetKey(slot)))
+			_craftingTracker.Cancel(slot);
 	}
 
 	public void ApplySetPriority(int value) => Priority = value;

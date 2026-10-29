@@ -38,7 +38,7 @@ public abstract class ModalUISystem : ModSystem, IModalHost
 	protected bool IsOpenInternal => Ui?.CurrentState != null;
 
 	private uint _openedTick = uint.MaxValue;
-	private bool OpenedThisFrame => _openedTick == Main.GameUpdateCount;
+	private bool OpenedThisFrame => _openedTick == UiFrame.Count;
 
 	private bool _openPressHeld;
 	private uint _openPressTick = uint.MaxValue;
@@ -52,9 +52,9 @@ public abstract class ModalUISystem : ModSystem, IModalHost
 		_pendingClose = false;
 		_parentLayer = parentLayer;
 		UILayers.Push(LayerName);
-		_openedTick = Main.GameUpdateCount;
+		_openedTick = UiFrame.Count;
 		_openPressHeld = Main.mouseLeft || Main.mouseRight;
-		_openPressTick = Main.GameUpdateCount;
+		_openPressTick = UiFrame.Count;
 	}
 
 	protected void CloseInternal()
@@ -129,8 +129,8 @@ public abstract class ModalUISystem : ModSystem, IModalHost
 
 	private void MaintainOpenPress()
 	{
-		if (!_openPressHeld || _openPressTick == Main.GameUpdateCount) return;
-		_openPressTick = Main.GameUpdateCount;
+		if (!_openPressHeld || _openPressTick == UiFrame.Count) return;
+		_openPressTick = UiFrame.Count;
 		if (!Main.mouseLeft && !Main.mouseRight) _openPressHeld = false;
 	}
 

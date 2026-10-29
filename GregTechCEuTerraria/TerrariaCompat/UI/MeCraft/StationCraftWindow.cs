@@ -63,7 +63,7 @@ public sealed class StationCraftWindow : UIModalWindow
 	public override void Update(GameTime gameTime)
 	{
 		if (_pendingAdd is { } gt) { _pendingAdd = null; AddPattern(gt); return; }
-		int now = (int)(Main.GameUpdateCount / 6);
+		int now = (int)(UiFrame.Count / 6);
 		if (now != _netTick) { _netTick = now; RefreshNetwork(); }
 		base.Update(gameTime);
 	}

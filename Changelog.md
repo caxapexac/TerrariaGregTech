@@ -1,3 +1,11 @@
+## 0.0.18
+
+Minor bugfix
+
+Qol:
+- ME interface slot changes now cancel the stale request (thanks Bup Supreme)
+- autopause UI bug fixed (thanks Lamordinary)
+
 ## 0.0.17
 
 Minor bugfix

@@ -165,7 +165,7 @@ public sealed class UISearchBar : UIElement
 			}
 		}
 
-		if (IsFocused && (Main.GameUpdateCount % 30) < 15)
+		if (IsFocused && (UiFrame.Count % 30) < 15)
 			Terraria.Utils.DrawBorderString(spriteBatch, "|", new Vector2(x, textY), Color.LightYellow, scale);
 
 		if (IsFocused) ImeText.DrawPanel(spriteBatch, bounds);

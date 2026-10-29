@@ -63,12 +63,12 @@ public static class ModalEscape
 	private static long _escConsumedTick = -1;
 
 	public static bool EscJustPressed =>
-		_escConsumedTick != Main.GameUpdateCount
+		_escConsumedTick != UiFrame.Count
 		&& Main.keyState.IsKeyDown(Keys.Escape) && !Main.oldKeyState.IsKeyDown(Keys.Escape);
 
 	public static void ConsumeEscape()
 	{
-		_escConsumedTick = Main.GameUpdateCount;
+		_escConsumedTick = UiFrame.Count;
 		foreach (var mode in KeyboardModes)
 			ConsumePhysicalKeys(EscapeKey, mode);
 	}

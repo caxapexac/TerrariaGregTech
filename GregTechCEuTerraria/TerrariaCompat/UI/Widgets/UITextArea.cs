@@ -430,7 +430,7 @@ public sealed class UITextArea : UIElement, ITextInput
 					new Vector2(textX, y), Color.White, TextScale);
 		}
 
-		if (IsFocused && Main.GameUpdateCount % 30 < 15)
+		if (IsFocused && UiFrame.Count % 30 < 15)
 		{
 			int cl = CaretLine();
 			if (cl >= _scrollLine && cl < _scrollLine + vis)

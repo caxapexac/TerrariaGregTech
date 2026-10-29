@@ -23,19 +23,19 @@ public static class UILayers
 	private static uint _stackSyncTick = uint.MaxValue;
 
 	private static uint _lastPushTick = uint.MaxValue;
-	public static bool PushedThisFrame => _lastPushTick == Main.GameUpdateCount;
+	public static bool PushedThisFrame => _lastPushTick == UiFrame.Count;
 
 	public static void Push(string name)
 	{
 		_modalStack.Remove(name);
 		_modalStack.Add(name);
-		_lastPushTick = Main.GameUpdateCount;
+		_lastPushTick = UiFrame.Count;
 	}
 
 	private static void SyncModalStack()
 	{
-		if (_stackSyncTick == Main.GameUpdateCount) return;
-		_stackSyncTick = Main.GameUpdateCount;
+		if (_stackSyncTick == UiFrame.Count) return;
+		_stackSyncTick = UiFrame.Count;
 		int before = _modalStack.Count;
 		_modalStack.RemoveAll(n => !_modalIsOpen.TryGetValue(n, out var f) || !f());
 		if (Main.mouseLeft && _modalStack.Count < before) _pressSpent = true;
@@ -100,8 +100,8 @@ public static class UILayers
 
 	private static void SyncClaim()
 	{
-		if (_claimTick == Main.GameUpdateCount) return;
-		_claimTick = Main.GameUpdateCount;
+		if (_claimTick == UiFrame.Count) return;
+		_claimTick = UiFrame.Count;
 		SyncModalStack();
 		int count = _modalStack.Count;
 		if (count == 0 || !Main.mouseLeft)

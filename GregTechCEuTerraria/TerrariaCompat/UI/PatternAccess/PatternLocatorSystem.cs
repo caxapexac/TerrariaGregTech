@@ -17,7 +17,7 @@ public sealed class PatternLocatorSystem : ModSystem
 	public static void Locate(Point16 providerPos)
 	{
 		_target = providerPos;
-		_expireTick = Main.GameUpdateCount + DurationTicks;
+		_expireTick = UiFrame.Count + DurationTicks;
 	}
 
 	public override void ClearWorld()
@@ -28,7 +28,7 @@ public sealed class PatternLocatorSystem : ModSystem
 
 	public override void PostDrawTiles()
 	{
-		if (Main.dedServ || Main.GameUpdateCount > _expireTick) return;
+		if (Main.dedServ || UiFrame.Count > _expireTick) return;
 
 		var start = Main.LocalPlayer.Center;
 		var end = new Vector2(_target.X * 16f + 16f, _target.Y * 16f + 16f);
@@ -38,7 +38,7 @@ public sealed class PatternLocatorSystem : ModSystem
 			DepthStencilState.None, RasterizerState.CullCounterClockwise, null,
 			Main.GameViewMatrix.TransformationMatrix);
 
-		float life = (_expireTick - Main.GameUpdateCount) / (float)DurationTicks;
+		float life = (_expireTick - UiFrame.Count) / (float)DurationTicks;
 		float alpha = System.Math.Min(1f, life * 4f);
 		DrawLine(sb, start - Main.screenPosition, end - Main.screenPosition,
 			new Color(120, 200, 255) * (0.85f * alpha), 4f);

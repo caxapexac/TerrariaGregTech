@@ -1,6 +1,5 @@
 #nullable enable
 using System.Collections.Generic;
-using Terraria;
 
 namespace GregTechCEuTerraria.TerrariaCompat.UI;
 
@@ -24,7 +23,7 @@ internal static class BrowserHover
 		FluidLabel = null;
 		TagLabel = null;
 		TagItems = null;
-		_frame = Main.GameUpdateCount;
+		_frame = UiFrame.Count;
 	}
 
 	public static void SetFluid(string id, string label)
@@ -34,7 +33,7 @@ internal static class BrowserHover
 		ItemType = 0;
 		TagLabel = null;
 		TagItems = null;
-		_frame = Main.GameUpdateCount;
+		_frame = UiFrame.Count;
 	}
 
 	public static void SetNone()
@@ -44,7 +43,7 @@ internal static class BrowserHover
 		FluidLabel = null;
 		TagLabel = null;
 		TagItems = null;
-		_frame = Main.GameUpdateCount;
+		_frame = UiFrame.Count;
 	}
 
 	public static void SetTag(string label, HashSet<int> items)
@@ -54,9 +53,9 @@ internal static class BrowserHover
 		ItemType = 0;
 		FluidId = null;
 		FluidLabel = null;
-		_frame = Main.GameUpdateCount;
+		_frame = UiFrame.Count;
 	}
 
 	// Recorded in draw, read one update later - 2-frame fresh window.
-	public static bool Fresh => Main.GameUpdateCount - _frame <= 2;
+	public static bool Fresh => UiFrame.Count - _frame <= 2;
 }

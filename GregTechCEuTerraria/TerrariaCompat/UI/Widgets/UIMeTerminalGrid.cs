@@ -384,11 +384,11 @@ public sealed class UIMeTerminalGrid : UIElement, IScrollSource, ISortSource
 	private void PushStationRecipePreview(AEItemKey key)
 	{
 		int type = key.GetItem();
-		if (_previewType != type || Main.GameUpdateCount - _previewTick >= 6)
+		if (_previewType != type || UiFrame.Count - _previewTick >= 6)
 		{
 			_previewCache = BuildStationPreview(type);
 			_previewType = type;
-			_previewTick = Main.GameUpdateCount;
+			_previewTick = UiFrame.Count;
 		}
 		if (_previewCache != null)
 			MeCraft.CraftWarningTooltipGlobal.PushStationRecipe(_previewCache);
@@ -446,7 +446,7 @@ public sealed class UIMeTerminalGrid : UIElement, IScrollSource, ISortSource
 			_stationCraftTick = -1;
 		}
 
-		int now = (int)(Main.GameUpdateCount / 20);
+		int now = (int)(UiFrame.Count / 20);
 		if (_stationCraftTick == now && !ReferenceEquals(_stationCraftables, _emptyStationCraft)) return;
 		_stationCraftTick = now;
 

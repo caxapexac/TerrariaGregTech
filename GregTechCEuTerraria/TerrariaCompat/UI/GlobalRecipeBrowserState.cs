@@ -1386,10 +1386,10 @@ public sealed class GlobalRecipeBrowserState : FreeModalWindow
 	private static Dictionary<string, int>? _snapFluids;
 	private static void EnsureSnapshot()
 	{
-		if (_snapTick == Main.GameUpdateCount && _snapInv is not null && _snapFluids is not null) return;
+		if (_snapTick == UiFrame.Count && _snapInv is not null && _snapFluids is not null) return;
 		_snapInv    = BuildInventoryCountsImpl();
 		_snapFluids = BuildFluidCountsImpl();
-		_snapTick   = Main.GameUpdateCount;
+		_snapTick   = UiFrame.Count;
 	}
 	internal static Dictionary<int, int> InventoryCountsSnapshot()
 	{ EnsureSnapshot(); return _snapInv!; }

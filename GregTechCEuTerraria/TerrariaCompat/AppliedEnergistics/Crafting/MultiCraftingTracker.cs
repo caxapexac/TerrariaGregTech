@@ -95,6 +95,15 @@ public sealed class MultiCraftingTracker
 		}
 	}
 
+	public void Cancel(int x)
+	{
+		_links[x]?.Cancel();
+		_links[x] = null;
+
+		_jobs[x]?.Cancel();
+		_jobs[x] = null;
+	}
+
 	public bool IsBusy(int slot) => GetLink(slot) != null || GetJob(slot) != null;
 
 	private CraftingJob? GetJob(int slot) => _jobs[slot];

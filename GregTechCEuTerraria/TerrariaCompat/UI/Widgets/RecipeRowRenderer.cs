@@ -219,7 +219,7 @@ public static class RecipeRowRenderer
 	public static void DrawSelectButton(SpriteBatch sb, Rectangle rect, bool hot)
 	{
 		var px = TextureAssets.MagicPixel.Value;
-		float t = (float)(0.5 + 0.22 * System.Math.Sin(Main.GameUpdateCount * 0.035));
+		float t = (float)(0.5 + 0.22 * System.Math.Sin(UiFrame.Count * 0.035));
 		var bg = Color.Lerp(new Color(36, 130, 60), new Color(96, 232, 122), t);
 		if (hot) bg = Color.Lerp(bg, Color.White, 0.25f);
 		sb.Draw(px, rect, bg);
